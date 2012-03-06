@@ -14,9 +14,9 @@
                   const unsigned start_index,
                   const unsigned end_index);
 
-  /*Heap sort function prototype*/
+  /*Heap sort function prototype
   void heapSort(int data[],
                  const unsigned array_size,
-                 );
+                 );*/
 
 #endif
