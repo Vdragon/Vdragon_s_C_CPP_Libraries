@@ -1,4 +1,4 @@
-/* 排序演算法
+﻿/* 排序演算法
  * -----------------------------------
  * 程式框架版本(program framework version)：A
  * 程式框架修訂號(program framework revision number)：201109251624
@@ -42,10 +42,8 @@
 /* swap algorithm header file
  * 版本：1.00(0)
  */
-#ifndef INCLUDED_SWAP_ALGORITHM
-  #include "Swap_algorithm.h"
-  #define INCLUDED_SWAP_ALGORITHM
-#endif
+#include "Swap_algorithm.h"
+
 
 /*maxHeapify function prototype*/
 void maxHeapify(int data[], unsigned array_size, unsigned current_index);
