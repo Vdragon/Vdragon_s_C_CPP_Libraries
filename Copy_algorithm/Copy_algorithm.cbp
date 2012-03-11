@@ -66,6 +66,10 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="Source_code/Copy_algorithm.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Source_code/Copy_algorithm.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />

@@ -6,4 +6,4 @@
                       const int min_result, /*the minimum value to exist*/
                       const int max_result);/*the maximum value to exist*/
 
-#endif // RANDOMIZE_ALGORITHM_H_INCLUDED
+#endif /* RANDOMIZE_ALGORITHM_H_INCLUDED*/
