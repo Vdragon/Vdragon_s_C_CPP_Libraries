@@ -35,6 +35,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Source_code/Bubble_sort.h" />
+		<Unit filename="Source_code/Copy_algorithm/Copy_algorithm.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Source_code/Copy_algorithm/Copy_algorithm.h" />
 		<Unit filename="Source_code/Display_content_algorithm/Display_array.c">
 			<Option compilerVar="CC" />
 		</Unit>

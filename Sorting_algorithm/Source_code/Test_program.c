@@ -81,74 +81,49 @@ short int mainPauseProgram(void);
 int main(void)
     {
     /*宣告與定義(Declaration & Definition)*/
-    int array[ SIZE ]; /* declare the array of ints to be sorted */
-    int i; /* int used in for loop */
+    /* create a random array*/
+    int unsorted[SIZE], sorted[SIZE];
 
     /*－－－－－－－－－－－－－－－－－－－－－*/
     /*程式從這個標籤重新啟動(program restarts from this label)*/
     restart_program:
 
-    /* create a random array*/
-    int random[SIZE], random_buffer[SIZE];
-    randomizeArray(random, SIZE, 0, 99);
-    copyArrayInt(random_buffer, random, SIZE);
+
+    randomizeArray(unsorted, SIZE, 0, 99);
+    copyArrayInt(sorted, unsorted, SIZE);
 
     /*print unsorted array*/
     printf( "Unsorted array:\n" );
-    displayArrayInt(random, SIZE, 2, " ", 15);
+    displayArrayInt(unsorted, SIZE, 2, " ", 15);
+
+    putchar('\n');
 
     printf("******insertion sort******\n");
-
-
-    for ( i = 0; i < SIZE; i++ ) /* print the array */
-       printf( "%d  ", array[ i ] );
-
-    printf( "\n\n" );
-
-    insertionSort( array, SIZE );
-
+    insertionSort( sorted, SIZE );
     printf( "Sorted array:\n" );
-
-    for ( i = 0; i < SIZE; i++ ) /* print the array */
-       printf( "%d  ", array[ i ] );
+    displayArrayInt(sorted, SIZE, 2, " ", 15);
 
     printf( "\n\n" );
+    copyArrayInt(sorted, unsorted, SIZE);
 
-    for ( i = 0; i < SIZE; i++ )
-       array[ i ] = rand() % 100; /* give each element a value */
     printf("******bubble sort******\n");
-    printf( "Unsorted array:\n" );
+    bubbleSort(sorted, SIZE, sortDescendingly);
+    printf( "Sorted array(descendingly):\n" );
+    displayArrayInt(sorted, SIZE, 2, " ", 15);
 
-    for ( i = 0; i < SIZE; i++ ) /* print the array */
-       printf( "%d  ", array[ i ] );
+    copyArrayInt(sorted, unsorted, SIZE);
 
-    printf( "\n\n" );
-
-    bubbleSort(array, SIZE, sortDescendingly);
-    /*mergeSort(array, 0, SIZE - 1);*/
-    printf( "Sorted array:\n" );
-
-    for ( i = 0; i < SIZE; i++ ) /* print the array */
-       printf( "%d  ", array[ i ] );
+    bubbleSort(sorted, SIZE, sortAscendingly);
+    printf( "Sorted array(ascendingly):\n" );
+    displayArrayInt(sorted, SIZE, 2, " ", 15);
 
     printf( "\n\n" );
+    copyArrayInt(sorted, unsorted, SIZE);
 
-    for ( i = 0; i < SIZE; i++ )
-       array[ i ] = rand() % 100; /* give each element a value */
     printf("******merge sort******\n");
-    printf( "Unsorted array:\n" );
-
-    for ( i = 0; i < SIZE; i++ ) /* print the array */
-       printf( "%d  ", array[ i ] );
-
-    printf( "\n\n" );
-
-    mergeSort(array, 0, SIZE - 1);
-
+    mergeSort(sorted, 0, SIZE - 1);
     printf( "Sorted array:\n" );
-
-    for ( i = 0; i < SIZE; i++ ) /* print the array */
-       printf( "%d  ", array[ i ] );
+    displayArrayInt(sorted, SIZE, 2, " ", 15);
 
     /*呼叫暫停運行函式(放在main函式中)*/
     if(mainPauseProgram() == 1){
