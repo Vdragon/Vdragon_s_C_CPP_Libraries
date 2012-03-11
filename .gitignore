@@ -10,6 +10,9 @@
 #  /FILE←只不track根目錄的FILE檔案
 #  build/←忽略build目錄下的所有檔案
 #  doc/*.txt←doc/a.txt會被忽略但是doc/a/b.txt則不會被忽略（那怎樣才能忽略呢？）
+##我自己的設定
+Debug*/
+Release*/
 
 ##Linux通用設定
 .*
