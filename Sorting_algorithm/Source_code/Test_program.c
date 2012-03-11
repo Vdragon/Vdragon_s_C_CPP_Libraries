@@ -39,9 +39,16 @@
   版本：1.02(3)*/
 #include <time.h>
 
+/*my sort functions*/
 #include "Insertion_sort.h"
 #include "Bubble_sort.h"
 #include "Merge_sort.h"
+
+/*Randomize_algorithm*/
+#include "Randomize_algorithm/Randomize_algorithm.h"
+
+/*Display_content_algorithm*/
+#include "Display_content_algorithm/Display_array.h"
 
 /*////////環境設定(Environment Settings)////////*/
 /*是否顯示偵錯數據（０為否）？*/
@@ -78,16 +85,16 @@ int main(void)
     /*程式從這個標籤重新啟動(program restarts from this label)*/
     restart_program:
 
-    /* seed the rand function */
-    srand( time( NULL ) );
-
     /* create a random array*/
-    for ( i = 0; i < SIZE; i++ )
-       array[ i ] = rand() % 100; /* give each element a value */
+    int random[SIZE];
+    randomizeArray(random, SIZE, 0, 99);
 
+    /*print unsorted array*/
+    printf( "Unsorted array:\n" );
+    displayArrayInt(random, SIZE, 2, " ", 15);
 
     printf("******insertion sort******\n");
-    printf( "Unsorted array:\n" );
+
 
     for ( i = 0; i < SIZE; i++ ) /* print the array */
        printf( "%d  ", array[ i ] );
