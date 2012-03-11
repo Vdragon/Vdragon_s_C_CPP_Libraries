@@ -31,14 +31,34 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="Source_code/Sorting_algorithm.c">
+		<Unit filename="Source_code/Bubble_sort.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="Source_code/Sorting_algorithm.h" />
-		<Unit filename="Source_code/Swap_algorithm.c">
+		<Unit filename="Source_code/Bubble_sort.h" />
+		<Unit filename="Source_code/Display_content_algorithm/Display_array.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="Source_code/Swap_algorithm.h" />
+		<Unit filename="Source_code/Display_content_algorithm/Display_array.h" />
+		<Unit filename="Source_code/Heap_sort.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Source_code/Heap_sort.h" />
+		<Unit filename="Source_code/Insertion_sort.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Source_code/Insertion_sort.h" />
+		<Unit filename="Source_code/Merge_sort.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Source_code/Merge_sort.h" />
+		<Unit filename="Source_code/Randomize_algorithm/Randomize_algorithm.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Source_code/Randomize_algorithm/Randomize_algorithm.h" />
+		<Unit filename="Source_code/Swap_algorithm/Swap_algorithm.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Source_code/Swap_algorithm/Swap_algorithm.h" />
 		<Unit filename="Source_code/Test_program.c">
 			<Option compilerVar="CC" />
 		</Unit>
