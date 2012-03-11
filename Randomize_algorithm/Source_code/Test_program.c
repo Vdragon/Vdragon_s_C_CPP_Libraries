@@ -56,7 +56,7 @@ int main(void)
     int test[MAX_DATA_SIZE] = {0};
 
     /*random it*/
-    randomizeArray(test, MAX_DATA_SIZE, 3, 20);
+    randomizeArray(test, MAX_DATA_SIZE, 1, 5);
 
     /*show it */
     displayArrayInt(test, MAX_DATA_SIZE, 2, " ", 10);

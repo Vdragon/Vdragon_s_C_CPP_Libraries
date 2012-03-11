@@ -49,7 +49,7 @@
   void randomizeArray(int array_source[], /*the source array*/
                       const unsigned array_size, /*array size*/
                       const int min_result, /*the minimum value to exist*/
-                      const int max_result)
+                      const int max_result /*the maximum value to exist, if you put 3, it may generate 3.*/)
   {
     /*counters*/
     unsigned i;
@@ -59,8 +59,8 @@
 
     /*for first index to last index, assign random number to array*/
     for (i = 0; i < array_size; ++i) {
-      /*result = min + rand() % (max - min)*/
-      array_source[i] = min_result + rand() % (max_result - min_result);
+      /*result = min + rand() % (max - min + 1)*/
+      array_source[i] = min_result + rand() % (max_result - min_result + 1);
     }
 
     /*done*/
