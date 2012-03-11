@@ -4,7 +4,7 @@
     destination should be bigger then the source*/
   void copyArrayInt(int destination[],
                     const int source[],
-                    const int source_size);
+                    const unsigned source_size);
 
 
 #endif /* COPY_ALGORITHM_H_INCLUDED*/

@@ -43,7 +43,7 @@
 /*--------------主要程式碼(Main Code)--------------*/
 void copyArrayInt(int destination[],
                   const int source[],
-                  const int source_size)
+                  const unsigned source_size)
 {
   /*counters*/
   unsigned i;
