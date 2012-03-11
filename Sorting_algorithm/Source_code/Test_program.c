@@ -25,33 +25,23 @@
 /*標準輸入／輸出函式庫(standard input/output library)
   版本：1.12(4)
   for printf(), scanf(), fgetc()...etc*/
-#ifndef INCLUDED_STD_C_STDIO
 #include <stdio.h>
 /*or in C++*/
 /*#include <cstdio>*/
-#define INCLUDED_STD_C_STDIO
-#endif
 
 /*C Standard General Utilities Library
   版本：1.01(8)*/
-#ifndef INCLUDED_STD_C_STDLIB
 #include <stdlib.h>
 /*or in C++*/
 /*#include <cstdlib>*/
-#define INCLUDED_STD_C_STDLIB
-#endif
 
 /*header for Date and time functions Library
   版本：1.02(3)*/
-#ifndef INCLUDED_STD_C_TIME
 #include <time.h>
-#define INCLUDED_STD_C_TIME
-#endif
 
-/* 排序演算法header file
- * 版本：1.00(0)
- */
-#include "Sorting_algorithm.h"
+#include "Insertion_sort.h"
+#include "Bubble_sort.h"
+#include "Merge_sort.h"
 
 /*////////環境設定(Environment Settings)////////*/
 /*是否顯示偵錯數據（０為否）？*/
@@ -62,8 +52,8 @@ Windows console = 0, Linux console = 1, Symbian console = 2, PSP console = 3*/
 #define SYSTEM_CATEGORY 1
 
 /*////////常數與巨集(Constants & Macros)////////*/
-/**/
-#define SIZE 100
+/* */
+#define SIZE 15
 
 /*--------------全域宣告與定義(Global Declaration & Definition)--------------*/
 /*////////資料結構(Structures)、typedefs跟enumerations////////*/
@@ -71,12 +61,6 @@ Windows console = 0, Linux console = 1, Symbian console = 2, PSP console = 3*/
 /*////////函式原型(Function Prototypes)////////*/
 /*暫停運行函式的function prototype*/
 short int mainPauseProgram(void);
-
-/*提供bubble sort遞增順序比較條件函式*/
-extern int sortAscendingly(int a, int b);
-
-/*提供bubble sort遞減順序比較條件函式*/
-extern int sortDescendingly(int a, int b);
 
 /*////////全域變數(Global Variables)////////*/
 
@@ -94,21 +78,62 @@ int main(void)
     /*程式從這個標籤重新啟動(program restarts from this label)*/
     restart_program:
 
+    /* seed the rand function */
+    srand( time( NULL ) );
 
-    srand( time( NULL ) ); /* seed the rand function */
-
+    /* create a random array*/
     for ( i = 0; i < SIZE; i++ )
        array[ i ] = rand() % 100; /* give each element a value */
 
+
+    printf("******insertion sort******\n");
     printf( "Unsorted array:\n" );
 
     for ( i = 0; i < SIZE; i++ ) /* print the array */
        printf( "%d  ", array[ i ] );
 
     printf( "\n\n" );
-    /*insertionSort( array, SIZE );*/
-    /*bubbleSort(array, SIZE, sortDescendingly);*/
+
+    insertionSort( array, SIZE );
+
+    printf( "Sorted array:\n" );
+
+    for ( i = 0; i < SIZE; i++ ) /* print the array */
+       printf( "%d  ", array[ i ] );
+
+    printf( "\n\n" );
+
+    for ( i = 0; i < SIZE; i++ )
+       array[ i ] = rand() % 100; /* give each element a value */
+    printf("******bubble sort******\n");
+    printf( "Unsorted array:\n" );
+
+    for ( i = 0; i < SIZE; i++ ) /* print the array */
+       printf( "%d  ", array[ i ] );
+
+    printf( "\n\n" );
+
+    bubbleSort(array, SIZE, sortDescendingly);
+    /*mergeSort(array, 0, SIZE - 1);*/
+    printf( "Sorted array:\n" );
+
+    for ( i = 0; i < SIZE; i++ ) /* print the array */
+       printf( "%d  ", array[ i ] );
+
+    printf( "\n\n" );
+
+    for ( i = 0; i < SIZE; i++ )
+       array[ i ] = rand() % 100; /* give each element a value */
+    printf("******merge sort******\n");
+    printf( "Unsorted array:\n" );
+
+    for ( i = 0; i < SIZE; i++ ) /* print the array */
+       printf( "%d  ", array[ i ] );
+
+    printf( "\n\n" );
+
     mergeSort(array, 0, SIZE - 1);
+
     printf( "Sorted array:\n" );
 
     for ( i = 0; i < SIZE; i++ ) /* print the array */
