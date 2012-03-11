@@ -50,6 +50,9 @@
 /*Display_content_algorithm*/
 #include "Display_content_algorithm/Display_array.h"
 
+/*Copy_algorithm*/
+#include "Copy_algorithm/Copy_algorithm.h"
+
 /*////////環境設定(Environment Settings)////////*/
 /*是否顯示偵錯數據（０為否）？*/
 #define SHOW_DEBUG_MESSAGE 1
@@ -86,8 +89,9 @@ int main(void)
     restart_program:
 
     /* create a random array*/
-    int random[SIZE];
+    int random[SIZE], random_buffer[SIZE];
     randomizeArray(random, SIZE, 0, 99);
+    copyArrayInt(random_buffer, random, SIZE);
 
     /*print unsorted array*/
     printf( "Unsorted array:\n" );
