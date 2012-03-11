@@ -34,9 +34,6 @@
 /*we need time()*/
 #include <time.h>
 
-/*Display_content_algorithm*/
-#include "Display_content_algorithm/Display_array.h"
-
 /*////////常數與巨集(Constants & Macros)以及其他#define指令////////*/
 
 /*////////其他前期處理器指令(Other Preprocessor Directives////////*/

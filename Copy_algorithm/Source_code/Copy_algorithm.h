@@ -1,4 +1,4 @@
-#ifndef COPY_ALGORITHM_H_INCLUDED
+﻿#ifndef COPY_ALGORITHM_H_INCLUDED
   #define COPY_ALGORITHM_H_INCLUDED
   /*function to copy an array to another
     destination should be bigger then the source*/
@@ -7,4 +7,4 @@
                     const int source_size);
 
 
-#endif // COPY_ALGORITHM_H_INCLUDED
+#endif /* COPY_ALGORITHM_H_INCLUDED*/

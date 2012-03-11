@@ -66,6 +66,10 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="Source_code/Display_content_algorithm/Display_array.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Source_code/Display_content_algorithm/Display_array.h" />
 		<Unit filename="Source_code/Randomize_algorithm.c">
 			<Option compilerVar="CC" />
 		</Unit>
