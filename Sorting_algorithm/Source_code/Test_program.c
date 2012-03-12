@@ -43,6 +43,7 @@
 #include "Insertion_sort.h"
 #include "Bubble_sort.h"
 #include "Merge_sort.h"
+#include "Heap_sort.h"
 
 /*Randomize_algorithm*/
 #include "Randomize_algorithm/Randomize_algorithm.h"
@@ -84,6 +85,8 @@ int main(void)
     /* create a random array*/
     int unsorted[SIZE], sorted[SIZE];
 
+    /* heapsort need variable size...make them happy*/
+    unsigned heap_size = SIZE;
     /*－－－－－－－－－－－－－－－－－－－－－*/
     /*程式從這個標籤重新啟動(program restarts from this label)*/
     restart_program:
@@ -129,6 +132,10 @@ int main(void)
     copyArrayInt(sorted, unsorted, SIZE);
 
     printf("******heap sort******\n");
+    heap_size = SIZE;
+    heapSort(sorted, &heap_size);
+    printf( "Sorted array:\n" );
+    displayArrayInt(sorted, SIZE, 2, " ", 15);
 
     /*呼叫暫停運行函式(放在main函式中)*/
     if(mainPauseProgram() == 1){

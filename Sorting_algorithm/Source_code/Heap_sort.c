@@ -42,8 +42,8 @@
 #define INDEX_PARENT(i) i >> 1
 
 /*節點 i 的left right children node*/
-#define INDEX_LEFT_CHILD(i) i << 1
-#define INDEX_RIGHT_CHILD(i) i << 1 + 1
+#define INDEX_LEFT_CHILD(i) (i << 1)
+#define INDEX_RIGHT_CHILD(i) (i << 1) + 1
 
 /*////////其他前期處理器指令(Other Preprocessor Directives////////*/
 
@@ -57,41 +57,84 @@
 /*--------------主要程式碼(Main Code)--------------*/
 
 
-  void maxHeapify(int heap[], /*heap array*/
-                  const unsigned heap_size, /*heap size, *not* array size*/
+  void maxHeapifyInt(int heap[], /*integer heap array*/
+                  const unsigned heap_size, /*heap size, *not* array size 15*/
                   const unsigned parent_index) /*index of parent node(to be heapified)*/
     {
     /*宣告與定義(Declaration & Definition)*/
     /*--函式雛型(function prototype)--*/
 
     /*--局域變數--*/
-    /*current largest node*/
-    unsigned largest_index = parent_index;
+    /*current largest node, presuming parent*/
+    unsigned largest_index = parent_index + 1;
 
     /*the child index of current node may be*/
-    unsigned left_child_index = INDEX_LEFT_CHILD(parent_index),
-            right_child_index = INDEX_RIGHT_CHILD(parent_index);
+    unsigned left_child_index = INDEX_LEFT_CHILD(largest_index),
+            right_child_index = INDEX_RIGHT_CHILD(largest_index);
     /*－－－－－－－－－－－－－－－－－－－－－*/
     /*if left child exist and greater than current node*/
-    if(left_child_index <= heap_size - 1 &&
-       heap[left_child_index] > heap[parent_index]){
+    if(left_child_index <= heap_size &&
+       heap[left_child_index - 1] > heap[largest_index - 1]){
        largest_index = left_child_index;
     }
 
     /*if right child exist and greater than current node*/
-    if(right_child_index <= heap_size - 1 &&
-       heap[right_child_index] > heap[parent_index]){
+    if(right_child_index <= heap_size &&
+       heap[right_child_index - 1] > heap[largest_index - 1]){
        largest_index = right_child_index;
     }
 
     /*if largest node isn't current node then swap with the largest
       then maxheapify the child which gets the parent node(which may violating the heap property)*/
-    if(largest_index != parent_index){
-      swapInt(&heap[parent_index], &heap[largest_index]);
-      maxHeapify(heap, heap_size, largest_index);
+    if(largest_index != parent_index + 1){
+      swapInt(&heap[parent_index], &heap[largest_index - 1]);
+      maxHeapifyInt(heap, heap_size, largest_index - 1);
     }
 
     /*－－－－－－－－－－－－－－－－－－－－－*/
     /*done*/
     return ;
     }
+
+  /*buildMaxHeapInt function prototype
+      build a max heap by calling maxHeapify from the last
+      non-leaf node to root node*/
+void buildMaxHeapInt(int heap[], /*heap array*/
+                     const unsigned heap_size /*heap size, *not* array size*/)
+{
+    /*counters*/
+    int i;
+
+    /*for last non-leaf node to root*/
+    for (i = (heap_size / 2 - 1); i >= 0; --i) {
+      maxHeapifyInt(heap, heap_size, i);
+    }
+
+    /*done*/
+    return;
+}
+
+void heapSort(int heap[],
+              unsigned * heap_size)
+{
+  /*counters*/
+  unsigned i;
+
+  /* build max heap from array */
+  buildMaxHeapInt(heap, *heap_size);
+
+  /*for last heap node to second heap node*/
+  for(i = *heap_size; i >= 2; --i){
+    /* swap last node of heap with first (biggest) node*/
+    swapInt(&heap[i - 1], &heap[0]);
+
+    /* heap_size - 1*/
+    --*heap_size;
+
+    /* may violate the heap property, max-heapify it again*/
+    maxHeapifyInt(heap, *heap_size, 0);
+  }
+
+  /*done*/
+  return;
+}
