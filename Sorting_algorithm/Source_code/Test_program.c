@@ -125,6 +125,11 @@ int main(void)
     printf( "Sorted array:\n" );
     displayArrayInt(sorted, SIZE, 2, " ", 15);
 
+    printf( "\n\n" );
+    copyArrayInt(sorted, unsorted, SIZE);
+
+    printf("******heap sort******\n");
+
     /*呼叫暫停運行函式(放在main函式中)*/
     if(mainPauseProgram() == 1){
         goto restart_program;

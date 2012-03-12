@@ -38,6 +38,12 @@
 #include "Swap_algorithm/Swap_algorithm.h"
 
 /*////////常數與巨集(Constants & Macros)以及其他#define指令////////*/
+/*節點 i 的父母節點(parent node)*/
+#define INDEX_PARENT(i) i >> 1
+
+/*節點 i 的left right children node*/
+#define INDEX_LEFT_CHILD(i) i << 1
+#define INDEX_RIGHT_CHILD(i) i << 1 + 1
 
 /*////////其他前期處理器指令(Other Preprocessor Directives////////*/
 
@@ -50,41 +56,42 @@
 
 /*--------------主要程式碼(Main Code)--------------*/
 
-/*maxHeapify函式
-  版本：0.00(0)*/
-void maxHeapify(int data[], unsigned array_size, unsigned current_index)
+
+  void maxHeapify(int heap[], /*heap array*/
+                  const unsigned heap_size, /*heap size, *not* array size*/
+                  const unsigned parent_index) /*index of parent node(to be heapified)*/
     {
     /*宣告與定義(Declaration & Definition)*/
     /*--函式雛型(function prototype)--*/
 
     /*--局域變數--*/
     /*current largest node*/
-    unsigned largest_index = current_index;
+    unsigned largest_index = parent_index;
 
     /*the child index of current node may be*/
-    unsigned left_child_index = current_index * 2,
-            right_child_index = current_index * 2 + 1;
+    unsigned left_child_index = INDEX_LEFT_CHILD(parent_index),
+            right_child_index = INDEX_RIGHT_CHILD(parent_index);
     /*－－－－－－－－－－－－－－－－－－－－－*/
     /*if left child exist and greater than current node*/
-    if(left_child_index <= array_size - 1 &&
-       data[left_child_index] > data[current_index]){
+    if(left_child_index <= heap_size - 1 &&
+       heap[left_child_index] > heap[parent_index]){
        largest_index = left_child_index;
     }
 
     /*if right child exist and greater than current node*/
-    if(right_child_index <= array_size - 1 &&
-       data[right_child_index] > data[current_index]){
+    if(right_child_index <= heap_size - 1 &&
+       heap[right_child_index] > heap[parent_index]){
        largest_index = right_child_index;
     }
 
     /*if largest node isn't current node then swap with the largest
-      then maxheapify it's child*/
-    if(largest_index != current_index){
-      swapInt(&data[current_index], &data[largest_index]);
-      maxHeapify(data, array_size, largest_index);
+      then maxheapify the child which gets the parent node(which may violating the heap property)*/
+    if(largest_index != parent_index){
+      swapInt(&heap[parent_index], &heap[largest_index]);
+      maxHeapify(heap, heap_size, largest_index);
     }
 
     /*－－－－－－－－－－－－－－－－－－－－－*/
-    /*傳回內容*/
+    /*done*/
     return ;
     }
