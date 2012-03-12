@@ -133,7 +133,7 @@ int main(void)
 
     printf("******heap sort******\n");
     heap_size = SIZE;
-    heapSort(sorted, &heap_size);
+    heapSortInt(sorted, &heap_size);
     printf( "Sorted array:\n" );
     displayArrayInt(sorted, SIZE, 2, " ", 15);
 

@@ -1,4 +1,4 @@
-/*Pause_program.c
+﻿/*Pause_program.c
 -----------------------------------
 程式名稱(program name)：。
 程式描述(program description)：。
@@ -32,11 +32,16 @@
 /*--------------程式碼開始(Code Started)--------------*/
 /*--------------前期處理器指令(Preprocessor Directive)--------------*/
 /*////////環境設定(Environment Settings)////////*/
+/* we need project specified settings*/
+
+
 /*////////程式所include的標頭檔(Included Headers)////////*/
+/* we need printf and scanf*/
   #include <stdio.h>
+
+/* we need system() */
   #include <stdlib.h>
 
-  #include "main.h"
 /*////////常數與巨集(Constants & Macros)以及其他#define指令////////*/
 
 /*////////其他前期處理器指令(Other Preprocessor Directives////////*/

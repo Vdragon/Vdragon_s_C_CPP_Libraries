@@ -1,8 +1,8 @@
-#ifndef HEAP_SORT_H_INCLUDED
+﻿#ifndef HEAP_SORT_H_INCLUDED
   #define HEAP_SORT_H_INCLUDED
   /*Heap sort function prototype
       sort data by first maxHeapify it and deletes root consequently*/
-  void heapSort(int heap[],
+  void heapSortInt(int heap[],
                  const unsigned *heap_size);
 
   /*maxHeapifyInt函式

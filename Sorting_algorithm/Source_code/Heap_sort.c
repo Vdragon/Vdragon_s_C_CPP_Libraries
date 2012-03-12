@@ -1,10 +1,5 @@
-/*程式框架(Program Framework)
+﻿/*Heap_sort.c
 -----------------------------------
-程式名稱(program name)：。
-程式描述(program description)：。
-程式版本(program version)：0.00(0)
-程式框架版本(program framework version)：A
-程式框架修訂號(program framework revision number)：201109251624
 更新紀錄(changelog)：
   Changelog is now stored on github
 已知問題(known issues)：
@@ -55,8 +50,6 @@
 /*////////全域變數(Global Variables)////////*/
 
 /*--------------主要程式碼(Main Code)--------------*/
-
-
   void maxHeapifyInt(int heap[], /*integer heap array*/
                   const unsigned heap_size, /*heap size, *not* array size 15*/
                   const unsigned parent_index) /*index of parent node(to be heapified)*/
@@ -114,7 +107,7 @@ void buildMaxHeapInt(int heap[], /*heap array*/
     return;
 }
 
-void heapSort(int heap[],
+void heapSortInt(int heap[],
               unsigned * heap_size)
 {
   /*counters*/
