@@ -1,5 +1,8 @@
 ﻿#ifndef HEAP_SORT_H_INCLUDED
   #define HEAP_SORT_H_INCLUDED
+  #ifdef __cplusplus
+    extern "C"{
+  #endif
   /*Heap sort function prototype
       sort data by first maxHeapify it and deletes root consequently*/
   void heapSortInt(int heap[],
@@ -17,4 +20,7 @@
       non-leaf node to root node*/
   void buildMaxHeapInt(int heap[], /*heap array*/
                        unsigned heap_size /*heap size, *not* array size*/);
+  #ifdef __cplusplus
+    }
+  #endif
 #endif /* HEAP_SORT_H_INCLUDED*/
