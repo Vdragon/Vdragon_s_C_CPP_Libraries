@@ -108,24 +108,24 @@ void buildMaxHeapInt(int heap[], /*heap array*/
 }
 
 void heapSortInt(int heap[],
-              unsigned * heap_size)
+              unsigned heap_size)
 {
   /*counters*/
   unsigned i;
 
   /* build max heap from array */
-  buildMaxHeapInt(heap, *heap_size);
+  buildMaxHeapInt(heap, heap_size);
 
   /*for last heap node to second heap node*/
-  for(i = *heap_size; i >= 2; --i){
+  for(i = heap_size; i >= 2; --i){
     /* swap last node of heap with first (biggest) node*/
     swapInt(&heap[i - 1], &heap[0]);
 
     /* heap_size - 1*/
-    --*heap_size;
+    --heap_size;
 
     /* may violate the heap property, max-heapify it again*/
-    maxHeapifyInt(heap, *heap_size, 0);
+    maxHeapifyInt(heap, heap_size, 0);
   }
 
   /*done*/
