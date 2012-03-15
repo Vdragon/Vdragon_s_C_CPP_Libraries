@@ -1,4 +1,4 @@
-﻿/*程式框架(Program Framework)
+/*Display_array.c
 -----------------------------------
 更新紀錄(changelog)：
   Changelog is now stored on github
@@ -28,39 +28,49 @@
 /*////////環境設定(Environment Settings)////////*/
 
 /*////////程式所include的標頭檔(Included Headers)////////*/
-/*we need printf()*/
+/* we need printf()*/
 #include <stdio.h>
 
-/*our algorithm header*/
-#include "Randomize_algorithm/Randomize_algorithm.h"
-
-/*Display_content_algorithm*/
-#include "Display_content_algorithm/Display_array.h"
-
 /*////////常數與巨集(Constants & Macros)以及其他#define指令////////*/
-#define MAX_DATA_SIZE 10
 
 /*////////其他前期處理器指令(Other Preprocessor Directives////////*/
 
 /*--------------全域宣告與定義(Global Declaration & Definition)--------------*/
-/*////////資料結構(Structures)、typedefs跟enumerations////////*/
+/*////////資料結構(Data Structures)、typedefs跟enumerations////////*/
 
 /*////////函式雛型(Function Prototypes)////////*/
 
 /*////////全域變數(Global Variables)////////*/
 
 /*--------------主要程式碼(Main Code)--------------*/
-int main(void)
-  {
-    /*a test array*/
-    int test[MAX_DATA_SIZE] = {0};
+void displayArrayInt(const int source[] , /*source_array*/
+                      const unsigned source_size, /*array size*/
+                      const unsigned item_field_width, /*field width of all items*/
+                      const char delimit_character_sequence[], /*character sequence to apart 2 items*/
+                      const unsigned items_per_line) /*how many items to show in one line*/
+{
+  /*counters*/
+  unsigned i;
 
-    /*random it*/
-    randomizeArray(test, MAX_DATA_SIZE, 1, 5);
+  /*for first item to last item, display them*/
+  for (i = 0; i < source_size; ++i) {
+    /*print item*/
+    printf("%*d", item_field_width, source[i]);
 
-    /*show it */
-    displayArrayInt(test, MAX_DATA_SIZE, 2, " ", 10);
+    /*if not last item or last item of the line, print delimit string*/
+    if(!(i == source_size - 1 || (i + 1) % items_per_line == 0)){
+      printf("%s", delimit_character_sequence);
+    }
 
-    /*program exited successfully*/
-    return 0;
+    /*if the item is the last item of the line, print end of line sequence*/
+    if((i + 1) % items_per_line == 0){
+      putchar('\n');
+    }
   }
+
+  /*if the item is the last item of the array, print end of line sequence*/
+  putchar('\n');
+
+  /*done*/
+  return;
+}

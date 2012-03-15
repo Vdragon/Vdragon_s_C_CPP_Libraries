@@ -1,4 +1,4 @@
-﻿/*程式框架(Program Framework)
+/*程式框架(Program Framework)
 -----------------------------------
 更新紀錄(changelog)：
   Changelog is now stored on github
@@ -28,17 +28,8 @@
 /*////////環境設定(Environment Settings)////////*/
 
 /*////////程式所include的標頭檔(Included Headers)////////*/
-/*we need printf()*/
-#include <stdio.h>
-
-/*our algorithm header*/
-#include "Randomize_algorithm/Randomize_algorithm.h"
-
-/*Display_content_algorithm*/
-#include "Display_content_algorithm/Display_array.h"
 
 /*////////常數與巨集(Constants & Macros)以及其他#define指令////////*/
-#define MAX_DATA_SIZE 10
 
 /*////////其他前期處理器指令(Other Preprocessor Directives////////*/
 
@@ -50,17 +41,19 @@
 /*////////全域變數(Global Variables)////////*/
 
 /*--------------主要程式碼(Main Code)--------------*/
-int main(void)
-  {
-    /*a test array*/
-    int test[MAX_DATA_SIZE] = {0};
+void copyArrayInt(int destination[],
+                  const int source[],
+                  const unsigned source_size)
+{
+  /*counters*/
+  unsigned i;
 
-    /*random it*/
-    randomizeArray(test, MAX_DATA_SIZE, 1, 5);
-
-    /*show it */
-    displayArrayInt(test, MAX_DATA_SIZE, 2, " ", 10);
-
-    /*program exited successfully*/
-    return 0;
+  /*for first index to last index in array...*/
+  for (i = 0; i < source_size; ++i) {
+    /*assign value from source to destination*/
+    destination[i] = source[i];
   }
+
+  /*done*/
+  return;
+}

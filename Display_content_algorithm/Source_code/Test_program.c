@@ -1,4 +1,4 @@
-/*Test_program.c
+﻿/*Test_program.c
 -----------------------------------
 更新紀錄(changelog)：
   Changelog is now stored on github
@@ -32,7 +32,7 @@
 #include <stdio.h>
 
 /*our header*/
-#include "Display_array.h"
+#include "Display_content_algorithm/Display_array.h"
 
 /*Randomize_algorithm*/
 #include "Randomize_algorithm/Randomize_algorithm.h"
