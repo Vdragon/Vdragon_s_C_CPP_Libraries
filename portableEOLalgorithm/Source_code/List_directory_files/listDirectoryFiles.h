@@ -11,4 +11,4 @@
   #ifdef __cplusplus
   }
   #endif
-#endif /* LISTDIRECTORYFILES_H_INCLUDED*/
+#endif // LISTDIRECTORYFILES_H_INCLUDED

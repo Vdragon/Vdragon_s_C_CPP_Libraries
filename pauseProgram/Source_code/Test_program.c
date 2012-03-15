@@ -1,8 +1,5 @@
 /*程式框架(Program Framework)
 -----------------------------------
-程式名稱(program name)：。
-程式描述(program description)：。
-程式版本(program version)：0.00(0)
 程式框架版本(program framework version)：A
 程式框架修訂號(program framework revision number)：201109251624
 更新紀錄(changelog)：
@@ -19,8 +16,7 @@
 /*--------------前期處理器指令(Preprocessor Directive)--------------*/
 
 /*////////程式所include的標頭檔(Included Headers)////////*/
-#include "Pause_program.h"
-#include "main.h"
+#include "pauseProgram/Pause_program.h"
 
 /*////////常數與巨集(Constants & Macros)以及其他#define指令////////*/
 

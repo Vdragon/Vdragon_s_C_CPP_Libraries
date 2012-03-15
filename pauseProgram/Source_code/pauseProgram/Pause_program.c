@@ -33,7 +33,7 @@
 /*--------------前期處理器指令(Preprocessor Directive)--------------*/
 /*////////環境設定(Environment Settings)////////*/
 /* we need project specified settings*/
-
+#include "../Project_specific_configurations/System_category.h"
 
 /*////////程式所include的標頭檔(Included Headers)////////*/
 /* we need printf and scanf*/
