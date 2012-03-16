@@ -43,9 +43,7 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Source_code/Display_content_algorithm/Display_array.h" />
-		<Unit filename="Source_code/Heap_sort.c">
-			<Option compilerVar="CC" />
-		</Unit>
+		<Unit filename="Source_code/Heap_sort.cpp" />
 		<Unit filename="Source_code/Heap_sort.h" />
 		<Unit filename="Source_code/Insertion_sort.c">
 			<Option compilerVar="CC" />
@@ -63,9 +61,7 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Source_code/Swap_algorithm/Swap_algorithm.h" />
-		<Unit filename="Source_code/Test_program.c">
-			<Option compilerVar="CC" />
-		</Unit>
+		<Unit filename="Source_code/Test_program.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />

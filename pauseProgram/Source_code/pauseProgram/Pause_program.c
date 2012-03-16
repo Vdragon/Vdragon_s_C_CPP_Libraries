@@ -1,10 +1,5 @@
 ﻿/*Pause_program.c
 -----------------------------------
-程式名稱(program name)：。
-程式描述(program description)：。
-程式版本(program version)：0.00(0)
-程式框架版本(program framework version)：A
-程式框架修訂號(program framework revision number)：201109251624
 更新紀錄(changelog)：
   Changelog is now stored on github
 已知問題(known issues)：
@@ -75,13 +70,13 @@ else{
   版本：1.31(10)*/
 short int pauseProgram(void)
   {
-	printf("\n------------------------------------------------\n");
+    printf("\n------------------------------------------------\n");
 
-	printf("顯示運行結果，程式暫停運行...\nProgram paused for displaying execution result...\n");
+    printf("顯示運行結果，程式暫停運行...\nProgram paused for displaying execution result...\n");
 
-	{
-	/*儲存輸入的字元*/
-	char inputChar;
+    {
+    /*儲存輸入的字元*/
+    char inputChar;
 
     do{
         printf("請問您要重新運行本程式嗎（Ｙ／Ｎ）？\nDo you want to execute this program again(Y/N)?");
@@ -90,23 +85,23 @@ short int pauseProgram(void)
     }while(!((inputChar = getchar()) == 'y' || inputChar == 'Y'
                 || inputChar == 'n' || inputChar == 'N'));
 
-	if(inputChar == 'y' || inputChar == 'Y'){
-		/*丟掉換行符號*/
-		scanf("%*c");
+      if(inputChar == 'y' || inputChar == 'Y'){
+        /*丟掉換行符號*/
+        scanf("%*c");
 
-		/*清空螢幕*/
-		if(SYSTEM_CATEGORY == 0){
-			system("cls");
-		}
-		else{
-			system("clear");
-		}
+        /*清空螢幕*/
+        if(SYSTEM_CATEGORY == 0){
+          system("cls");
+        }
+        else{
+          system("clear");
+        }
 
-		/*return true*/
-		return 1;
-	}
-	}
+        /*return true*/
+        return 1;
+      }
+    }
 
-	/*return false*/
-		return 0;
+    /*return false*/
+    return 0;
   }
