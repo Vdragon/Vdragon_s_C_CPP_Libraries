@@ -6,7 +6,7 @@
 void listDirectoryFiles(void)
   {
     if(SYSTEM_CATEGORY == 1){
-      system("ls -a");
+      system("ls --almost-all");
     }else{
       system("dir");
     }

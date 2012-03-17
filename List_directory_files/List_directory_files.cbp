@@ -66,15 +66,17 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="Source_code/List_directory_files/listDirectoryFiles.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Source_code/List_directory_files/listDirectoryFiles.h" />
 		<Unit filename="Source_code/Project_specific_configuration/Show_debug_message.h" />
 		<Unit filename="Source_code/Project_specific_configuration/System_category.h" />
+		<Unit filename="Source_code/Project_specific_configurations/Show_debug_message.h" />
+		<Unit filename="Source_code/Project_specific_configurations/System_category.h" />
 		<Unit filename="Source_code/Test_program.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="Source_code/listDirectoryFiles.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Source_code/listDirectoryFiles.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />
