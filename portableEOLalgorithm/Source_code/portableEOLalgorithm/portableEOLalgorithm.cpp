@@ -31,6 +31,15 @@
 /*we need io functions*/
 #include <fstream>
 
+/* we need iostream to output debug message*/
+#include <iostream>
+
+/*我們需要專案的設定值*/
+#include "../Project_specific_configurations/Debug.h"
+
+/*我們需要一些defined訊息*/
+#include "../Messages_templates/zh_TW.h"
+
 /*////////常數與巨集(Constants & Macros)以及其他#define指令////////*/
 
 /*////////其他前期處理器指令(Other Preprocessor Directives////////*/
@@ -58,28 +67,37 @@ short skipEOLsequence(istream& file_stream)
   switch(test){
   case '\n':
     /*if is Unix...eat it and done*/
+#ifdef DEBUG
+    cout << DEBUG_TAG << "吃掉[LF]" << endl;
+#endif
     file_stream.ignore(1);
     /*return Unix*/
     return 1;
-
+    break;
   case '\r':
     /*maybe MS-DOS or Mac...ignore it and peek next*/
     file_stream.ignore(1);
     test = file_stream.peek();
     if(test == '\n'){
+#ifdef DEBUG
+      cout << DEBUG_TAG << "吃掉[CR][LF]" << endl;
+#endif
       file_stream.ignore(1);
       /*return Windows*/
       return 2;
     }
     /*return Mac*/
+#ifdef DEBUG
+    cout << DEBUG_TAG << "吃掉[CR]" << endl;
+#endif
     return 3;
+    break;
   default:
     /*shouldn't be EOL else...*/
     return -1;
+    break;
   }
 
-  /*不應該跑到這邊來，當作錯誤吧！*/
-  return -1;
 }
 
 /*portable getline function*/
@@ -111,4 +129,29 @@ std::istream& portableGetline(std::istream& is, std::string& t)
             t += (char)c;
         }
     }
+}
+
+void dumpInvisibleContent(string& input)
+{
+  /*counter*/
+  unsigned i;
+  char buffer;
+
+  /*從第一個到最後一個字串字元*/
+  for(i = 0; i < input.length(); ++i){
+    buffer = input[i];
+    switch(buffer){
+    case '\n':
+      cout << "[LF]";
+      break;
+    case '\r':
+      cout << "[CR]";
+      break;
+    default:
+      cout << buffer;
+      break;
+    }
+  }
+  /*完成*/
+  return;
 }
