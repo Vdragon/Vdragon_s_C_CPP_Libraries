@@ -52,22 +52,8 @@
 
 
 
-/*呼叫暫停運行函式(放在main函式中)
-if(pauseProgram() == 1){
-	goto restart_program;
-}
-*/
-/*呼叫暫停運行函式(其他函式)
-if(pauseProgram() == 1){
-	goto restart_program;
-}
-else{
-	return ;
-}
-*/
-/*－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－
-  暫停運行函式
-  版本：1.31(10)*/
+
+/*暫停運行函式*/
 short int pauseProgram(void)
   {
     printf("\n------------------------------------------------\n");
