@@ -46,6 +46,7 @@ Desktop.ini
 ##封存／壓縮檔
 *.7z
 *.zip
+*.tar.gz
 
 ##Code::Blocks
 *.layout
