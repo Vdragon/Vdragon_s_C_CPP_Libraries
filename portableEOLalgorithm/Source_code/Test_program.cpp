@@ -44,7 +44,7 @@
 #include <fstream>
 
 /*錯誤訊息header*/
-#include "Error_messages/Generic.zh_TW.h"
+#include "Messages_templates/zh_TW.h"
 
 /*我們需要暫停程式*/
 #include "pauseProgram/Pause_program.h"
@@ -98,26 +98,14 @@ restart_program:
         break;
       }
       cout << buffer;
-      switch(skipEOLsequence(input_file)){
-      case 1:
-        cout << "[LF]" << endl;
-        break;
-      case 2:
-        cout << "[CR][LF]" << endl;
-        break;
-      case 3:
-        cout << "[CR]" << endl;
-        break;
-      case -1:default:
-        cout << "[ERROR]" << endl;
-        break;
-      }
+      skipEOLsequence(input_file);
     }
-    }else{
-      cout << FILE_FAIL_OPEN;
-    }
-  /*close file*/
-  input_file.close();
+    /*close file*/
+    input_file.close();
+
+  }else{
+      cout << ERROR_FILE_OPEN_FAIL;
+  }
 
   /*pause*/
   if(pauseProgram() == 1){

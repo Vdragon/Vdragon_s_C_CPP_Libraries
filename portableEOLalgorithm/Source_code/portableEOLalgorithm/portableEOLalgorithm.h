@@ -11,6 +11,9 @@
   #define SKIP_EOL_ALGORITHM_H_
   using namespace std;
 
+  /* 標示目前執行位置的標籤*/
+  #define SKIP_EOL_SEQUENCE_TAG "【跳過EOL序列模組】"
+
   /*跳過stream中的換行字元序列的函式*/
   short skipEOLsequence(istream& file_stream);
 
