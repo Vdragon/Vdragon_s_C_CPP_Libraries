@@ -8,9 +8,9 @@
   #endif
   
   /*軟體名稱*/
-  #define SOFTWARE_NAME "Software Name"
+  #define SOFTWARE_NAME "SOFTWARE_NAME"
   /*軟體開發者名稱*/
-  #define DEVELOPER_NAME "Developer Name"
+  #define DEVELOPER_NAME "DEVELOPER_NAME"
   /*軟體開發者的電子郵件地址*/
   #define DEVELOPER_EMAIL "developer@host.category.region"
   /*用在著作權宣告的軟體釋出年份*/
