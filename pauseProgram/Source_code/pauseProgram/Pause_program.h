@@ -11,12 +11,12 @@
     short int pauseProgram(void);
 /*用來重新運行程式的label
 restart_program:*/
-    /*呼叫暫停運行函式(放在main函式中)
+    /*暫停程式運行（於main函式中）
     if(pauseProgram() == 1){
       goto restart_program;
     }
     */
-    /*呼叫暫停運行函式(其他函式)
+    /*暫停程式運行（於其他函式）
     if(pauseProgram() == 1){
       goto restart_program;
     }
