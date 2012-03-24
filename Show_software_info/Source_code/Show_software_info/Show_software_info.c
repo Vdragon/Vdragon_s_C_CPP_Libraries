@@ -27,6 +27,11 @@
 /*--------------程式碼開始(Code Started)--------------*/
 /*--------------前期處理器指令(Preprocessor Directive)--------------*/
 /*////////程式所include之函式庫的標頭檔(Included Library Headers)////////*/
+/*我們需要Project_specific_configurations中定義的軟體訊息*/
+#include "../Project_specific_configurations/Software_info.h"
+
+/*我們需要printf()*/
+#include <stdio.h>
 
 /*////////常數與巨集(Constants & Macros)////////*/
 
@@ -44,7 +49,8 @@
    *  印出資訊，將控制交還給主要程式*/
 void show_software_info()
 {
-
+  printf(SOFTWARE_NAME "\n");
+  printf("Copyright " SOFTWARE_RELEASE_YEAR " " DEVELOPER_NAME "\n");
   /* 結束*/
   return ;
 }

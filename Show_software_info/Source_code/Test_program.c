@@ -53,7 +53,9 @@ int main(void)
 
 /*用來重新運行程式的label*/
 restart_program:
-  /*呼叫
+  /*呼叫Show software info*/
+  show_software_info();
+
   /*呼叫暫停運行函式(放在main函式中)*/
   if(pauseProgram() == 1){
     goto restart_program;
