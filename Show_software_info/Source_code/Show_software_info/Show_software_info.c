@@ -47,10 +47,26 @@
 /*--------------主要程式碼(Main Code)--------------*/
 /* 顯示軟體資訊的函式
    *  印出資訊，將控制交還給主要程式*/
-void show_software_info()
+void show_software_info(char program_name[])
 {
-  printf(SOFTWARE_NAME "\n");
-  printf("Copyright " SOFTWARE_RELEASE_YEAR " " DEVELOPER_NAME "\n");
+  /*顯示程式名稱及著作權宣告*/
+  printf("%s\n", program_name);
+  printf("Copyright " SOFTWARE_RELEASE_YEAR " " DEVELOPER_NAME "(" DEVELOPER_EMAIL ")\n");
+  putchar('\n');
+
+  /*顯示授權條款*/
+  printf("%s is part of " SOFTWARE_NAME ".\n", program_name);
+  printf(SOFTWARE_NAME " is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License as published by the Free Software Foundation, either version 3 of the License, or(at your option) any later version.\n");
+  putchar('\n');
+
+  /* 顯示免責條款*/
+  printf(SOFTWARE_NAME " is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public License for more details.\n");
+
+  /*顯示附帶說明*/
+  printf("You should have received a copy of the GNU Lesser General Public License along with " SOFTWARE_NAME ".  If not, see <http://www.gnu.org/licenses/>.\n");
+
+  /*顯示分隔線*/
+  printf("---------------------------------\n");
   /* 結束*/
   return ;
 }

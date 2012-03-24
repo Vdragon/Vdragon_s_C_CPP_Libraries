@@ -8,8 +8,10 @@
   #endif
 
   /* 顯示軟體資訊的函式
-   *  印出資訊，將控制交還給主要程式*/
-  void show_software_info();
+   *   印出資訊，將控制交還給主要程式
+   * 參數：
+   *   program_name:程式名稱（非軟體名稱）的陣列*/
+  void show_software_info(char program_name[]);
 
   #ifdef __cplusplus
     }
