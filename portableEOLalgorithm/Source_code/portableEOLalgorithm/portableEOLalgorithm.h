@@ -14,7 +14,14 @@
   /* 標示目前執行位置的標籤*/
   #define SKIP_EOL_SEQUENCE_TAG "【跳過EOL序列模組】"
 
-  /*跳過stream中的換行字元序列的函式*/
+  /* 跳過stream中的換行字元序列的函式
+   * 參數：
+   *   input stream
+   * 回傳值：
+   *   1  跳過UNIX行結尾字元序列
+   *   2  跳過DOS/WINDOWS行結尾字元序列
+   *   3  跳過MAC行結尾字元序列
+   *   -1 發生未在開發者預期中的錯誤*/
   short skipEOLsequence(istream& file_stream);
 
   /*可以處理所有平台換行序列的getline函式
