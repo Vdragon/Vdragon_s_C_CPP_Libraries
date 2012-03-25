@@ -132,8 +132,8 @@ bool CComplex::divide(CComplex divider)
   /***測試例外情況階段***/
   /*被除數是零除法沒有定義*/
   if(divider.isZero()){
-    cout << COMPLEX_NUMBER_DIVISION_TAG << ERROR_DIVIDE_BY_ZERO
-         << COMPLEX_NUMBER_DIVISION_TAG << "Complex Number Division Failed!" << endl;
+    cout << ERROR_TAG << COMPLEX_NUMBER_DIVISION_TAG << ERROR_DIVIDE_BY_ZERO
+         << ERROR_TAG << COMPLEX_NUMBER_DIVISION_TAG << "Complex Number Division Failed!" << endl;
     return false;
   }
 
