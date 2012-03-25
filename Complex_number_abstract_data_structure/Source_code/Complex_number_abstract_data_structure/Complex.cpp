@@ -191,8 +191,27 @@ double CComplex::getImaginary()
 /*a method to test CComplex class*/
 bool CComplex::unitTest()
 {
+  {
+    /*複數等於零method測試*/
+    CComplex x1, x2, x3, x4;
 
-  {/*複數相等method測試*/
+    x1.setValue(0,0);
+    x2.setValue(0.02, -0.14);
+    x3.setValue(3,0);
+    x4.setValue(0,3);
+
+    assert(x1.isZero());
+    assert(!x2.isZero());
+    assert(!x3.isZero());
+    assert(!x4.isZero());
+#ifdef DEBUG
+  cout << DEBUG_TAG << UNIT_TEST_TAG
+       << "複數等於零method測試通過！" << endl;
+#endif
+  }
+  {
+
+    /*複數相等method測試*/
     CComplex z1, z2;
 
     z1.setValue(3.14159, 2.71787);
@@ -289,8 +308,8 @@ void CComplex::print()
    * originally used for divide-by-0 checking*/
 inline bool CComplex::isZero()
 {
-  /*兩數相乘為零表示兩者接分別為零*/
-  return fabs(m_real * m_imaginary) < MAX_ZERO_LIMIT;
+  /*實虛部係數皆為零者為零*/
+  return (fabs(m_real) < MAX_ZERO_LIMIT && fabs(m_imaginary) < MAX_ZERO_LIMIT);
 }
 
 /*一個inline的method用來將一個複數轉型成其共軛型式*/
