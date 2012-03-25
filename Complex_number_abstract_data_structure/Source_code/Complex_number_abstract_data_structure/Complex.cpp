@@ -287,7 +287,20 @@ bool CComplex::unitTest()
            << "複數除法method測試通過！" << endl;
   #endif
   }
+  {/* 是否為實數method測試*/
+    CComplex x1, x2, x3;
+    x1.setValue(3, 0);
+    x2.setValue(3,-3);
+    x3.setValue(0,3);
 
+    assert(x1.isReal());
+    assert(!x2.isReal());
+    assert(!x3.isReal());
+#ifdef DEBUG
+    cout << DEBUG_TAG << UNIT_TEST_TAG
+         << "是否為實數method測試通過！" << endl;
+#endif
+  }
   /*success*/
 #ifdef DEBUG
   cout << DEBUG_TAG << UNIT_TEST_TAG
@@ -321,4 +334,15 @@ inline void CComplex::toConjugate()
 
   /*done*/
   return;
+}
+
+/* an inline method to check if complex number is real,
+ * originally used for print() format check*/
+inline bool CComplex::isReal()
+{
+  if(fabs(m_imaginary) < MAX_ZERO_LIMIT){
+    return true;
+  }else{
+    return false;
+  }
 }

@@ -56,6 +56,10 @@
     /*一個inline的method用來將一個複數轉型成其共軛型式*/
     inline void toConjugate();
 
+    /* an inline method to check if complex number is real,
+     * originally used for print() format check*/
+    inline bool isReal();
+
   private:
     double m_real;
     double m_imaginary;
