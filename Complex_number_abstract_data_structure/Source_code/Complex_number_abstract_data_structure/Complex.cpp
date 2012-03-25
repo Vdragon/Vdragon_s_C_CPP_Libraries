@@ -308,6 +308,7 @@ void CComplex::print()
    * originally used for divide-by-0 checking*/
 inline bool CComplex::isZero()
 {
+
   /*實虛部係數皆為零者為零*/
   return (fabs(m_real) < MAX_ZERO_LIMIT && fabs(m_imaginary) < MAX_ZERO_LIMIT);
 }
