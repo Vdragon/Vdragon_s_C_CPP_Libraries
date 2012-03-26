@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "findMaxMin.h"
+#include <assert.h>
+#include "findMaxMin/findMaxMin.h"
 
 #define MAX_RANDOM_DATA_SIZE 5
 
@@ -26,6 +27,16 @@ int main(void)
     putchar('\n');
     printf("呼叫intArrayMax()，陣列中最大的資料為：%d\n", intArrayMax(random_input, MAX_RANDOM_DATA_SIZE));
     printf("呼叫intArrayMin()，陣列中最小的資料為：%d\n", intArrayMin(random_input, MAX_RANDOM_DATA_SIZE));
+
+    {
+      double small = -3, big = 16;
+      assert(MIN_OF_2(small, big) == small);
+      assert(MIN_OF_2(big, small) == small);
+      assert(MAX_OF_2(small, big) == big);
+      assert(MAX_OF_2(big, small) == big);
+      printf("MIN_OF_2()、MAX_OF_2()測試通過。\n");
+    }
+
     return 0;
   }
 
