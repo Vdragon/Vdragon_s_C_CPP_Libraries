@@ -1,0 +1,24 @@
+//函式異常退出
+printf("函式使用的Max Heap資料量超出最大容許大小，函式必須異常退出。\n"
+       "The data in the max heap which function used is full, function must be errorly exited.");
+//函式錯誤訊息規範
+    if(func_call_result != 0){
+        switch(func_call_result){
+        case -1:
+            printf("軟體使用之graphListInsertEdge函式向作業系統要求記憶體空間失敗！\n"
+                   "請檢查系統的可用記憶體空間是否足夠。\n"
+                   "The function \"graphListInsertEdge\" in the software failed of requesting memory space from operating system!\n"
+                   "Please check if the free memory space is sufficient.\n");
+            break;
+        default:
+            printf("graphListInsertEdge函式發生未知的錯誤。\n"
+                   "The graphListInsertEdge function has unknown error.\n");
+            break;
+        }
+        printf("graphListInsertEdge函式異常退出！\n"
+               "graphListInsertEdge function has errorly exited!\n"
+               "軟體將跳至不會受到影響的位置繼續執行。\n"
+               "Software will jump to somewhere not affected to continue.\n");
+        goto insert_edge_into_graph_list_end;
+    }
+    }
