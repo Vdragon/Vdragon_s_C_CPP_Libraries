@@ -307,7 +307,7 @@ int main(void)
     if(SHOW_DEBUG_MESSAGE){
         printf("input_number = %u\n", input_number);
     }
-    }while(input_number < 0 || input_number >= MAX_ADJ_MATRIX_SIZE || checksum != 1);
+    }while(input_number >= MAX_ADJ_MATRIX_SIZE || checksum != 1);
 
     /*呼叫適用於相鄰性陣列(Adjacency Matrix)的深度優先搜尋(Depth First Search)函式*/
     /*graphAdjMatDFS(graph_adj_matrix1, input_number);*/
@@ -914,7 +914,7 @@ short int graphAdjListFBC(Graph target, Vertex child, Vertex parent)
 
                 /*如果呼叫完表示說low(u)跟low(w)計算好了嗎？*/
                 /*low(child) = min(low[child], low[next_child])
-                low[child] = MIN_OF_2(low[child], low[next_child]);
+                low[child] = MIN_OF_2(low[child], low[next_child]);*/
 
                 /*如果low(w) >= dfn(u)（發現關節點*/
                 if(low[next_child] >= dfn[child]){
