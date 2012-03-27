@@ -27,6 +27,10 @@
 /*--------------程式碼開始(Code Started)--------------*/
 /*--------------前期處理器指令(Preprocessor Directive)--------------*/
 /*////////程式所include之函式庫的標頭檔(Included Library Headers)////////*/
+/**/
+#include "Graph_abstract_data_type.list.h"
+/**/
+#include "../Project_specific_configurations/Max_value.h"
 
 /*////////常數與巨集(Constants & Macros)////////*/
 
@@ -230,7 +234,7 @@ void graphAdjListDFS(const Graph target, const Vertex root)
     {
     /*宣告與定義(Declaration & Definition)*/
     /*用來判斷該Head有無拜訪過的陣列，有為非零、沒有為零*/
-    static unsigned visited[MAX_ADJ_LIST_SIZE] = {FALSE};
+    static unsigned visited[MAX_ADJ_LIST_SIZE] = {0};
 
     /*用來判斷是否為最外層呼叫的靜態變數，假設最外層為１*/
     static unsigned call_level = 1;
@@ -261,7 +265,7 @@ void graphAdjListDFS(const Graph target, const Vertex root)
     else{
         register unsigned i;
         for(i = 0; i < MAX_ADJ_LIST_SIZE; i++){
-            visited[i] = FALSE;
+            visited[i] = 0;
         }
         printf("END\n");
     }

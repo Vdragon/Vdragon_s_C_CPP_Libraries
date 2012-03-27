@@ -1,35 +1,3 @@
-/*程式框架(Program Framework)
-  -------------------------------------------------------------------
-  程式名稱(Program Name)：圖的資料結構與演算法。
-  程式敘述(Program Description)：。
-  程式版本(Program Version)：0.00(5)201106161840
-  程式框架版本(Program Framework Version)：A
-  程式框架修訂號(Program Framework Revision Number)：38
-  最新更新紀錄(Latest Update Log)：專案開始。
-
-更新紀錄(Changelog)：
-0.00(0)　專案開始
-0.00(1)201106041639　加了一些東西
-0.00(2)201106070131　加入DFS
-0.00(4)201106151815　加入相鄰性陣列DFS
-0.00(5)201106161840
-完成
-將邊插入相鄰性陣列函式
-插入一個邊(edge)至相鄰性List函式
-摧毀相鄰性List圖的函式
-輸出相鄰性List圖的函式
-對counter優化
-以及bug修正
-0.00(3)201106080102
-完成：
-插入一個邊(edge)至相鄰性List圖中的函式--漏一、邊界檢查錯誤修正
-加了const
-將邊插入相鄰性陣列函式加入自loop邊線偵測功能
-更新紀錄(Changelog)：
-已知問題(Known Issue)：
-0.00(2)：出現重複頂點->解決
-
---------------注意事項--------------
 
 /*--------------程式碼開始(Code Started)--------------*/
 /*--------------前置處理器選項(Preprocessor Code)--------------*/
@@ -50,6 +18,12 @@
 /*版本：1.00(1)*/
 #include <time.h>
 
+/**/
+#include "pauseProgram/Pause_program.h"
+
+/**/
+#include "Graph_abstract_data_type/Graph_abstract_data_type.list.h"
+
 /*環境設定(Environment Settings)*/
 
 /*----常數與巨集(Constants & Macros)----*/
@@ -63,8 +37,6 @@
 
 /*--------------全域宣告與定義(Global Declaration & Definition)--------------*/
 /*----資料結構(Structures), typedefs, enums----*/
-
-
 
 /*堆疊(Stack)元素資料結構*/
 typedef Edge StackElement;
@@ -128,7 +100,6 @@ int main(void)
         /*testEdge.v = 2;*/
 
         /*測試edge插入陣列中*/
-        func_call_result = graphMatrixInsertEdge(UNDIRECTED, graph_adj_matrix1, testEdge);
         if(func_call_result != 0){
             switch(func_call_result){
             case -1:
@@ -147,7 +118,7 @@ int main(void)
                    "graphMatrixInsertEdge function has errorly exited!\n"
                    "軟體將跳至不會受到影響的位置繼續執行。\n"
                    "Software will jump to somewhere not affected to continue.\n");
-            goto insert_edge_into_graph_matrix_end;
+            goto insert_edge_into_graph_list_end;
         }
 
         /*測試將edge插入相鄰性List中*/
@@ -196,10 +167,11 @@ int main(void)
            "Please enter which vertex you want to start Depth First Search?\n");
     printf("->");
     checksum = scanf("%u%*c", &input_number);
-    if(SHOW_DEBUG_MESSAGE){
+#ifdef DEBUG
         printf("input_number = %u\n", input_number);
-    }
-    }while(input_number >= MAX_ADJ_MATRIX_SIZE || checksum != 1);
+
+#endif
+    }while(input_number >= MAX_ADJ_LIST_SIZE || checksum != 1);
 
     /*呼叫適用於相鄰性List(Adjacency List)的深度優先搜尋(Depth First Search)函式*/
     graphAdjListDFS(graph_adj_list1, input_number);
@@ -220,7 +192,7 @@ int main(void)
     graphListDestroy(graph_adj_list1);
 
     /*呼叫暫停運行函式(放在main函式中)*/
-    if(main_pause_program() == 1){
+    if(pauseProgram() == 1){
         goto restart_program;
     }
 
