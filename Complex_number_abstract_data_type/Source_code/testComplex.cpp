@@ -76,7 +76,7 @@ restart_program:
   if(!CComplex::unitTest()){
     cout << "元件測試未通過！軟體無法繼續運行。" << endl
          << "請保留程式輸出之所有訊息以提交程式缺陷報告供軟體開發者處理這個問題。" << endl
-         << "提交報告網頁地址：https://github.com/Vdragon/NTOU_CPP_Lab_Opensource_Project/issues" << endl;
+         << "提交程式缺陷報告網址：https://github.com/Vdragon/NTOU_CPP_Lab_Opensource_Project/issues" << endl;
   }
 
   /*暫停程式運行*/

@@ -1,4 +1,4 @@
-/*Test_program.cpp
+/*Test_program.c
 -----------------------------------
 更新紀錄 | Changelog
   Changelog is now stored on GitHub
@@ -9,41 +9,32 @@
 著作權宣告 | Copyright notice
   Copyright 2012 林博仁(Henry Lin, pika1021@gmail.com)
 智慧財產授權條款：
-  Test_program.cpp is part of Operate_resources_helper
-  Operate_resources_helper is free software: you can redistribute it and/or modify
+  Test_program.c is part of Messages_templates
+  Messages_templates is free software: you can redistribute it and/or modify
   it under the terms of the GNU Lesser General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
   (at your option) any later version.
 
-  Operate_resources_helper is distributed in the hope that it will be useful,
+  Messages_templates is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU Lesser General Public License for more details.
 
   You should have received a copy of the GNU Lesser General Public License
-  along with Operate_resources_helper.  If not, see <http://www.gnu.org/licenses/>.
+  along with Messages_templates.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 /*--------------程式碼開始(Code Started)--------------*/
 /*--------------前期處理器指令(Preprocessor Directive)--------------*/
 /*////////程式所include之函式庫的標頭檔(Included Library Headers)////////*/
 /**/
-#include <iostream>
-
-/**/
-#include <cstdlib>
-
-/**/
-#include "pauseProgram/Pause_program.h"
-
-/**/
-#include "Operate_resources_helper/Operate_file_CPP.h"
-
-/**/
-#include <fstream>
-
-/**/
 #include "Messages_templates/zh_TW.h"
+
+/**/
+#include "stdlib.h"
+
+/**/
+#include "stdio.h"
 
 /*////////常數與巨集(Constants & Macros)////////*/
 
@@ -57,43 +48,10 @@
 /*////////全域變數(Global Variables)////////*/
 
 /*--------------主要程式碼(Main Code)--------------*/
-/**/
-using namespace std;
-int main()
+int main(void)
 {
-/*用來重新運行程式的label*/
-restart_program:
+  DEBUG_LOCATION();
 
-  /*filename*/
-  char filename[30];
-
-  /*stream*/
-  ifstream input_file;
-
-  /*buffer*/
-  char buffer[30];
-
-  /*open file*/
-  askFile(filename);
-  if(!openFile(filename, "rw", input_file)){
-    while(!input_file.eof()){
-      input_file.getline(buffer, 30);
-      cout << buffer << endl;
-    }
-    closeFile(filename, input_file);
-
-  }
-  else{
-    cerr << ERROR_TAG
-         << "檔案讀取失敗！" << endl;
-  }
-
-
-  /*暫停程式運行（於main函式中）*/
-  if(pauseProgram() == 1){
-    goto restart_program;
-  }
-
-  /*done*/
+  /**/
   return EXIT_SUCCESS;
 }
