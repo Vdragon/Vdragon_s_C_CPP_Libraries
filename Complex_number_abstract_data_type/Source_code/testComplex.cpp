@@ -49,6 +49,9 @@
 /*我們需要處理EOL*/
 #include "portableEOLalgorithm/portableEOLalgorithm.h"
 
+/*我們需要預先定義好的回傳狀態碼*/
+#include <cstdlib>
+
 /*////////常數與巨集(Constants & Macros)以及其他#define指令////////*/
 
 /*////////其他前期處理器指令(Other Preprocessor Directives////////*/
@@ -81,5 +84,5 @@ restart_program:
     goto restart_program;
   }
 /*end_program:*/
-  return 0;
+  return EXIT_SUCCESS;
 }
