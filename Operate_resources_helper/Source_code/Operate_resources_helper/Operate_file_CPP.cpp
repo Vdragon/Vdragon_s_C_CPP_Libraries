@@ -39,6 +39,9 @@
 /**/
 #include "../Messages_templates/zh_TW.h"
 
+/*askFile 需要吃EOL*/
+#include "../portableEOLalgorithm/portableEOLalgorithm.h"
+
 /*////////常數與巨集(Constants & Macros)////////*/
 
 /*////////其他前期處理器指令(Other Preprocessor Directives////////*/
@@ -59,8 +62,10 @@ using namespace std;
     /**/
     listDirectoryFiles();
     cout << "目前工作目錄(working directory)下的檔案資訊如上，請輸入要開啟的檔案名稱：";
-    /*FIXME:目前尚無能夠完美處理stdin的解決方案*/
-    gets(filename);
+
+    cin >> filename;
+
+    skipEOLsequence(cin);
 
     /*done*/
     return;
