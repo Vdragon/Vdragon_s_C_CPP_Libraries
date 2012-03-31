@@ -3,7 +3,8 @@
 /*錯誤訊息標籤*/
 #define ERROR_TAG "【錯誤】"
 
-/*檔案開啟失敗*/
+/* 檔案開啟失敗
+ * FIXME:換行會造成下一行沒有ERROR_TAG...*/
 #define ERROR_FILE_OPEN_FAIL "檔案開啟失敗！\n請確定要開啟的檔案是否存在於作用中的目錄下，或是您是否有權限讀取它。\n"
 
 /*divide by zero fail*/
