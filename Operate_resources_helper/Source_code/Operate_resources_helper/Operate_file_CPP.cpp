@@ -74,8 +74,8 @@ using namespace std;
      * FIXME:目前沒有判斷是否開檔失敗*/
     input_file.open(filename, fstream::in | fstream::out);
     if(!input_file.is_open()){
-      cerr << ERROR_TAG << ERROR_FILE_OPEN_FAIL << endl
-           << DEBUG_TAG << "錯誤發生程式位置：" << __FILE__ << ":" << __LINE__ << endl;
+      cerr << ERROR_TAG << ERROR_FILE_OPEN_FAIL << endl;
+      DEBUG_LOCATION(); cout << endl;
       /*檔案開啟失敗*/
       return -1;
     }
