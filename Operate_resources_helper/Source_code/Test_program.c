@@ -34,7 +34,7 @@
 #include <stdlib.h>
 
 /* this library*/
-#include "Operate_resources_helper/Operate_file.h"
+#include "Operate_resources_helper/Operate_file_C.h"
 
 /*////////常數與巨集(Constants & Macros)////////*/
 /*fast*/

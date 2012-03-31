@@ -64,6 +64,7 @@ using namespace std;
   /*開啟檔案函式*/
   short openFile(const char filename[], const char mode[], ifstream& input_file)
   {
+    /* FIXME:目前無視於mode的設定直接假設開啟的檔案為RW*/
     input_file.open(filename, fstream::in | fstream::out);
 
     return 0;
@@ -73,6 +74,7 @@ using namespace std;
   /*關閉檔案函式*/
   short closeFile(const char filename[], ifstream& input_file)
   {
+    /* FIXME:目前沒有檢查關閉檔案是否成功*/
     input_file.close();
 
     /*success*/
