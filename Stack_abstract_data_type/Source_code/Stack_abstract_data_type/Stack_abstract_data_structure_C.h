@@ -8,8 +8,6 @@
   #endif
     /*StackElement的定義*/
     typedef int StackElement;
-    /*定義堆疊(Stack)最大容量大小*/
-    #define MAX_STACK_SIZE 100
 
     /*模組標籤*/
     #define STACK_ABSTRACT_DATA_STRUCTURE_TAG "【Stack抽象資料類型模組】"
