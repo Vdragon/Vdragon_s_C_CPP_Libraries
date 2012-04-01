@@ -69,6 +69,13 @@ CComplex::CComplex(void)
 {
 }
 
+CComplex::CComplex(double real, double imaginary)
+{
+  m_real = real;
+  m_imaginary = imaginary;
+  return;
+}
+
 CComplex::~CComplex(void)
 {
 }
@@ -196,6 +203,7 @@ double CComplex::getImaginary()
 bool CComplex::unitTest()
 {
   {
+
     /*複數等於零method測試*/
     CComplex x1, x2, x3, x4;
 
@@ -346,6 +354,16 @@ bool CComplex::unitTest()
     cout << DEBUG_TAG << UNIT_TEST_TAG
          << "請自行檢查輸出是否正確。" << endl;
 #endif
+  }
+  /*測試setValue功能的constructor*/
+  {
+    CComplex x1(1.23, -4.56), x2;
+    x2.setValue(1.23, -4.56);
+
+    assert(x1.isEqual(x2, MAX_ZERO_LIMIT));
+
+    cout << DEBUG_TAG << UNIT_TEST_TAG
+         << "setValue功能的constructor測試通過！" << endl;
   }
   /*success*/
 #ifdef DEBUG

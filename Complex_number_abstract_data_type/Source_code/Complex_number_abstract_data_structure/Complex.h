@@ -18,6 +18,8 @@
   {
   public:
     CComplex(void);
+    /*順便設定係數*/
+    CComplex(double real, double imaginary);
 
     virtual ~CComplex(void);
 
