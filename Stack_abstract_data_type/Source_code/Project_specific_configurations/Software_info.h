@@ -8,11 +8,11 @@
   #endif
   
   /*軟體名稱*/
-  #define SOFTWARE_NAME "SOFTWARE_NAME"
+  #define SOFTWARE_NAME "Stack抽象資料類型"
   /*軟體開發者名稱*/
-  #define DEVELOPER_NAME "DEVELOPER_NAME"
+  #define DEVELOPER_NAME "Ｖ字龍(Vdragon)"
   /*軟體開發者的電子郵件地址*/
-  #define DEVELOPER_EMAIL "developer@host.category.region"
+  #define DEVELOPER_EMAIL "pika1021@gmail.com"
   /*用在著作權宣告的軟體釋出年份*/
   #define SOFTWARE_RELEASE_YEAR "2012"
   /* 用在軟體所使用的授權條款（目前尚未實作）
