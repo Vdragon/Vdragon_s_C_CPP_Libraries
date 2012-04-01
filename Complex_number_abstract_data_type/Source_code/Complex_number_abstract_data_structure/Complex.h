@@ -27,7 +27,7 @@
     /*method to assign value to a CComplex*/
     void setValue(double real, double imaginary);
     /* an method to copy an 存在的複數到此複數物件中*/
-    void setValue(CComplex &source);
+    void setValue(CComplex source);
     /*method to add another CComplex to this CComplex*/
     void add(CComplex target);
     /*method to subtract another CComplex to this CComplex*/

@@ -412,7 +412,7 @@ inline bool CComplex::isReal()
 }
 
 /* an method to copy an 存在的複數到此複數物件中*/
-void CComplex::setValue(CComplex &source)
+void CComplex::setValue(CComplex source)
 {
   setValue(source.getReal(), source.getImaginary());
 
