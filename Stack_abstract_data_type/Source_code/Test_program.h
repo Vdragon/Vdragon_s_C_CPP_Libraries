@@ -6,11 +6,7 @@
   #ifdef __cplusplus
     extern "C"{
   #endif
-  /*定義堆疊(Stack)最大容量大小*/
-  #define MAX_STACK_SIZE 100
 
-  /*定義StackElement*/
-  typedef int StackElement;
 
   /*單元測試函式*/
   short stackUnitTest(void);
