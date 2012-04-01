@@ -6,34 +6,25 @@
   #ifdef __cplusplus
     extern "C"{
   #endif
+  /*圖(graph)共同的結構*/
+  #include "Graph_abstract_data_type.generic.h"
 
-  /*點的資料結構*/
-  typedef int Vertex;
-
-  /*邊(edge)的資料結構*/
-  typedef struct edge{
-      Vertex u, v;
-  }Edge;
+  /*最大相鄰性列表的大小*/
+  #define MAX_ADJ_LIST_SIZE 100
 
   /*圖節點的資料結構（adjacency lists表示法）*/
   typedef struct adjListNode * AdjListHead;
   typedef struct adjListNode{
-      signed connected_vertex;
+      Vertex connected_vertex;
       struct adjListNode * next;
   }AdjListNode;
 
   /*圖的宣告*/
   typedef AdjListHead * Graph;
 
-  /*圖的類型設定*/
-  typedef enum graphTypes{
-      UNDIRECTED, DIRECTED
-  }GraphTypes;
-
 
   /*插入一個頂點(vertex)至相鄰性List圖中的函式的function prototype*/
   short int graphListInsertVert(GraphTypes mode, Graph target, Vertex v);
-
   /*插入一個邊(edge)至相鄰性List圖中的函式的function prototype*/
   short int graphListInsertEdge(GraphTypes mode, Graph target, Edge item);
 
@@ -68,7 +59,8 @@
 
 
   /*適用於相鄰性List(Adjacency List)的尋找多連結圖元件(Biconnected Component)函式的function prototype*/
-  short int graphAdjListFBC(Graph target, Vertex child, Vertex parent);
+  short int graphAdjListFBC(Graph target, Vertex child, Vertex parent, unsigned max_stack_size);
+
 
   #ifdef __cplusplus
     }

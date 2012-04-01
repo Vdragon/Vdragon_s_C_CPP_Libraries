@@ -6,6 +6,9 @@
   #ifdef __cplusplus
     extern "C"{
   #endif
+    /*圖(graph)共同的結構*/
+    #include "Graph_abstract_data_type.generic.h"
+
     /*adjacency矩陣表示法最大大小*/
     #define MAX_ADJ_MATRIX_SIZE 10
 

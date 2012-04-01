@@ -27,34 +27,20 @@
 /*環境設定(Environment Settings)*/
 
 /*----常數與巨集(Constants & Macros)----*/
-/*adjacency list表示法頂點數量*/
-#define MAX_ADJ_LIST_SIZE 10
-
 
 /*堆疊(Stack)*/
 /*定義堆疊(Stack)最大容量大小*/
 #define MAX_STACK_SIZE 100
 
+/*定義測試用的圖的邊、頂點數量*/
+#define TEST_EDGE_QUANTITY 100
+#define TEST_VERTEX_QUANTITY 100
+
 /*--------------全域宣告與定義(Global Declaration & Definition)--------------*/
 /*----資料結構(Structures), typedefs, enums----*/
 
-/*堆疊(Stack)元素資料結構*/
-typedef Edge StackElement;
 
 /*----函式原型(Function Prototypes)----*/
-
-
-/*將元素pop出堆疊的函式的function prototype*/
-StackElement stackPop(StackElement stack[], int *stack_top);
-
-/*判斷堆疊是否為空函式的function prototype*/
-inline short int stackIsEmpty(int stack_top);
-
-/*判斷堆疊是否已滿函式的function prototype*/
-inline short int stackIsFull(int stack_top);
-
-/*將元素push至堆疊的函式的function prototype*/
-short int stackPush(StackElement item, StackElement stack[], int *stack_top);
 
 /*----全域變數(Global Variables)----*/
 
@@ -65,7 +51,8 @@ short int stackPush(StackElement item, StackElement stack[], int *stack_top);
 int main(void)
 	{
 	/*宣告與定義(Declaration & Definition)*/
-    /*圖的宣告（adjacency list表示法）*/
+    /* 圖的宣告（adjacency list表示法）
+     * FIXME:應該是graph1跟TEST_VERTEX_QUANTITY才對*/
     AdjListHead graph_adj_list1[MAX_ADJ_LIST_SIZE] = {NULL};
 
     /*用來保存函式運行結果的變數*/
@@ -91,13 +78,10 @@ int main(void)
     /*for迴圈*/
     register unsigned i;
 
-    for(i = 1; i <= 5; i++){
+    for(i = 1; i <= 100; i++){
         /*測試edge*/
         testEdge.u = rand() % MAX_ADJ_LIST_SIZE;
         while((testEdge.v = rand() % MAX_ADJ_LIST_SIZE) == testEdge.u);
-
-        /*testEdge.u = 0;*/
-        /*testEdge.v = 2;*/
 
         /*測試edge插入陣列中*/
         if(func_call_result != 0){
@@ -185,7 +169,7 @@ int main(void)
 
 
     /*呼叫適用於相鄰性List(Adjacency List)的尋找多連結圖元件(Biconnected Component)函式*/
-    graphAdjListFBC(graph_adj_list1, 0, -1);
+    graphAdjListFBC(graph_adj_list1, 0, -1, MAX_STACK_SIZE);
 
     }
     /*-------程式結束前清理----------*/
@@ -200,67 +184,4 @@ int main(void)
 	/*傳回數字０（表程式運行成功）*/
 	return 0;
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*將元素push至堆疊的函式
-  版本：1.00(0)*/
-short int stackPush(StackElement item, StackElement stack[], int *stack_top)
-    {
-    /*宣告與定義(Declaration & Definition)*/
-    /*－－－－－－－－－－－－－－－－－－－－－*/
-    /*如果堆疊已滿就錯誤離開*/
-    if(stackIsFull(*stack_top)){
-        return -1;
-    }
-    /*將元素插入堆疊中*/
-    stack[++*stack_top] = item;
-
-    /*－－－－－－－－－－－－－－－－－－－－－*/
-    /*傳回0*/
-    return 0;
-    }
-
-/*將元素pop出堆疊的函式*/
-/*版本：0.00(0)*/
-StackElement stackPop(StackElement stack[], int *stack_top)
-    {
-    /*宣告與定義(Declaration & Definition)*/
-    /*－－－－－－－－－－－－－－－－－－－－－*/
-    /*如果堆疊已滿就錯誤離開*/
-    if(stackIsEmpty(*stack_top)){
-        /*製造表示函式錯誤的元素*/
-        StackElement errorElement = {-1, -1};
-        /*傳回表示函式錯誤的元素*/
-        return errorElement;
-    }
-    /*－－－－－－－－－－－－－－－－－－－－－*/
-    /*傳回top位置的元素並遞減top*/
-    return stack[--*stack_top];
-    }
-
-/*判斷堆疊是否為空函式*/
-/*版本：0.00(0)*/
-inline short int stackIsEmpty(int stack_top)
-	{
-    return (stack_top == -1) ? 1 : 0;
-    }
-
-/*判斷堆疊是否已滿函式*/
-/*版本：0.00(0)*/
-inline short int stackIsFull(int stack_top)
-	{
-    return (stack_top == MAX_STACK_SIZE - 1) ? 1 : 0;
-    }
-
 

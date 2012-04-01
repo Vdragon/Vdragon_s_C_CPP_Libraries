@@ -31,6 +31,16 @@
 #include "Graph_abstract_data_type.list.h"
 /**/
 #include "../Project_specific_configurations/Max_value.h"
+/*we need NULL*/
+#include <stddef.h>
+/*we need stack adt*/
+#include "../Stack_abstract_data_type/Stack_abstract_data_structure_C.h"
+/*we need malloc() free()*/
+#include <stdlib.h>
+/* we need MIN_OF_2 macro*/
+#include "../findMaxMin/findMaxMin.h"
+/*we need printf*/
+#include <stdio.h>
 
 /*////////常數與巨集(Constants & Macros)////////*/
 
@@ -239,12 +249,12 @@ void graphAdjListDFS(const Graph target, const Vertex root)
     /*用來判斷是否為最外層呼叫的靜態變數，假設最外層為１*/
     static unsigned call_level = 1;
 
-    /*用來讀取Node的指標*/*
-    AdjListNode * readPtr = NULL;
+    /*用來讀取Node的指標*/
+    AdjListNode *readPtr = NULL;
 
     /*－－－－－－－－－－－－－－－－－－－－－*/
     /*將root的head標記為已拜訪*/
-    visited[root] = TRUE;
+    visited[root] = 1;
 
     /**/
     printf("%d->", root);
@@ -252,7 +262,7 @@ void graphAdjListDFS(const Graph target, const Vertex root)
     /**/
     for(readPtr = target[root]; readPtr != NULL; readPtr = readPtr->next){
         /*如果還沒拜訪過該節點*/
-        if(visited[readPtr->connected_vertex] != TRUE){
+        if(visited[readPtr->connected_vertex] != 1){
             /*用該節點進行呼叫*/
             call_level++;
             graphAdjListDFS(target, readPtr->connected_vertex);
@@ -282,7 +292,7 @@ short int graphAdjListDfnLow(Graph target, Vertex child, Vertex parent)
     {
     /*宣告與定義(Declaration & Definition)*/
     /*用來判斷該Head有無拜訪過的陣列，有為非零、沒有為零（改為用dfn值 = -1代替無拜訪過。）*/
-    /*static unsigned visited[MAX_ADJ_LIST_SIZE] = {FALSE};*//*被替代*/
+    /*static unsigned visited[MAX_ADJ_LIST_SIZE] = {0};*//*被替代*/
 
     /*用來判斷是否為最外層呼叫的靜態變數，假設最外層為１*/
     static unsigned call_level = 0;
@@ -332,7 +342,7 @@ short int graphAdjListDfnLow(Graph target, Vertex child, Vertex parent)
         }
         /*如果拜訪過下一個子頂點，下一個子頂點又不是parent頂點的話...*/
         else if(next_child != parent){
-            /*
+            /**/
             /*low(child) = min(low(child), dfn(next_child))*/
             low[child] = MIN_OF_2(low[child], dfn[next_child]);
         }
@@ -343,6 +353,7 @@ short int graphAdjListDfnLow(Graph target, Vertex child, Vertex parent)
         call_level--;
     }
     else{
+#ifdef DEBUG
         /*輸出測試數據*/
         register unsigned j, k;
 
@@ -350,16 +361,17 @@ short int graphAdjListDfnLow(Graph target, Vertex child, Vertex parent)
 
             for(k = 0; k < MAX_ADJ_LIST_SIZE; k++){
                 /*測試輸出*/
-                if(dfn[k] == j && SHOW_DEBUG_MESSAGE == 1){
+                if(dfn[k] == j){
                     printf("dfn(%u)=%d  low(%u)=%d\n", k, dfn[k], k, low[k]);
                     j++;
                 }
-                else if(dfn[k] == -1 && SHOW_DEBUG_MESSAGE == 1){
+                else if(dfn[k] == -1){
                     printf("dfn(%u)=%d  low(%u)=%d\n", k, dfn[k], k, low[k]);
                     j++;
                 }
             }
         }
+#endif
 
         /*清除靜態陣列以後才能繼續使用dfnlow函式*/
         register unsigned i;
@@ -377,11 +389,11 @@ short int graphAdjListDfnLow(Graph target, Vertex child, Vertex parent)
 
 /*適用於相鄰性List(Adjacency List)的尋找多連結圖元件(Biconnected Component)函式*/
 /*版本：0.00(0)*/
-short int graphAdjListFBC(Graph target, Vertex child, Vertex parent)
+short int graphAdjListFBC(Graph target, Vertex child, Vertex parent, unsigned max_stack_size)
     {
     /*宣告與定義(Declaration & Definition)*/
     /*用來判斷該Head有無拜訪過的陣列，有為非零、沒有為零（改為用dfn值 = -1代替無拜訪過。）*/
-    /*static unsigned visited[MAX_ADJ_LIST_SIZE] = {FALSE};*//*被替代*/
+    /*static unsigned visited[MAX_ADJ_LIST_SIZE] = {0};*//*被替代*/
 
     /*用來判斷是否為最外層呼叫的靜態變數，假設最外層為１*/
     static unsigned call_level = 0;
@@ -392,7 +404,7 @@ short int graphAdjListFBC(Graph target, Vertex child, Vertex parent)
     /*用來遞增dfn跟low的變數*/
     static int num;
 
-    /*讀取List的指標*/*
+    /*讀取List的指標*/
     AdjListNode * readPtr = NULL;
 
     /*暫存讀取到的下一個子頂點的頂點*/
@@ -404,7 +416,7 @@ short int graphAdjListFBC(Graph target, Vertex child, Vertex parent)
     temp_edge.v = 0;
 
     /*宣告一個堆疊(Stack)*/
-    StackElement stack[MAX_STACK_SIZE];
+    StackElement stack[max_stack_size];
 
     /*指向堆疊top位置指標或註標(subscript)*/
     int stack_top = -1;
@@ -438,13 +450,13 @@ short int graphAdjListFBC(Graph target, Vertex child, Vertex parent)
             /*將線push至stack中*/
             temp_edge.u = child;
             temp_edge.v = next_child;
-            call_result = stackPush(temp_edge, stack, &stack_top);
+            call_result = stackPush(temp_edge, stack, &stack_top, max_stack_size);
 
             /*如果next_child沒有拜訪過*/
             if(dfn[next_child] == -1){
                 /*用下一個子頂點當作子頂點呼叫本身*/
                 call_level++;
-                graphAdjListFBC(target, next_child, child);
+                graphAdjListFBC(target, next_child, child, max_stack_size);
 
                 /*如果呼叫完表示說low(u)跟low(w)計算好了嗎？*/
                 /*low(child) = min(low[child], low[next_child])
@@ -452,12 +464,15 @@ short int graphAdjListFBC(Graph target, Vertex child, Vertex parent)
 
                 /*如果low(w) >= dfn(u)（發現關節點*/
                 if(low[next_child] >= dfn[child]){
+                    /*當作stackPop回傳值的變數*/
+                    short result01;
+
                     printf("找到一個新的biconnected component：\n"
                            "Find a new biconnected component:\n");
                     do{
                         /*自stack delete edge*/
-                        temp_edge = stackPop(stack, &stack_top);
-                        if(temp_edge.u == -1 && temp_edge.v == -1){
+                        temp_edge = stackPop(stack, &stack_top, &result01);
+                        if(result01 == -1){
                             printf("ERROR!\n");
                             return -1;
                         }

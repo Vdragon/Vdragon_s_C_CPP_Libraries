@@ -1,3 +1,51 @@
+/*Graph ADT matrix
+-----------------------------------
+更新紀錄 | Changelog
+  Changelog is now stored on GitHub
+已知問題 | Known Issues
+  Known issues is now stored on GitHub
+待辦事項 | Todos
+  Todo is now stored on GitHub
+著作權宣告 | Copyright notice
+  Copyright 2012 林博仁(Henry Lin, pika1021@gmail.com)
+智慧財產授權條款：
+  Graph ADT matrix is part of this software
+  This software is free software: you can redistribute it and/or modify
+  it under the terms of the GNU Lesser General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This software is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU Lesser General Public License for more details.
+
+  You should have received a copy of the GNU Lesser General Public License
+  along with this software.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+/*--------------程式碼開始(Code Started)--------------*/
+/*--------------前期處理器指令(Preprocessor Directive)--------------*/
+/*////////程式所include之函式庫的標頭檔(Included Library Headers)////////*/
+
+/**/
+#include "Graph_abstract_data_type.matrix.h"
+
+/*we need printf()*/
+#include <stdio.h>
+
+/*////////常數與巨集(Constants & Macros)////////*/
+
+/*////////其他前期處理器指令(Other Preprocessor Directives////////*/
+
+/*--------------全域宣告與定義(Global Declaration & Definition)--------------*/
+/*////////Classes、資料結構(Data Structures)、type definitions跟enumerations////////*/
+
+/*////////函式和函式雛型(Function & Function Prototypes)////////*/
+
+/*////////全域變數(Global Variables)////////*/
+
+/*--------------主要程式碼(Main Code)--------------*/
 
 /*插入一個邊(edge)至相鄰性陣列圖中的函式
  *  版本：1.00(1)*/
@@ -67,14 +115,14 @@ void graphAdjMatDFS(Graph graph_adj_matrix[][MAX_ADJ_MATRIX_SIZE], const Vertex 
   {
   /*宣告與定義(Declaration & Definition)*/
   /*用來判斷該Head有無拜訪過的陣列，有為非零、沒有為零*/
-  static unsigned visited[MAX_ADJ_LIST_SIZE] = {FALSE};
+  static unsigned visited[MAX_ADJ_MATRIX_SIZE] = {0};
 
   /*用來判斷是否為最外層呼叫的靜態變數，假設最外層為１*/
   static unsigned call_level = 1;
 
   /*－－－－－－－－－－－－－－－－－－－－－*/
   /*將root的head標記為已拜訪*/
-  visited[root] = TRUE;
+  visited[root] = 1;
 
   /*印出root*/
   printf("%d->", root);
@@ -83,7 +131,7 @@ void graphAdjMatDFS(Graph graph_adj_matrix[][MAX_ADJ_MATRIX_SIZE], const Vertex 
   register unsigned count;
   for(count = 0; count < MAX_ADJ_MATRIX_SIZE; count++){
       /*如果兩頂點有相連且還沒拜訪過該頂點*/
-      if(visited[count] == FALSE && graph_adj_matrix[root][count] == 1){
+      if(visited[count] == 0 && graph_adj_matrix[root][count] == 1){
           /*用該節點進行呼叫*/
           call_level++;
           graphAdjMatDFS(graph_adj_matrix, count);
@@ -97,7 +145,7 @@ void graphAdjMatDFS(Graph graph_adj_matrix[][MAX_ADJ_MATRIX_SIZE], const Vertex 
   else{
       register unsigned i;
       for(i = 0; i < MAX_ADJ_MATRIX_SIZE; i++){
-          visited[i] = FALSE;
+          visited[i] = 0;
       }
       printf("END\n");
   }
