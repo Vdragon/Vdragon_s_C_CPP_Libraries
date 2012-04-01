@@ -17,6 +17,7 @@
 					<Add option="-Wextra" />
 					<Add option="-Wall" />
 					<Add option="-g" />
+					<Add option="-DDEBUG" />
 				</Compiler>
 			</Target>
 			<Target title="釋出版本(Linux x86)">
@@ -44,8 +45,10 @@
 				<Option use_console_runner="0" />
 				<Compiler>
 					<Add option="-pedantic" />
+					<Add option="-Wextra" />
 					<Add option="-Wall" />
 					<Add option="-g" />
+					<Add option="-DDEBUG" />
 				</Compiler>
 			</Target>
 			<Target title="釋出版本(Windows x86)">
@@ -69,10 +72,10 @@
 		<Unit filename="Source_code/Test_program.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="Source_code/findMaxMin.c">
+		<Unit filename="Source_code/findMaxMin/findMaxMin.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="Source_code/findMaxMin.h" />
+		<Unit filename="Source_code/findMaxMin/findMaxMin.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />
