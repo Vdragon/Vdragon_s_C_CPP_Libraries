@@ -19,7 +19,8 @@
 
   /*圖的類型設定*/
   typedef enum graphTypes{
-      UNDIRECTED, DIRECTED
+      UNDIRECTED, /*無方向性邊的圖*/
+      DIRECTED /*有方向性邊的圖*/
   }GraphTypes;
 
   #ifdef __cplusplus

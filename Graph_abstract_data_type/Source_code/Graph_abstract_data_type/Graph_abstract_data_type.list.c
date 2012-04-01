@@ -55,7 +55,6 @@
 
 /*--------------主要程式碼(Main Code)--------------*/
 /*插入一個邊(edge)至相鄰性List圖中的函式
-  版本：1.00(1)
   參數：mode（有無方向性）、target（相鄰性List圖Head陣列）、item（限定非Loop的邊）*/
 short int graphListInsertEdge(GraphTypes mode, Graph target, Edge item)
     {

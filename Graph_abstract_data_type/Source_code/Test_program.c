@@ -3,19 +3,12 @@
 /*--------------前置處理器選項(Preprocessor Code)--------------*/
 /*程式所include的標頭檔(Included Headers)*/
 /*standard input/output library*/
-/*版本：1.10(1)*/
 #include <stdio.h> /*for printf(), scanf(), fgetc()*/
-/*or in C++*/
-/*#include <cstdio>*/
 
 /*C Standard General Utilities Library*/
-/*版本：1.00(6)*/
 #include <stdlib.h>
-/*or in C++*/
-/*#include <cstdlib>*/
 
 /*header for Date and time functions Library*/
-/*版本：1.00(1)*/
 #include <time.h>
 
 /**/
@@ -53,7 +46,7 @@ int main(void)
 	/*宣告與定義(Declaration & Definition)*/
     /* 圖的宣告（adjacency list表示法）
      * FIXME:應該是graph1跟TEST_VERTEX_QUANTITY才對*/
-    AdjListHead graph_adj_list1[MAX_ADJ_LIST_SIZE] = {NULL};
+    AdjListHead graph01[MAX_ADJ_LIST_SIZE] = {NULL};
 
     /*用來保存函式運行結果的變數*/
     short int func_call_result = 0;
@@ -106,7 +99,7 @@ int main(void)
         }
 
         /*測試將edge插入相鄰性List中*/
-        func_call_result = graphListInsertEdge(UNDIRECTED, graph_adj_list1, testEdge);
+        func_call_result = graphListInsertEdge(UNDIRECTED, graph01, testEdge);
         if(func_call_result != 0){
             switch(func_call_result){
             case -1:
@@ -138,7 +131,7 @@ int main(void)
     }/*測試迴圈*/
 
     /*輸出list、 矩陣*/
-    graphListOutput(graph_adj_list1);
+    graphListOutput(graph01);
 
     insert_edge_into_graph_list_end:
 
@@ -158,22 +151,22 @@ int main(void)
     }while(input_number >= MAX_ADJ_LIST_SIZE || checksum != 1);
 
     /*呼叫適用於相鄰性List(Adjacency List)的深度優先搜尋(Depth First Search)函式*/
-    graphAdjListDFS(graph_adj_list1, input_number);
+    graphAdjListDFS(graph01, input_number);
 
     putchar('\n');
 
     /*呼叫適用於相鄰性List(Adjacency List)的計算各頂點dfn、low值的函式*/
-    /*graphAdjListDfnLow(graph_adj_list1, 0, -1);*/
+    /*graphAdjListDfnLow(graph01, 0, -1);*/
 
     /*putchar('\n');*/
 
 
     /*呼叫適用於相鄰性List(Adjacency List)的尋找多連結圖元件(Biconnected Component)函式*/
-    graphAdjListFBC(graph_adj_list1, 0, -1, MAX_STACK_SIZE);
+    graphAdjListFBC(graph01, 0, -1, MAX_STACK_SIZE);
 
     }
     /*-------程式結束前清理----------*/
-    graphListDestroy(graph_adj_list1);
+    graphListDestroy(graph01);
 
     /*呼叫暫停運行函式(放在main函式中)*/
     if(pauseProgram() == 1){
