@@ -75,8 +75,7 @@ using namespace std;
    * FIXME:應改用較安全的String來當作filename*/
   short openFile(const char filename[], const char mode[], ifstream& input_file)
   {
-    /* FIXME:目前無視於mode的設定直接假設開啟的檔案為RW
-     * FIXME:目前沒有判斷是否開檔失敗*/
+    /* FIXME:目前無視於mode的設定直接假設開啟的檔案為RW*/
     input_file.open(filename, fstream::in | fstream::out);
     if(!input_file.is_open()){
       cerr << ERROR_TAG << ERROR_FILE_OPEN_FAIL;
