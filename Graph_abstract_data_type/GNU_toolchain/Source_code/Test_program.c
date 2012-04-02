@@ -72,6 +72,7 @@ int main(void)
         /*測試edge*/
         testEdge.u = rand() % TEST_EDGE_QUANTITY;
         while((testEdge.v = rand() % TEST_EDGE_QUANTITY) == testEdge.u);
+        testEdge.cost = -1;
 
         /*測試edge插入陣列中*/
         if(func_call_result != 0){
