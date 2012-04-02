@@ -124,6 +124,7 @@ short stackUnitTest(void)
 
     if(i < MAX_STACK_SIZE){
       printf("%d  ", buffer01);
+      /*FIXME:unknown "警告： 在有號和無號整數運算式間比較 [-Wsign-compare]*/
       if(result == -1 || buffer01 != (MAX_STACK_SIZE - 1) - i){
         putchar('\n');
         return -1;

@@ -1,4 +1,4 @@
-/* C header檔案範本 */
+﻿/* C header檔案範本 */
 /* include guard：避免同一個header檔案被include第二次。*/
 #ifndef STACK_ABSTRACT_DATA_STRUCTURE_C_H_INCLUDED
   #define STACK_ABSTRACT_DATA_STRUCTURE_C_H_INCLUDED
@@ -24,10 +24,10 @@
     /*}StackElement;*/
 
     /*判斷堆疊是否為空函式的function prototype*/
-    inline short int stackIsEmpty(int stack_top);
+    short int stackIsEmpty(int stack_top);
 
     /*判斷堆疊是否已滿函式的function prototype*/
-    inline short int stackIsFull(int stack_top, unsigned max_stack_size);
+    short int stackIsFull(int stack_top, unsigned max_stack_size);
 
     /*將元素push至堆疊的函式*/
     short int stackPush(StackElement item, StackElement stack[], int *stack_top, unsigned max_stack_size);

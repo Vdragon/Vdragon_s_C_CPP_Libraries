@@ -1,4 +1,4 @@
-/*Stack_abstract_data_structure_C.c
+﻿/*Stack_abstract_data_structure_C.c
 -----------------------------------
 更新紀錄 | Changelog
   Changelog is now stored on GitHub
@@ -51,13 +51,13 @@
 
 //判斷堆疊是否為空函式
 //版本：1.00(0)
-inline short int stackIsEmpty(int stack_top)
+short int stackIsEmpty(int stack_top)
   {
     return (stack_top == -1) ? 1 : 0;
   }
 //判斷堆疊是否已滿函式
 //版本：1.00(0)
-inline short int stackIsFull(int stack_top, unsigned max_stack_size)
+short int stackIsFull(int stack_top, unsigned max_stack_size)
   {
     return (stack_top == max_stack_size - 1) ? 1 : 0;
   }
@@ -89,11 +89,13 @@ StackElement stackPop(StackElement stack[], int *stack_top, short * return_statu
     //－－－－－－－－－－－－－－－－－－－－－
     //如果堆疊為空就錯誤離開
     if(stackIsEmpty(*stack_top)){
+      StackElement dummy;
+
       printf(ERROR_TAG STACK_ADT_PUSH_TAG
              ERROR_STACK_POP_WHEN_EMPTY
              DEBUG_TAG "位於原始程式碼：" __FILE__ " 第%d行。\n", __LINE__);
         *return_status = -1;
-        StackElement dummy;
+
         return dummy;
     }else{
       *return_status = 0;
