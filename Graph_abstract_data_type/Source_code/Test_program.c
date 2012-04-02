@@ -4,16 +4,13 @@
 /*程式所include的標頭檔(Included Headers)*/
 /*standard input/output library*/
 #include <stdio.h> /*for printf(), scanf(), fgetc()*/
-
 /*C Standard General Utilities Library*/
 #include <stdlib.h>
-
 /*header for Date and time functions Library*/
 #include <time.h>
 
 /**/
 #include "pauseProgram/Pause_program.h"
-
 /**/
 #include "Graph_abstract_data_type/Graph_abstract_data_type.list.h"
 
