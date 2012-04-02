@@ -1,4 +1,4 @@
-/* Graph_abstract_data_type.generic.h */
+﻿/* Graph_abstract_data_type.generic.h */
 /* include guard：避免同一個header檔案被include第二次。*/
 #ifndef GRAPH_ABSTRACT_DATA_TYPE_GENERIC_H_
   #define GRAPH_ABSTRACT_DATA_TYPE_GENERIC_H_

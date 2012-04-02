@@ -1,4 +1,4 @@
-/*Graph_abstract_data_type.list.c
+﻿/*Graph_abstract_data_type.list.c
 -----------------------------------
 更新紀錄 | Changelog
   Changelog is now stored on GitHub
@@ -9,19 +9,19 @@
 著作權宣告 | Copyright notice
   Copyright 2012 林博仁(Henry Lin, pika1021@gmail.com)
 智慧財產授權條款：
-  Graph_abstract_data_type.list.c is part of Graph抽象資料結構
-  Graph抽象資料結構 is free software: you can redistribute it and/or modify
+  Graph_abstract_data_type.list.c is part of Graph抽像資料結構
+  Graph抽像資料結構 is free software: you can redistribute it and/or modify
   it under the terms of the GNU Lesser General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
   (at your option) any later version.
 
-  Graph抽象資料結構 is distributed in the hope that it will be useful,
+  Graph抽像資料結構 is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU Lesser General Public License for more details.
 
   You should have received a copy of the GNU Lesser General Public License
-  along with Graph抽象資料結構.  If not, see <http://www.gnu.org/licenses/>.
+  along with Graph抽像資料結構.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 /*--------------程式碼開始(Code Started)--------------*/
@@ -32,7 +32,7 @@
 /*we need NULL*/
 #include <stddef.h>
 /*we need stack adt*/
-#include "../Stack_abstract_data_type/Stack_abstract_data_structure_C.h"
+#include "../Stack_abstract_data_type_Graph/Stack_abstract_data_structure_C.h"
 /*we need malloc() free()*/
 #include <stdlib.h>
 /* we need MIN_OF_2 macro*/
@@ -41,6 +41,8 @@
 #include <stdio.h>
 /*we need memcpy*/
 #include <string.h>
+/**/
+#include "../Messages_templates/zh_TW.h"
 
 /*////////常數與巨集(Constants & Macros)////////*/
 
@@ -397,47 +399,46 @@ short int graphAdjListDfnLow(Graph target, Vertex child, Vertex parent, unsigned
 short int graphAdjListFBC(Graph target, Vertex child, Vertex parent, unsigned max_stack_size, unsigned max_adj_list_size)
     {
     /*宣告與定義(Declaration & Definition)*/
-    /*用來判斷該Head有無拜訪過的陣列，有為非零、沒有為零（改為用dfn值 = -1代替無拜訪過。）*/
-    /*static unsigned visited[MAX_ADJ_LIST_SIZE] = {0};*//*被替代*/
-
     /*用來判斷是否為最外層呼叫的靜態變數，假設最外層為１*/
     static unsigned call_level = 0;
-
+    /*指向堆疊top位置指標或註標(subscript)*/
+    static int stack_top = -1;
     /* 用來保存dfn、low值的靜態陣列
      * 以靜態指標變數保存動態配置的陣列空間*/
     static short *dfn = NULL, *low = NULL;
-
     /*用來遞增dfn跟low的變數*/
     static int num;
+    /*宣告一個堆疊(Stack)*/
+    static StackElement *stack;
 
     /*讀取List的指標*/
     AdjListNode * readPtr = NULL;
-
     /*暫存讀取到的下一個子頂點的頂點*/
     Vertex next_child;
-
     /*暫時存放stack的edge*/
     StackElement temp_edge;
+
+    /*回傳狀態
+     * FIXME:why unused?*/
+    short call_result;
+
     temp_edge.u = 0;
     temp_edge.v = 0;
 
-    /*宣告一個堆疊(Stack)*/
-    StackElement stack[max_stack_size];
-
-    /*指向堆疊top位置指標或註標(subscript)*/
-    int stack_top = -1;
-
-    /*回傳狀態*/
-    short int call_result;
 
     /*－－－－－－－－－－－－－－－－－－－－－*/
     /*在最外層呼叫時動態配置並初始化dfn、low值陣列*/
     {
     if(call_level == 0){
+        /**/
+        register unsigned i;
+
+
         /*FIXME:malloc check!*/
+        stack = (StackElement *)malloc(sizeof(StackElement) * max_stack_size);
         dfn = (short *)malloc(sizeof(short) * max_adj_list_size);
         low = (short *)malloc(sizeof(short) * max_adj_list_size);
-        register unsigned i;
+
         for(i = 0; i < max_adj_list_size; i++){
             dfn[i] = low[i] = -1;
         }
@@ -460,7 +461,10 @@ short int graphAdjListFBC(Graph target, Vertex child, Vertex parent, unsigned ma
             temp_edge.u = child;
             temp_edge.v = next_child;
             call_result = stackPush(temp_edge, stack, &stack_top, max_stack_size);
-
+            if(call_result == -1){
+              fprintf(stderr, ERROR_TAG"尋找多連結圖元件(Biconnected Component)失敗！\n");
+              return -1;
+            }
             /*如果next_child沒有拜訪過*/
             if(dfn[next_child] == -1){
                 /*用下一個子頂點當作子頂點呼叫本身*/
@@ -473,15 +477,13 @@ short int graphAdjListFBC(Graph target, Vertex child, Vertex parent, unsigned ma
 
                 /*如果low(w) >= dfn(u)（發現關節點*/
                 if(low[next_child] >= dfn[child]){
-                    /*當作stackPop回傳值的變數*/
-                    short result01;
 
                     printf("找到一個新的biconnected component：\n"
                            "Find a new biconnected component:\n");
                     do{
                         /*自stack delete edge*/
-                        temp_edge = stackPop(stack, &stack_top, &result01);
-                        if(result01 == -1){
+                        temp_edge = stackPop(stack, &stack_top, &call_result);
+                        if(call_result == -1){
                             printf("ERROR!\n");
                             return -1;
                         }
@@ -511,11 +513,13 @@ short int graphAdjListFBC(Graph target, Vertex child, Vertex parent, unsigned ma
         call_level--;
     }
     else{
-
         /*釋放記憶體*/
-        free(dfn);
-        free(low);
+        free(dfn);dfn = NULL;
+        free(low);low = NULL;
+        free(stack);stack = NULL;
 
+        /*將call_level重置為零*/
+        call_level = 0;
     }
     /*－－－－－－－－－－－－－－－－－－－－－*/
     /*傳回內容*/

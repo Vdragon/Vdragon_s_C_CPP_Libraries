@@ -1,4 +1,4 @@
-/*Graph ADT matrix
+﻿/*Graph ADT matrix
 -----------------------------------
 更新紀錄 | Changelog
   Changelog is now stored on GitHub
@@ -96,14 +96,17 @@ void graphMatrixOutput(Graph graph_adj_matrix[][MAX_ADJ_MATRIX_SIZE])
   /*印出陣列資料*/
   printf("  0 1 2 3 4 5 6 7 8 9\n");
 
-  register unsigned i, j;
-  for(j = 0; j < MAX_ADJ_MATRIX_SIZE; j++){
-    printf("%u ", j);
-    for(i = 0; i < MAX_ADJ_MATRIX_SIZE; i++){
-      printf("%u ", graph_adj_matrix[i][j]);
+  {
+    register unsigned i, j;
+    for(j = 0; j < MAX_ADJ_MATRIX_SIZE; j++){
+      printf("%u ", j);
+      for(i = 0; i < MAX_ADJ_MATRIX_SIZE; i++){
+        printf("%u ", graph_adj_matrix[i][j]);
+      }
+              putchar('\n');
     }
-            putchar('\n');
   }
+
       /*－－－－－－－－－－－－－－－－－－－－－*/
       /*傳回內容*/
       return ;
@@ -128,15 +131,18 @@ void graphAdjMatDFS(Graph graph_adj_matrix[][MAX_ADJ_MATRIX_SIZE], const Vertex 
   printf("%d->", root);
 
   /**/
-  register unsigned count;
-  for(count = 0; count < MAX_ADJ_MATRIX_SIZE; count++){
-      /*如果兩頂點有相連且還沒拜訪過該頂點*/
-      if(visited[count] == 0 && graph_adj_matrix[root][count] == 1){
-          /*用該節點進行呼叫*/
-          call_level++;
-          graphAdjMatDFS(graph_adj_matrix, count);
-      }
+  {
+    register unsigned count;
+    for(count = 0; count < MAX_ADJ_MATRIX_SIZE; count++){
+        /*如果兩頂點有相連且還沒拜訪過該頂點*/
+        if(visited[count] == 0 && graph_adj_matrix[root][count] == 1){
+            /*用該節點進行呼叫*/
+            call_level++;
+            graphAdjMatDFS(graph_adj_matrix, count);
+        }
+    }
   }
+
 
   /*如果沒有呼叫就表示要退出*/
   if(call_level != 1){

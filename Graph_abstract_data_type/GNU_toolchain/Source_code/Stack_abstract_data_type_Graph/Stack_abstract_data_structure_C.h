@@ -1,4 +1,6 @@
-/* C header檔案範本 */
+﻿/* Stack抽象資料類型 | Stack Abstract Data Type
+ * 相依性 | Dependency
+ *   Messages_templates */
 /* include guard：避免同一個header檔案被include第二次。*/
 #ifndef STACK_ABSTRACT_DATA_STRUCTURE_C_H_INCLUDED
   #define STACK_ABSTRACT_DATA_STRUCTURE_C_H_INCLUDED
@@ -6,7 +8,8 @@
   #ifdef __cplusplus
     extern "C"{
   #endif
-    /*StackElement的定義*/
+    /*StackElement的定義（於需要使用ADT的程式碼自訂）
+    typedef int StackElement;*/
     #include "../Graph_abstract_data_type/Graph_abstract_data_type.generic.h"
 
     /*模組標籤*/
@@ -24,10 +27,10 @@
     /*}StackElement;*/
 
     /*判斷堆疊是否為空函式的function prototype*/
-    inline short int stackIsEmpty(int stack_top);
+    short int stackIsEmpty(int stack_top);
 
     /*判斷堆疊是否已滿函式的function prototype*/
-    inline short int stackIsFull(int stack_top, unsigned max_stack_size);
+    short int stackIsFull(int stack_top, unsigned max_stack_size);
 
     /*將元素push至堆疊的函式*/
     short int stackPush(StackElement item, StackElement stack[], int *stack_top, unsigned max_stack_size);
