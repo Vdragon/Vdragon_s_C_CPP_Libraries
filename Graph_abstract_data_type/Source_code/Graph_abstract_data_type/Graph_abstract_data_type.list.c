@@ -29,8 +29,6 @@
 /*////////程式所include之函式庫的標頭檔(Included Library Headers)////////*/
 /**/
 #include "Graph_abstract_data_type.list.h"
-/**/
-#include "../Project_specific_configurations/Max_value.h"
 /*we need NULL*/
 #include <stddef.h>
 /*we need stack adt*/
