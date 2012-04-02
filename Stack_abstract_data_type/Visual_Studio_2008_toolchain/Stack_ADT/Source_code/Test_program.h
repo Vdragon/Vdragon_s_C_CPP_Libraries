@@ -9,6 +9,9 @@
   /*定義堆疊(Stack)最大容量大小*/
   #define MAX_STACK_SIZE 100
 
+  /*定義堆疊元素的資料類型*/
+  typedef int StackElement;
+
   /*單元測試函式*/
   short stackUnitTest(void);
   #ifdef __cplusplus

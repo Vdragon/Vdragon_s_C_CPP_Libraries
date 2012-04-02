@@ -9,19 +9,19 @@
 著作權宣告 | Copyright notice
   Copyright 2012 林博仁(Henry Lin, pika1021@gmail.com)
 智慧財產授權條款：
-  Stack_abstract_data_structure_C.c is part of Stack抽象資料類型
-  Stack抽象資料類型 is free software: you can redistribute it and/or modify
+  Stack_abstract_data_structure_C.c is part of Stack抽像資料類型
+  Stack抽像資料類型 is free software: you can redistribute it and/or modify
   it under the terms of the GNU Lesser General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
   (at your option) any later version.
 
-  Stack抽象資料類型 is distributed in the hope that it will be useful,
+  Stack抽像資料類型 is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU Lesser General Public License for more details.
 
   You should have received a copy of the GNU Lesser General Public License
-  along with Stack抽象資料類型.  If not, see <http://www.gnu.org/licenses/>.
+  along with Stack抽像資料類型.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 /*--------------程式碼開始(Code Started)--------------*/
@@ -89,14 +89,14 @@ StackElement stackPop(StackElement stack[], int *stack_top, short * return_statu
     //－－－－－－－－－－－－－－－－－－－－－
     //如果堆疊為空就錯誤離開
     if(stackIsEmpty(*stack_top)){
-      StackElement dummy;
+      StackElement need_not_initialize;
 
       printf(ERROR_TAG STACK_ADT_PUSH_TAG
              ERROR_STACK_POP_WHEN_EMPTY
              DEBUG_TAG "位於原始程式碼：" __FILE__ " 第%d行。\n", __LINE__);
         *return_status = -1;
 
-        return dummy;
+        return need_not_initialize;
     }else{
       *return_status = 0;
       //傳回top位置的元素並遞減top

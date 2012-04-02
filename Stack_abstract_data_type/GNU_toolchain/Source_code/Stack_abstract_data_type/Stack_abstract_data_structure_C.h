@@ -1,4 +1,6 @@
-﻿/* C header檔案範本 */
+﻿/* Stack抽象資料類型 | Stack Abstract Data Type
+ * 相依性 | Dependency
+ *   Messages_templates */
 /* include guard：避免同一個header檔案被include第二次。*/
 #ifndef STACK_ABSTRACT_DATA_STRUCTURE_C_H_INCLUDED
   #define STACK_ABSTRACT_DATA_STRUCTURE_C_H_INCLUDED
@@ -6,8 +8,10 @@
   #ifdef __cplusplus
     extern "C"{
   #endif
-    /*StackElement的定義*/
-    typedef int StackElement;
+    /*StackElement的定義（於需要使用ADT的程式碼自訂）
+    typedef int StackElement;*/
+    #include "../Test_program.h"
+
 
     /*模組標籤*/
     #define STACK_ABSTRACT_DATA_STRUCTURE_TAG "【Stack抽象資料類型模組】"

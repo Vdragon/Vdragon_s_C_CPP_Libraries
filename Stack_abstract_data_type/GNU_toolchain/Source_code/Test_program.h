@@ -1,4 +1,4 @@
-/* Test_program.h */
+﻿/* Test_program.h */
 /* include guard：避免同一個header檔案被include第二次。*/
 #ifndef TEST_PROGRAM_H_
   #define TEST_PROGRAM_H_
@@ -8,6 +8,9 @@
   #endif
   /*定義堆疊(Stack)最大容量大小*/
   #define MAX_STACK_SIZE 100
+
+  /*定義堆疊元素的資料類型*/
+  typedef int StackElement;
 
   /*單元測試函式*/
   short stackUnitTest(void);
