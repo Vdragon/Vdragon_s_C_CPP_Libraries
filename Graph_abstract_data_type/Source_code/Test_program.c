@@ -27,7 +27,7 @@
 
 /*定義測試用的圖的邊、頂點數量*/
 #define TEST_EDGE_QUANTITY 100
-#define TEST_VERTEX_QUANTITY 100
+#define GRAPH01_VERTEX 100
 
 /*--------------全域宣告與定義(Global Declaration & Definition)--------------*/
 /*----資料結構(Structures), typedefs, enums----*/
@@ -46,7 +46,7 @@ int main(void)
 	/*宣告與定義(Declaration & Definition)*/
     /* 圖的宣告（adjacency list表示法）
      * FIXME:應該是graph1跟TEST_VERTEX_QUANTITY才對*/
-    AdjListHead graph01[MAX_ADJ_LIST_SIZE] = {NULL};
+    AdjListHead graph01[GRAPH01_VERTEX] = {NULL};
 
     /*用來保存函式運行結果的變數*/
     short int func_call_result = 0;
@@ -73,8 +73,8 @@ int main(void)
 
     for(i = 1; i <= 100; i++){
         /*測試edge*/
-        testEdge.u = rand() % MAX_ADJ_LIST_SIZE;
-        while((testEdge.v = rand() % MAX_ADJ_LIST_SIZE) == testEdge.u);
+        testEdge.u = rand() % TEST_EDGE_QUANTITY;
+        while((testEdge.v = rand() % TEST_EDGE_QUANTITY) == testEdge.u);
 
         /*測試edge插入陣列中*/
         if(func_call_result != 0){
@@ -131,7 +131,7 @@ int main(void)
     }/*測試迴圈*/
 
     /*輸出list、 矩陣*/
-    graphListOutput(graph01);
+    graphListOutput(graph01, GRAPH01_VERTEX);
 
     insert_edge_into_graph_list_end:
 
@@ -148,10 +148,10 @@ int main(void)
         printf("input_number = %u\n", input_number);
 
 #endif
-    }while(input_number >= MAX_ADJ_LIST_SIZE || checksum != 1);
+    }while(input_number >= TEST_EDGE_QUANTITY || checksum != 1);
 
     /*呼叫適用於相鄰性List(Adjacency List)的深度優先搜尋(Depth First Search)函式*/
-    graphAdjListDFS(graph01, input_number);
+    graphAdjListDFS(graph01, input_number, GRAPH01_VERTEX);
 
     putchar('\n');
 
@@ -162,11 +162,11 @@ int main(void)
 
 
     /*呼叫適用於相鄰性List(Adjacency List)的尋找多連結圖元件(Biconnected Component)函式*/
-    graphAdjListFBC(graph01, 0, -1, MAX_STACK_SIZE);
+    graphAdjListFBC(graph01, 0, -1, MAX_STACK_SIZE, TEST_EDGE_QUANTITY);
 
     }
     /*-------程式結束前清理----------*/
-    graphListDestroy(graph01);
+    graphListDestroy(graph01, GRAPH01_VERTEX);
 
     /*呼叫暫停運行函式(放在main函式中)*/
     if(pauseProgram() == 1){
