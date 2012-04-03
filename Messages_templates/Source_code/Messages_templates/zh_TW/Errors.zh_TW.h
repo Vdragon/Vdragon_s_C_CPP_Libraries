@@ -9,3 +9,6 @@
 
 /*divide by zero fail*/
 #define ERROR_DIVIDE_BY_ZERO "偵測到沒有被定義正確之運算結果之「除數為零的除法運算」！\n"
+
+/* MEMORY ALLOCATION FAIL */
+#define ERROR_MEMORY_ALLOCATION_FAIL "向作業系統要求配置記憶體空間失敗！請確定作業系統是否有足夠的可用記憶體空間。\n"
