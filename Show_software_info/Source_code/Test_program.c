@@ -57,7 +57,7 @@ int main(void)
 restart_program:
   /*呼叫Show software info*/
   show_software_info(PROGRAM_NAME);
-
+  show_software_info("test_string");
   /*呼叫暫停運行函式(放在main函式中)*/
   if(pauseProgram() == 1){
     goto restart_program;
