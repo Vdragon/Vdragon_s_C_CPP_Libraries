@@ -10,7 +10,8 @@
     /* 暫停運行函式的function prototype
      * 呼叫此函式將會將程式暫停並提示使用者是否要重新運行程式
      * （透過需手動新增到程式碼的label (restart_program)）
-     * 使用範例列於下方*/
+     * 如果回傳1表示使用者想要程式重新執行
+     * 回傳0表示可讓程式結束*/
     short int pauseProgram(void);
 /*用來重新運行程式的label
 restart_program:*/
