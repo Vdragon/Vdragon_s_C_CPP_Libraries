@@ -31,10 +31,12 @@
 #include "Messages_templates/zh_TW.h"
 
 /**/
-#include "stdlib.h"
+#include <cstdlib>
 
 /**/
-#include "stdio.h"
+#include <cstdio>
+#include <iostream>
+using namespace std;
 
 /*////////常數與巨集(Constants & Macros)////////*/
 
@@ -51,7 +53,7 @@
 int main(void)
 {
   DEBUG_LOCATION();
-
+  cout << ERROR_TAG << ERROR_FILE_OPEN_FAIL << endl;
   /**/
   return EXIT_SUCCESS;
 }
