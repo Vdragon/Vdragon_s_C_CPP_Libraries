@@ -3,7 +3,7 @@
 #ifndef _H_INCLUDED
   #define _H_INCLUDED
   /*使用printf()*/
-  #include <stdio.h>
+  #include <cstdio>
 
   /* 如果是C++編譯器則停用C++特有的函式名稱mangling*/
   #ifdef __cplusplus
@@ -13,7 +13,7 @@
   #define DEBUG_TAG "【偵錯用訊息】"
 
   /*用來定位錯誤發生的程式碼位置的MACRO*/
-  #define DEBUG_LOCATION() printf(DEBUG_TAG "位置：" __FILE__":%d", __LINE__);
+  #define DEBUG_LOCATION() printf(DEBUG_TAG "位置：" __FILE__":%d\n", __LINE__);
 
   #ifdef __cplusplus
     }
