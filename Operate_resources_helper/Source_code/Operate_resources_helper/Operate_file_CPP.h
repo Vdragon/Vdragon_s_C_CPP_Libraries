@@ -1,4 +1,7 @@
-/* Operate_file_CPP.h */
+/* Operate_file_CPP.h
+ * 依賴List_directory_files
+ *    Messages_templates
+ *    portableEOLalgorithm */
 /* include guard：避免同一個header檔案被include第二次。*/
 #ifndef OPERATE_FILE_CPP_H_
   #define OPERATE_FILE_CPP_H_
