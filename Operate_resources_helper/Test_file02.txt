@@ -1,0 +1,6 @@
+GDB 的 區塊(frame) 和堆疊(stack) 觀念
+在 gdb 裡，為了方便除錯，它將程式碼以副程式為單位分成一個個的區塊 (frame)。比如說，在上例裡的 main() 會被視為一個 frame，而 Password() 則會被視為另一個 frame。因而在利用 gdb 除錯時，可以直接執行某個 frame、跳至上一個或下一個 frame、直接執行至該 frame 結束... 等等，而加快在使用 gdb 來 debug 的速度並降低 debug 的困難度。
+
+在 frame 與 frame 之間，正在執行的區塊就是 frame 0。呼叫該區塊的就是 frame 1；而再上上一層的就叫 frame 2，以此類推。
+在 gdb 進入另一個 frame 之前，它會將該 frame 的一些變數值之類的儲存至堆疊 (stack) 裡，等到從 frame 回來後再從這些 stack 裡把這些變數值取回來。
+我們會在下文中看到非常多應用 frame 和 stack 的指令。

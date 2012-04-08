@@ -29,22 +29,19 @@
 /*////////程式所include之函式庫的標頭檔(Included Library Headers)////////*/
 /**/
 #include <iostream>
-
 /**/
 #include <cstdlib>
-
-/**/
-#include "pauseProgram/Pause_program.h"
-
-/**/
-#include "Operate_resources_helper/Operate_file_CPP.h"
-
 /**/
 #include <fstream>
 
 /**/
+#include "pauseProgram/Pause_program.h"
+/**/
+#include "Operate_resources_helper/Operate_file_CPP.h"
+/**/
 #include "Messages_templates/zh_TW.h"
 
+using namespace std;
 /*////////常數與巨集(Constants & Macros)////////*/
 
 /*////////其他前期處理器指令(Other Preprocessor Directives////////*/
@@ -57,15 +54,13 @@
 /*////////全域變數(Global Variables)////////*/
 
 /*--------------主要程式碼(Main Code)--------------*/
-/**/
-using namespace std;
+
 int main()
 {
 /*用來重新運行程式的label*/
 restart_program:
 
-  /*filename*/
-  char filename[30];
+  string filename;
 
   /*stream*/
   ifstream input_file;
@@ -75,11 +70,16 @@ restart_program:
 
   /*open file*/
   askFile(filename);
-  if(!openFile(filename, "rw", input_file)){
-    while(!input_file.eof()){
+  if(openFile(filename, "rw", input_file) == 0){
+    do{
       input_file.getline(buffer, 30);
+#ifndef NDEBUG
+      cout << DEBUG_TAG
+           << "input_file.eof() = " << input_file.eof() << endl;
+#endif
       cout << buffer << endl;
-    }
+    }while(input_file.eof() == false);
+
     closeFile(filename, input_file);
 
   }
