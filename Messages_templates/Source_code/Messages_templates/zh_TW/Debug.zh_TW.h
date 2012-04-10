@@ -3,7 +3,7 @@
 #ifndef _H_INCLUDED
   #define _H_INCLUDED
   /*使用printf()*/
-  #include <cstdio>
+  #include <stdio.h>
 
   /* 如果是C++編譯器則停用C++特有的函式名稱mangling*/
   #ifdef __cplusplus
