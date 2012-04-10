@@ -67,18 +67,20 @@ restart_program:
 
   /*buffer*/
   char buffer[30];
+  //char bufferChar;
 
-  /*open file*/
+  /*open file
+   * 如何於讀取資料時正確處理eof bit ： http://www.velocityreviews.com/forums/t716773-what-does-fstream-getline-return-after-setting-fail-bit.html
+   * */
   askFile(filename);
-  if(openFile(filename, "rw", input_file) == 0){
-    do{
-      input_file.getline(buffer, 30);
-#ifndef NDEBUG
-      cout << DEBUG_TAG
-           << "input_file.eof() = " << input_file.eof() << endl;
-#endif
+  if(openFile(filename, "r", input_file) == 0){
+    while(input_file.getline(buffer, 30)){
       cout << buffer << endl;
-    }while(input_file.eof() == false);
+    }
+    if(!input_file.eof()){
+      cerr << ERROR_TAG
+           << "getline()發生錯誤！" << endl;
+    }
 
     closeFile(filename, input_file);
 

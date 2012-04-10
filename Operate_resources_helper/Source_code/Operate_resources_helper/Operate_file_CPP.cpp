@@ -78,7 +78,7 @@ using namespace std;
   short openFile(const string& filename, const char mode[], ifstream& input_file)
   {
     /* FIXME:目前無視於mode的設定直接假設開啟的檔案為RW*/
-    input_file.open(filename.c_str(), fstream::in | fstream::out);
+    input_file.open(filename.c_str(), fstream::in);
     if(!input_file.is_open()){
       cerr << ERROR_TAG << ERROR_FILE_OPEN_FAIL;
       DEBUG_LOCATION();
@@ -95,6 +95,7 @@ using namespace std;
    *   -1 關閉檔案失敗*/
   short closeFile(const string& filename, ifstream& input_file)
   {
+    input_file.clear();
     input_file.close();
     /* FIXME:一定會進去fail()*/
     if(input_file.fail()){
