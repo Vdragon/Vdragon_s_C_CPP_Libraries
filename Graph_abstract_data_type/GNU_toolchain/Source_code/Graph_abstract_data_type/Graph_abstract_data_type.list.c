@@ -1,4 +1,4 @@
-/*Graph_abstract_data_type.list.c
+﻿/*Graph_abstract_data_type.list.c
 -----------------------------------
 更新紀錄 | Changelog
   Changelog is now stored on GitHub
@@ -181,16 +181,12 @@ void destroyGraph(struct graph *target, unsigned max_adj_list_size)
             /*1.2.3-將curr_destroy_node設定成Head指向的節點*/
             curr_destroy_node = (*target).adj_list[i];
 
-            /*debug*/
-            /*graphListOutput((*target));*/
         }
 
         /*1.3-將Head指向的節點釋放*/
         free((*target).adj_list[i]);
         (*target).adj_list[i] = NULL;
 
-        /*debug*/
-        /*graphListOutput((*target));*/
     }
 
     /*把target釋放掉*/
