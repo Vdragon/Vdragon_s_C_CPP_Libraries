@@ -54,6 +54,7 @@ int main(void)
 {
   DEBUG_LOCATION();
   cout << ERROR_TAG << ERROR_FILE_OPEN_FAIL << endl;
+  cout << ERROR_TAG << ERROR_FILE_CLOSE_FAIL << endl;
   /**/
   return EXIT_SUCCESS;
 }
