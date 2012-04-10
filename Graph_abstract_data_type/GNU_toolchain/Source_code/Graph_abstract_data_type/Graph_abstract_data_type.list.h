@@ -13,30 +13,43 @@
   /*#define MAX_ADJ_LIST_SIZE 100*/
 
   /*圖節點的資料結構（adjacency lists表示法）*/
-  typedef struct adjListNode * AdjListHead;
   typedef struct adjListNode{
       Vertex connected_vertex;
       struct adjListNode * next;
   }AdjListNode;
+  typedef struct adjListNode * AdjListHead;
 
   /*圖的宣告*/
-  typedef AdjListHead * Graph;
+  /*typedef AdjListHead * Graph;*/
+  typedef struct graph{
+    AdjListHead * adj_list;
+    GraphTypes type;
+    unsigned vertex_num;
 
+    short (*initGraphRef) (struct graph *target, const unsigned vertex_num, GraphTypes type);
+    short (*insertEdgeRef) (GraphTypes mode, struct graph target, Edge item);
+    void (*destroyGraphRef) (struct graph *target, unsigned max_adj_list_size);
+    void (*printGraphRef)(struct graph target, unsigned max_adj_list_size);
+  }Graph;
 
-  /*插入一個頂點(vertex)至相鄰性List圖中的函式的function prototype*/
-  short int graphListInsertVert(GraphTypes mode, Graph target, Vertex v);
-  /*插入一個邊(edge)至相鄰性List圖中的函式的function prototype*/
+  /*初始化Graph成員函式：根據vertex_num的量動態配置記憶體作為AdjListHead的陣列*/
+  short initGraph(struct graph *  target, const unsigned vertex_num, GraphTypes type);
+  /*摧毀相鄰性List圖的函式的function prototype*/
+  void destroyGraph(struct graph * target, unsigned max_adj_list_size);
+  /*插入一個邊(edge)至相鄰性List圖中的函式的成員函式*/
   short int graphListInsertEdge(GraphTypes mode, Graph target, Edge item);
+  /*輸出相鄰性List圖的函式的function prototype*/
+  void printGraph(struct graph target, unsigned max_adj_list_size);
+
+  /*插入一個頂點(vertex)至相鄰性List圖中的函式的function prototype
+  short int graphListInsertVert(GraphTypes mode, AdjListHead adj_list[], Vertex v);*/
+
   /*於圖中刪除一個頂點(vertex)（及其連結邊）的函式的function prototype*/
   /*Graph graphDeleteVertex(Graph target, Vertex item);*/
   /*於圖中刪除一個邊(edge)的函式的function prototype*/
   /*Graph graphDeleteEdge(Graph target, Edge item);*/
 
-  /*輸出相鄰性List圖的函式的function prototype*/
-  void graphListOutput(const Graph target, unsigned max_adj_list_size);
 
-  /*摧毀相鄰性List圖的函式的function prototype*/
-  void graphListDestroy(Graph target, unsigned max_adj_list_size);
 
 
   /*確認圖為空函式的function prototype*/

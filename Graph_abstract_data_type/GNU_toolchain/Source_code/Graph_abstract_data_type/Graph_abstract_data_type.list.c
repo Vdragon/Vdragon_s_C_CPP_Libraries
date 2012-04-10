@@ -29,6 +29,7 @@
 /*////////程式所include之函式庫的標頭檔(Included Library Headers)////////*/
 /**/
 #include "Graph_abstract_data_type.list.h"
+
 /*we need NULL*/
 #include <stddef.h>
 /*we need stack adt*/
@@ -75,21 +76,20 @@ short int graphListInsertEdge(GraphTypes mode, Graph target, Edge item)
     if(item.u == item.v){
         return -2;
     }
-
     /*1.-先處理u頂點*/
     /*1.1-如果說該邊的Head目前沒有點...*/
-    if(target[item.u] == NULL){
+    if(target.adj_list[item.u] == NULL){
         /*1.1.1-要求一個節點的記憶體並附加在Head上*/
-        target[item.u] = (AdjListNode *)malloc(sizeof(AdjListNode));
+        target.adj_list[item.u] = (AdjListNode *)malloc(sizeof(AdjListNode));
 
         /*1.1.2-如果要求記憶體失敗*/
-        if(target[item.u] == NULL){
+        if(target.adj_list[item.u] == NULL){
             return -1;
         }
 
         /*1.1.3-設定該節點*/
-        target[item.u]->connected_vertex = item.v;
-        target[item.u]->next = NULL;
+        target.adj_list[item.u]->connected_vertex = item.v;
+        target.adj_list[item.u]->next = NULL;
 
         /*如果是無向圖且非第二次呼叫的話就將點交換頂點再呼叫自己一次*/
         if(second_call == 'n' && mode == UNDIRECTED){
@@ -104,10 +104,10 @@ short int graphListInsertEdge(GraphTypes mode, Graph target, Edge item)
         return 0;
     }
     /*1.2-將current_node_position設定為第一個節點*/
-    current_node_position = target[item.u];
+    current_node_position = target.adj_list[item.u];
 
     /*1.3-當還沒到最後一個節點前一直往前*/
-    for(current_node_position = target[item.u];
+    for(current_node_position = target.adj_list[item.u];
         1;
         current_node_position = current_node_position->next){
         /*1.3.1-如果發現重複的點就正常離開*/
@@ -147,8 +147,9 @@ short int graphListInsertEdge(GraphTypes mode, Graph target, Edge item)
     /*傳回內容*/
     return 0;
     }
+
 /*摧毀相鄰性List圖的函式*/
-void graphListDestroy(Graph target, unsigned max_adj_list_size)
+void destroyGraph(struct graph *target, unsigned max_adj_list_size)
     {
     /*宣告與定義(Declaration & Definition)*/
     /*指向要刪除節點的指標*/
@@ -159,12 +160,12 @@ void graphListDestroy(Graph target, unsigned max_adj_list_size)
     register unsigned i;
     for(i = 0; i < max_adj_list_size; i++){
         /*1.1-如果Head沒有節點就跳過*/
-        if(target[i] == NULL){
+        if((*target).adj_list[i] == NULL){
             continue;
         }
 
         /*將curr_destroy_node設定成Head指向的節點*/
-        curr_destroy_node = target[i];
+        curr_destroy_node = (*target).adj_list[i];
 
         /*1.2-在該Head指向的節點後方的節點尚未釋放之前*/
         while(curr_destroy_node->next != NULL){
@@ -178,27 +179,30 @@ void graphListDestroy(Graph target, unsigned max_adj_list_size)
             curr_destroy_node->next = NULL;
 
             /*1.2.3-將curr_destroy_node設定成Head指向的節點*/
-            curr_destroy_node = target[i];
+            curr_destroy_node = (*target).adj_list[i];
 
             /*debug*/
-            /*graphListOutput(target);*/
+            /*graphListOutput((*target));*/
         }
 
         /*1.3-將Head指向的節點釋放*/
-        free(target[i]);
-        target[i] = NULL;
+        free((*target).adj_list[i]);
+        (*target).adj_list[i] = NULL;
 
         /*debug*/
-        /*graphListOutput(target);*/
+        /*graphListOutput((*target));*/
     }
 
+    /*把target釋放掉*/
+    free((*target).adj_list);
+    (*target).adj_list = NULL;
     /*－－－－－－－－－－－－－－－－－－－－－*/
     /*離開*/
     return ;
     }
 
 /*輸出相鄰性List圖的函式*/
-void graphListOutput(const Graph target, unsigned max_adj_list_size)
+void printGraph(const Graph target, unsigned max_adj_list_size)
     {
     /*宣告與定義(Declaration & Definition)*/
     /*現在正在讀取node的位置的指標*/
@@ -212,17 +216,17 @@ void graphListOutput(const Graph target, unsigned max_adj_list_size)
         printf("頂點""(Vertex)""%u""與""(links with)", i);
 
         /*如果沒有*/
-        if(target[i] == NULL){
+        if(target.adj_list[i] == NULL){
             printf("無頂點相連""(no vertex)。\n");
             continue;
         }
 
         /*輸出節點*/
         printf("頂點""(vertex)");
-        for(curr_read_node_pos = target[i];
+        for(curr_read_node_pos = target.adj_list[i];
             curr_read_node_pos != NULL;
             curr_read_node_pos = curr_read_node_pos->next){
-            if(curr_read_node_pos == target[i]){
+            if(curr_read_node_pos == target.adj_list[i]){
                 printf("%u", curr_read_node_pos->connected_vertex);
             }
             else{
@@ -264,7 +268,7 @@ void graphAdjListDFS(const Graph target, const Vertex root, unsigned max_adj_lis
     printf("%d->", root);
 
     /**/
-    for(readPtr = target[root]; readPtr != NULL; readPtr = readPtr->next){
+    for(readPtr = target.adj_list[root]; readPtr != NULL; readPtr = readPtr->next){
         /*如果還沒拜訪過該節點*/
         if(visited[readPtr->connected_vertex] != 1){
             /*用該節點進行呼叫*/
@@ -331,7 +335,7 @@ short int graphAdjListDfnLow(Graph target, Vertex child, Vertex parent, unsigned
     dfn[child] = low[child] = num++;
 
     /*從相鄰性List的第一項至最後一項*/
-    for(readPtr = target[child]; readPtr != NULL; readPtr = readPtr->next){
+    for(readPtr = target.adj_list[child]; readPtr != NULL; readPtr = readPtr->next){
         /*從指標獲取下一個子頂點*/
         next_child = readPtr->connected_vertex;
 
@@ -451,7 +455,7 @@ short int graphAdjListFBC(Graph target, Vertex child, Vertex parent, unsigned ma
     dfn[child] = low[child] = num++;
 
     /*從相鄰性List的第一項至最後一項*/
-    for(readPtr = target[child]; readPtr != NULL; readPtr = readPtr->next){
+    for(readPtr = target.adj_list[child]; readPtr != NULL; readPtr = readPtr->next){
         /*從指標獲取下一個子頂點*/
         next_child = readPtr->connected_vertex;
 
@@ -491,14 +495,11 @@ short int graphAdjListFBC(Graph target, Vertex child, Vertex parent, unsigned ma
 
                     }while(!((temp_edge.u == child) && (temp_edge.v == next_child)));
                     putchar('\n');
-
                 }
             }
             else if(next_child != parent){
                 low[child] = MIN_OF_2(low[child], dfn[next_child]);
             }
-
-
         }
         /*如果拜訪過下一個子頂點，下一個子頂點又不是parent頂點的話...*/
         else if(next_child != parent){
@@ -525,3 +526,30 @@ short int graphAdjListFBC(Graph target, Vertex child, Vertex parent, unsigned ma
     /*傳回內容*/
     return 0;
     }
+
+/*初始化Graph函式：根據vertex_num的量動態配置記憶體作為AdjListHead的陣列*/
+short initGraph(struct graph *  target, const unsigned vertex_num, GraphTypes type)
+  {
+    /*要求記憶體*/
+    (*target).adj_list = malloc(sizeof(AdjListHead) * vertex_num);
+    if((*target).adj_list == NULL){
+      fprintf(stderr, ERROR_TAG ERROR_MEMORY_ALLOCATION_FAIL);
+      return -1;
+    }
+    {/*memory guard*/
+      /**/
+      unsigned counter01;
+      for(counter01 = 0; counter01 < vertex_num; ++counter01){
+        (*target).adj_list[counter01] = NULL;
+      }
+    }
+    (*target).vertex_num = vertex_num;
+    (*target).type = type;
+    (*target).destroyGraphRef = destroyGraph;
+    (*target).insertEdgeRef = graphListInsertEdge;
+    (*target).printGraphRef = printGraph;
+    /*成功*/
+    return 0;
+  }
+
+

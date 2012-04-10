@@ -66,6 +66,37 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="Source_code/Graph_abstract_data_type/Graph_abstract_data_type.generic.h" />
+		<Unit filename="Source_code/Graph_abstract_data_type/Graph_abstract_data_type.list.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Source_code/Graph_abstract_data_type/Graph_abstract_data_type.list.h" />
+		<Unit filename="Source_code/Messages_templates/zh_TW.h" />
+		<Unit filename="Source_code/Messages_templates/zh_TW/Debug.zh_TW.h" />
+		<Unit filename="Source_code/Messages_templates/zh_TW/Errors.zh_TW.h" />
+		<Unit filename="Source_code/Messages_templates/zh_TW/Prompt.zh_TW.h" />
+		<Unit filename="Source_code/Messages_templates/zh_TW/Warnings.zh_TW.h" />
+		<Unit filename="Source_code/Project_specific_configurations/Debug.h" />
+		<Unit filename="Source_code/Project_specific_configurations/Math.h" />
+		<Unit filename="Source_code/Project_specific_configurations/Max_value.h" />
+		<Unit filename="Source_code/Project_specific_configurations/Software_info.h" />
+		<Unit filename="Source_code/Project_specific_configurations/System_category.h" />
+		<Unit filename="Source_code/Stack_abstract_data_type_Graph/Stack_abstract_data_structure_C.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Source_code/Stack_abstract_data_type_Graph/Stack_abstract_data_structure_C.h" />
+		<Unit filename="Source_code/Test_program.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Source_code/Test_program.h" />
+		<Unit filename="Source_code/findMaxMin/findMaxMin.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Source_code/findMaxMin/findMaxMin.h" />
+		<Unit filename="Source_code/pauseProgram/Pause_program.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Source_code/pauseProgram/Pause_program.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />

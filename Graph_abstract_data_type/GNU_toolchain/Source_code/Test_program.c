@@ -43,7 +43,7 @@ int main(void)
 	/*宣告與定義(Declaration & Definition)*/
     /* 圖的宣告（adjacency list表示法）
      * FIXME:應該是graph1跟TEST_VERTEX_QUANTITY才對*/
-    AdjListHead graph01[GRAPH01_VERTEX] = {NULL};
+      Graph graph01;
 
     /*用來保存函式運行結果的變數*/
     short int func_call_result = 0;
@@ -63,41 +63,25 @@ int main(void)
            "09957010_1A_林博仁 (c) 保留所有權利\n09957010_1A_Henry Lin (c) All RIGHTS RESERVED\n"
            "----------------------------------------------------------------\n");
 
+    /*初始化Graph*/
+    graph01.initGraphRef = initGraph;
 
+    (*graph01.initGraphRef)(&graph01, GRAPH01_VERTEX, UNDIRECTED);
+#if 1
     {/*測試迴圈*/
     /*for迴圈*/
     register unsigned i;
 
     for(i = 1; i <= 100; i++){
         /*測試edge*/
-        testEdge.u = rand() % TEST_EDGE_QUANTITY;
-        while((testEdge.v = rand() % TEST_EDGE_QUANTITY) == testEdge.u);
-        testEdge.cost = -1;
+        testEdge.setEdgeRef = setEdge;
+        do{
+        (*testEdge.setEdgeRef)(&testEdge, rand() % TEST_EDGE_QUANTITY, rand() % TEST_EDGE_QUANTITY, -1);
 
-        /*測試edge插入陣列中*/
-        if(func_call_result != 0){
-            switch(func_call_result){
-            case -1:
-                printf("軟體使用之graphMatrixInsertEdge函式偵測到引數item的member \n"
-                       "u跟v兩個頂點相同（函式不允許頂點loop的邊線(edge)作為引數）。\n"
-                       "The function \"graphMatrixInsertEdge\" in the software detected\n"
-                       "the augument \"item\"'s member:u and v vertex are same.\n"
-                       "(Function doesn't permit a self-loop edge as an argument.)\n");
-                break;
-            default:
-                printf("graphMatrixInsertEdge函式發生未知的錯誤。\n"
-                       "The graphMatrixInsertEdge function has unknown error.\n");
-                break;
-            }
-            printf("graphMatrixInsertEdge函式異常退出！\n"
-                   "graphMatrixInsertEdge function has errorly exited!\n"
-                   "軟體將跳至不會受到影響的位置繼續執行。\n"
-                   "Software will jump to somewhere not affected to continue.\n");
-            goto insert_edge_into_graph_list_end;
-        }
+        }while(testEdge.getUref(testEdge) == testEdge.getVref(testEdge));
 
         /*測試將edge插入相鄰性List中*/
-        func_call_result = graphListInsertEdge(UNDIRECTED, graph01, testEdge);
+        func_call_result = (*graph01.insertEdgeRef)(UNDIRECTED, graph01, testEdge);
         if(func_call_result != 0){
             switch(func_call_result){
             case -1:
@@ -127,12 +111,15 @@ int main(void)
         /*測試將edge插入相鄰性List中*/
     }
     }/*測試迴圈*/
+#endif
+
+
 
     /*輸出list、 矩陣*/
-    graphListOutput(graph01, GRAPH01_VERTEX);
+    (*graph01.printGraphRef)(graph01, GRAPH01_VERTEX);
 
     insert_edge_into_graph_list_end:
-
+#if 0
     /*-----DFS、FBC--------*/
     {
     unsigned input_number;
@@ -163,8 +150,9 @@ int main(void)
     graphAdjListFBC(graph01, 0, -1, MAX_STACK_SIZE, TEST_EDGE_QUANTITY);
 
     }
+#endif
     /*-------程式結束前清理----------*/
-    graphListDestroy(graph01, GRAPH01_VERTEX);
+    (*graph01.destroyGraphRef)(&graph01, GRAPH01_VERTEX);
 
     /*呼叫暫停運行函式(放在main函式中)*/
     if(pauseProgram() == 1){

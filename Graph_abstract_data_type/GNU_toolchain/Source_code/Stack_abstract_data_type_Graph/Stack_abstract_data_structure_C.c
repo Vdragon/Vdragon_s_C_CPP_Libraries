@@ -49,25 +49,24 @@
 
 /*--------------主要程式碼(Main Code)--------------*/
 
-//判斷堆疊是否為空函式
-//版本：1.00(0)
+/*判斷堆疊是否為空函式*/
 short int stackIsEmpty(int stack_top)
   {
     return (stack_top == -1) ? 1 : 0;
   }
-//判斷堆疊是否已滿函式
-//版本：1.00(0)
+
+/*判斷堆疊是否已滿函式*/
 short int stackIsFull(int stack_top, unsigned max_stack_size)
   {
     return (stack_top == max_stack_size - 1) ? 1 : 0;
   }
 
-//將元素push至堆疊的函式
+/*將元素push至堆疊的函式*/
 short int stackPush(StackElement item, StackElement stack[], int *stack_top, unsigned max_stack_size)
     {
-    //宣告與定義(Declaration & Definition)
-    //－－－－－－－－－－－－－－－－－－－－－
-    //如果堆疊已滿就錯誤離開
+    /*宣告與定義(Declaration & Definition)
+    －－－－－－－－－－－－－－－－－－－－－
+    如果堆疊已滿就錯誤離開*/
     if(stackIsFull(*stack_top, max_stack_size)){
         printf(ERROR_TAG STACK_ADT_PUSH_TAG
                ERROR_STACK_PUSH_WHEN_FULL
@@ -81,13 +80,12 @@ short int stackPush(StackElement item, StackElement stack[], int *stack_top, uns
     return 0;
     }
 
-//將元素pop出堆疊的函式
-//版本：1.00(0)
+/*將元素pop出堆疊的函式*/
 StackElement stackPop(StackElement stack[], int *stack_top, short * return_status)
     {
-    //宣告與定義(Declaration & Definition)
-    //－－－－－－－－－－－－－－－－－－－－－
-    //如果堆疊為空就錯誤離開
+    /*宣告與定義(Declaration & Definition)
+    －－－－－－－－－－－－－－－－－－－－－
+    如果堆疊為空就錯誤離開*/
     if(stackIsEmpty(*stack_top)){
       StackElement need_not_initialize;
 
@@ -99,7 +97,7 @@ StackElement stackPop(StackElement stack[], int *stack_top, short * return_statu
         return need_not_initialize;
     }else{
       *return_status = 0;
-      //傳回top位置的元素並遞減top
+      /*傳回top位置的元素並遞減top*/
       return stack[(*stack_top)--];
     }
     }
