@@ -73,7 +73,7 @@ int main(void)
     register unsigned i;
 
     for(i = 1; i <= 100; i++){
-        /*測試edge*/
+
         testEdge.setEdgeRef = setEdge;
         do{
         (*testEdge.setEdgeRef)(&testEdge, rand() % TEST_EDGE_QUANTITY, rand() % TEST_EDGE_QUANTITY, -1);

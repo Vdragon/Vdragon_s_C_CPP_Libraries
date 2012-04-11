@@ -15,6 +15,7 @@
   /*圖節點的資料結構（adjacency lists表示法）*/
   typedef struct adjListNode{
       Vertex connected_vertex;
+      int weight;
       struct adjListNode * next;
   }AdjListNode;
   typedef struct adjListNode * AdjListHead;
@@ -28,8 +29,8 @@
 
     short (*initGraphRef) (struct graph *target, const unsigned vertex_num, GraphTypes type);
     short (*insertEdgeRef) (GraphTypes mode, struct graph target, Edge item);
-    void (*destroyGraphRef) (struct graph *target, unsigned max_adj_list_size);
-    void (*printGraphRef)(struct graph target, unsigned max_adj_list_size);
+    void  (*destroyGraphRef) (struct graph *target, unsigned max_adj_list_size);
+    void  (*printGraphRef)(struct graph target, unsigned max_adj_list_size);
   }Graph;
 
   /*初始化Graph成員函式：根據vertex_num的量動態配置記憶體作為AdjListHead的陣列*/

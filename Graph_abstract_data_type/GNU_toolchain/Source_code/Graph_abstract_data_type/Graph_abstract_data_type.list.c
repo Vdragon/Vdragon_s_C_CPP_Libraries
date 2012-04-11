@@ -89,12 +89,14 @@ short int graphListInsertEdge(GraphTypes mode, Graph target, Edge item)
 
         /*1.1.3-設定該節點*/
         target.adj_list[item.u]->connected_vertex = item.v;
+        target.adj_list[item.u]->weight = item.cost;
         target.adj_list[item.u]->next = NULL;
 
         /*如果是無向圖且非第二次呼叫的話就將點交換頂點再呼叫自己一次*/
         if(second_call == 'n' && mode == UNDIRECTED){
             exchange_edge.u = item.v;
             exchange_edge.v = item.u;
+            exchange_edge.cost = item.cost;
             second_call = 'y';
             graphListInsertEdge(UNDIRECTED, target, exchange_edge);
         }
@@ -130,12 +132,14 @@ short int graphListInsertEdge(GraphTypes mode, Graph target, Edge item)
 
     /*設定該新節點*/
     current_node_position->next->connected_vertex = item.v;
+    current_node_position->next->weight = item.cost;
     current_node_position->next->next = NULL;
 
     /*如果是無向圖且非第二次呼叫的話就將點交換頂點再呼叫自己一次*/
     if(item.u != item.v && second_call == 'n' && mode == UNDIRECTED){
         exchange_edge.u = item.v;
         exchange_edge.v = item.u;
+        exchange_edge.cost = item.cost;
         second_call = 'y';
         graphListInsertEdge(UNDIRECTED, target, exchange_edge);
     }
