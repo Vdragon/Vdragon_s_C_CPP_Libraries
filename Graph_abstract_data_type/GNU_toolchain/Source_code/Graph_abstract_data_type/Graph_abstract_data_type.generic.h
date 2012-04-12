@@ -13,10 +13,18 @@
   typedef struct edge{
     Vertex u, v;
     int cost;
+    void (*initEdgeRef) (struct edge *target);
     void (*setEdgeRef) (struct edge *edge, Vertex u, Vertex v, int cost);
     Vertex (*getUref) (struct edge edge);
     Vertex (*getVref) (struct edge edge);
   }Edge;
+  /**/
+  Vertex getU(Edge edge);
+  Vertex getV(Edge edge);
+  /*初始化邊的函式*/
+  void initEdge(Edge *target);
+  /*設定邊的屬性的函式*/
+  void setEdge(Edge *edge, Vertex u, Vertex v, int cost);
 
   /*堆疊(Stack)元素資料結構*/
   typedef Edge StackElement;
@@ -27,12 +35,9 @@
     DIRECTED /*有方向性邊的圖*/
   }GraphTypes;
 
-  /*設定邊的屬性的函式*/
-  void setEdge(Edge *edge, Vertex u, Vertex v, int cost);
 
-  /**/
-  Vertex getU(struct edge edge);
-  Vertex getV(struct edge edge);
+
+
 
   #ifdef __cplusplus
     }

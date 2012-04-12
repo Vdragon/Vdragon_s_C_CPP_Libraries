@@ -42,25 +42,31 @@
 /*////////全域變數(Global Variables)////////*/
 
 /*--------------主要程式碼(Main Code)--------------*/
+  /*初始化邊的函式*/
+  void initEdge(Edge *target)
+  {
+    (*target).getUref = getU;
+    (*target).getVref = getV;
+    (*target).setEdgeRef = setEdge;
+    /*done*/
+	  return;
+  }
   /*設定邊的屬性的函式*/
   void setEdge(Edge *edge, Vertex u, Vertex v, int cost)
   {
     (*edge).u = u;
     (*edge).v = v;
     (*edge).cost = cost;
-    (*edge).getUref = getU;
-    (*edge).getVref = getV;
+
     return;
   }
 
   /**/
-  Vertex getU(struct edge edge)
+  Vertex getU(Edge edge)
   {
-
     return edge.u;
   }
-  Vertex getV(struct edge edge)
+  Vertex getV(Edge edge)
   {
-
     return edge.v;
   }

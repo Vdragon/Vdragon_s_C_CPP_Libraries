@@ -153,7 +153,7 @@ short int graphListInsertEdge(GraphTypes mode, Graph target, Edge item)
     }
 
 /*摧毀相鄰性List圖的函式*/
-void destroyGraph(struct graph *target, unsigned max_adj_list_size)
+void destroyGraph(struct graph *target)
     {
     /*宣告與定義(Declaration & Definition)*/
     /*指向要刪除節點的指標*/
@@ -162,7 +162,7 @@ void destroyGraph(struct graph *target, unsigned max_adj_list_size)
     /*－－－－－－－－－－－－－－－－－－－－－*/
     /*1-處理每個Head*/
     register unsigned i;
-    for(i = 0; i < max_adj_list_size; i++){
+    for(i = 0; i < (*target).vertex_num; i++){
         /*1.1-如果Head沒有節點就跳過*/
         if((*target).adj_list[i] == NULL){
             continue;
@@ -202,7 +202,7 @@ void destroyGraph(struct graph *target, unsigned max_adj_list_size)
     }
 
 /*輸出相鄰性List圖的函式*/
-void printGraph(const Graph target, unsigned max_adj_list_size)
+void printGraph(const Graph target)
     {
     /*宣告與定義(Declaration & Definition)*/
     /*現在正在讀取node的位置的指標*/
@@ -211,7 +211,7 @@ void printGraph(const Graph target, unsigned max_adj_list_size)
     /*－－－－－－－－－－－－－－－－－－－－－*/
     /*從第一個輸出到最後一個Head*/
     register unsigned i;
-    for(i = 0; i < max_adj_list_size; i++){
+    for(i = 0; i < target.vertex_num; i++){
         /*輸出Head*/
         printf("頂點""(Vertex)""%u""與""(links with)", i);
 
@@ -552,4 +552,17 @@ short initGraph(struct graph *  target, const unsigned vertex_num, GraphTypes ty
     return 0;
   }
 
+short graphIsEmpty(Graph target)
+  {
+    return !target.vertex_num;
+  }
 
+/*Prim's Minimum Spanning Tree演算法*/
+void prim_sMST(Graph target, Vertex start, Vertex parent[])
+{
+
+
+
+
+  return ;
+}

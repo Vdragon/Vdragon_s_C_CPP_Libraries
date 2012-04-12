@@ -74,7 +74,8 @@ int main(void)
 
     for(i = 1; i <= 100; i++){
 
-        testEdge.setEdgeRef = setEdge;
+        testEdge.initEdgeRef = initEdge;
+        (*testEdge.initEdgeRef)(&testEdge);
         do{
         (*testEdge.setEdgeRef)(&testEdge, rand() % TEST_EDGE_QUANTITY, rand() % TEST_EDGE_QUANTITY, -1);
 
@@ -113,10 +114,8 @@ int main(void)
     }/*測試迴圈*/
 #endif
 
-
-
     /*輸出list、 矩陣*/
-    (*graph01.printGraphRef)(graph01, GRAPH01_VERTEX);
+    (*graph01.printGraphRef)(graph01);
 
     insert_edge_into_graph_list_end:
 #if 0
@@ -152,7 +151,7 @@ int main(void)
     }
 #endif
     /*-------程式結束前清理----------*/
-    (*graph01.destroyGraphRef)(&graph01, GRAPH01_VERTEX);
+    (*graph01.destroyGraphRef)(&graph01);
 
     /*呼叫暫停運行函式(放在main函式中)*/
     if(pauseProgram() == 1){
