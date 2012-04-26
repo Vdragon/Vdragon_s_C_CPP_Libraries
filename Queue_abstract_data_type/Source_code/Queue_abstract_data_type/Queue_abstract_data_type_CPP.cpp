@@ -30,6 +30,19 @@
 /*Queue ADT*/
 #include "./Queue_abstract_data_type_CPP.h"
 
+/***Standard C++函式庫***/
+/*NULL定義*/
+#include <cstddef>
+/**/
+#include <iostream>
+/**/
+#include <cassert>
+using namespace std;
+
+/***Ｖ字龍的C++函式庫蒐集*/
+/**/
+#include "../Messages_templates/zh_TW.h"
+
 /*////////常數與巨集(Constants & Macros)////////*/
 
 /*////////其他前期處理器指令(Other Preprocessor Directives////////*/
@@ -42,23 +55,73 @@
 /*////////全域變數(Global Variables)////////*/
 
 /*--------------主要程式碼(Main Code)--------------*/
-queue::queue()
+Queue::Queue()
 {
 
 }
-queue::~queue()
+Queue::~Queue()
 {
 
 }
-void queue::initialize()
+
+void Queue::initialize()
 {
+  m_head = NULL;
+  m_tail = NULL;
   return;
 }
-void queue::enque(int)
+
+bool Queue::unitTest()
 {
-  return;
+  /* 測試Queue::initialize() */{
+    Queue target;
+
+    target.initialize();
+    assert(target.m_head == NULL && target.m_tail == NULL);
+  }
+
+  /* 測試Queue::enque() */{
+    Queue target;
+    QueueElement dummy;
+
+    assert(target.enque(dummy));
+  }
+
+  /*元件測試成功*/
+  cout << QUEUE_UNITTEST_TAG << "元件測試全部成功！" << endl;
+  return true;
 }
-bool queue::deque(int&)
+
+bool Queue::enque(QueueElement enque_item)
 {
+  /*配置一個新的元素*/
+  QueueElement *newItem = new QueueElement;
+  if(newItem == NULL){
+    cerr << QUEUE_ENQUE_TAG
+         << ERROR_MEMORY_ALLOCATION_FAIL << endl;
+    return false;
+  }
+  *newItem = enque_item;
+  newItem->next = NULL;
+
+  /* 情形1—Queue是空的 */
+  if(m_tail == NULL){
+    m_tail = m_head = newItem;
+
+    return true;
+  }/* 情形2—Queue不是空的 */else{
+    m_tail->next = newItem;
+    m_tail = newItem;
+    return true;
+  }
+
+  /* enque操作成功 */
+  return true;
+}
+
+bool Queue::deque(QueueElement& dequed)
+{
+
+  /*deque到一個元素*/
   return true;
 }

@@ -5,8 +5,6 @@
    int data;
  }QueueElement;
 
- /*宣告一個Queue
- QueueElement queue[MAX_QUEUE_SIZE];*/
 
  /*指向Queue front位置跟rear位置的指標或註標(subscript)
  int queue_rear = -1;

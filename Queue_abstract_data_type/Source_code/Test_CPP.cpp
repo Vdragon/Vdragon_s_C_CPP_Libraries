@@ -29,10 +29,14 @@
 /*////////程式所include之函式庫的標頭檔(Included Library Headers)////////*/
 /* 標準C++函式庫*/
 #include <cstdlib>
+#include <cassert>
 
 /* Vdragon的C、C++函式庫收集*/
 #include "Show_software_info/Show_software_info.h"
 #include "pauseProgram/Pause_program.h"
+
+/*測試的程式*/
+#include "Queue_abstract_data_type/Queue_abstract_data_type_CPP.h"
 
 /*////////常數與巨集(Constants & Macros)////////*/
 
@@ -50,6 +54,9 @@ int main()
 {
 restart_program:
   show_software_info("隊列(Queue)抽象資料類型測試程式");
+
+  /*元件測試*/
+  assert(Queue::unitTest());
 
   if(pauseProgram() == 1){
     goto restart_program;
