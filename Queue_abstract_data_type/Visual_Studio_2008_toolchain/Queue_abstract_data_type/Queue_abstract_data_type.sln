@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual C++ Express 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Queue_abstract_data_type", "Queue_abstract_data_type.vcproj", "{934A00A2-2081-4AA6-8C6D-F462E6EB7D70}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug_C|Win32 = Debug_C|Win32
+		Debug_CPP|Win32 = Debug_CPP|Win32
+		Release_C|Win32 = Release_C|Win32
+		Release_CPP|Win32 = Release_CPP|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{934A00A2-2081-4AA6-8C6D-F462E6EB7D70}.Debug_C|Win32.ActiveCfg = Debug|Win32
+		{934A00A2-2081-4AA6-8C6D-F462E6EB7D70}.Debug_C|Win32.Build.0 = Debug|Win32
+		{934A00A2-2081-4AA6-8C6D-F462E6EB7D70}.Debug_CPP|Win32.ActiveCfg = Debug_CPP|Win32
+		{934A00A2-2081-4AA6-8C6D-F462E6EB7D70}.Debug_CPP|Win32.Build.0 = Debug_CPP|Win32
+		{934A00A2-2081-4AA6-8C6D-F462E6EB7D70}.Release_C|Win32.ActiveCfg = Release|Win32
+		{934A00A2-2081-4AA6-8C6D-F462E6EB7D70}.Release_C|Win32.Build.0 = Release|Win32
+		{934A00A2-2081-4AA6-8C6D-F462E6EB7D70}.Release_CPP|Win32.ActiveCfg = Release_CPP|Win32
+		{934A00A2-2081-4AA6-8C6D-F462E6EB7D70}.Release_CPP|Win32.Build.0 = Release_CPP|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
