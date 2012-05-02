@@ -55,6 +55,7 @@ int main(void)
 restart_program:
   show_software_info("Linked List抽象資料類型測試程式");
 
+
   if(pauseProgram() == 1){
     goto restart_program;
   }

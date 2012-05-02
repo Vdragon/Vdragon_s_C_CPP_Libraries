@@ -8,11 +8,11 @@
   #endif
   
   /*軟體名稱*/
-  #define SOFTWARE_NAME "SOFTWARE_NAME"
+  #define SOFTWARE_NAME "Queue（隊列）抽象資料類型"
   /*軟體開發者名稱*/
-  #define DEVELOPER_NAME "DEVELOPER_NAME"
+  #define DEVELOPER_NAME "林博仁(Henry Lin)"
   /*軟體開發者的電子郵件地址*/
-  #define DEVELOPER_EMAIL "developer@host.category.region"
+  #define DEVELOPER_EMAIL "pika1021@gmail.com"
   /*用在著作權宣告的軟體釋出年份*/
   #define SOFTWARE_RELEASE_YEAR "2012"
   /* 用在軟體所使用的授權條款（目前尚未實作）
