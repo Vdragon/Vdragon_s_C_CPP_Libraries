@@ -122,11 +122,11 @@
  {
    /*如果queue為空就錯誤離開*/
    if(cirQueueIsEmpty(cir_queue_rear, *cir_queue_front)){
-     //製造表示queue為空的元素
+     /*製造表示queue為空的元素*/
      CirQueueElement dummy;
-     //設定錯誤值
+     /*設定錯誤值*/
      *result = -1;
-     //傳回表示queue為空的元素
+     /*傳回表示queue為空的元素*/
      return dummy;
    }
 
