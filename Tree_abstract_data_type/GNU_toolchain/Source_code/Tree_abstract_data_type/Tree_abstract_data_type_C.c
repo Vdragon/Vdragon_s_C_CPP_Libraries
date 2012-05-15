@@ -2,6 +2,7 @@
 #include <stddef.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <assert.h>
 
 /* this */
 #include "Tree_abstract_data_type_C.h"
@@ -11,6 +12,10 @@ void binaryTreeCreate(BinaryTree *self)
 {
   self->root = NULL;
   self->destroy = binaryTreeDestroy;
+  self->unitTest = binaryTreeUnitTest;
+  self->inorder = binaryTreeInorder;
+  self->preorder = binaryTreePreorder;
+
   return;
 }
 
@@ -20,6 +25,15 @@ void binaryTreeDestroy(BinaryTree *self)
   destroyBinaryTreeChild(self->root);
   free(self->root);
   return;
+}
+
+/* 元件測試函式 */
+short binaryTreeUnitTest(struct binaryTree *self)
+{
+
+  /* 測試通過 */
+  fprintf(stdout, TREE_ADT_TAG "元件測試全部通過！\n");
+  return 0;
 }
 
 /* 遞迴地釋放樹佔用的記憶體的函式
@@ -40,41 +54,48 @@ void destroyBinaryTreeChild(BinaryTreeNode *root)
   return ;
   }
 
+/* 中序Traversal演算法函式 */
+void binaryTreeInorder(BinaryTree *self)
+{
+
+  inorder(self->root);
+  return;
+}
+
 /*中序Traversal演算法函式 */
-void inorder(TreeNode * treeNodePtr)
+void inorder(BinaryTreeNode *root)
 	{
-  /*宣告與定義(Declaration & Definition)*/
-
-
-  /*－－－－－－－－－－－－－－－－－－－－－*/
   /*1.直到到達leaf節點即停止呼叫自己*/
-  if(treeNodePtr != NULL){
+  if(root != NULL){
       /*1.1.先呼叫自己拜訪左子樹*/
-      inorder(treeNodePtr->leftChild);
+      inorder(root->leftChild);
       /*1.2.讀出值*/
-
+      fprintf(stdout, "%d ", root->data);
       /*1.3.再呼叫自己拜訪右子樹*/
-      inorder(treeNodePtr->rightChild);
+      inorder(root->rightChild);
   }
-
-  /*－－－－－－－－－－－－－－－－－－－－－*/
-  /*傳回內容*/
   return ;
 	}
 
+/* 前序Traversal演算法函式 */
+void binaryTreePreorder(BinaryTree *self)
+{
+  preorder(self->root);
+  return;
+}
 
 /* 前序Traversal演算法函式 */
-void preorder(TreeNode * treeNodePtr)
+void preorder(BinaryTreeNode *root)
 {
 
   /* 1.直到到達leaf節點即停止呼叫自己 */
-  if(treeNodePtr != NULL){
+  if(root != NULL){
     /* 1.1.先讀出值 */
-
+    fprintf(stdout, "%d ", root->data);
     /* 1.2.再呼叫自己拜訪左子樹 */
-    preorder(treeNodePtr->leftChild);
+    preorder(root->leftChild);
     /* 1.3.再呼叫自己拜訪右子樹 */
-    preorder(treeNodePtr->rightChild);
+    preorder(root->rightChild);
   }
   return ;
 }

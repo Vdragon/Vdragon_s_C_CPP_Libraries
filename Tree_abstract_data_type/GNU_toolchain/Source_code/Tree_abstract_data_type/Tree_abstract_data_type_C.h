@@ -4,6 +4,9 @@
     extern "C"{
   #endif
 
+  /* 訊息 */
+  #define TREE_ADT_TAG "【樹(Tree)抽象資料類型】"
+
   /* 樹節點的定義 */
   typedef struct treeNode{
     /*資料項*/
@@ -33,19 +36,26 @@
     /* 清除二元樹物件的函式 */
     void (*destroy)(struct binaryTree *self);
     /* 中序Traversal演算法函式 */
-    void (*inorder)(TreeNode * treeNodePtr);
-
+    void (*inorder)(struct binaryTree *self);
+    /* 前序Traversal演算法函式 */
+    void (*preorder)(struct binaryTree *self);
+    /* 元件測試函式 */
+    short (*unitTest)(struct binaryTree *self);
     /* private */
 
   }BinaryTree;
+  /* 元件測試函式 */
+  short binaryTreeUnitTest(struct binaryTree *self);
   void binaryTreeCreate(BinaryTree *self);
   void binaryTreeDestroy(BinaryTree *self);
   /* 遞迴地釋放樹佔用的記憶體的函式
    * 運行完後只剩下最上層的root還存在 */
   void destroyBinaryTreeChild(BinaryTreeNode *root);
-  void inorder(TreeNode * treeNodePtr);
+  void binaryTreeInorder(BinaryTree *self);
+  void inorder(BinaryTreeNode *root);
+  void binaryTreePreorder(BinaryTree *self);
   /*前序Traversal演算法函式的function prototype*/
-  void preorder(TreeNode * treeNodePtr);
+  void preorder(BinaryTreeNode *root);
   //後序Traversal演算法函式的function prototype
   void postorder(TreeNode * treeNodePtr);
   //階層順序走訪(Level Order Traversal)演算法函式的function prototype

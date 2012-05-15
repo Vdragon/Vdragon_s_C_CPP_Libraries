@@ -48,6 +48,10 @@
 /*--------------主要程式碼(Main Code)--------------*/
 int main(void)
 {
+  BinaryTree tree;
+  tree.create = binaryTreeCreate;
+  (*tree.create)(&tree);
+  (*tree.unitTest)(&tree);
 
   return EXIT_SUCCESS;
 }
