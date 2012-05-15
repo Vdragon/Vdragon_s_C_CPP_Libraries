@@ -1,4 +1,12 @@
-﻿/*指向二元樹根節點的指標*/
+﻿/* 標準C函式庫 */
+#include <stddef.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+/* this */
+#include "Tree_abstract_data_type_C.h"
+
+/*指向二元樹根節點的指標*/
 /*TreeNode * treeRoot1 = NULL;*/
 
 /*中序Traversal演算法函式
@@ -122,7 +130,7 @@ short int maxHeapPush(HeapElement item, HeapElement max_heap[], unsigned int *he
 
 //自Max Heap中pop出元素的函式
 //版本：1.00(0)
-HeapElement maxHeapPop(HeapElement max_heap[], unsigned int *heap_size)
+HeapElement maxHeapPop(HeapElement max_heap[], unsigned *heap_size)
 	{
 	//宣告與定義(Declaration & Definition)
     //用來判斷要插入的位置的兩個變數
