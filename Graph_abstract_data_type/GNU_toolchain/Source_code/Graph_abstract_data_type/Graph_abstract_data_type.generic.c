@@ -51,6 +51,7 @@
     /*done*/
 	  return;
   }
+
   /*設定邊的屬性的函式*/
   void setEdge(Edge *edge, Vertex u, Vertex v, int cost)
   {

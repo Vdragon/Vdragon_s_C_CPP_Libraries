@@ -29,7 +29,6 @@
 /*--------------全域宣告與定義(Global Declaration & Definition)--------------*/
 /*----資料結構(Structures), typedefs, enums----*/
 
-
 /*----函式原型(Function Prototypes)----*/
 
 /*----全域變數(Global Variables)----*/

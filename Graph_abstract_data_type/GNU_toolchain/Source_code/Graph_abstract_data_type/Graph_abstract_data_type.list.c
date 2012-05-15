@@ -429,7 +429,6 @@ short int graphAdjListFBC(Graph target, Vertex child, Vertex parent, unsigned ma
     temp_edge.u = 0;
     temp_edge.v = 0;
 
-
     /*－－－－－－－－－－－－－－－－－－－－－*/
     /*在最外層呼叫時動態配置並初始化dfn、low值陣列*/
     {
