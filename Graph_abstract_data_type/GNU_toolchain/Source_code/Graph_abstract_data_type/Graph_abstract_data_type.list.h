@@ -21,7 +21,6 @@
   typedef struct adjListNode * AdjListHead;
 
   /*圖的宣告*/
-  /*typedef AdjListHead * Graph;*/
   typedef struct graph{
     AdjListHead * adj_list;
     GraphTypes type;

@@ -36,9 +36,6 @@
   }GraphTypes;
 
 
-
-
-
   #ifdef __cplusplus
     }
   #endif
