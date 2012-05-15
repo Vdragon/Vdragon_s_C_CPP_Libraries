@@ -3,59 +3,82 @@
   #ifdef __cplusplus
     extern "C"{
   #endif
-    /*典型二元樹資料結構
-     *  版本：1.00(0)*/
-    typedef struct treeNode{
-      /*資料項*/
-      int data;
-      /*指向左右子節點的指標*/
-      struct treeNode *leftChild, *rightChild;
 
-    }TreeNode;
+  /* 樹節點的定義 */
+  typedef struct treeNode{
+    /*資料項*/
+    int data;
+    /*指向左右子節點的指標*/
+    struct treeNode *leftChild, *rightChild;
+  }TreeNode;
 
-    /*中序Traversal演算法函式的function prototype*/
-    void inorder(TreeNode * treeNodePtr);
+  /* 樹節點的定義 */
+  typedef struct binaryTreeNode{
+    /*資料項*/
+    int data;
+    /*指向左右子節點的指標*/
+    struct binaryTreeNode *leftChild, *rightChild;
+  }BinaryTreeNode;
 
-    /*前序Traversal演算法函式的function prototype*/
-    void preorder(TreeNode * treeNodePtr);
+  /* 典型二元樹抽象資料類型 */
+  typedef struct binaryTree{
+    /* ==屬性== */
+    /* 二元樹的根節點 */
+    BinaryTreeNode *root;
 
-    //後序Traversal演算法函式的function prototype
-    void postorder(TreeNode * treeNodePtr);
+    /* ==介面== */
+    /* public */
+    /* 初始化二元樹物件的函式 */
+    void (*create) (struct binaryTree *self);
+    /* 清除二元樹物件的函式 */
+    void (*destroy)(struct binaryTree *self);
+    /* 中序Traversal演算法函式 */
+    void (*inorder)(TreeNode * treeNodePtr);
 
-    //階層順序走訪(Level Order Traversal)演算法函式的function prototype
-    void levelOrder(TreeNode * treeNodePtr);
+    /* private */
 
-    //將3-tuple資料寫入樹中函式的function prototype
-    TreeNode * dataToTree(TreeNode * * target_root, const char * input_string);
+  }BinaryTree;
+  void binaryTreeCreate(BinaryTree *self);
+  void binaryTreeDestroy(BinaryTree *self);
+  /* 遞迴地釋放樹佔用的記憶體的函式
+   * 運行完後只剩下最上層的root還存在 */
+  void destroyBinaryTreeChild(BinaryTreeNode *root);
+  void inorder(TreeNode * treeNodePtr);
+  /*前序Traversal演算法函式的function prototype*/
+  void preorder(TreeNode * treeNodePtr);
+  //後序Traversal演算法函式的function prototype
+  void postorder(TreeNode * treeNodePtr);
+  //階層順序走訪(Level Order Traversal)演算法函式的function prototype
+  void levelOrder(TreeNode * treeNodePtr);
+  //將3-tuple資料寫入樹中函式的function prototype
+  TreeNode * dataToTree(TreeNode * * target_root, const char * input_string);
+  //判斷右算式位置的函式
+  inline short int findRightFormula(const char * input_string);
 
-    //判斷右算式位置的函式
-    inline short int findRightFormula(const char * input_string);
 
-    //清除樹的記憶體配置函式
-    TreeNode * destroyTree(TreeNode * treeNodePtr);
-    //Max Heap資料結構
-    //定義Heap中最多允許之元素數量
-    #define MAX_HEAP_ELEMENTS 100
-    //測試Heap是否已滿的巨集(Macro)
-    #define HEAP_IS_FULL(n) (n == MAX_HEAP_ELEMENTS - 1)
-    //測試Heap是否為空的巨集(Macro)
-    #define HEAP_IS_EMPTY(n) (!(n == 1))
+  //Max Heap資料結構
+//定義Heap中最多允許之元素數量
+#define MAX_HEAP_ELEMENTS 100
+//測試Heap是否已滿的巨集(Macro)
+#define HEAP_IS_FULL(n) (n == MAX_HEAP_ELEMENTS - 1)
+//測試Heap是否為空的巨集(Macro)
+#define HEAP_IS_EMPTY(n) (!(n == 1))
 
-    ////Max Heap資料結構
+////Max Heap資料結構
 
-    //Max Heap的資料結構定義
-    typedef struct HeapElement{
-      int key;
+//Max Heap的資料結構定義
+typedef struct HeapElement{
+  int key;
 
-    }HeapElement;
-    //用level order形式印出heap中的資料的函式的function prototype
-    void levelPrintHeap(HeapElement heap[], unsigned int heap_size);
+}HeapElement;
+//用level order形式印出heap中的資料的函式的function prototype
+void levelPrintHeap(HeapElement heap[], unsigned int heap_size);
 
-    //Push元素至Max Heap中的函式的function prototype
-    short int maxHeapPush(HeapElement item, HeapElement max_heap[], unsigned int *heap_size);
+//Push元素至Max Heap中的函式的function prototype
+short int maxHeapPush(HeapElement item, HeapElement max_heap[], unsigned int *heap_size);
 
-    //自Max Heap中pop出元素的函式的function prototype
-    HeapElement maxHeapPop(HeapElement max_heap[], unsigned *heap_size);
+//自Max Heap中pop出元素的函式的function prototype
+HeapElement maxHeapPop(HeapElement max_heap[], unsigned *heap_size);
 
   #ifdef __cplusplus
     }

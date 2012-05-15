@@ -6,13 +6,41 @@
 /* this */
 #include "Tree_abstract_data_type_C.h"
 
-/*指向二元樹根節點的指標*/
-/*TreeNode * treeRoot1 = NULL;*/
+/* 初始化二元樹物件的函式 */
+void binaryTreeCreate(BinaryTree *self)
+{
+  self->root = NULL;
+  self->destroy = binaryTreeDestroy;
+  return;
+}
 
-/*中序Traversal演算法函式
-  版本：1.00(0)
-  回傳值的資料型式 函式名稱(參數定義)
-  returnType functionName(definition of parameters)*/
+/* 清除二元樹物件的函式 */
+void binaryTreeDestroy(BinaryTree *self)
+{
+  destroyBinaryTreeChild(self->root);
+  free(self->root);
+  return;
+}
+
+/* 遞迴地釋放樹佔用的記憶體的函式
+ * 運行完後只剩下最上層的root還存在 */
+void destroyBinaryTreeChild(BinaryTreeNode *root)
+  {
+  /*1.直到到達leaf節點即停止呼叫自己*/
+  if(root != NULL){
+    /*1.1.先呼叫自己拜訪左子樹*/
+    destroyBinaryTreeChild(root->leftChild);
+    /*1.2.清除左子樹節點*/
+    free(root->leftChild);
+    /*1.3.再呼叫自己拜訪右子樹*/
+    destroyBinaryTreeChild(root->rightChild);
+    /*1.4.清除右子樹節點*/
+    free(root->rightChild);
+  }
+  return ;
+  }
+
+/*中序Traversal演算法函式 */
 void inorder(TreeNode * treeNodePtr)
 	{
   /*宣告與定義(Declaration & Definition)*/
@@ -27,7 +55,7 @@ void inorder(TreeNode * treeNodePtr)
 
       /*1.3.再呼叫自己拜訪右子樹*/
       inorder(treeNodePtr->rightChild);
-  }/*1.直到到達leaf節點即停止呼叫自己
+  }
 
   /*－－－－－－－－－－－－－－－－－－－－－*/
   /*傳回內容*/
@@ -297,23 +325,3 @@ inline short int findRightFormula(const char * input_string)
     }
 
 
-/* 清除樹的記憶體配置函式 */
-TreeNode * destroyTree(TreeNode * treeNodePtr)
-  {
-
-  //1.直到到達leaf節點即停止呼叫自己
-  if(treeNodePtr != NULL){
-      //1.1.先呼叫自己拜訪左子樹
-      destroyTree(treeNodePtr->leftChild);
-      //1.2.清除左子樹節點
-      free(treeNodePtr->leftChild);
-      //1.3.再呼叫自己拜訪右子樹
-      destroyTree(treeNodePtr->rightChild);
-      //1.4.清除右子樹節點
-      free(treeNodePtr->rightChild);
-  }////1.直到到達leaf節點即停止呼叫自己
-
-  //－－－－－－－－－－－－－－－－－－－－－
-  //傳回內容
-  return treeNodePtr;
-  }
