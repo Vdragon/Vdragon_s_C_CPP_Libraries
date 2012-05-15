@@ -29,10 +29,14 @@
 /*////////程式所include之函式庫的標頭檔(Included Library Headers)////////*/
 /*標準C函式庫*/
 #include <stdlib.h>
+#include <assert.h>
 
 /*Ｖ字龍的函式庫蒐集*/
 #include "Show_software_info/Show_software_info.h"
 #include "pauseProgram/Pause_program.h"
+
+/* 測試對象 */
+#include "Queue_abstract_data_type/Queue_abstract_data_type_C.h"
 
 /*////////常數與巨集(Constants & Macros)////////*/
 
@@ -46,14 +50,16 @@
 /*////////全域變數(Global Variables)////////*/
 
 /*--------------主要程式碼(Main Code)--------------*/
-int main(void)
+int main(int argc, char *argv[])
 {
-  restart_program:
-    show_software_info("隊列(Queue)抽象資料類型測試程式");
+restart_program:
+  show_software_info("隊列(Queue)抽象資料類型測試程式");
 
-    if(pauseProgram() == 1){
-      goto restart_program;
+  assert(!queueUnitTest());
 
-    }
+  if(pauseProgram() == 1){
+    goto restart_program;
+
+  }
   return EXIT_SUCCESS;
 }
