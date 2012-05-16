@@ -47,8 +47,20 @@
   /*確認圖為空函式的function prototype
    *  回傳值：true/false*/
   short graphIsEmpty(Graph target);
-  /*Prim's Minimum Spanning Tree演算法*/
-  void prim_sMST(Graph target, Vertex start, Vertex parent[]);
+  /*Prim's Minimum Spanning Tree演算法
+   *  參數
+   *  　target
+   *  　　製作MST的Graph
+   *  　root
+　 * 　　　MST的根節點
+　 * 　　parent
+   * 　　　保存MST的結果，所有頂點以及其父節點，MST根節點的父節點為0
+   * 　回傳值
+   * 　　0
+   * 　　　成功完成
+   * 　　-1
+   * 　　　記憶體要求失敗*/
+  short prim_sMST(Graph target, Vertex root, Vertex parent[]);
 
   /*插入一個頂點(vertex)至相鄰性List圖中的函式的function prototype
   short int graphListInsertVert(GraphTypes mode, AdjListHead adj_list[], Vertex v);*/

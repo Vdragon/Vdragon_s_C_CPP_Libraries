@@ -27,26 +27,34 @@
 /*--------------程式碼開始(Code Started)--------------*/
 /*--------------前期處理器指令(Preprocessor Directive)--------------*/
 /*////////程式所include之函式庫的標頭檔(Included Library Headers)////////*/
-/**/
+/*this*/
 #include "Graph_abstract_data_type.list.h"
 
+/* 標準C函式庫 */
 /*we need NULL*/
 #include <stddef.h>
-/*we need stack adt*/
-#include "../Stack_abstract_data_type_Graph/Stack_abstract_data_structure_C.h"
 /*we need malloc() free()*/
 #include <stdlib.h>
-/* we need MIN_OF_2 macro*/
-#include "../findMaxMin/findMaxMin.h"
 /*we need printf*/
 #include <stdio.h>
 /*we need memcpy*/
 #include <string.h>
+/* UINT_MAX的定義 */
+#include <limits.h>
+
+/* Vdragon's Library Collection */
+/*we need stack adt*/
+#include "../Stack_abstract_data_type_Graph/Stack_abstract_data_structure_C.h"
+/* we need MIN_OF_2 macro*/
+#include "../findMaxMin/findMaxMin.h"
 /**/
 #include "../Messages_templates/zh_TW.h"
+/* Queue used in prim_sMST() */
+#include "../Queue_abstract_data_type_prim_sMST/Queue_abstract_data_type_C.h"
 
 /*////////常數與巨集(Constants & Macros)////////*/
-
+/* 定義用於Prim's MST的無限 */
+#define INFINITE UINT_MAX
 /*////////其他前期處理器指令(Other Preprocessor Directives////////*/
 
 /*--------------全域宣告與定義(Global Declaration & Definition)--------------*/
@@ -527,7 +535,7 @@ short int graphAdjListFBC(Graph target, Vertex child, Vertex parent, unsigned ma
     }
 
 /*初始化Graph函式：根據vertex_num的量動態配置記憶體作為AdjListHead的陣列*/
-short initGraph(struct graph *  target, const unsigned vertex_num, GraphTypes type)
+short initGraph(struct graph *target, const unsigned vertex_num, GraphTypes type)
   {
     /*要求記憶體*/
     (*target).adj_list = malloc(sizeof(AdjListHead) * vertex_num);
@@ -557,11 +565,28 @@ short graphIsEmpty(Graph target)
   }
 
 /*Prim's Minimum Spanning Tree演算法*/
-void prim_sMST(Graph target, Vertex start, Vertex parent[])
+short prim_sMST(Graph target, Vertex root, Vertex parent[])
 {
+  /* 配置一個queue，有效節點從1開始 */
+  QueueElementPrimMST *queue = (QueueElementPrimMST *)malloc(sizeof(QueueElementPrimMST) * target.vertex_num + 1);
+  if(queue == NULL){
+    fprintf(stderr, ERROR_TAG ERROR_MEMORY_ALLOCATION_FAIL);
+    return -1;
+  }
 
+  /* initialize min_weight */{
+    register unsigned i;
+    for(i = 1; i <= target.vertex_num; ++i){
+      queue[i].min_weight = UINT_MAX;
+    }
+    queue[root].min_weight = 0;
+  }
 
+  /* 根節點沒有父節點 */
+  parent[root] = 0;
 
+  //while()
 
-  return ;
+  /* 成功完成 */
+  return 0;
 }
