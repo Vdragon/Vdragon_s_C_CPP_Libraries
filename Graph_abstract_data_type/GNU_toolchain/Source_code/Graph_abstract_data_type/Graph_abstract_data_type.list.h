@@ -85,21 +85,22 @@
   short int graphAdjListFBC(Graph target, Vertex child, Vertex parent, unsigned max_stack_size, unsigned max_adj_list_size);
 
 
-  /*Prim's Minimum Spanning Tree演算法所用的物件*/
-  typedef struct prim_sMst{
-    int *keyArray;
+  /* Prim's Minimum Spanning Tree演算法所用的物件（未完成） */
+  typedef struct prim_sMSTcontainer{
+    /* 屬性 */
+    unsigned key[];
 
-
-    short (*primInitRef)(Vertex * key, unsigned size);
-    Vertex (*primDelRef)();
-    short (*primConsistOfRef)();
-    unsigned (*primKeyValRef)(Vertex w);
-    void (*primDecreaseRef)(Vertex w, unsigned new_weight);
-  }Prim_sMst;
+    /* 介面 */
+    short (*InitRef)(Prim_sMSTcontainer *self, unsigned key[], unsigned size);
+    Vertex (*DelRef)(Prim_sMSTcontainer *self);
+    short (*ConsistOfRef)(Prim_sMSTcontainer *self);
+    unsigned (*KeyValRef)(Prim_sMSTcontainer *self, Vertex w);
+    void (*DecreaseRef)(Prim_sMSTcontainer *self, Vertex w, unsigned new_weight);
+  }Prim_sMSTcontainer;
 
 /*h.init(key, n): initializes h to the values in key (程式開始時 h 裡面有 n-1 個節點,
  *  也就是除掉 start 之外的所有節點)*/
-  short primInit(Vertex * key, unsigned size);
+  short primInit(unsigned key[], unsigned size);
 
 /*h.del(): deletes the item in h with the smallest weight and returns the vertex (由 h 中把距離目前 MST 距離最短的節點剔除)*/
   Vertex primDel();
