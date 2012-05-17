@@ -18,10 +18,10 @@
   {
   public:
     CComplex(void);
+    virtual ~CComplex(void);
     /*順便設定係數*/
     CComplex(double real, double imaginary);
 
-    virtual ~CComplex(void);
 
     /*計算模塊*/
     /*method to assign value to a CComplex*/
@@ -67,6 +67,8 @@
     /*a method to test CComplex class*/
     static bool unitTest();
 
+    /* overload強制轉型operater */
+    operator double();
   private:
     /*複數的實數部份*/
     double m_real;

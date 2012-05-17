@@ -31,27 +31,19 @@
 /*we need CComplex declaration*/
 #include "Complex.h"
 
+/* ====標準C++函式庫==== */
 /*we need assertion*/
 #include <cassert>
-
-/*we need squt()*/
+/*we need sqrt()*/
 #include <cmath>
+/* We need cout*/
+#include <iostream>
 
 /*We need error messages*/
 #include "../Messages_templates/zh_TW.h"
 
-/* We need cout*/
-#include <iostream>
-
-/* 我們需要編譯DEBUG專用的程式碼*/
-#include "../Project_specific_configurations/Debug.h"
-
-
-/**/
-#include <iostream>
-
 /*////////常數與巨集(Constants & Macros)以及其他#define指令////////*/
-
+    operator double();
 /*////////其他前期處理器指令(Other Preprocessor Directives////////*/
 
 /*--------------全域宣告與定義(Global Declaration & Definition)--------------*/
@@ -435,6 +427,12 @@ void CComplex::print2Stream(ostream &output)
 
   /*完成*/
   return;
+}
+
+/* overload強制轉型operater */
+CComplex::operator double()
+{
+  return sqrt(m_real * m_real + m_imaginary * m_imaginary);
 }
 
 /* overload ostream 的 << operator*/
