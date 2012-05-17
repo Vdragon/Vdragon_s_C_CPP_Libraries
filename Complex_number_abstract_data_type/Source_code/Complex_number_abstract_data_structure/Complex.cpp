@@ -43,7 +43,6 @@
 #include "../Messages_templates/zh_TW.h"
 
 /*////////常數與巨集(Constants & Macros)以及其他#define指令////////*/
-    operator double();
 /*////////其他前期處理器指令(Other Preprocessor Directives////////*/
 
 /*--------------全域宣告與定義(Global Declaration & Definition)--------------*/
