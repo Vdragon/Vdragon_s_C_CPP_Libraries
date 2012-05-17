@@ -69,16 +69,10 @@ CComplex::CComplex(void)
 {
 }
 
-CComplex::CComplex(double real, double imaginary)
+CComplex::CComplex(double real, double imaginary=0.0)
 {
   m_real = real;
   m_imaginary = imaginary;
-  return;
-}
-
-CComplex::CComplex(double real)
-  :m_real(real), m_imaginary(0.0)
-{
   return;
 }
 

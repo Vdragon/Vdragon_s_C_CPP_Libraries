@@ -20,8 +20,7 @@
     CComplex(void);
     /*順便設定係數*/
     CComplex(double real, double imaginary);
-    /* 將單一double型態參數視為實數部份建構複數 */
-    CComplex(double real);
+
     virtual ~CComplex(void);
 
     /*計算模塊*/
