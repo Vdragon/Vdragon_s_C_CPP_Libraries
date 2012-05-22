@@ -22,23 +22,13 @@
 /*--------------程式碼開始(Code Started)--------------*/
 /*--------------前置處理器選項(Preprocessor Code)--------------*/
 /*////////程式所include的標頭檔(Included Headers)////////*/
-/*standard input/output library
-版本：1.10(1)
-for printf(), scanf(), fgetc()...etc*/
+/*standard input/output library*/
 #include <stdio.h>
-/*or in C++
-#include <cstdio>
-*/
-
-/*C Standard General Utilities Library
-版本：1.00(7)*/
+/*C Standard General Utilities Library*/
 #include <stdlib.h>
-/*or in C++
-#include <cstdlib>
-*/
 
 /*Swap_algorithm*/
-#include "Swap_algorithm.h"
+#include "Swap_algorithm/Swap_algorithm.h"
 
 /*////////環境設定(Environment Settings)////////*/
 /*是否顯示偵錯數據（０為否）？*/
