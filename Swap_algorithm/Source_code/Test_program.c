@@ -75,9 +75,10 @@ int main(void)
     /*test*/
     {
     int a = 10, b = 20;
-
+    printf("互換前的兩值：\n");
+    printf("a = %d, b = %d\n", a, b);
     swapInt(&a, &b);
-
+    printf("互換後的兩值：\n");
     printf("a = %d, b = %d", a, b);
     }
 
