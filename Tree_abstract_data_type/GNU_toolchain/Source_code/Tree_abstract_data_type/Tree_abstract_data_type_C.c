@@ -9,6 +9,7 @@
 
 /* Vdragon's Library Collection */
 #include "../Messages_templates/zh_TW.h"
+#include "Swap_algorithm_heap_element/Swap_algorithm.h"
 
 /* 初始化二元樹物件的函式 */
 void binaryTreeCreate(BinaryTree *self)
@@ -236,7 +237,7 @@ short findRightFormula(const char * input_string)
     return -1;
     }
 
-/* ====heap 抽象資料類型==== */
+/* ====堆抽象資料類型 | Heap Abstract Data Structure==== */
 /* 建構並初始化heap物件的函式 */
 short heapCreate(Heap *self, unsigned size, HeapType type)
 {
@@ -245,9 +246,11 @@ short heapCreate(Heap *self, unsigned size, HeapType type)
   self->isEmpty = heapIsEmpty;
   self->isFull = heapIsFull;
   self->levelPrint = heapLevelPrint;
+  self->del = heapDelete;
+  self->add = heapAdd;
 
-  /* 要求size大小記憶體給heap */
-  self->heap = (HeapElement *)malloc(sizeof(HeapElement) * size);
+  /* 建立heap[1~size] */
+  self->heap = (HeapElement *)malloc(sizeof(HeapElement) * size + 1);
   if(self->heap == NULL){
     fprintf(stderr, ERROR_TAG ERROR_MEMORY_ALLOCATION_FAIL);
     return -1;
@@ -293,6 +296,23 @@ short heapIsFull(Heap *self)
   }
 }
 
+/* 產生父母節點索引值的inline函式 */
+unsigned INDEX_PARENT(const unsigned child_index)
+{
+  return child_index >> 1;
+}
+/* 產生左子節點索引值的inline函式 */
+unsigned INDEX_LEFT_CHILD(const unsigned parent_index)
+{
+  return parent_index << 1;
+}
+
+/* 產生右節點索引值的inline函式 */
+unsigned INDEX_RIGHT_CHILD(const unsigned parent_index)
+{
+  return (parent_index << 1) + 1;
+}
+
 /* 用level order形式印出heap中的資料的函式 */
 void heapLevelPrint(Heap *self)
     {
@@ -307,7 +327,7 @@ void heapLevelPrint(Heap *self)
       register unsigned curr_print;
 
       /*用for迴圈從第一個元素輸出到最後一個元素*/
-      for(curr_print = 1; curr_print <= self->size; ++curr_print){
+      for(curr_print = 1; curr_print <= self->length; ++curr_print){
           printf("%d[%d] ", curr_print, (self->heap[curr_print]).key);
       }
     }
@@ -317,95 +337,111 @@ void heapLevelPrint(Heap *self)
     return ;
     }
 
+/*maxHeapify函式
+    When assuming the left and right children node are heaps,
+    let the complete binary tree rooted by parent node be a heap.
+  參數
+  　parent_index
+  　　父母節點的索引值（可能不符合heap性質）*/
+void heapHeapify(Heap *self, const unsigned parent_index)
+{
+  /*current largest node, preassuming parent*/
+  unsigned largest_index = parent_index;
 
-/* Add元素至Heap中的函式
-   時間複雜度：O(log(2,n)) */
-short HeapAdd(Heap *self, HeapElement item)
-    {
-    /*宣告與定義(Declaration & Definition)*/
-    /* 元素的寫入位置 */
-    unsigned insert_position;
+  /*the child index of current node may be*/
+  unsigned left_child_index = INDEX_LEFT_CHILD(largest_index),
+            right_child_index = INDEX_RIGHT_CHILD(largest_index);
+  /*－－－－－－－－－－－－－－－－－－－－－*/
 
-    /*如果heap已滿就異常退出*/
-    if(self->length == self->size){
-      fprintf(stderr, ERROR_TAG "無法新增元素於已滿的heap！");
-      return -1;
-    }
-
-    /* 將length遞增一並將同時是item可能
-     * 之存放位置之heap_size值存進insert_position
-     * 進行判斷 */
-    insert_position = ++(self->length);
-
-    /* 當insert_position不是根節點且item的key比其父節點的key還要大時 */
-    while((insert_position != 1) &&
-        (item.key > (self->heap[insert_position / 2]).key)){
-      /* 將item bubble up至item的父節點位置（將父節點位置拉至insert_position當前的位置
-         然後將insert_position設成父節點以前的位置） */
-      self->heap[insert_position] = self->heap[insert_position / 2];
-      insert_position /= 2;
-    }
-    /* 將item元素寫入insert_position位置中 */
-    self->heap[insert_position] = item;
-    return 0;
-    }
-
-#if 0
-/* 自Max Heap中delete出元素的函式 */
-HeapElement maxHeapDelete(HeapElement max_heap[], unsigned *heap_size)
-  {
-    //用來判斷要插入的位置的兩個變數
-    unsigned int parent_insert, child_compare;
-
-    //pop出來的元素跟用來暫時存放的元素
-    HeapElement popped_item, temp;
-
-    //如果max heap沒有資料則回傳表示出錯的元素
-    if(HEAP_IS_EMPTY(*heap_size)){
-    //函式異常退出
-    printf("函式欲從沒有資料的max heap中取出資料，函式必須異常退出。\n"
-           "The function attempt to acquire data from an empty max heap, function must be errorly exited.\n");
-        popped_item.key = -999999;
-        return popped_item;
-    }
-
-    //讀出含有最大鍵的元素
-    popped_item = max_heap[1];
-
-    //把最後一個元素提取出來尋找插入的位置
-    temp = max_heap[(*heap_size)--];
-
-    //將parent預設為根結點（被ＰＯＰ掉了），child設為第一個子節點
-    parent_insert = 1;
-    child_compare = 2;
-
-    //當還沒有判斷完全部的child之前
-    while(child_compare <= *heap_size){
-      //如果child位置還沒到最後一個元素且當前parent的右邊child的key比左邊child的key還要大
-      if((child_compare < *heap_size) && (max_heap[child_compare].key < max_heap[child_compare + 1].key)){
-          //將child_compare設成兩個child中比較大者
-          child_compare++;
-      }
-
-      //如果temp的key比兩個child中比較大的child的key還要大表示temp應該插入至這個位置
-      if(temp.key >= max_heap[child_compare].key){
-          //離開while迴圈
-          break;
-      }
-
-      //將兩個child中比較大的child swap至其parent（當前因為被pop掉了所以無值）的位置
-      max_heap[parent_insert] = max_heap[child_compare];
-      parent_insert = child_compare;
-
-      //換成兩個child中比較大的child的child節點繼續跟temp做key的比較
-      child_compare *= 2;
-    }//結束while判斷迴圈
-
-    //將temp插入至當前無值的位置
-    max_heap[parent_insert] = temp;
-
-  //－－－－－－－－－－－－－－－－－－－－－
-  //傳回pop出的元素
-  return popped_item;
+  /*if left child exist and its key greater than current node*/
+  if(left_child_index <= self->length &&
+     (self->type == MAX_HEAP)?
+         self->heap[left_child_index].key > self->heap[largest_index].key:
+         self->heap[left_child_index].key < self->heap[largest_index].key){
+     largest_index = left_child_index;
   }
-#endif
+
+  /*if right child exist and greater than current node*/
+  if(right_child_index <= self->length &&
+     (self->type == MAX_HEAP)?
+         self->heap[right_child_index].key > self->heap[largest_index].key:
+         self->heap[right_child_index].key < self->heap[largest_index].key){
+     largest_index = right_child_index;
+  }
+
+  /*if largest node isn't current node then swap with the largest
+    then maxheapify the child which gets the parent node(which may violating the heap property)*/
+  if(largest_index != parent_index){
+    swapHeapElement(&(self->heap[parent_index]), &(self->heap[largest_index]));
+    heapHeapify(self, largest_index);
+  }
+  /* 完成 */
+  return;
+}
+
+/*buildHeap function
+  build a heap by calling Heapify from the last
+  non-leaf node to root node*/
+void heapBuildHeap(Heap *self)
+{
+  unsigned parent;
+
+  /*for last non-leaf node to root*/
+  for (parent = (self->length / 2); parent >= 1; --parent) {
+    heapHeapify(self, parent);
+  }
+
+  /*done*/
+  return;
+}
+
+/* Add元素至Heap中的函式 */
+short heapAdd(Heap *self, HeapElement item)
+{
+  /*如果heap已滿就異常退出*/
+  if(self->length == self->size){
+    fprintf(stderr, ERROR_TAG "無法新增元素於已滿的heap！");
+    return -1;
+  }
+
+  /* 將欲加入的元素放置於heap的尾端之後 */
+  self->heap[++self->length] = item;
+
+  /* 對已經不維持heap性質的陣列重新構築heap */
+  heapBuildHeap(self);
+
+  /* 完成add操作 */
+  return 0;
+}
+
+/* 自Heap中delete出元素的函式 */
+HeapElement heapDelete(Heap *self, short *result)
+{
+  HeapElement deleted;
+  deleted.key = -99999;
+
+  /* 如果堆疊是空的就無法進行delete操作 */
+  if(self->isEmpty(self) == 1){
+    printf(ERROR_TAG HEAP_ADT_TAG "無法於空的heap進行delete操作！\n");
+    *result = -1;
+    return deleted;
+  }
+  /* 取出最小／大的根節點，現在根節點是空的 */
+  deleted = self->heap[1];
+
+  /* 把所有[2]以後的元素都往前移一位 */{
+    unsigned i;
+    for(i = 2; i <= self->length; ++i){
+      self->heap[i-1] = self->heap[i];
+    }
+    self->length -= 1;
+  }
+
+  /* 已經不維持heap性質，重新構築heap */
+  heapBuildHeap(self);
+
+  /* 完成delete操作 */
+  *result = 0;
+  return deleted;
+}
+
