@@ -98,11 +98,11 @@
     void (*DecreaseRef)(Prim_sMSTcontainer *self, Vertex w, unsigned new_weight);
   }Prim_sMSTcontainer;
 
-/*h.init(key, n): initializes h to the values in key (程式開始時 h 裡面有 n-1 個節點,
- *  也就是除掉 start 之外的所有節點)*/
+  /*h.init(key, n): initializes h to the values in key (程式開始時 h 裡面有 n-1 個節點,
+   *  也就是除掉 start 之外的所有節點)*/
   short primInit(unsigned key[], unsigned size);
 
-/*h.del(): deletes the item in h with the smallest weight and returns the vertex (由 h 中把距離目前 MST 距離最短的節點剔除)*/
+  /*h.del(): deletes the item in h with the smallest weight and returns the vertex (由 h 中把距離目前 MST 距離最短的節點剔除)*/
   Vertex primDel();
 
   /*h.isin(w): returns true if vertex w is in h (這是一個簡單的測試函式, 可惜命名錯了, 想一下 isin 應該改成什麼?)*/
