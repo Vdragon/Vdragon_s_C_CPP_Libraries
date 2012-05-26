@@ -41,10 +41,10 @@
 #include <ctime>
 
 /*my sort functions*/
-#include "Insertion_sort.h"
-#include "Bubble_sort.h"
-#include "Merge_sort.h"
-#include "Heap_sort.h"
+#include "Sorting_algorithm/Insertion_sort.h"
+#include "Sorting_algorithm/Bubble_sort.h"
+#include "Sorting_algorithm/Merge_sort.h"
+#include "Sorting_algorithm/Heap_sort.h"
 
 /*Randomize_algorithm*/
 #include "Randomize_algorithm/Randomize_algorithm.h"
@@ -65,7 +65,7 @@ Windows console = 0, Linux console = 1, Symbian console = 2, PSP console = 3*/
 
 /*////////常數與巨集(Constants & Macros)////////*/
 /* */
-#define SIZE 15
+#define SIZE 100
 
 /*--------------全域宣告與定義(Global Declaration & Definition)--------------*/
 /*////////資料結構(Structures)、typedefs跟enumerations////////*/
@@ -86,8 +86,6 @@ int main(void)
     /* create a random array*/
     int unsorted[SIZE], sorted[SIZE];
 
-    /* heapsort need variable size...make them happy*/
-    unsigned heap_size = SIZE;
     /*－－－－－－－－－－－－－－－－－－－－－*/
     /*程式從這個標籤重新啟動(program restarts from this label)*/
     restart_program:
@@ -133,8 +131,11 @@ int main(void)
     copyArrayInt(sorted, unsorted, SIZE);
 
     printf("******heap sort******\n");
-    heap_size = SIZE;
-    heapSortInt(sorted, heap_size);
+    heapSortInt(sorted, SIZE, INCREASINGLY);
+    printf( "Sorted array:\n" );
+    displayArrayInt(sorted, SIZE, 2, " ", 15);
+
+    heapSortInt(sorted, SIZE, DECREASINGLY);
     printf( "Sorted array:\n" );
     displayArrayInt(sorted, SIZE, 2, " ", 15);
 

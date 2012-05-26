@@ -8,9 +8,6 @@
   #define TREE_ADT_TAG "【樹(Tree)抽象資料類型】"
   #define HEAP_ADT_TAG "【Heap抽象資料類型】"
 
-  /* HEAP單元測試所使用的HEAP最大大小 */
-  #define HEAP_UNITTEST_SIZE 100
-
   /* ====樹(tree)抽象資料類型定義==== */
   /* 樹節點的定義 */
   typedef struct binaryTreeNode{
@@ -73,13 +70,7 @@
  *         4 5 6 7
  **/
 /* heap元素的定義 */
-typedef struct heapElement{
-  /* 用來元素之間比較大小的數值 */
-  int key;
-
-  /* 其他資料欄位 */
-
-}HeapElement;
+typedef int HeapElement;
 
 /* Heap的類型定義 */
 typedef enum heapType{
@@ -116,25 +107,14 @@ typedef struct heap{
   short (*isEmpty)(struct heap *self);
   /* 判斷heap是否為滿的函式 */
   short (*isFull)(struct heap *self);
-  /* 用level order形式印出heap中的資料的函式 */
-  void (*levelPrint)(struct heap *self);
-  /* 將元素加入至Heap中的函式
-     時間複雜度：O(log(2,n)) */
-  short (*add)(struct heap *self, HeapElement item);
-  /* 對heap進行delete操作的函式 */
-  HeapElement (*del)(struct heap *self, short *result);
-  /* heap ADT的單元測試函式
-   * 回傳值
-   * 　0 測試通過*/
-  short (*unitTest)();
 }Heap;
 /* ==private成員函式== */
 /* 產生父母節點索引值的inline函式 */
 unsigned INDEX_PARENT(const unsigned parent_index);
 /* 產生左子節點索引值的inline函式 */
-unsigned INDEX_LEFT_CHILD(const unsigned parent_index);
+unsigned INDEX_LEFT_CHILD(unsigned parent_index);
 /* 產生右節點索引值的inline函式 */
-unsigned INDEX_RIGHT_CHILD(const unsigned parent_index);
+unsigned INDEX_RIGHT_CHILD(unsigned parent_index);
 /*將子節點為heap但根節點未必遵守heap性質的完整二元樹變為heap的函式
     When assuming the left and right children node are max heaps,
     let the complete binary tree rooted by parent node be a max heap.
@@ -155,7 +135,6 @@ short heapIsFull(Heap *self);
 void heapLevelPrint(Heap *self);
 short heapAdd(struct heap *self, HeapElement item);
 HeapElement heapDelete(Heap *self, short *result);
-short heapUnitTest();
 
 #ifdef __cplusplus
     }

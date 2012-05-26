@@ -35,7 +35,7 @@
 
 /*////////程式所include的標頭檔(Included Headers)////////*/
 /*Swap_algorithm*/
-#include "Swap_algorithm/Swap_algorithm.h"
+#include "../Swap_algorithm/Swap_algorithm.h"
 
 /*////////常數與巨集(Constants & Macros)以及其他#define指令////////*/
 
