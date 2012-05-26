@@ -41,6 +41,8 @@
 #include <string.h>
 /* UINT_MAX的定義 */
 #include <limits.h>
+/*header for Date and time functions Library*/
+#include <time.h>
 
 /* Vdragon's Library Collection */
 /*we need stack adt*/
@@ -49,12 +51,10 @@
 #include "../findMaxMin/findMaxMin.h"
 /**/
 #include "../Messages_templates/zh_TW.h"
-/* Queue used in prim_sMST() */
-#include "../Queue_abstract_data_type_prim_sMST/Queue_abstract_data_type_C.h"
 
 /*////////常數與巨集(Constants & Macros)////////*/
-/* 定義用於Prim's MST的無限 */
-#define INFINITE UINT_MAX
+/* 定義用於Prim's MST的無限
+#define INFINITE UINT_MAX*/
 /*////////其他前期處理器指令(Other Preprocessor Directives////////*/
 
 /*--------------全域宣告與定義(Global Declaration & Definition)--------------*/
@@ -161,7 +161,7 @@ short int graphListInsertEdge(GraphTypes mode, Graph target, Edge item)
     }
 
 /*摧毀相鄰性List圖的函式*/
-void destroyGraph(struct graph *target)
+void graphDestroy(struct graph *target)
     {
     /*宣告與定義(Declaration & Definition)*/
     /*指向要刪除節點的指標*/
@@ -210,7 +210,7 @@ void destroyGraph(struct graph *target)
     }
 
 /*輸出相鄰性List圖的函式*/
-void printGraph(const Graph target)
+void graphPrint(const Graph target)
     {
     /*宣告與定義(Declaration & Definition)*/
     /*現在正在讀取node的位置的指標*/
@@ -535,27 +535,29 @@ short int graphAdjListFBC(Graph target, Vertex child, Vertex parent, unsigned ma
     }
 
 /*初始化Graph函式：根據vertex_num的量動態配置記憶體作為AdjListHead的陣列*/
-short initGraph(struct graph *target, const unsigned vertex_num, GraphTypes type)
+short graphInit(struct graph *target, const unsigned vertex_num, GraphTypes type)
   {
-    /*要求記憶體*/
-    (*target).adj_list = malloc(sizeof(AdjListHead) * vertex_num);
-    if((*target).adj_list == NULL){
+    /* 要求記憶體 */
+    target->adj_list = malloc(sizeof(AdjListHead) * vertex_num);
+    if(target->adj_list == NULL){
       fprintf(stderr, ERROR_TAG ERROR_MEMORY_ALLOCATION_FAIL);
       return -1;
     }
-    {/*memory guard*/
+    {/* memory guard */
       /**/
       unsigned counter01;
       for(counter01 = 0; counter01 < vertex_num; ++counter01){
-        (*target).adj_list[counter01] = NULL;
+        target->adj_list[counter01] = NULL;
       }
     }
-    (*target).vertex_num = vertex_num;
-    (*target).type = type;
-    (*target).destroyGraphRef = destroyGraph;
-    (*target).insertEdgeRef = graphListInsertEdge;
-    (*target).printGraphRef = printGraph;
-    /*成功*/
+    target->vertex_num = vertex_num;
+    target->type = type;
+
+    target->destroy = graphDestroy;
+    target->insertEdge = graphListInsertEdge;
+    target->print = graphPrint;
+    target->isEmpty = graphIsEmpty;
+    target->unitTest = graphUnitTest;
     return 0;
   }
 
@@ -564,6 +566,112 @@ short graphIsEmpty(Graph target)
     return !target.vertex_num;
   }
 
+short graphUnitTest(void)
+{
+  /*宣告與定義(Declaration & Definition)*/
+    /* 圖的宣告（adjacency list表示法）
+     * FIXME:應該是graph1跟TEST_VERTEX_QUANTITY才對*/
+      Graph graph01;
+
+    /*用來保存函式運行結果的變數*/
+    short int func_call_result = 0;
+
+    /*測試edge*/
+    Edge testEdge;
+
+  /*－－－－－－－－－－－－－－－－－－－－－*/
+    /*初始化測試亂數產生器*/
+    srand(time(NULL));
+
+    /*初始化Graph*/
+    graph01.init = graphInit;
+
+    graph01.init(&graph01, GRAPH01_VERTEX, UNDIRECTED);
+
+    {/*測試迴圈*/
+    /*for迴圈*/
+    register unsigned i;
+
+    for(i = 1; i <= 100; i++){
+
+        testEdge.init = edgeInit;
+        testEdge.init(&testEdge);
+        do{
+        testEdge.setEdge(&testEdge, rand() % TEST_EDGE_QUANTITY, rand() % TEST_EDGE_QUANTITY, -1);
+
+        }while(testEdge.getU(testEdge) == testEdge.getV(testEdge));
+
+        /*測試將edge插入相鄰性List中*/
+        func_call_result = (graph01.insertEdge)(UNDIRECTED, graph01, testEdge);
+        if(func_call_result != 0){
+            switch(func_call_result){
+            case -1:
+                printf("軟體使用之graphListInsertEdge函式向作業系統要求記憶體空間失敗！\n"
+                       "請檢查系統的可用記憶體空間是否足夠。\n"
+                       "The function \"graphListInsertEdge\" in the software failed of requesting memory space from operating system!\n"
+                       "Please check if the free memory space is sufficient.\n");
+                break;
+            case -2:
+                printf("軟體使用之graphListInsertEdge函式偵測到引數item的member \n"
+                       "u跟v兩個頂點相同（函式不允許頂點loop的邊線(edge)作為引數）。\n"
+                       "The function \"graphListInsertEdge\" in the software detected\n"
+                       "the augument \"item\"'s member:u and v vertex are same.\n"
+                       "(Function doesn't permit a self-loop edge as an argument.)\n");
+                break;
+            default:
+                printf("graphListInsertEdge函式發生未知的錯誤。\n"
+                       "The graphListInsertEdge function has unknown error.\n");
+                break;
+            }
+            printf("graphListInsertEdge函式異常退出！\n"
+                   "graphListInsertEdge function has errorly exited!\n");
+            return -1;
+        }
+        /*測試將edge插入相鄰性List中*/
+    }
+    }/*測試迴圈*/
+
+
+    /*輸出list、 矩陣*/
+    graph01.print(graph01);
+#if 0
+    /*-----DFS、FBC--------*/
+    {
+    unsigned input_number;
+    unsigned checksum = 0;
+    do{
+    printf("請輸入您要從哪一個頂點開始Depth First Search？\n"
+           "Please enter which vertex you want to start Depth First Search?\n");
+    printf("->");
+    checksum = scanf("%u%*c", &input_number);
+#ifdef DEBUG
+        printf("input_number = %u\n", input_number);
+
+#endif
+    }while(input_number >= TEST_EDGE_QUANTITY || checksum != 1);
+
+    /*呼叫適用於相鄰性List(Adjacency List)的深度優先搜尋(Depth First Search)函式*/
+    graphAdjListDFS(graph01, input_number, GRAPH01_VERTEX);
+
+    putchar('\n');
+
+    /*呼叫適用於相鄰性List(Adjacency List)的計算各頂點dfn、low值的函式*/
+    /*graphAdjListDfnLow(graph01, 0, -1);*/
+
+    /*putchar('\n');*/
+
+
+    /*呼叫適用於相鄰性List(Adjacency List)的尋找多連結圖元件(Biconnected Component)函式*/
+    graphAdjListFBC(graph01, 0, -1, MAX_STACK_SIZE, TEST_EDGE_QUANTITY);
+
+    }
+#endif
+    /*-------程式結束前清理----------*/
+    graph01.destroy(&graph01);
+  /* done */
+  return 0;
+}
+#if 0
 /*Prim's Minimum Spanning Tree演算法*/
 short prim_sMST(Graph target, Vertex root, Vertex parent[])
 {
@@ -590,3 +698,4 @@ short prim_sMST(Graph target, Vertex root, Vertex parent[])
   /* 成功完成 */
   return 0;
 }
+#endif

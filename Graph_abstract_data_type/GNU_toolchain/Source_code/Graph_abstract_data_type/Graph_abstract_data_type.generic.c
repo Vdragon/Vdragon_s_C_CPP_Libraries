@@ -43,17 +43,18 @@
 
 /*--------------主要程式碼(Main Code)--------------*/
   /*初始化邊的函式*/
-  void initEdge(Edge *target)
+  void edgeInit(Edge *target)
   {
-    (*target).getUref = getU;
-    (*target).getVref = getV;
-    (*target).setEdgeRef = setEdge;
+    (*target).getU = edgeGetU;
+    (*target).getV = edgeGetV;
+    (*target).setEdge = edgeSet;
+
     /*done*/
 	  return;
   }
 
   /*設定邊的屬性的函式*/
-  void setEdge(Edge *edge, Vertex u, Vertex v, int cost)
+  void edgeSet(Edge *edge, Vertex u, Vertex v, int cost)
   {
     (*edge).u = u;
     (*edge).v = v;
@@ -63,11 +64,11 @@
   }
 
   /**/
-  Vertex getU(Edge edge)
+  Vertex edgeGetU(Edge edge)
   {
     return edge.u;
   }
-  Vertex getV(Edge edge)
+  Vertex edgeGetV(Edge edge)
   {
     return edge.v;
   }
