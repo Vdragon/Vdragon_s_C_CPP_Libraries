@@ -31,27 +31,18 @@
 /*we need CComplex declaration*/
 #include "Complex.h"
 
+/* ====標準C++函式庫==== */
 /*we need assertion*/
 #include <cassert>
-
-/*we need squt()*/
+/*we need sqrt()*/
 #include <cmath>
+/* We need cout*/
+#include <iostream>
 
 /*We need error messages*/
 #include "../Messages_templates/zh_TW.h"
 
-/* We need cout*/
-#include <iostream>
-
-/* 我們需要編譯DEBUG專用的程式碼*/
-#include "../Project_specific_configurations/Debug.h"
-
-
-/**/
-#include <iostream>
-
 /*////////常數與巨集(Constants & Macros)以及其他#define指令////////*/
-
 /*////////其他前期處理器指令(Other Preprocessor Directives////////*/
 
 /*--------------全域宣告與定義(Global Declaration & Definition)--------------*/
@@ -365,11 +356,18 @@ bool CComplex::unitTest()
     cout << DEBUG_TAG << UNIT_TEST_TAG
          << "setValue功能的constructor測試通過！" << endl;
   }
+  /* 測試只有實數參數的constructer */{
+    CComplex x1(10.0), check;
+    check.setValue(10.0, 0);
+    assert(x1.isEqual(check, MAX_ZERO_LIMIT));
+    cout << DEBUG_TAG << UNIT_TEST_TAG
+         << "只有實數參數的constructer測試通過！" << endl;
+  }
   /*success*/
-#ifdef DEBUG
+
   cout << DEBUG_TAG << UNIT_TEST_TAG
        << "複數抽象資料結構單元測試完全通過！" << endl;
-#endif
+
   return true;
 }
 
@@ -428,6 +426,12 @@ void CComplex::print2Stream(ostream &output)
 
   /*完成*/
   return;
+}
+
+/* overload強制轉型operater */
+CComplex::operator double()
+{
+  return sqrt(m_real * m_real + m_imaginary * m_imaginary);
 }
 
 /* overload ostream 的 << operator*/

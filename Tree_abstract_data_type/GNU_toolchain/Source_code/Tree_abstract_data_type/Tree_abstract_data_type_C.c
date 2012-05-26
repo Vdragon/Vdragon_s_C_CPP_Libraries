@@ -1,268 +1,176 @@
-﻿
-/*指向二元樹根節點的指標*/
-/*TreeNode * treeRoot1 = NULL;*/
+﻿/* ====標準C函式庫==== */
+#include <stddef.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <assert.h>
+#include <time.h>
+
+/* this */
+#include "Tree_abstract_data_type_C.h"
+
+/* Vdragon's Library Collection */
+#include "../Messages_templates/zh_TW.h"
+#include "Swap_algorithm_heap_element/Swap_algorithm.h"
+
+/* 初始化二元樹物件的函式 */
+void binaryTreeCreate(BinaryTree *self)
+{
+  self->root = NULL;
+  self->destroy = binaryTreeDestroy;
+  self->unitTest = binaryTreeUnitTest;
+  self->inorder = binaryTreeInorder;
+  self->preorder = binaryTreePreorder;
+  self->postorder = binaryTreePostorder;
+  return;
+}
+
+/* 清除二元樹物件的函式 */
+void binaryTreeDestroy(BinaryTree *self)
+{
+  destroyBinaryTreeChild(self->root);
+  free(self->root);
+  return;
+}
+
+/* 元件測試函式 */
+short binaryTreeUnitTest(struct binaryTree *self)
+{
 
 
-/*中序Traversal演算法函式
-  版本：1.00(0)
-  回傳值的資料型式 函式名稱(參數定義)
-  returnType functionName(definition of parameters)
-*/
-void inorder(TreeNode * treeNodePtr)
+  /* 測試通過 */
+  fprintf(stdout, TREE_ADT_TAG "元件測試全部通過！\n");
+  return 0;
+}
+
+/* 遞迴地釋放樹佔用的記憶體的函式
+ * 運行完後只剩下最上層的root還存在 */
+void destroyBinaryTreeChild(BinaryTreeNode *root)
+  {
+  /*1.直到到達leaf節點即停止呼叫自己*/
+  if(root != NULL){
+    /*1.1.先呼叫自己拜訪左子樹*/
+    destroyBinaryTreeChild(root->leftChild);
+    /*1.2.清除左子樹節點*/
+    free(root->leftChild);
+    /*1.3.再呼叫自己拜訪右子樹*/
+    destroyBinaryTreeChild(root->rightChild);
+    /*1.4.清除右子樹節點*/
+    free(root->rightChild);
+  }
+  return ;
+  }
+
+/* 中序Traversal演算法函式 */
+void binaryTreeInorder(BinaryTree *self)
+{
+
+  inorder(self->root);
+  return;
+}
+
+/*中序Traversal演算法函式 */
+void inorder(BinaryTreeNode *root)
 	{
-        /*宣告與定義(Declaration & Definition)*/
-
-
-        /*－－－－－－－－－－－－－－－－－－－－－*/
-        /*1.直到到達leaf節點即停止呼叫自己*/
-        if(treeNodePtr != NULL){
-            /*1.1.先呼叫自己拜訪左子樹*/
-            inorder(treeNodePtr->leftChild);
-            /*1.2.讀出值*/
-
-            /*1.3.再呼叫自己拜訪右子樹*/
-            inorder(treeNodePtr->rightChild);
-        }/*1.直到到達leaf節點即停止呼叫自己
-
-        /*－－－－－－－－－－－－－－－－－－－－－*/
-        /*傳回內容*/
-        return ;
+  /*1.直到到達leaf節點即停止呼叫自己*/
+  if(root != NULL){
+      /*1.1.先呼叫自己拜訪左子樹*/
+      inorder(root->leftChild);
+      /*1.2.讀出值*/
+      fprintf(stdout, "%d ", root->data);
+      /*1.3.再呼叫自己拜訪右子樹*/
+      inorder(root->rightChild);
+  }
+  return ;
 	}
 
+/* 前序Traversal演算法函式 */
+void binaryTreePreorder(BinaryTree *self)
+{
+  preorder(self->root);
+  return;
+}
 
-//前序Traversal演算法函式
-//版本：0.00(0)
-/*
-回傳值的資料型式 函式名稱(參數定義)
-returnType functionName(definition of parameters)
-*/
-void preorder(TreeNode * treeNodePtr)
-	{
-        //宣告與定義(Declaration & Definition)
+/* 前序Traversal演算法函式 */
+void preorder(BinaryTreeNode *root)
+{
 
+  /* 1.直到到達leaf節點即停止呼叫自己 */
+  if(root != NULL){
+    /* 1.1.先讀出值 */
+    fprintf(stdout, "%d ", root->data);
+    /* 1.2.再呼叫自己拜訪左子樹 */
+    preorder(root->leftChild);
+    /* 1.3.再呼叫自己拜訪右子樹 */
+    preorder(root->rightChild);
+  }
+  return ;
+}
 
-        //－－－－－－－－－－－－－－－－－－－－－
-        //1.直到到達leaf節點即停止呼叫自己
-        if(treeNodePtr != NULL){
-            //1.1.先讀出值
+/* 後序Traversal演算法函式 */
+void binaryTreePostorder(BinaryTree *self)
+{
+  postorder(self->root);
+  return;
+}
 
-            //1.2.再呼叫自己拜訪左子樹
-            preorder(treeNodePtr->leftChild);
-            //1.3.再呼叫自己拜訪右子樹
-            preorder(treeNodePtr->rightChild);
-        }////1.直到到達leaf節點即停止呼叫自己
+/* 後序Traversal演算法函式 */
+void postorder(BinaryTreeNode * treeNodePtr)
+{
+  /*1.直到到達leaf節點即停止呼叫自己*/
+  if(treeNodePtr != NULL){
+    /*1.1.先呼叫自己拜訪左子樹*/
+    postorder(treeNodePtr->leftChild);
+    /*1.2.再呼叫自己拜訪右子樹*/
+    postorder(treeNodePtr->rightChild);
+    /*1.3.再讀出值*/
 
-        //－－－－－－－－－－－－－－－－－－－－－
-        //傳回內容
-        return ;
-	}
+  }
+  return ;
+}
 
+void binaryTreeDataToTree(BinaryTree *self, const char *input)
+{
+  dataToBinaryTree(&(self->root), input);
+  return;
+}
 
-//後序Traversal演算法函式
-//版本：0.00(0)
-/*
-回傳值的資料型式 函式名稱(參數定義)
-returnType functionName(definition of parameters)
-*/
-void postorder(TreeNode * treeNodePtr)
-	{
-        //宣告與定義(Declaration & Definition)
-
-
-        //－－－－－－－－－－－－－－－－－－－－－
-        //1.直到到達leaf節點即停止呼叫自己
-        if(treeNodePtr != NULL){
-            //1.1.先呼叫自己拜訪左子樹
-            postorder(treeNodePtr->leftChild);
-            //1.2.再呼叫自己拜訪右子樹
-            postorder(treeNodePtr->rightChild);
-            //1.3.再讀出值
-
-        }////1.直到到達leaf節點即停止呼叫自己
-
-        //－－－－－－－－－－－－－－－－－－－－－
-        //傳回內容
-        return ;
-	}
-
-
-//用level order形式印出heap中的資料的函式
-//版本：1.00(0)
-void levelPrintHeap(HeapElement heap[], unsigned int heap_size)
-    {
-    //宣告與定義(Declaration & Definition)
-    //現在處理的元素計數器
-    register unsigned curr_print;
-
-    //－－－－－－－－－－－－－－－－－－－－－
-    //如果heap中無資料則直接退出
-    if(HEAP_IS_EMPTY(heap_size)){
-        printf("目前heap中無資料。\n"
-               "There are currently no data in the heap.\n");
-        return;
-    }
-    else{
-        //用for迴圈從第一個元素輸出到最後一個元素
-        for(curr_print = 1; curr_print <= heap_size; curr_print++){
-            printf("%d[%d] ", curr_print, heap[curr_print].key);
-        }
-    }
-
-    //斷行
-    putchar('\n');
-
-    //－－－－－－－－－－－－－－－－－－－－－
-    //結束函式
-    return ;
-    }
-
-
-//Max Heap目前的元素數量
-/*unsigned int heap_size = 0;*/
-
-//Max Heap的宣告
-/*HeapElement max_heap[MAX_HEAP_ELEMENTS];*/
-
-
-//Push元素至Max Heap中的函式
-//版本：1.00(0)
-//時間複雜度：O(log(2,n))
-short int maxHeapPush(HeapElement item, HeapElement max_heap[], unsigned int *heap_size)
-    {
-    //宣告與定義(Declaration & Definition)
-    //元素的寫入位置
-    unsigned int insert_position;
-
-    //－－－－－－－－－－－－－－－－－－－－－
-    //如果heap已滿就異常退出
-    if(HEAP_IS_FULL(*heap_size) == 1){
-        return -1;
-    }
-
-    //將heap_size遞增一並將同時是item可能之存放位置之heap_size值存進insert_position進行判斷
-    insert_position = ++(*heap_size);
-
-    //當insert_position不是根節點且item的key比其父節點的key還要大時
-    while((insert_position != 1) && (item.key > max_heap[insert_position / 2].key)){
-        //將item bubble up至item的父節點位置（將父節點位置拉至insert_position當前的位置
-        //然後將insert_position設成父節點以前的位置）
-        max_heap[insert_position] = max_heap[insert_position / 2];
-        insert_position /= 2;
-    }
-    //將item元素寫入insert_position位置中
-    max_heap[insert_position] = item;
-
-    //－－－－－－－－－－－－－－－－－－－－－
-    //傳回內容
-    return 0;
-    }
-
-
-//自Max Heap中pop出元素的函式
-//版本：1.00(0)
-HeapElement maxHeapPop(HeapElement max_heap[], unsigned int *heap_size)
-	{
-	//宣告與定義(Declaration & Definition)
-    //用來判斷要插入的位置的兩個變數
-    unsigned int parent_insert, child_compare;
-
-    //pop出來的元素跟用來暫時存放的元素
-    HeapElement popped_item, temp;
-
-	//－－－－－－－－－－－－－－－－－－－－－
-    //如果max heap沒有資料則回傳表示出錯的元素
-    if(HEAP_IS_EMPTY(*heap_size)){
-    //函式異常退出
-    printf("函式欲從沒有資料的max heap中取出資料，函式必須異常退出。\n"
-           "The function attempt to acquire data from an empty max heap, function must be errorly exited.\n");
-        popped_item.key = -999999;
-        return popped_item;
-    }
-
-    //讀出含有最大鍵的元素
-    popped_item = max_heap[1];
-
-    //把最後一個元素提取出來尋找插入的位置
-    temp = max_heap[(*heap_size)--];
-
-    //將parent預設為根結點（被ＰＯＰ掉了），child設為第一個子節點
-    parent_insert = 1;
-    child_compare = 2;
-
-    //當還沒有判斷完全部的child之前
-    while(child_compare <= *heap_size){
-        //如果child位置還沒到最後一個元素且當前parent的右邊child的key比左邊child的key還要大
-        if((child_compare < *heap_size) && (max_heap[child_compare].key < max_heap[child_compare + 1].key)){
-            //將child_compare設成兩個child中比較大者
-            child_compare++;
-        }
-
-        //如果temp的key比兩個child中比較大的child的key還要大表示temp應該插入至這個位置
-        if(temp.key >= max_heap[child_compare].key){
-            //離開while迴圈
-            break;
-        }
-
-        //將兩個child中比較大的child swap至其parent（當前因為被pop掉了所以無值）的位置
-        max_heap[parent_insert] = max_heap[child_compare];
-        parent_insert = child_compare;
-
-        //換成兩個child中比較大的child的child節點繼續跟temp做key的比較
-        child_compare *= 2;
-    }//結束while判斷迴圈
-
-    //將temp插入至當前無值的位置
-    max_heap[parent_insert] = temp;
-
-	//－－－－－－－－－－－－－－－－－－－－－
-	//傳回pop出的元素
-	return popped_item;
-	}
-
-
-//將3-tuple資料寫入樹中函式
-//版本：0.00(0)
-TreeNode * dataToTree(TreeNode * * target_root, const char * input_string)
+/* 將3-tuple資料寫入樹中函式 */
+BinaryTreeNode * dataToBinaryTree(BinaryTreeNode * *target_root, const char *input)
 	{
 		//宣告與定義(Declaration & Definition)
 
 		//－－－－－－－－－－－－－－－－－－－－－
 		/*test 01
 		printf("%d\t%d\n", '0', '9');
-        *///test 01->48, 57
+    *///test 01->48, 57
 
-        //malloc current root node
-        *target_root = (TreeNode *)malloc(sizeof(TreeNode));
+    //malloc current root node
+    *target_root = (BinaryTreeNode *)malloc(sizeof(BinaryTreeNode));
 
-        //如果得到的string中間項是一個數字表示該為leaf節點
-        if(input_string[0] >= 48 && input_string[0] <= 57){
-            //將target_root值設為該數字，其左右子設NULL
-            (*target_root)->data = atoi(input_string);
-            (*target_root)->leftChild = NULL;
-            (*target_root)->rightChild = NULL;
-        }
-        else{//得到的string非數字（左括號）
-            //第二個字元為運算子
-            (*target_root)->data = input_string[1];
-            //第三個字元之後（第四個字元開始）的字串是左算式
-            (*target_root)->leftChild = dataToTree(&(*target_root)->leftChild, input_string + 3);
+    //如果得到的string中間項是一個數字表示該為leaf節點
+    if(input[0] >= 48 && input[0] <= 57){
+        //將target_root值設為該數字，其左右子設NULL
+        (*target_root)->data = atoi(input);
+        (*target_root)->leftChild = NULL;
+        (*target_root)->rightChild = NULL;
+    }
+    else{//得到的string非數字（左括號）
+        //第二個字元為運算子
+        (*target_root)->data = input[1];
+        //第三個字元之後（第四個字元開始）的字串是左算式
+        (*target_root)->leftChild = dataToBinaryTree(&(*target_root)->leftChild, input + 3);
 
-            //呼叫findRightFormula尋找右運算式位置
-            (*target_root)->rightChild = dataToTree(&(*target_root)->rightChild, input_string + findRightFormula(input_string));
-        }
+        //呼叫findRightFormula尋找右運算式位置
+        (*target_root)->rightChild = dataToBinaryTree(&(*target_root)->rightChild, input + findRightFormula(input));
+    }
 		//－－－－－－－－－－－－－－－－－－－－－
 		//傳回內容
 		return *target_root;
 	}
 
 
-//判斷右算式位置的函式
-//版本：0.00(0)
-/*
-回傳值的資料型式 函式名稱(參數定義)
-returnType functionName(definition of parameters)
-*/
-inline short int findRightFormula(const char * input_string)
+/* 判斷右算式位置的函式 */
+short findRightFormula(const char * input_string)
     {
     //宣告與定義(Declaration & Definition)
     //左括弧、右括弧、讀取字串計數器
@@ -272,20 +180,20 @@ inline short int findRightFormula(const char * input_string)
     //－－－－－－－－－－－－－－－－－－－－－
     //當還沒讀到字串結尾時
     while(input_string[read_string_count] != '\0'){
-        switch(input_string[read_string_count]){
-        case '(':
-            left_brace_count++;
-            break;
-        case ')':
-            right_brace_count++;
-            break;
-        case ',':
-            comma_count++;
-            break;
-        default:
-            break;
-        };
-        read_string_count++;
+      switch(input_string[read_string_count]){
+      case '(':
+          left_brace_count++;
+          break;
+      case ')':
+          right_brace_count++;
+          break;
+      case ',':
+          comma_count++;
+          break;
+      default:
+          break;
+      };
+      read_string_count++;
     }
 
     //判斷formula類型
@@ -331,28 +239,268 @@ inline short int findRightFormula(const char * input_string)
     return -1;
     }
 
+/* ====堆抽象資料類型 | Heap Abstract Data Structure==== */
+/* 建構並初始化heap物件的函式 */
+short heapCreate(Heap *self, unsigned size, HeapType type)
+{
+  /* 初始化各個函式指標 */
+  self->destroy = heapDestroy;
+  self->isEmpty = heapIsEmpty;
+  self->isFull = heapIsFull;
+  self->levelPrint = heapLevelPrint;
+  self->del = heapDelete;
+  self->add = heapAdd;
+  self->unitTest = heapUnitTest;
 
-//清除樹的記憶體配置函式
-//版本：0.00(0)
-TreeNode * destroyTree(TreeNode * treeNodePtr)
+  /* 建立heap[1~size] */
+  self->heap = (HeapElement *)malloc(sizeof(HeapElement) * (size + 1));
+  if(self->heap == NULL){
+    fprintf(stderr, ERROR_TAG ERROR_MEMORY_ALLOCATION_FAIL);
+    return -1;
+  }
+
+  /* 初始化屬性 */
+  self->length = 0;
+  self->size = size;
+  self->type = type;
+
+  /* 完成create操作 */
+  return 0;
+}
+
+/* 清除heap物件的函式 */
+void heapDestroy(Heap *self)
+{
+  /* 釋放記憶體空間 */
+  free(self->heap);
+  self->size = self->length = 0;
+
+  /* 完成destroy操作 */
+  return;
+}
+
+/* 判斷heap是否為空的函式 */
+short heapIsEmpty(Heap *self)
+{
+  if(self->length == 0){
+    return 1;
+  }else{
+    return 0;
+  }
+}
+
+/* 判斷heap是否為滿的函式 */
+short heapIsFull(Heap *self)
+{
+  if(self->length == self->size){
+    return 1;
+  }else{
+    return 0;
+  }
+}
+
+/* 產生父母節點索引值的inline函式 */
+unsigned INDEX_PARENT(const unsigned child_index)
+{
+  return child_index >> 1;
+}
+/* 產生左子節點索引值的inline函式 */
+unsigned INDEX_LEFT_CHILD(const unsigned parent_index)
+{
+  return parent_index << 1;
+}
+
+/* 產生右節點索引值的inline函式 */
+unsigned INDEX_RIGHT_CHILD(const unsigned parent_index)
+{
+  return (parent_index << 1) + 1;
+}
+
+/* 用level order形式印出heap中的資料的函式 */
+void heapLevelPrint(Heap *self)
     {
-    //宣告與定義(Declaration & Definition)
-
-
-    //－－－－－－－－－－－－－－－－－－－－－
-    //1.直到到達leaf節點即停止呼叫自己
-    if(treeNodePtr != NULL){
-        //1.1.先呼叫自己拜訪左子樹
-        destroyTree(treeNodePtr->leftChild);
-        //1.2.清除左子樹節點
-        free(treeNodePtr->leftChild);
-        //1.3.再呼叫自己拜訪右子樹
-        destroyTree(treeNodePtr->rightChild);
-        //1.4.清除右子樹節點
-        free(treeNodePtr->rightChild);
-    }////1.直到到達leaf節點即停止呼叫自己
-
-    //－－－－－－－－－－－－－－－－－－－－－
-    //傳回內容
-    return treeNodePtr;
+    /*如果heap中無資料則直接退出*/
+    if(heapIsEmpty(self)){
+        printf("目前heap中無資料。\n"
+               "There are currently no data in the heap.\n");
+        return;
     }
+    else{
+      /*現在處理的元素計數器*/
+      register unsigned curr_print;
+
+      /*用for迴圈從第一個元素輸出到最後一個元素*/
+      for(curr_print = 1; curr_print <= self->length; ++curr_print){
+          printf("%d[%d] ", curr_print, (self->heap[curr_print]).key);
+      }
+    }
+    /*斷行*/
+    putchar('\n');
+
+    return ;
+    }
+
+/*maxHeapify函式
+    When assuming the left and right children node are heaps,
+    let the complete binary tree rooted by parent node be a heap.
+  參數
+  　parent_index
+  　　父母節點的索引值（可能不符合heap性質）*/
+void heapHeapify(Heap *self, const unsigned parent_index)
+{
+  /*current largest node, preassuming parent*/
+  unsigned largest_index = parent_index;
+
+  /*the child index of current node may be*/
+  unsigned left_child_index = INDEX_LEFT_CHILD(largest_index),
+            right_child_index = INDEX_RIGHT_CHILD(largest_index);
+  /*－－－－－－－－－－－－－－－－－－－－－*/
+
+  /*if left child exist and its key greater than current node*/
+  if(left_child_index <= self->length &&
+     ((self->type == MAX_HEAP)?
+         self->heap[left_child_index].key > self->heap[largest_index].key:
+         self->heap[left_child_index].key < self->heap[largest_index].key)){
+     largest_index = left_child_index;
+  }
+
+  /*if right child exist and greater than current node*/
+  if(right_child_index <= self->length &&
+     ((self->type == MAX_HEAP)?
+         self->heap[right_child_index].key > self->heap[largest_index].key:
+         self->heap[right_child_index].key < self->heap[largest_index].key)){
+     largest_index = right_child_index;
+  }
+
+  /*if largest node isn't current node then swap with the largest
+    then maxheapify the child which gets the parent node(which may violating the heap property)*/
+  if(largest_index != parent_index){
+    swapHeapElement(&(self->heap[parent_index]), &(self->heap[largest_index]));
+    heapHeapify(self, largest_index);
+  }
+  /* 完成 */
+  return;
+}
+
+/*buildHeap function
+  build a heap by calling Heapify from the last
+  non-leaf node to root node*/
+void heapBuildHeap(Heap *self)
+{
+  unsigned parent;
+
+  /*for last non-leaf node to root*/
+  for (parent = (self->length / 2); parent >= 1; --parent) {
+    heapHeapify(self, parent);
+  }
+
+  /*done*/
+  return;
+}
+
+/* Add元素至Heap中的函式 */
+short heapAdd(Heap *self, HeapElement item)
+{
+  /*如果heap已滿就異常退出*/
+  if(self->length == self->size){
+    fprintf(stderr, ERROR_TAG "無法新增元素於已滿的heap！");
+    return -1;
+  }
+
+  /* 將欲加入的元素放置於heap的尾端之後 */
+  self->length++;
+  self->heap[self->length] = item;
+
+  /* 對已經不維持heap性質的陣列重新構築heap */
+  heapBuildHeap(self);
+
+  /* 完成add操作 */
+  return 0;
+}
+
+/* 自Heap中delete出元素的函式 */
+HeapElement heapDelete(Heap *self, short *result)
+{
+  HeapElement deleted;
+  deleted.key = -99999;
+
+  /* 如果堆疊是空的就無法進行delete操作 */
+  if(self->isEmpty(self) == 1){
+    printf(ERROR_TAG HEAP_ADT_TAG "無法於空的heap進行delete操作！\n");
+    *result = -1;
+    return deleted;
+  }
+  /* 取出最小／大的根節點，現在根節點是空的 */
+  deleted = self->heap[1];
+
+  /* 把所有[2]以後的元素都往前移一位 */{
+    unsigned i;
+    for(i = 2; i <= self->length; ++i){
+      self->heap[i-1] = self->heap[i];
+    }
+    self->length -= 1;
+  }
+
+  /* 已經不維持heap性質，重新構築heap */
+  heapBuildHeap(self);
+
+  /* 完成delete操作 */
+  *result = 0;
+  return deleted;
+}
+
+short heapUnitTest()
+{
+  /* 測試heap add, delete */{
+    Heap max, min;
+    min.create = max.create = heapCreate;
+
+    srand(time(NULL));
+
+    min.create(&min, HEAP_UNITTEST_SIZE, MIN_HEAP);
+    {
+      unsigned i;
+      HeapElement augend, prev, next;
+      short del_result;
+
+      for(i = 0; i < HEAP_UNITTEST_SIZE; ++i){
+        augend.key = rand() % 100;
+        heapAdd(&min, augend);
+      }
+      prev = heapDelete(&min, &del_result);
+      assert(!del_result);
+      for(i = 1; i < HEAP_UNITTEST_SIZE; ++i){
+        next = heapDelete(&min, &del_result);
+        assert(!del_result);
+        assert(prev.key <= next.key);
+        prev.key = next.key;
+      }
+    }
+    min.destroy(&min);
+
+    max.create(&max, HEAP_UNITTEST_SIZE, MAX_HEAP);
+    {
+      unsigned i;
+      HeapElement augend, prev, next;
+      short del_result;
+
+      for(i = 0; i < HEAP_UNITTEST_SIZE; ++i){
+        augend.key = rand() % 100;
+        heapAdd(&max, augend);
+      }
+      prev = heapDelete(&max, &del_result);
+      assert(!del_result);
+      for(i = 1; i < HEAP_UNITTEST_SIZE; ++i){
+        next = heapDelete(&max, &del_result);
+        assert(!del_result);
+        assert(prev.key >= next.key);
+        prev.key = next.key;
+      }
+    }
+    max.destroy(&max);
+  }
+
+  /* pass */
+  fprintf(stdout, HEAP_ADT_TAG "元件測試全部通過！\n");
+  return 0;
+}
