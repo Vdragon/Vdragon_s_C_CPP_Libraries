@@ -21,7 +21,7 @@ short heapCreate(Heap *self, unsigned size, HeapType type)
   self->isFull = heapIsFull;
 
   /* 建立heap[1~size] */
-  self->heap = (HeapElement *)malloc(sizeof(HeapElement) * size + 1);
+  self->heap = (HeapElement *)malloc(sizeof(HeapElement) * (size + 1));
   if(self->heap == NULL){
     fprintf(stderr, ERROR_TAG ERROR_MEMORY_ALLOCATION_FAIL);
     return -1;

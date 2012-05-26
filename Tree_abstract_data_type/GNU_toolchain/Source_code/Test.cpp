@@ -52,6 +52,12 @@ int main(void)
   tree.create = binaryTreeCreate;
   (*tree.create)(&tree);
   (*tree.unitTest)(&tree);
+  tree.destroy(&tree);
 
+  Heap heap;
+  heap.create = heapCreate;
+  heap.create(&heap, 1, MIN_HEAP);
+  heap.unitTest();
+  heap.destroy(&heap);
   return EXIT_SUCCESS;
 }

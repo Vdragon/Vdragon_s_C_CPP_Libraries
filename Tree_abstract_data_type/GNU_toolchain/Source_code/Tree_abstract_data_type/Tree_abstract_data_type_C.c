@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <assert.h>
+#include <time.h>
 
 /* this */
 #include "Tree_abstract_data_type_C.h"
@@ -34,6 +35,7 @@ void binaryTreeDestroy(BinaryTree *self)
 /* 元件測試函式 */
 short binaryTreeUnitTest(struct binaryTree *self)
 {
+
 
   /* 測試通過 */
   fprintf(stdout, TREE_ADT_TAG "元件測試全部通過！\n");
@@ -248,9 +250,10 @@ short heapCreate(Heap *self, unsigned size, HeapType type)
   self->levelPrint = heapLevelPrint;
   self->del = heapDelete;
   self->add = heapAdd;
+  self->unitTest = heapUnitTest;
 
   /* 建立heap[1~size] */
-  self->heap = (HeapElement *)malloc(sizeof(HeapElement) * size + 1);
+  self->heap = (HeapElement *)malloc(sizeof(HeapElement) * (size + 1));
   if(self->heap == NULL){
     fprintf(stderr, ERROR_TAG ERROR_MEMORY_ALLOCATION_FAIL);
     return -1;
@@ -355,17 +358,17 @@ void heapHeapify(Heap *self, const unsigned parent_index)
 
   /*if left child exist and its key greater than current node*/
   if(left_child_index <= self->length &&
-     (self->type == MAX_HEAP)?
+     ((self->type == MAX_HEAP)?
          self->heap[left_child_index].key > self->heap[largest_index].key:
-         self->heap[left_child_index].key < self->heap[largest_index].key){
+         self->heap[left_child_index].key < self->heap[largest_index].key)){
      largest_index = left_child_index;
   }
 
   /*if right child exist and greater than current node*/
   if(right_child_index <= self->length &&
-     (self->type == MAX_HEAP)?
+     ((self->type == MAX_HEAP)?
          self->heap[right_child_index].key > self->heap[largest_index].key:
-         self->heap[right_child_index].key < self->heap[largest_index].key){
+         self->heap[right_child_index].key < self->heap[largest_index].key)){
      largest_index = right_child_index;
   }
 
@@ -405,7 +408,8 @@ short heapAdd(Heap *self, HeapElement item)
   }
 
   /* 將欲加入的元素放置於heap的尾端之後 */
-  self->heap[++self->length] = item;
+  self->length++;
+  self->heap[self->length] = item;
 
   /* 對已經不維持heap性質的陣列重新構築heap */
   heapBuildHeap(self);
@@ -445,3 +449,58 @@ HeapElement heapDelete(Heap *self, short *result)
   return deleted;
 }
 
+short heapUnitTest()
+{
+  /* 測試heap add, delete */{
+    Heap max, min;
+    min.create = max.create = heapCreate;
+
+    srand(time(NULL));
+
+    min.create(&min, HEAP_UNITTEST_SIZE, MIN_HEAP);
+    {
+      unsigned i;
+      HeapElement augend, prev, next;
+      short del_result;
+
+      for(i = 0; i < HEAP_UNITTEST_SIZE; ++i){
+        augend.key = rand() % 100;
+        heapAdd(&min, augend);
+      }
+      prev = heapDelete(&min, &del_result);
+      assert(!del_result);
+      for(i = 1; i < HEAP_UNITTEST_SIZE; ++i){
+        next = heapDelete(&min, &del_result);
+        assert(!del_result);
+        assert(prev.key <= next.key);
+        prev.key = next.key;
+      }
+    }
+    min.destroy(&min);
+
+    max.create(&max, HEAP_UNITTEST_SIZE, MAX_HEAP);
+    {
+      unsigned i;
+      HeapElement augend, prev, next;
+      short del_result;
+
+      for(i = 0; i < HEAP_UNITTEST_SIZE; ++i){
+        augend.key = rand() % 100;
+        heapAdd(&max, augend);
+      }
+      prev = heapDelete(&max, &del_result);
+      assert(!del_result);
+      for(i = 1; i < HEAP_UNITTEST_SIZE; ++i){
+        next = heapDelete(&max, &del_result);
+        assert(!del_result);
+        assert(prev.key >= next.key);
+        prev.key = next.key;
+      }
+    }
+    max.destroy(&max);
+  }
+
+  /* pass */
+  fprintf(stdout, HEAP_ADT_TAG "元件測試全部通過！\n");
+  return 0;
+}

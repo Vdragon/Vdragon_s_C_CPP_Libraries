@@ -8,6 +8,9 @@
   #define TREE_ADT_TAG "【樹(Tree)抽象資料類型】"
   #define HEAP_ADT_TAG "【Heap抽象資料類型】"
 
+  /* HEAP單元測試所使用的HEAP最大大小 */
+  #define HEAP_UNITTEST_SIZE 100
+
   /* ====樹(tree)抽象資料類型定義==== */
   /* 樹節點的定義 */
   typedef struct binaryTreeNode{
@@ -120,15 +123,18 @@ typedef struct heap{
   short (*add)(struct heap *self, HeapElement item);
   /* 對heap進行delete操作的函式 */
   HeapElement (*del)(struct heap *self, short *result);
-
+  /* heap ADT的單元測試函式
+   * 回傳值
+   * 　0 測試通過*/
+  short (*unitTest)();
 }Heap;
 /* ==private成員函式== */
 /* 產生父母節點索引值的inline函式 */
 unsigned INDEX_PARENT(const unsigned parent_index);
 /* 產生左子節點索引值的inline函式 */
-unsigned INDEX_LEFT_CHILD(unsigned parent_index);
+unsigned INDEX_LEFT_CHILD(const unsigned parent_index);
 /* 產生右節點索引值的inline函式 */
-unsigned INDEX_RIGHT_CHILD(unsigned parent_index);
+unsigned INDEX_RIGHT_CHILD(const unsigned parent_index);
 /*將子節點為heap但根節點未必遵守heap性質的完整二元樹變為heap的函式
     When assuming the left and right children node are max heaps,
     let the complete binary tree rooted by parent node be a max heap.
@@ -149,6 +155,7 @@ short heapIsFull(Heap *self);
 void heapLevelPrint(Heap *self);
 short heapAdd(struct heap *self, HeapElement item);
 HeapElement heapDelete(Heap *self, short *result);
+short heapUnitTest();
 
 #ifdef __cplusplus
     }
