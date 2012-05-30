@@ -6,21 +6,27 @@
   #ifdef __cplusplus
     extern "C"{
   #endif
+  /*||||| Forward declarations |||||*/
+
+  /*||||| 程式所include之函式庫的標頭檔 | Included Library Headers |||||*/
   /*圖(graph)共同的結構*/
   #include "Graph_abstract_data_type.generic.h"
 
-  /*定義堆疊(Stack)最大容量大小*/
-  #define MAX_STACK_SIZE 100
+  /* 為Prim的MST演算法設計的HeapADT */
+  #include "Tree_abstract_data_type_prim_sMST/Tree_abstract_data_type_C.h"
+
+  /*|||||常數與巨集 | Constants & Macros |||||*/
+  /*定義堆疊(Stack)最大容量大小
+  #define MAX_STACK_SIZE 100*/
 
   /*定義測試用的圖的邊、頂點數量*/
-  #define TEST_EDGE_QUANTITY 100
-  #define GRAPH01_VERTEX 100
-
-
+  #define TEST_EDGE_QUANTITY 10
+  #define GRAPH01_VERTEX_QUANTITY 10
+  /*||||| Definition of data type, enumeration, data structure and class |||||*/
   /*圖節點的資料結構（adjacency lists表示法）*/
   typedef struct adjListNode{
       Vertex connected_vertex;
-      int weight;
+      unsigned weight;
       struct adjListNode * next;
   }AdjListNode;
   typedef AdjListNode * AdjListHead;
@@ -35,7 +41,7 @@
     short (*insertEdge) (GraphTypes mode, struct graph target, Edge item);
     void  (*destroy) (struct graph *target);
     void  (*print)(struct graph target);
-    void  (*prim_sMST) (struct graph target);
+    short (*prim_sMST) (struct graph target, Vertex root, Vertex parent[]);
     short (*isEmpty) (struct graph target);
     short (*unitTest) (void);
   }Graph;
@@ -44,13 +50,13 @@
   /*初始化Graph成員函式：
    *  根據vertex_num的量動態配置記憶體作為AdjListHead的陣列[0 ~ vertex_num-1]
    *  請注意此陣列的第零個索引位址為第一個點(vertex)！*/
-  short graphInit(struct graph *target, const unsigned vertex_num, GraphTypes type);
+  short graphInit(Graph *target, const unsigned vertex_num, GraphTypes type);
   /*摧毀相鄰性List圖的函式的function prototype*/
-  void graphDestroy(struct graph *target);
+  void graphDestroy(Graph *target);
   /*插入一個邊(edge)至相鄰性List圖中的函式的成員函式*/
   short int graphInsertEdge(GraphTypes mode, Graph target, Edge item);
   /*輸出相鄰性List圖的函式的function prototype*/
-  void graphPrint(struct graph target);
+  void graphPrint(Graph target);
   /*確認圖為空函式的function prototype
    *  回傳值：true/false*/
   short graphIsEmpty(Graph target);
@@ -93,34 +99,51 @@
   /*適用於相鄰性List(Adjacency List)的尋找多連結圖元件(Biconnected Component)函式的function prototype*/
   short int graphAdjListFBC(Graph target, Vertex child, Vertex parent, unsigned max_stack_size, unsigned max_adj_list_size);
 
+#endif
+
 
   /* Prim's Minimum Spanning Tree演算法所用的物件（未完成） */
   typedef struct prim_sMSTcontainer{
     /* 屬性 */
-    unsigned key[];
-    /* heap的類型(max-heap/min-heap) */
-    HeapType type;
+    Heap heap;
 
     /* 介面 */
-    short (*InitRef)(Prim_sMSTcontainer *self, unsigned key[], unsigned size);
-    Vertex (*DelRef)(Prim_sMSTcontainer *self);
-    short (*ConsistOfRef)(Prim_sMSTcontainer *self);
-    unsigned (*KeyValRef)(Prim_sMSTcontainer *self, Vertex w);
-    void (*DecreaseRef)(Prim_sMSTcontainer *self, Vertex w, unsigned new_weight);
+    short (*init)(struct prim_sMSTcontainer *self, unsigned key[], unsigned size);
+    void (*destroy)(struct prim_sMSTcontainer *self);
+    Vertex (*del)(struct prim_sMSTcontainer *self);
+    short (*has)(struct prim_sMSTcontainer *self, Vertex w);
+    unsigned (*keyOf)(struct prim_sMSTcontainer *self, Vertex w);
+    void (*decrease)(struct prim_sMSTcontainer *self, Vertex w, unsigned new_weight);
+
   }Prim_sMSTcontainer;
+
+  /* private 成員函式 */
+
 
   /* public 成員函式 */
   /*h.init(key, n): initializes h to the values in key (程式開始時 h 裡面有 n-1 個節點,
-   *  也就是除掉 start 之外的所有節點)*/
-  short primInit(unsigned key[], unsigned size);
+   *  也就是除掉 start 之外的所有節點)
+   *  回傳值
+   *  　-1
+   *  　　記憶體配置失敗
+   *    ０
+   *    　成功執行*/
+  short primInit(Prim_sMSTcontainer *self, unsigned key[], unsigned size);
+  void primDestroy(Prim_sMSTcontainer *self);
   /*h.del(): deletes the item in h with the smallest weight and returns the vertex (由 h 中把距離目前 MST 距離最短的節點剔除)*/
-  Vertex primDel();
+  Vertex primDel(Prim_sMSTcontainer *self);
   /*h.isin(w): returns true if vertex w is in h (這是一個簡單的測試函式, 可惜命名錯了, 想一下 isin 應該改成什麼?)*/
-  short primConsistOf(Vertex w);
+  short primHeapHas(Prim_sMSTcontainer *self, Vertex w);
   /*h.keyval(w): returns the weight corresponding to the vertex w (由 h 中將指定的節點到目前 MST 的距離取出)*/
-  unsigned primKeyval(Vertex w);
-  /*h.decrease(w, new_weight): changes the weight of w to new_weight (smaller) (由於演算法一次增加一個新的節點到目前 MST 中, 每增加一個新的節點進入目前 MST, 所有還沒有加入目前 MST 的節點到 目前 MST 的距離都需要修改, 此介面函式目的就是修改節點 w 距離目前 MST 的距離為 new_weight)*/
-  void primDecrease(Vertex w, unsigned new_weight);
+  unsigned primKeyOf(Prim_sMSTcontainer *self, Vertex w);
+  /*h.decrease(w, new_weight): changes the weight of w to new_weight (smaller)
+   * (由於演算法一次增加一個新的節點到目前 MST 中, 每增加一個新的節點進入目前 MST,
+   * 所有還沒有加入目前 MST 的節點到 目前 MST 的距離都需要修改, 此介面函式目的就是
+   * 修改節點 w 距離目前 MST 的距離為 new_weight)*/
+  void primDecrease(Prim_sMSTcontainer *self, Vertex w, unsigned new_weight);
+#if 0
+
+
 #endif
 
   #ifdef __cplusplus

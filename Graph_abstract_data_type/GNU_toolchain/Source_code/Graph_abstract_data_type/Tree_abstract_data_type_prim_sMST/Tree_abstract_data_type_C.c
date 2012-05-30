@@ -25,6 +25,9 @@ short heapCreate(Heap *self, unsigned size, HeapType type)
   self->del = heapDelete;
   self->add = heapAdd;
   self->unitTest = heapUnitTest;
+  self->has = heapHas;
+  self->keyOf = heapKeyOf;
+  self->decrease = heapDecrease;
 
   /* 建立heap[1~size] */
   self->heap = (HeapElement *)malloc(sizeof(HeapElement) * (size + 1));
@@ -105,7 +108,7 @@ void heapLevelPrint(Heap *self)
 
       /*用for迴圈從第一個元素輸出到最後一個元素*/
       for(curr_print = 1; curr_print <= self->length; ++curr_print){
-          printf("%d[%d] ", curr_print, (self->heap[curr_print]).key);
+          printf("%d[%d] ", curr_print, (self->heap[curr_print]).min_weight);
       }
     }
     /*斷行*/
@@ -130,19 +133,19 @@ void heapHeapify(Heap *self, const unsigned parent_index)
             right_child_index = INDEX_RIGHT_CHILD(largest_index);
   /*－－－－－－－－－－－－－－－－－－－－－*/
 
-  /*if left child exist and its key greater than current node*/
+  /*if left child exist and its min_weight greater than current node*/
   if(left_child_index <= self->length &&
      ((self->type == MAX_HEAP)?
-         self->heap[left_child_index].key > self->heap[largest_index].key:
-         self->heap[left_child_index].key < self->heap[largest_index].key)){
+         self->heap[left_child_index].min_weight > self->heap[largest_index].min_weight:
+         self->heap[left_child_index].min_weight < self->heap[largest_index].min_weight)){
      largest_index = left_child_index;
   }
 
   /*if right child exist and greater than current node*/
   if(right_child_index <= self->length &&
      ((self->type == MAX_HEAP)?
-         self->heap[right_child_index].key > self->heap[largest_index].key:
-         self->heap[right_child_index].key < self->heap[largest_index].key)){
+         self->heap[right_child_index].min_weight > self->heap[largest_index].min_weight:
+         self->heap[right_child_index].min_weight < self->heap[largest_index].min_weight)){
      largest_index = right_child_index;
   }
 
@@ -196,7 +199,7 @@ short heapAdd(Heap *self, HeapElement item)
 HeapElement heapDelete(Heap *self, short *result)
 {
   HeapElement deleted;
-  deleted.key = -99999;
+  deleted.min_weight = -99999;
 
   /* 如果堆疊是空的就無法進行delete操作 */
   if(self->isEmpty(self) == 1){
@@ -238,7 +241,7 @@ short heapUnitTest()
       short del_result;
 
       for(i = 0; i < HEAP_UNITTEST_SIZE; ++i){
-        augend.key = rand() % 100;
+        augend.min_weight = rand() % 100;
         heapAdd(&min, augend);
       }
       prev = heapDelete(&min, &del_result);
@@ -246,8 +249,8 @@ short heapUnitTest()
       for(i = 1; i < HEAP_UNITTEST_SIZE; ++i){
         next = heapDelete(&min, &del_result);
         assert(!del_result);
-        assert(prev.key <= next.key);
-        prev.key = next.key;
+        assert(prev.min_weight <= next.min_weight);
+        prev.min_weight = next.min_weight;
       }
     }
     min.destroy(&min);
@@ -259,7 +262,7 @@ short heapUnitTest()
       short del_result;
 
       for(i = 0; i < HEAP_UNITTEST_SIZE; ++i){
-        augend.key = rand() % 100;
+        augend.min_weight = rand() % 100;
         heapAdd(&max, augend);
       }
       prev = heapDelete(&max, &del_result);
@@ -267,8 +270,8 @@ short heapUnitTest()
       for(i = 1; i < HEAP_UNITTEST_SIZE; ++i){
         next = heapDelete(&max, &del_result);
         assert(!del_result);
-        assert(prev.key >= next.key);
-        prev.key = next.key;
+        assert(prev.min_weight >= next.min_weight);
+        prev.min_weight = next.min_weight;
       }
     }
     max.destroy(&max);
@@ -277,4 +280,37 @@ short heapUnitTest()
   /* pass */
   fprintf(stdout, HEAP_ADT_TAG "元件測試全部通過！\n");
   return 0;
+}
+
+short heapHas(Heap *self, Vertex w)
+{
+  unsigned i;
+  for(i = 1; i < self->length; ++i){
+    if(self->heap[i].v == w){
+      return 1;
+    }
+  }
+  return 0;
+}
+
+unsigned heapKeyOf(struct heap *self, Vertex w)
+{
+  unsigned i;
+  for(i = 1; i < self->length; ++i){
+    if(self->heap[i].v == w){
+      return self->heap[i].min_weight;
+    }
+  }
+  return 0;
+}
+
+void heapDecrease(Heap *self, Vertex w, unsigned new_weight)
+{
+  unsigned i;
+  for(i = 1; i < self->length; ++i){
+    if(self->heap[i].v == w){
+      self->heap[i].min_weight = new_weight;
+      return;
+    }
+  }
 }

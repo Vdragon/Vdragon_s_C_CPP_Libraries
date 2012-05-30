@@ -66,11 +66,26 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="Source_code/Graph_abstract_data_type/Graph_abstract_data_type.generic.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="Source_code/Graph_abstract_data_type/Graph_abstract_data_type.generic.h" />
 		<Unit filename="Source_code/Graph_abstract_data_type/Graph_abstract_data_type.list.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Source_code/Graph_abstract_data_type/Graph_abstract_data_type.list.h" />
+		<Unit filename="Source_code/Graph_abstract_data_type/Graph_abstract_data_type.matrix.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Source_code/Graph_abstract_data_type/Graph_abstract_data_type.matrix.h" />
+		<Unit filename="Source_code/Graph_abstract_data_type/Tree_abstract_data_type_prim_sMST/Swap_algorithm_heap_element/Swap_algorithm.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Source_code/Graph_abstract_data_type/Tree_abstract_data_type_prim_sMST/Swap_algorithm_heap_element/Swap_algorithm.h" />
+		<Unit filename="Source_code/Graph_abstract_data_type/Tree_abstract_data_type_prim_sMST/Tree_abstract_data_type_C.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Source_code/Graph_abstract_data_type/Tree_abstract_data_type_prim_sMST/Tree_abstract_data_type_C.h" />
 		<Unit filename="Source_code/Messages_templates/zh_TW.h" />
 		<Unit filename="Source_code/Messages_templates/zh_TW/Debug.zh_TW.h" />
 		<Unit filename="Source_code/Messages_templates/zh_TW/Errors.zh_TW.h" />

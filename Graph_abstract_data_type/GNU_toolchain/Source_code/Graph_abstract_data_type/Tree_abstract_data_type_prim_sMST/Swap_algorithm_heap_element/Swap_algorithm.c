@@ -25,9 +25,16 @@
    * License along with this library; if not, write to the Free Software
    * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
    */
-/*  */
+/*||||| Forward declarations |||||*/
+
+/*||||| 程式所include之函式庫的標頭檔 | Included Library Headers |||||*/
 #include "../Tree_abstract_data_type_C.h"
 
+/*|||||常數與巨集 | Constants & Macros |||||*/
+
+/*||||| Definition of data type, enumeration, data structure and class |||||*/
+
+/*||||| 全域變數 | Global Variables |||||*/
 
 /* swapHeapElement function */
 void swapHeapElement(HeapElement *a, HeapElement *b)

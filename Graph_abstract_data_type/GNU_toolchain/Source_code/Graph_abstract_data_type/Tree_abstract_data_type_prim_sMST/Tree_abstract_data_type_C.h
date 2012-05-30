@@ -1,11 +1,10 @@
-﻿#ifndef TREE_DATA_STRUCTURE_ALGORITHM_H_INCLUDED
-  #define TREE_DATA_STRUCTURE_ALGORITHM_H_INCLUDED
+﻿#ifndef TREE_ADT_PRIM_MST
+  #define TREE_ADT_PRIM_MST
   #ifdef __cplusplus
     extern "C"{
   #endif
 
   /* 訊息 */
-  #define TREE_ADT_TAG "【樹(Tree)抽象資料類型】"
   #define HEAP_ADT_TAG "【Heap抽象資料類型】"
 
   /* HEAP單元測試所使用的HEAP最大大小 */
@@ -20,8 +19,11 @@
  *          2   3
  *         4 5 6 7
  **/
+#include "../Graph_abstract_data_type.generic.h"
+
 /* heap元素的定義 */
 typedef struct heapElement{
+  Vertex v;
   unsigned min_weight;
 }HeapElement;
 
@@ -67,10 +69,13 @@ typedef struct heap{
   short (*add)(struct heap *self, HeapElement item);
   /* 對heap進行delete操作的函式 */
   HeapElement (*del)(struct heap *self, short *result);
+  short (*has)(struct heap *self, Vertex w);
+  unsigned (*keyOf)(struct heap *self, Vertex w);
+  void (*decrease)(struct heap *self, Vertex w, unsigned new_weight);
   /* heap ADT的單元測試函式
    * 回傳值
    * 　0 測試通過*/
-  short (*unitTest)();
+  short (*unitTest)(void);
 }Heap;
 /* ==private成員函式== */
 /* 產生父母節點索引值的inline函式 */
@@ -97,10 +102,12 @@ void heapDestroy(Heap *self);
 short heapIsEmpty(Heap *self);
 short heapIsFull(Heap *self);
 void heapLevelPrint(Heap *self);
-short heapAdd(struct heap *self, HeapElement item);
+short heapAdd(Heap *self, HeapElement item);
 HeapElement heapDelete(Heap *self, short *result);
+short heapHas(Heap *self, Vertex w);
 short heapUnitTest();
-
+unsigned heapKeyOf(Heap *self, Vertex w);
+void heapDecrease(Heap *self, Vertex w, unsigned new_weight);
 #ifdef __cplusplus
     }
   #endif

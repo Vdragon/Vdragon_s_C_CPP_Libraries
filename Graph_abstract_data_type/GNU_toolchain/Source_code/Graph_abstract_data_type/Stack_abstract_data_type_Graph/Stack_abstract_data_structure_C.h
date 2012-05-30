@@ -10,7 +10,7 @@
   #endif
     /*StackElement的定義（於需要使用ADT的程式碼自訂）
     typedef int StackElement;*/
-    #include "../Graph_abstract_data_type/Graph_abstract_data_type.generic.h"
+    #include "../Graph_abstract_data_type.generic.h"
 
     /*模組標籤*/
     #define STACK_ABSTRACT_DATA_STRUCTURE_TAG "【Stack抽象資料類型模組】"

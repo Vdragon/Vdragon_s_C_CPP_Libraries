@@ -43,18 +43,19 @@
 #include <limits.h>
 /*header for Date and time functions Library*/
 #include <time.h>
+#include <assert.h>
 
 /* Vdragon's Library Collection */
 /*we need stack adt*/
-#include "../Stack_abstract_data_type_Graph/Stack_abstract_data_structure_C.h"
+#include "Stack_abstract_data_type_Graph/Stack_abstract_data_structure_C.h"
 /* we need MIN_OF_2 macro*/
 #include "../findMaxMin/findMaxMin.h"
 /**/
 #include "../Messages_templates/zh_TW.h"
 
 /*////////常數與巨集(Constants & Macros)////////*/
-/* 定義用於Prim's MST的無限
-#define INFINITE UINT_MAX*/
+/* 定義用於Prim's MST的無限*/
+#define INFINITE UINT_MAX
 /*////////其他前期處理器指令(Other Preprocessor Directives////////*/
 
 /*--------------全域宣告與定義(Global Declaration & Definition)--------------*/
@@ -407,7 +408,6 @@ short int graphAdjListDfnLow(Graph target, Vertex child, Vertex parent, unsigned
     }
 
 /*適用於相鄰性List(Adjacency List)的尋找多連結圖元件(Biconnected Component)函式*/
-/*版本：0.00(0)*/
 short int graphAdjListFBC(Graph target, Vertex child, Vertex parent, unsigned max_stack_size, unsigned max_adj_list_size)
     {
     /*宣告與定義(Declaration & Definition)*/
@@ -558,6 +558,7 @@ short graphInit(struct graph *target, const unsigned vertex_num, GraphTypes type
     target->print = graphPrint;
     target->isEmpty = graphIsEmpty;
     target->unitTest = graphUnitTest;
+    target->prim_sMST = graphPrim_sMST;
     return 0;
   }
 
@@ -586,7 +587,7 @@ short graphUnitTest(void)
     /*初始化Graph*/
     graph01.init = graphInit;
 
-    graph01.init(&graph01, GRAPH01_VERTEX, UNDIRECTED);
+    graph01.init(&graph01, GRAPH01_VERTEX_QUANTITY, UNDIRECTED);
 
     {/*測試迴圈*/
     /*for迴圈*/
@@ -651,11 +652,11 @@ short graphUnitTest(void)
     }while(input_number >= TEST_EDGE_QUANTITY || checksum != 1);
 
     /*呼叫適用於相鄰性List(Adjacency List)的深度優先搜尋(Depth First Search)函式*/
-    graphAdjListDFS(graph01, input_number, GRAPH01_VERTEX);
+    graphAdjListDFS(graph01, input_number, GRAPH01_VERTEX_QUANTITY);
 
     putchar('\n');
 
-    /*呼叫適用於相鄰性List(Adjacency List)的計算各頂點dfn、low值的函式*/
+    /*呼叫適用於相鄰性List(Adjacency List)的計算各key頂點dfn、low值的函式*/
     /*graphAdjListDfnLow(graph01, 0, -1);*/
 
     /*putchar('\n');*/
@@ -666,36 +667,121 @@ short graphUnitTest(void)
 
     }
 #endif
+    /* 測試Prim's MST演算法 */{
+      Vertex parent[GRAPH01_VERTEX_QUANTITY];
+      graph01.prim_sMST(graph01, 5, parent);
+    }
+
     /*-------程式結束前清理----------*/
     graph01.destroy(&graph01);
   /* done */
   return 0;
 }
-#if 0
+
 /*Prim's Minimum Spanning Tree演算法*/
-short prim_sMST(Graph target, Vertex root, Vertex parent[])
+short graphPrim_sMST(Graph target, Vertex root, Vertex parent[])
 {
-  /* 配置一個queue，有效節點從1開始 */
-  QueueElementPrimMST *queue = (QueueElementPrimMST *)malloc(sizeof(QueueElementPrimMST) * target.vertex_num + 1);
-  if(queue == NULL){
-    fprintf(stderr, ERROR_TAG ERROR_MEMORY_ALLOCATION_FAIL);
+  Prim_sMSTcontainer h;
+  unsigned *key = (unsigned *)malloc(sizeof(unsigned) * (target.vertex_num + 1));
+  if(key == NULL){
     return -1;
   }
 
   /* initialize min_weight */{
     register unsigned i;
     for(i = 1; i <= target.vertex_num; ++i){
-      queue[i].min_weight = UINT_MAX;
+      key[i] = INFINITE;
     }
-    queue[root].min_weight = 0;
+    key[root] = 0;
   }
 
   /* 根節點沒有父節點 */
   parent[root] = 0;
 
-  //while()
+  /*... */{
+    register unsigned i;
+    Vertex v, w;
+    AdjListNode *iterator;
 
+    h.init = primInit;
+    h.init(&h, key, target.vertex_num);
+    for(i = 1; i <= target.vertex_num; ++i){
+      v = h.del(&h);
+      iterator = target.adj_list[v];
+      while(iterator != NULL){
+        w = iterator->connected_vertex;
+        if(h.has(&h, w) && iterator->weight < h.keyOf(&h, w)){
+          parent[w] = v;
+          h.decrease(&h, w, iterator->weight);
+        }
+        iterator = iterator->next;
+      }
+    }
+  }
+  free(key);
+  h.destroy(&h);
   /* 成功完成 */
   return 0;
 }
-#endif
+
+short primInit(Prim_sMSTcontainer *self, unsigned key[], unsigned size)
+{
+  /* 要求Vertex數 + 1大小的陣列 */
+  self->heap.create = heapCreate;
+  self->heap.create(&(self->heap), size, MIN_HEAP);
+
+  /* 初始化各個成員函式 */
+  self->destroy = primDestroy;
+  self->del = primDel;
+  self->has = primHeapHas;
+  self->keyOf = primKeyOf;
+  self->decrease = primDecrease;
+
+  /* 依據key[]的資料新增heap */{
+    register unsigned i;
+    HeapElement temp;
+    for(i = 1; i <= size; ++i){
+      if(key[i] == 0){
+        continue;
+      }
+      temp.v = i;
+      temp.min_weight = key[i];
+      self->heap.add(&(self->heap), temp);
+    }
+  }
+  return 0;
+}
+
+void primDestroy(Prim_sMSTcontainer *self)
+{
+  self->heap.destroy(&(self->heap));
+  return;
+}
+
+/*h.del(): deletes the item in h with the smallest weight and returns the vertex (由 h 中把距離目前 MST 距離最短的節點剔除)*/
+Vertex primDel(Prim_sMSTcontainer *self)
+{
+  HeapElement temp;
+  short dummy;
+  temp = self->heap.del(&(self->heap), &dummy);
+
+  return temp.v;
+}
+
+/*h.isin(w): returns true if vertex w is in h (這是一個簡單的測試函式, 可惜命名錯了, 想一下 isin 應該改成什麼?)*/
+short primHeapHas(Prim_sMSTcontainer *self, Vertex w)
+{
+  return self->heap.has(&(self->heap), w);
+}
+
+unsigned primKeyOf(Prim_sMSTcontainer *self, Vertex w)
+{
+  return self->heap.keyOf(&(self->heap), w);
+}
+
+void primDecrease(Prim_sMSTcontainer *self, Vertex w, unsigned new_weight)
+{
+  self->heap.decrease(&(self->heap), w, new_weight);
+  return;
+}
+
