@@ -285,7 +285,7 @@ short heapUnitTest()
 short heapHas(Heap *self, Vertex w)
 {
   unsigned i;
-  for(i = 1; i < self->length; ++i){
+  for(i = 1; i <= self->length; ++i){
     if(self->heap[i].v == w){
       return 1;
     }
@@ -296,7 +296,7 @@ short heapHas(Heap *self, Vertex w)
 unsigned heapKeyOf(struct heap *self, Vertex w)
 {
   unsigned i;
-  for(i = 1; i < self->length; ++i){
+  for(i = 1; i <= self->length; ++i){
     if(self->heap[i].v == w){
       return self->heap[i].min_weight;
     }
@@ -307,9 +307,10 @@ unsigned heapKeyOf(struct heap *self, Vertex w)
 void heapDecrease(Heap *self, Vertex w, unsigned new_weight)
 {
   unsigned i;
-  for(i = 1; i < self->length; ++i){
+  for(i = 1; i <= self->length; ++i){
     if(self->heap[i].v == w){
       self->heap[i].min_weight = new_weight;
+      heapBuildHeap(self);
       return;
     }
   }

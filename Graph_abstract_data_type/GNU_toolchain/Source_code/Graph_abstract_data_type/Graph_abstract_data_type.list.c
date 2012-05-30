@@ -569,72 +569,65 @@ short graphIsEmpty(Graph target)
 
 short graphUnitTest(void)
 {
-  /*宣告與定義(Declaration & Definition)*/
-    /* 圖的宣告（adjacency list表示法）
-     * FIXME:應該是graph1跟TEST_VERTEX_QUANTITY才對*/
-      Graph graph01;
-
+  printf("開始進行GraphADT元件測試。\n");
+  /* 測試Graph::init, insertEdge... */{
+    Graph graph01;
     /*用來保存函式運行結果的變數*/
-    short int func_call_result = 0;
-
-    /*測試edge*/
+    short func_call_result = 0;
     Edge testEdge;
 
-  /*－－－－－－－－－－－－－－－－－－－－－*/
+    printf("=====測試Graph::init, insertEdge...開始=====\n");
     /*初始化測試亂數產生器*/
     srand(time(NULL));
 
     /*初始化Graph*/
     graph01.init = graphInit;
-
     graph01.init(&graph01, GRAPH01_VERTEX_QUANTITY, UNDIRECTED);
 
-    {/*測試迴圈*/
-    /*for迴圈*/
-    register unsigned i;
-
-    for(i = 1; i <= 100; i++){
-
+    /*for迴圈*/{
+      register unsigned i;
+      for(i = 1; i <= 100; i++){
         testEdge.init = edgeInit;
         testEdge.init(&testEdge);
         do{
-        testEdge.setEdge(&testEdge, rand() % TEST_EDGE_QUANTITY, rand() % TEST_EDGE_QUANTITY, -1);
-
+          testEdge.setEdge(&testEdge, rand() % TEST_EDGE_QUANTITY, rand() % TEST_EDGE_QUANTITY, -1);
         }while(testEdge.getU(testEdge) == testEdge.getV(testEdge));
 
         /*測試將edge插入相鄰性List中*/
         func_call_result = (graph01.insertEdge)(UNDIRECTED, graph01, testEdge);
         if(func_call_result != 0){
-            switch(func_call_result){
-            case -1:
-                printf("軟體使用之graphListInsertEdge函式向作業系統要求記憶體空間失敗！\n"
-                       "請檢查系統的可用記憶體空間是否足夠。\n"
-                       "The function \"graphListInsertEdge\" in the software failed of requesting memory space from operating system!\n"
-                       "Please check if the free memory space is sufficient.\n");
-                break;
-            case -2:
-                printf("軟體使用之graphListInsertEdge函式偵測到引數item的member \n"
-                       "u跟v兩個頂點相同（函式不允許頂點loop的邊線(edge)作為引數）。\n"
-                       "The function \"graphListInsertEdge\" in the software detected\n"
-                       "the augument \"item\"'s member:u and v vertex are same.\n"
-                       "(Function doesn't permit a self-loop edge as an argument.)\n");
-                break;
-            default:
-                printf("graphListInsertEdge函式發生未知的錯誤。\n"
-                       "The graphListInsertEdge function has unknown error.\n");
-                break;
-            }
-            printf("graphListInsertEdge函式異常退出！\n"
-                   "graphListInsertEdge function has errorly exited!\n");
-            return -1;
+          switch(func_call_result){
+          case -1:
+            printf("軟體使用之graphListInsertEdge函式向作業系統要求記憶體空間失敗！\n"
+                   "請檢查系統的可用記憶體空間是否足夠。\n"
+                   "The function \"graphListInsertEdge\" in the software failed of requesting memory space from operating system!\n"
+                   "Please check if the free memory space is sufficient.\n");
+            break;
+          case -2:
+            printf("軟體使用之graphListInsertEdge函式偵測到引數item的member \n"
+                   "u跟v兩個頂點相同（函式不允許頂點loop的邊線(edge)作為引數）。\n"
+                   "The function \"graphListInsertEdge\" in the software detected\n"
+                   "the augument \"item\"'s member:u and v vertex are same.\n"
+                   "(Function doesn't permit a self-loop edge as an argument.)\n");
+            break;
+          default:
+            printf("graphListInsertEdge函式發生未知的錯誤。\n"
+                   "The graphListInsertEdge function has unknown error.\n");
+            break;
+          }
+          printf("graphListInsertEdge函式異常退出！\n"
+                 "graphListInsertEdge function has errorly exited!\n");
+          return -1;
         }
-        /*測試將edge插入相鄰性List中*/
+      }
     }
-    }/*測試迴圈*/
-
-
     /*輸出list、 矩陣*/
     graph01.print(graph01);
+    graph01.destroy(&graph01);
+    printf("=====測試Graph::init, insertEdge...結束=====\n");
+  }
+
+  putchar('\n');
 #if 0
     /*-----DFS、FBC--------*/
     {
@@ -667,14 +660,54 @@ short graphUnitTest(void)
 
     }
 #endif
-    /* 測試Prim's MST演算法 */{
-      Vertex parent[GRAPH01_VERTEX_QUANTITY];
-      graph01.prim_sMST(graph01, 5, parent);
+
+  /* 測試Prim's MST演算法 */{
+    Vertex parent[6];
+    Graph target;
+    Edge input;
+
+    printf("=====測試Prim's MST演算法=====\n");
+    target.init = graphInit;
+    target.init(&target, 6, UNDIRECTED);
+    input.init = edgeInit;
+    input.init(&input);
+    input.setEdge(&input, 1 - 1, 2 - 1, 4);
+    target.insertEdge(UNDIRECTED, target, input);
+    input.setEdge(&input, 1 - 1, 3 - 1, 2);
+    target.insertEdge(UNDIRECTED, target, input);
+    input.setEdge(&input, 1 - 1, 5 - 1, 3);
+    target.insertEdge(UNDIRECTED, target, input);
+    input.setEdge(&input, 2 - 1, 4 - 1, 5);
+    target.insertEdge(UNDIRECTED, target, input);
+    input.setEdge(&input, 3 - 1, 4 - 1, 1);
+    target.insertEdge(UNDIRECTED, target, input);
+    input.setEdge(&input, 3 - 1, 5 - 1, 6);
+    target.insertEdge(UNDIRECTED, target, input);
+    input.setEdge(&input, 3 - 1, 6 - 1, 3);
+    target.insertEdge(UNDIRECTED, target, input);
+    input.setEdge(&input, 4 - 1, 6 - 1, 6);
+    target.insertEdge(UNDIRECTED, target, input);
+    input.setEdge(&input, 5 - 1, 6 - 1, 2);
+    target.insertEdge(UNDIRECTED, target, input);
+    target.print(target);
+
+    target.prim_sMST(target, 4, parent);
+
+    /* 印出結果 */{
+      unsigned i;
+      printf("parent[] = ");
+      for(i = 0; i < 6; ++i){
+        printf("%d ", parent[i]);
+      }
+      putchar('\n');
     }
 
-    /*-------程式結束前清理----------*/
-    graph01.destroy(&graph01);
+    target.destroy(&target);
+    printf("=====測試Prim's MST演算法結束=====\n");
+  }
+
   /* done */
+  printf("完成GraphADT元件測試。\n");
   return 0;
 }
 
@@ -682,43 +715,57 @@ short graphUnitTest(void)
 short graphPrim_sMST(Graph target, Vertex root, Vertex parent[])
 {
   Prim_sMSTcontainer h;
-  unsigned *key = (unsigned *)malloc(sizeof(unsigned) * (target.vertex_num + 1));
-  if(key == NULL){
+  unsigned *initial_weight = (unsigned *)malloc(sizeof(unsigned) * (target.vertex_num));
+  if(initial_weight == NULL){
     return -1;
   }
 
-  /* initialize min_weight */{
+  /* initialize key[], parent[] */{
     register unsigned i;
-    for(i = 1; i <= target.vertex_num; ++i){
-      key[i] = INFINITE;
+    for(i = 0; i < target.vertex_num; ++i){
+      initial_weight[i] = INFINITE;
+      /* 未被賦值的節點預設為-1 */
+      parent[i] = -1;
     }
-    key[root] = 0;
+    /* 讓根節點一開始的weight為零，讓他於第一次循環時被delete出來 */
+    initial_weight[root] = 0;
+    parent[root] = -1;
   }
 
-  /* 根節點沒有父節點 */
-  parent[root] = 0;
-
-  /*... */{
-    register unsigned i;
-    Vertex v, w;
-    AdjListNode *iterator;
-
+  /* initialize minheap */{
     h.init = primInit;
-    h.init(&h, key, target.vertex_num);
+    h.init(&h, initial_weight, target.vertex_num);
+    free(initial_weight);
+    initial_weight = NULL;
+  }
+
+  /* 依序將最小weight的edge delete出來 */{
+    register unsigned i;
     for(i = 1; i <= target.vertex_num; ++i){
-      v = h.del(&h);
-      iterator = target.adj_list[v];
-      while(iterator != NULL){
-        w = iterator->connected_vertex;
-        if(h.has(&h, w) && iterator->weight < h.keyOf(&h, w)){
-          parent[w] = v;
-          h.decrease(&h, w, iterator->weight);
+      Vertex deleted;
+
+      deleted = h.del(&h);
+
+      /* 更新h中各個為未於tree中的頂點至tree的最小weight */{
+        AdjListNode *iterator;
+
+        for(iterator = target.adj_list[deleted];
+            iterator != NULL;
+            iterator = iterator->next){
+          /* 如果在MST外含有與deleted相鄰的頂點且deleted到該節點的weight小於MST
+           * 到該頂點的最小weight，則將MST到該頂點的最小weight換為deleted到該頂
+           * 點的weight並將該頂點的父母節點設定為deleted
+           */
+          if(h.has(&h, iterator->connected_vertex) &&
+             iterator->weight < h.keyOf(&h, iterator->connected_vertex)){
+            h.decrease(&h, iterator->connected_vertex, iterator->weight);
+            parent[iterator->connected_vertex] = deleted;
+          }
         }
-        iterator = iterator->next;
       }
     }
   }
-  free(key);
+
   h.destroy(&h);
   /* 成功完成 */
   return 0;
@@ -737,13 +784,10 @@ short primInit(Prim_sMSTcontainer *self, unsigned key[], unsigned size)
   self->keyOf = primKeyOf;
   self->decrease = primDecrease;
 
-  /* 依據key[]的資料新增heap */{
+  /* 依據key[]的資料新增未在MST中的節點至heap */{
     register unsigned i;
     HeapElement temp;
-    for(i = 1; i <= size; ++i){
-      if(key[i] == 0){
-        continue;
-      }
+    for(i = 0; i < size; ++i){
       temp.v = i;
       temp.min_weight = key[i];
       self->heap.add(&(self->heap), temp);

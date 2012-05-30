@@ -33,8 +33,11 @@
 
   /*圖的宣告*/
   typedef struct graph{
+    /* 指向各個AdjListNode的指標變數所組成的陣列[0 ~ vertex_num - 1] */
     AdjListHead * adj_list;
+    /* 圖的類型：有向圖or無向圖 */
     GraphTypes type;
+    /* 頂點(vertex)的數量 */
     unsigned vertex_num;
 
     short (*init) (struct graph *target, const unsigned vertex_num, GraphTypes type);
@@ -121,8 +124,7 @@
 
 
   /* public 成員函式 */
-  /*h.init(key, n): initializes h to the values in key (程式開始時 h 裡面有 n-1 個節點,
-   *  也就是除掉 start 之外的所有節點)
+  /*h.init(key, n): initializes h to the values in key
    *  回傳值
    *  　-1
    *  　　記憶體配置失敗
