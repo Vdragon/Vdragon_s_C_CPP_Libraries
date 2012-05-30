@@ -48,6 +48,7 @@
     (*target).getU = edgeGetU;
     (*target).getV = edgeGetV;
     (*target).setEdge = edgeSet;
+    target->getCost = edgeGetCost;
 
     /*done*/
 	  return;
@@ -68,7 +69,13 @@
   {
     return edge.u;
   }
+
   Vertex edgeGetV(Edge edge)
   {
     return edge.v;
+  }
+
+  int edgeGetCost(Edge edge)
+  {
+    return edge.cost;
   }

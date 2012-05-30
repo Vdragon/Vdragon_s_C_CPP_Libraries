@@ -17,10 +17,13 @@
     void (*setEdge) (struct edge *edge, Vertex u, Vertex v, int cost);
     Vertex (*getU) (struct edge edge);
     Vertex (*getV) (struct edge edge);
+    int (*getCost)(struct edge edge);
   }Edge;
   /* ====public 成員函式 ====*/
   Vertex edgeGetU(Edge edge);
   Vertex edgeGetV(Edge edge);
+  int edgeGetCost(Edge edge);
+
   /*初始化邊的函式*/
   void edgeInit(Edge *target);
   /*設定邊的屬性的函式*/

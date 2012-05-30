@@ -236,10 +236,10 @@ void graphPrint(const Graph target)
             curr_read_node_pos != NULL;
             curr_read_node_pos = curr_read_node_pos->next){
             if(curr_read_node_pos == target.adj_list[i]){
-                printf("%u", curr_read_node_pos->connected_vertex);
+                printf("%u(%d)", curr_read_node_pos->connected_vertex, curr_read_node_pos->weight);
             }
             else{
-                printf(",%u", curr_read_node_pos->connected_vertex);
+                printf(",%u(%d)", curr_read_node_pos->connected_vertex, curr_read_node_pos->weight);
             }
         }
 
@@ -559,6 +559,7 @@ short graphInit(struct graph *target, const unsigned vertex_num, GraphTypes type
     target->isEmpty = graphIsEmpty;
     target->unitTest = graphUnitTest;
     target->prim_sMST = graphPrim_sMST;
+    target->getEdgeWeight = graphGetEdgeWeight;
     return 0;
   }
 
@@ -566,6 +567,25 @@ short graphIsEmpty(Graph target)
   {
     return !target.vertex_num;
   }
+
+/* 查詢某已知邊的weight的函式 */
+int graphGetEdgeWeight(Graph target, Edge query, short *result)
+{
+  AdjListNode *iterator;
+  for(iterator = target.adj_list[query.getU(query)];
+      iterator != NULL;
+      iterator = iterator->next){
+    if(iterator->connected_vertex == query.getV(query)){
+      /* 操作成功完成 */
+      *result = 0;
+      return iterator->weight;
+    }
+  }
+
+  /* 找不到欲求weight的邊 */
+  *result = -1;
+  return -1;
+}
 
 short graphUnitTest(void)
 {
@@ -586,11 +606,11 @@ short graphUnitTest(void)
 
     /*for迴圈*/{
       register unsigned i;
-      for(i = 1; i <= 100; i++){
+      for(i = 1; i <= GRAPH01_EDGE_QUANTITY; i++){
         testEdge.init = edgeInit;
         testEdge.init(&testEdge);
         do{
-          testEdge.setEdge(&testEdge, rand() % TEST_EDGE_QUANTITY, rand() % TEST_EDGE_QUANTITY, -1);
+          testEdge.setEdge(&testEdge, rand() % GRAPH01_VERTEX_QUANTITY, rand() % GRAPH01_VERTEX_QUANTITY, -1);
         }while(testEdge.getU(testEdge) == testEdge.getV(testEdge));
 
         /*測試將edge插入相鄰性List中*/
@@ -704,6 +724,88 @@ short graphUnitTest(void)
 
     target.destroy(&target);
     printf("=====測試Prim's MST演算法結束=====\n");
+  }
+
+  putchar('\n');
+
+  /* 測試Graph::getEdgeWeight() */{
+    Graph graph03;
+    /*用來保存函式運行結果的變數*/
+    short func_call_result = 0;
+    Edge testEdge;
+
+    printf("=====測試Graph::init, insertEdge...開始=====\n");
+    /*初始化測試亂數產生器*/
+    srand(time(NULL));
+
+    /*初始化Graph*/
+    graph03.init = graphInit;
+    graph03.init(&graph03, GRAPH03_VERTEX_QUANTITY, UNDIRECTED);
+
+    /*for迴圈*/{
+      register unsigned i;
+      for(i = 1; i <= GRAPH03_EDGE_QUANTITY; i++){
+        testEdge.init = edgeInit;
+        testEdge.init(&testEdge);
+        do{
+          testEdge.setEdge(&testEdge, rand() % GRAPH03_VERTEX_QUANTITY, rand() % GRAPH03_VERTEX_QUANTITY, rand() % GRAPH03_MAX_WEIGHT);
+        }while(testEdge.getU(testEdge) == testEdge.getV(testEdge));
+
+        /*測試將edge插入相鄰性List中*/
+        func_call_result = (graph03.insertEdge)(UNDIRECTED, graph03, testEdge);
+        if(func_call_result != 0){
+          switch(func_call_result){
+          case -1:
+            printf("軟體使用之graphListInsertEdge函式向作業系統要求記憶體空間失敗！\n"
+                   "請檢查系統的可用記憶體空間是否足夠。\n"
+                   "The function \"graphListInsertEdge\" in the software failed of requesting memory space from operating system!\n"
+                   "Please check if the free memory space is sufficient.\n");
+            break;
+          case -2:
+            printf("軟體使用之graphListInsertEdge函式偵測到引數item的member \n"
+                   "u跟v兩個頂點相同（函式不允許頂點loop的邊線(edge)作為引數）。\n"
+                   "The function \"graphListInsertEdge\" in the software detected\n"
+                   "the augument \"item\"'s member:u and v vertex are same.\n"
+                   "(Function doesn't permit a self-loop edge as an argument.)\n");
+            break;
+          default:
+            printf("graphListInsertEdge函式發生未知的錯誤。\n"
+                   "The graphListInsertEdge function has unknown error.\n");
+            break;
+          }
+          printf("graphListInsertEdge函式異常退出！\n"
+                 "graphListInsertEdge function has errorly exited!\n");
+          return -1;
+        }
+      }
+    }
+
+    /* 輸出、查詢 */{
+      Edge query;
+      short query_result;
+      int input_result = 0;
+      Vertex u, v;
+
+      graph03.print(graph03);
+      query.init = edgeInit;
+      query.init(&query);
+      printf("請輸入欲查詢的邊（格式：(u,v)）後按Enter鍵\n");
+      do{
+        printf("->");
+        input_result = scanf("(%d,%d)", &u, &v);
+        getchar();
+      }while(input_result != 2);
+      query.setEdge(&query, u, v, -1);
+      query.setEdge(&query, u, v, graph03.getEdgeWeight(graph03, query, &query_result));
+      if(query_result == -1){
+        printf("找不到邊。\n");
+      }else{
+        printf("weight = %d\n", query.getCost(query));
+      }
+    }
+
+    graph03.destroy(&graph03);
+    printf("=====測試Graph::init, insertEdge...結束=====\n");
   }
 
   /* done */

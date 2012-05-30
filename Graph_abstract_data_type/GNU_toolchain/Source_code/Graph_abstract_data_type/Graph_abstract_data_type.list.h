@@ -20,8 +20,12 @@
   #define MAX_STACK_SIZE 100*/
 
   /*定義測試用的圖的邊、頂點數量*/
-  #define TEST_EDGE_QUANTITY 10
+  #define GRAPH01_EDGE_QUANTITY 10
   #define GRAPH01_VERTEX_QUANTITY 10
+  #define GRAPH03_EDGE_QUANTITY 10
+  #define GRAPH03_VERTEX_QUANTITY 10
+  #define GRAPH03_MAX_WEIGHT 30
+
   /*||||| Definition of data type, enumeration, data structure and class |||||*/
   /*圖節點的資料結構（adjacency lists表示法）*/
   typedef struct adjListNode{
@@ -46,6 +50,7 @@
     void  (*print)(struct graph target);
     short (*prim_sMST) (struct graph target, Vertex root, Vertex parent[]);
     short (*isEmpty) (struct graph target);
+    int (*getEdgeWeight)(struct graph target, Edge query, short *result);
     short (*unitTest) (void);
   }Graph;
 
@@ -77,6 +82,8 @@
    * 　　-1
    * 　　　記憶體要求失敗*/
   short graphPrim_sMST(Graph target, Vertex root, Vertex parent[]);
+  /* 查詢某已知邊的weight的函式 */
+  int graphGetEdgeWeight(Graph target, Edge query, short *result);
   /* 對GraphADT進行單元測試的函式 */
   short graphUnitTest(void);
 #if 0
