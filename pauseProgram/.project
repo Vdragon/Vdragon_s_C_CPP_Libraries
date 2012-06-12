@@ -3,6 +3,7 @@
 	<name>pauseProgram</name>
 	<comment></comment>
 	<projects>
+		<project>Project_specific_configurations</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
