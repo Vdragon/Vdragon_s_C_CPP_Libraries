@@ -4,8 +4,8 @@
   Changelog is now stored on github
 已知問題(known issues)：
   Known issues is now stored on github
-待辦事項(todo)：
-  Todo is now stored on github
+待辦事項(todos)：
+  Todos is now stored on github
 智慧財產授權條款：
 *//* Copyright (C) 2012 林博仁(Henry Lin)
    *
