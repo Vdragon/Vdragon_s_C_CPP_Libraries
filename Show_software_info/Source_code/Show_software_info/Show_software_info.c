@@ -5,7 +5,7 @@
 已知問題 | Known Issues
   Known issues is now stored on GitHub
 待辦事項 | Todos
-  Todo is now stored on GitHub
+  Todos is now stored on GitHub
 著作權宣告 | Copyright notice
   Copyright 2012 林博仁(Henry Lin, pika1021@gmail.com)
 智慧財產授權條款：
