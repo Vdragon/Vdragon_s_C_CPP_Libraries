@@ -18,12 +18,18 @@
     /* for showing software info */
 		  #include "Show_software_info/Show_software_info.h"
 
+	/* Library under test */
+		#include "printSomething/printSomething.h"
+
 /* 常數與巨集
  * Constants & Macros */
 /* Definition of data type, enumeration, data structure and class */
 
 /* 函式雛型
  * Function Prototypes */
+	/* unit test functions */
+		void test_printCstring(void);
+		void test_printLine(void);
 
 /* 全域變數
  * Global Variables */
@@ -35,6 +41,10 @@
   restart_program:
     show_software_info("printSomething 測試程式");
 
+		test_printCstring();
+		printLine("#", 20);
+		test_printLine();
+
     /*暫停程式運行（於main函式中）*/
     if(pauseProgram() == 1){
       goto restart_program;
@@ -42,3 +52,18 @@
 
     return EXIT_SUCCESS;
   }
+
+	void test_printCstring(void){
+		printCstring("");
+		printCstring("\n");
+		printCstring("Longer");
+		putchar('\n');
+		return;
+	}
+
+	void test_printLine(void){
+		printLine("-", 20);
+		printLine("##", 10);
+		printLine("喵", 10);
+		return;
+	}

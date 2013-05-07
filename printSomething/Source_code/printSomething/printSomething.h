@@ -1,4 +1,4 @@
-/* 
+/*
 	程式名稱
 	Program name
 		printSomething library
@@ -18,9 +18,9 @@
 	Intellectual property license
 		printSomething library is part of Ｖ字龍的C、C++程式語言函式庫收集
 		Ｖ字龍的C、C++程式語言函式庫收集 is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
-		
+
 		Ｖ字龍的C、C++程式語言函式庫收集 is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public License for more details.
-		
+
 		You should have received a copy of the GNU Lesser General Public License along with Ｖ字龍的C、C++程式語言函式庫收集.  If not, see <http://www.gnu.org/licenses/>.
 	本程式的框架基於「C/C++ program templates」專案
 	This program's frame is based on "C/C++ program templates" project
@@ -42,6 +42,8 @@
 
 		/* 程式所 include 之函式庫的標頭檔
 		   Included Library Headers */
+			/* 標準 C 函式庫 */
+				#include <stdio.h>
 
 		/* 常數與巨集
 		   Constants & Macros */
@@ -50,10 +52,28 @@
 
 		/* 函式雛型
 		   Function prototypes */
+			/* 印出一個 C 語言的字串 */
+				inline void printCstring(const char c_string[]);
+
+			/* 印出一條由成份字串組成的線 */
+				void printLine(
+					/* 線的組成成份 */
+						const char component[],
+					/* 線的長度 */
+						unsigned short length
+				);
 
 		/* 全域變數
 		   Global variables */
-		
+
+		/* Inline 子程式的實作
+		   Inline procedure implementations */
+				inline void printCstring(const char c_string[]){
+					printf("%s", c_string);
+
+					return;
+				}
+
 		#ifdef __cplusplus
 			}
 		#endif /* __cplusplus */

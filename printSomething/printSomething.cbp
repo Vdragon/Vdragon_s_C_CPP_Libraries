@@ -105,6 +105,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Source_code/pauseProgram/Pause_program.h" />
+		<Unit filename="Source_code/printSomething/printSomething.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Source_code/printSomething/printSomething.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />
