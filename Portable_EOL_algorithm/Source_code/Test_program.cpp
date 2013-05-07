@@ -76,13 +76,15 @@ restart_program:
   cin >> filename;
   switch(skipEOLsequence(cin)){
   case 1:
-    cout << "偵測到並丟棄[LF]"<< endl;
+    cout << "[cin]偵測到並丟棄[LF]"<< endl;
     break;
   case -1:
   default:
-    cout << "沒有偵測到換行字元序列" << endl;
+    cout << "[cin]沒有偵測到換行字元序列" << endl;
     break;
   }
+  printf("%s", "---------------------");
+  putEOL();
 
   input_file.open(filename, ifstream::in);
   if(input_file.is_open()){

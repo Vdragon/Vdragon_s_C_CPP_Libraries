@@ -161,3 +161,23 @@ void dumpInvisibleContent(string& input)
   /*完成*/
   return;
 }
+
+	void putEOL(void){
+#if defined (_WIN32)
+		putchar('\r');
+		putchar('\n');
+#endif // _WIN32
+
+#if defined(unix) || defined(__unix) || defined(__unix__)
+		putchar('\n');
+#endif // __unix__
+
+#if defined(Machintosh) || defined(machintosh)
+		putchar('\r');
+#endif // defined mac os 9
+
+#if defined(__APPLE__) && defined(__MACH__)
+		putchar('\n');
+#endif // defined mac os X or later
+		return;
+	}
