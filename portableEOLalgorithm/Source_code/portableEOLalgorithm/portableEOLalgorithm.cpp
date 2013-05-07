@@ -70,7 +70,7 @@ short skipEOLsequence(istream& file_stream)
   switch(test){
   case '\n':
     /*if is Unix...eat it and done*/
-#ifdef DEBUG
+#ifndef NDEBUG
     cout << DEBUG_TAG << SKIP_EOL_SEQUENCE_TAG
          << "吃掉[LF]" << endl;
 #endif
@@ -83,7 +83,7 @@ short skipEOLsequence(istream& file_stream)
     file_stream.ignore(1);
     test = file_stream.peek();
     if(test == '\n'){
-#ifdef DEBUG
+#ifndef NDEBUG
       cout << DEBUG_TAG << SKIP_EOL_SEQUENCE_TAG
            << "吃掉[CR][LF]" << endl;
 #endif
@@ -92,7 +92,7 @@ short skipEOLsequence(istream& file_stream)
       return 2;
     }
     /*return Mac*/
-#ifdef DEBUG
+#ifndef NDEBUG
     cout << DEBUG_TAG << SKIP_EOL_SEQUENCE_TAG
          << "吃掉[CR]" << endl;
 #endif
