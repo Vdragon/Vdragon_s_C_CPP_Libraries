@@ -1,5 +1,6 @@
 # printSomething
 Copyright 2013 Vdragon(pika1021@gmail.com)
+
 ## 這是什麼？<br />What is this?
 用來印出某些東西的函式庫
 
@@ -21,7 +22,11 @@ Copyright 2013 Vdragon(pika1021@gmail.com)
           This documentation
 
 ## 如何使用？<br />How to use it?
-（尚未實作）
+（尚未實作完畢）
+
+## 軟體依賴關係<br />Software dependencies
+* 標準 C 函式庫
+* 
 
 ## 授權條款<br />License
 printSomething is part of Ｖ字龍的C、C++程式語言函式庫收集.
