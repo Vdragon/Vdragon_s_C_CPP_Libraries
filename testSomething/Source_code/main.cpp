@@ -46,7 +46,7 @@
 
 		testProcedure("foo", foo, "-", 10);
 
-    /*暫停程式運行（於main函式中）*/
+    /* 暫停程式運行（於main函式中）*/
     if(pauseProgram() == 1){
       goto restart_program;
     }
