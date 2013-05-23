@@ -11,7 +11,7 @@
    *   印出資訊，將控制交還給主要程式
    * 參數：
    *   program_name:程式名稱（非軟體名稱）的陣列*/
-  void show_software_info(const char program_name[]);
+  void showSoftwareInfo(const char program_name[]);
 
   #ifdef __cplusplus
     }

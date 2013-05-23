@@ -47,7 +47,7 @@
 /*--------------主要程式碼(Main Code)--------------*/
 /* 顯示軟體資訊的函式
    *  印出資訊，將控制交還給主要程式*/
-void show_software_info(const char program_name[])
+void showSoftwareInfo(const char program_name[])
 {
   /*顯示程式名稱及著作權宣告*/
   printf("%s\n", program_name);

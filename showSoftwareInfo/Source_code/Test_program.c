@@ -28,7 +28,7 @@
 /*--------------前期處理器指令(Preprocessor Directive)--------------*/
 /*////////程式所include之函式庫的標頭檔(Included Library Headers)////////*/
 /* 我們需要顯示軟體資訊的library*/
-#include "Show_software_info/Show_software_info.h"
+#include "showSoftwareInfo/showSoftwareInfo.h"
 
 /* 我們需要暫停程式*/
 #include "pauseProgram/Pause_program.h"
@@ -56,8 +56,8 @@ int main(void)
 /*用來重新運行程式的label*/
 restart_program:
   /*呼叫Show software info*/
-  show_software_info(PROGRAM_NAME);
-  show_software_info("test_string");
+  showSoftwareInfo(PROGRAM_NAME);
+  showSoftwareInfo("test_string");
   /*呼叫暫停運行函式(放在main函式中)*/
   if(pauseProgram() == 1){
     goto restart_program;
