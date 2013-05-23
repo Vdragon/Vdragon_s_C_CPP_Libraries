@@ -45,29 +45,18 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="Source_code/Pause_program.c">
+		<Unit filename="Source_code/Project_specific_configurations/Debug.h" />
+		<Unit filename="Source_code/Test_program.c">
 			<Option compilerVar="CC" />
-			<Option target="偵錯版本(Linux x86)" />
-			<Option target="釋出版本(Linux x86)" />
 		</Unit>
-		<Unit filename="Source_code/Pause_program.h">
-			<Option target="偵錯版本(Linux x86)" />
-			<Option target="釋出版本(Linux x86)" />
-		</Unit>
-		<Unit filename="Source_code/main.c">
+		<Unit filename="Source_code/pauseProgram/pauseProgram.c">
 			<Option compilerVar="CC" />
-			<Option target="偵錯版本(Linux x86)" />
-			<Option target="釋出版本(Linux x86)" />
-			<Option target="偵錯版本(Windows x86)" />
 		</Unit>
-		<Unit filename="Source_code/main.h">
-			<Option target="偵錯版本(Linux x86)" />
-			<Option target="釋出版本(Linux x86)" />
-			<Option target="偵錯版本(Windows x86)" />
-		</Unit>
+		<Unit filename="Source_code/pauseProgram/pauseProgram.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />
+			<envvars />
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>

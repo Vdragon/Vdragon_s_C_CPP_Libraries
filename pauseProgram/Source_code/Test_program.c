@@ -16,7 +16,7 @@
 /*--------------前期處理器指令(Preprocessor Directive)--------------*/
 
 /*////////程式所include的標頭檔(Included Headers)////////*/
-#include "pauseProgram/Pause_program.h"
+#include "pauseProgram/pauseProgram.h"
 
 /*////////常數與巨集(Constants & Macros)以及其他#define指令////////*/
 
