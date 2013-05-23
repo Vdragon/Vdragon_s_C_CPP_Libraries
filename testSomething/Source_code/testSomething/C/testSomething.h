@@ -1,4 +1,4 @@
-/* 
+/*
 	程式名稱
 	Program name
 		testSomething
@@ -18,9 +18,9 @@
 	Intellectual property license
 		「程式名稱 | Program name」 is part of 「軟體名稱 | Software name」
 		「軟體名稱 | Software name」 is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
-		
+
 		「軟體名稱 | Software name」 is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public License for more details.
-		
+
 		You should have received a copy of the GNU Lesser General Public License along with 「軟體名稱 | Software name」.  If not, see <http://www.gnu.org/licenses/>.
 	本程式的框架基於「C/C++ program templates」專案
 	This program's frame is based on "C/C++ program templates" project
@@ -50,6 +50,16 @@
 
 		/* 函式雛型
 		   Function prototypes */
+			/* 測試函式的函式 */
+				void testProcedure(
+					/* 函式名稱 */
+						const char name[],
+					/* 函式指標變數 */
+						void (*proc_under_test)(void),
+					/* 用來分隔測試中函式的輸出的線的組成成份（直接傳至 printLine()） */
+						const char line_component[],
+					/* 用來分隔測試中函式的輸出的線的長度（直接傳至 printLine()） */
+						const unsigned short line_length);
 
 		/* 全域變數
 		   Global variables */
@@ -60,7 +70,7 @@
 		     Reference resources
 		       How do you tell the compiler to make a member function inline?, C++ FAQ
 		       http://www.parashift.com/c++-faq-lite/inline-member-fns.html */
-		
+
 		#ifdef __cplusplus
 			}
 		#endif /* __cplusplus */

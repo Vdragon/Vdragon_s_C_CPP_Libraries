@@ -11,12 +11,18 @@
     /* for EXIT_* return code definition */
 		  #include <stdlib.h>
 
+		/* for i/o */
+			#include <iostream>
+
   /* Vdragons_C_CPP_Libraries_Collection
    * https://github.com/Vdragon/Vdragons_C_CPP_Libraries_Collection */
     /* for pausing program definition */
 		  #include "pauseProgram/Pause_program.h"
     /* for showing software info */
 		  #include "Show_software_info/Show_software_info.h"
+
+	/* Function under test */
+		#include "testSomething/C/testSomething.h"
 
 /* 常數與巨集
  * Constants & Macros */
@@ -25,6 +31,8 @@
 
 /* 函式雛型
  * Function Prototypes */
+	/* function foo */
+		void foo(void);
 
 /* 全域變數
  * Global Variables */
@@ -36,10 +44,17 @@
   restart_program:
     show_software_info("testSomething 測試程式");
 
+		testProcedure("foo", foo, "-", 10);
+
     /*暫停程式運行（於main函式中）*/
     if(pauseProgram() == 1){
       goto restart_program;
     }
 
     return EXIT_SUCCESS;
+  }
+
+  void foo(void){
+  	std::cout << "Function foo is running!" << std::endl;
+		return;
   }
