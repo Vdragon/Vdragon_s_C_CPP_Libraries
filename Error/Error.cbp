@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Error" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug_Linux_x86_32bit">
+				<Option platforms="Unix;" />
+				<Option output="Build/$(TARGET_NAME)/$(PROJECT_NAME).exe" prefix_auto="0" extension_auto="0" />
+				<Option object_output="Object_code/$(TARGET_NAME)/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release_Linux_x86_32bit">
+				<Option platforms="Unix;" />
+				<Option output="Build/$(TARGET_NAME)/$(PROJECT_NAME).exe" prefix_auto="0" extension_auto="0" />
+				<Option object_output="Object_code/$(TARGET_NAME)/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add option="-DNDEBUG" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+			<Target title="Debug_Windows_x86_32bit">
+				<Option platforms="Windows;" />
+				<Option output="Build/$(TARGET_NAME)/$(PROJECT_NAME).exe" prefix_auto="0" extension_auto="0" />
+				<Option object_output="Object_code/$(TARGET_NAME)/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Option projectIncludeDirsRelation="2" />
+				<Option projectLibDirsRelation="2" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release_Windows_x86_32bit">
+				<Option platforms="Windows;" />
+				<Option output="Build/$(TARGET_NAME)/$(PROJECT_NAME).exe" prefix_auto="0" extension_auto="0" />
+				<Option object_output="Object_code/$(TARGET_NAME)/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Option projectIncludeDirsRelation="2" />
+				<Option projectLibDirsRelation="2" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add option="-DNDEBUG" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+			<Target title="Debug_Mac_x86_32bit">
+				<Option platforms="Mac;" />
+				<Option output="Build/$(TARGET_NAME)/$(PROJECT_NAME).exe" prefix_auto="0" extension_auto="0" />
+				<Option object_output="Object_code/$(TARGET_NAME)/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+				<Linker>
+					<Add option="-lglut" />
+				</Linker>
+			</Target>
+			<Target title="Release_Mac_x86_32bit">
+				<Option platforms="Mac;" />
+				<Option output="Build/$(TARGET_NAME)/$(PROJECT_NAME).exe" prefix_auto="0" extension_auto="0" />
+				<Option object_output="Object_code/$(TARGET_NAME)/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add option="-DNDEBUG" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add option="-lglut" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+		</Compiler>
+		<Unit filename="Source_code/Error/C/Error.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Source_code/Error/C/Error.h" />
+		<Unit filename="Source_code/Project_specific_configurations/Debug.h" />
+		<Unit filename="Source_code/Project_specific_configurations/Math.h" />
+		<Unit filename="Source_code/Project_specific_configurations/Max_value.h" />
+		<Unit filename="Source_code/Project_specific_configurations/Software_info.h" />
+		<Unit filename="Source_code/Project_specific_configurations/System_category.h" />
+		<Unit filename="Source_code/Show_software_info/Show_software_info.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Source_code/Show_software_info/Show_software_info.h" />
+		<Unit filename="Source_code/Testbench.cpp" />
+		<Unit filename="Source_code/pauseProgram/Pause_program.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Source_code/pauseProgram/Pause_program.h" />
+		<Extensions>
+			<code_completion />
+			<debugger />
+			<envvars set="locale_en_us" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
