@@ -8,19 +8,19 @@
   #endif
   
   /*軟體名稱*/
-  #define SOFTWARE_NAME "SOFTWARE_NAME"
+		#define SOFTWARE_NAME "未命名軟體"
   /*軟體開發者名稱*/
-  #define DEVELOPER_NAME "DEVELOPER_NAME"
+		#define DEVELOPER_NAME "未命名開發者"
   /*軟體開發者的電子郵件地址*/
-  #define DEVELOPER_EMAIL "developer@host.category.region"
+		#define DEVELOPER_EMAIL "（尚未設定電子郵件地址）"
   /*用在著作權宣告的軟體釋出年份*/
-  #define SOFTWARE_RELEASE_YEAR "2012"
+		#define SOFTWARE_RELEASE_YEAR "2013"
   /* 用在軟體所使用的授權條款（目前尚未實作）
    * 有效值："LGPL" "GPL" "ALL_RIGHTS_RESERVED"
-  #define SOFTWARE_LICENSE "LGPL"*/
+		#define SOFTWARE_LICENSE "LGPL"*/
   /* 用在軟體所使用的授權條款版本（目前尚未實作）
    * 有效值："「數字」（+）" "NONE"
-  #define SOFTWARE_LICENSE_VERSION "3+"*/
+		#define SOFTWARE_LICENSE_VERSION "3+"*/
   #ifdef __cplusplus
     }
   #endif
