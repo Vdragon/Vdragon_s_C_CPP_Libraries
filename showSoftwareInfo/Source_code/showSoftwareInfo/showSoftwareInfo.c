@@ -51,7 +51,7 @@ void showSoftwareInfo(const char program_name[])
 {
   /*顯示程式名稱及著作權宣告*/
   printf("%s\n", program_name);
-  printf("Copyright " SOFTWARE_RELEASE_YEAR " " DEVELOPER_NAME "(" DEVELOPER_EMAIL ")\n");
+  printf("Copyright " SOFTWARE_RELEASE_YEAR " " DEVELOPER_NAME "<" DEVELOPER_EMAIL ">\n");
   putchar('\n');
 
   /*顯示授權條款*/
