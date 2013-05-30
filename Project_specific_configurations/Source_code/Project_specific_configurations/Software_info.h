@@ -1,7 +1,7 @@
 /* Software_info.h */
 /* include guard：避免同一個header檔案被include第二次。*/
-#ifndef SOFTWARE_INFO_H_
-  #define SOFTWARE_INFO_H_
+#ifndef SOFTWARE_INFO_H_INCLUDED
+  #define SOFTWARE_INFO_H_INCLUDED
   /* 如果是C++編譯器則停用C++特有的函式名稱mangling*/
   #ifdef __cplusplus
     extern "C"{
@@ -24,4 +24,4 @@
   #ifdef __cplusplus
     }
   #endif
-#endif /* SOFTWARE_INFO_H_ */
+#endif /* SOFTWARE_INFO_H_INCLUDED */
