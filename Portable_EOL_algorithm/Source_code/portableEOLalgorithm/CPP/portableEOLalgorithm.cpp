@@ -35,13 +35,13 @@
 #include <iostream>
 
 /*我們需要專案的設定值*/
-#include "../Project_specific_configurations/Debug.h"
+#include "../../Project_specific_configurations/Debug.h"
 
 /*我們需要一些defined訊息*/
-#include "../Messages_templates/zh_TW.h"
+#include "../../Messages_templates/zh_TW.h"
 
 /*我們需要標示當前模組的字串*/
-#include "portableEOLalgorithm.h"
+#include "portableEOLalgorithm.hpp"
 
 /*////////常數與巨集(Constants & Macros)以及其他#define指令////////*/
 

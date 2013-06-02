@@ -29,7 +29,7 @@
 
 /*////////程式所include的標頭檔(Included Headers)////////*/
 /*include our library*/
-#include "portableEOLalgorithm/portableEOLalgorithm.h"
+#include "portableEOLalgorithm/CPP/portableEOLalgorithm.hpp"
 
 /*include list files */
 #include "List_directory_files/listDirectoryFiles.h"
