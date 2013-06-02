@@ -9,11 +9,11 @@
  * Included Library Headers */
 	/* Standard C/C++ library */
     /* for EXIT_* return code definition */
-		  #include <stdlib.h>
+		  #include <cstdlib>
 		/* for errno */
-			#include <errno.h>
+			#include <cerrno>
 		/* io function */
-			#include <stdio.h>
+			#include <cstdio>
 
   /* Vdragons_C_CPP_Libraries_Collection
    * https://github.com/Vdragon/Vdragons_C_CPP_Libraries_Collection */
