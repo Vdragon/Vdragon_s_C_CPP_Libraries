@@ -28,5 +28,4 @@
 
 ## 已知問題<br />Known issues
 請瀏覽本專案的問題追蹤系統。  
-Please browse our project's issue tracker.  
-[https://github.com/Vdragon/C_CPP_project_template/issues](https://github.com/Vdragon/C_CPP_project_template/issues)
+Please browse our project's issue tracker.
