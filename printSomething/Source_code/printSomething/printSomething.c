@@ -27,6 +27,12 @@
 
 /* 主要程式碼
  * Main Code */
+	void printCstring(const char c_string[]){
+		printf("%s", c_string);
+
+		return;
+	}
+
 	void printLine(
 		/* 線的組成成份 */
 			const char component[],

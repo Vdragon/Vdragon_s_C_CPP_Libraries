@@ -53,7 +53,7 @@
 		/* 函式雛型
 		   Function prototypes */
 			/* 印出一個 C 語言的字串 */
-				inline void printCstring(const char c_string[]);
+				void printCstring(const char c_string[]);
 
 			/* 印出一條由成份字串組成的線 */
 				void printLine(
@@ -68,11 +68,7 @@
 
 		/* Inline 子程式的實作
 		   Inline procedure implementations */
-				inline void printCstring(const char c_string[]){
-					printf("%s", c_string);
 
-					return;
-				}
 
 		#ifdef __cplusplus
 			}
