@@ -47,10 +47,6 @@
 /*////////全域變數(Global Variables)////////*/
 
 /*--------------主要程式碼(Main Code)--------------*/
-
-
-
-
 /* 暫停運行函式 */
 short int pauseProgram(void)
   {
