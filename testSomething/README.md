@@ -20,6 +20,9 @@
         * 本說明文件  
           This documentation
 
+## 模組依賴關係<br />Module dependency
+* printSomething
+
 ## 如何使用？<br />How to use it?
 （尚未實作）
 
