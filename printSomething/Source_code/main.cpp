@@ -10,6 +10,8 @@
 	/* Standard C/C++ library */
     /* for EXIT_* return code definition */
 		  #include <stdlib.h>
+		#include <stdio.h>
+
 
   /* Vdragons_C_CPP_Libraries_Collection
    * https://github.com/Vdragon/Vdragons_C_CPP_Libraries_Collection */

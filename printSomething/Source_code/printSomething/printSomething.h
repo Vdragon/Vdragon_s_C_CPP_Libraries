@@ -42,8 +42,6 @@
 
 		/* 程式所 include 之函式庫的標頭檔
 		   Included Library Headers */
-			/* 標準 C 函式庫 */
-				#include <stdio.h>
 
 		/* 常數與巨集
 		   Constants & Macros */

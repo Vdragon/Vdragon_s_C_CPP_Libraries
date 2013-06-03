@@ -11,8 +11,11 @@
 */
 /* 程式所 include 之函式庫的標頭檔
  * Included Library Headers */
-	/* 自己 */
-		#include "printSomething.h"
+	/* 自己
+		#include "printSomething.h" */
+
+	/* 標準 C 函式庫 */
+		#include <stdio.h>
 
 /* 常數與巨集
  * Constants & Macros */
