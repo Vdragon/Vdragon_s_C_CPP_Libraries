@@ -40,14 +40,24 @@
 /* 主要程式碼
  * Main Code */
   int main(int argc, char *argv[]){
-  	FILE *not_exist;
+  	FILE *not_exist = NULL;
 
   /*用來重新運行程式的label*/
   restart_program:
     show_software_info("Error 測試程式");
 
 		not_exist = fopen("nonexist", "r");
-		printError(errno);
+		if(not_exist == NULL){
+		  printError(errno);
+		}
+
+		/* Shouldn't use this code according to the following question:
+		 * c - Why glibc's fclose(NULL) cause segmentation fault instead of returning error? - Stack Overflow
+		 * http://stackoverflow.com/questions/16922871/why-glibcs-fclosenull-cause-segmentation-fault-instead-of-returning-error
+		if(fclose(not_exist) == EOF){
+      printError(errno);
+    }
+    */
 
     /*暫停程式運行（於main函式中）*/
     if(pauseProgram() == 1){
