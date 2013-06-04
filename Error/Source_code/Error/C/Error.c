@@ -32,7 +32,7 @@
 /* 函式的實作
  * Function implementations */
 	void printError(int error_id){
-		printf(
+		fprintf(stderr,
       "偵測到錯誤！\n"
       "系統回報的錯誤原因為：%d - %s\n", error_id, strerror(error_id));
 		return;
