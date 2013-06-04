@@ -55,9 +55,9 @@
 		 * c - Why glibc's fclose(NULL) cause segmentation fault instead of returning error? - Stack Overflow
 		 * http://stackoverflow.com/questions/16922871/why-glibcs-fclosenull-cause-segmentation-fault-instead-of-returning-error
 		if(fclose(not_exist) == EOF){
-      printError(errno);
-    }
-    */
+			printError(errno);
+		}
+		 */
 
     /*暫停程式運行（於main函式中）*/
     if(pauseProgram() == 1){
