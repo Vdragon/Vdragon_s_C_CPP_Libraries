@@ -28,20 +28,20 @@
 /*////////環境設定(Environment Settings)////////*/
 
 /*////////程式所include的標頭檔(Included Headers)////////*/
-/*we need io functions*/
-#include <fstream>
+	/*we need io functions*/
+		#include <fstream>
 
-/* we need iostream to output debug message*/
-#include <iostream>
+	/* we need iostream to output debug message*/
+		#include <iostream>
 
-/*我們需要專案的設定值*/
-#include "../../Project_specific_configurations/Debug.h"
+	/*我們需要專案的設定值*/
+		#include "../../Project_specific_configurations/Debug.h"
 
-/*我們需要一些defined訊息*/
-#include "../../Messages_templates/zh_TW.h"
+	/*我們需要一些defined訊息*/
+		#include "../../Messages_templates/zh_TW.h"
 
-/*我們需要標示當前模組的字串*/
-#include "portableEOLalgorithm.hpp"
+	/*我們需要標示當前模組的字串*/
+		#include "portableEOLalgorithm.hpp"
 
 /*////////常數與巨集(Constants & Macros)以及其他#define指令////////*/
 
@@ -56,89 +56,87 @@
 
 /*--------------主要程式碼(Main Code)--------------*/
 /*我們需要std namespace*/
-using namespace std;
+	using namespace std;
 
 /* 跳過stream中的換行字元序列的函式*/
-short skipEOLsequence(istream& file_stream)
-{
-  /*用來測試的字元*/
-  char test;
+	short skipEOLsequence(istream& file_stream){
+		/*用來測試的字元*/
+			char test;
 
-  /*guess first character, may be '\r'(MS-DOS later or MAC) or '\n'(Unix)*/
-  test = file_stream.peek();
+		/*guess first character, may be '\r'(MS-DOS later or MAC) or '\n'(Unix)*/
+			test = file_stream.peek();
 
-  switch(test){
-  case '\n':
-    /*if is Unix...eat it and done*/
+		switch(test){
+		case '\n':
+			/*if is Unix...eat it and done*/
 #ifndef NDEBUG
-    cout << DEBUG_TAG << SKIP_EOL_SEQUENCE_TAG
-         << "吃掉[LF]" << endl;
+				cout << DEBUG_TAG << SKIP_EOL_SEQUENCE_TAG
+						 << "吃掉[LF]" << endl;
 #endif
-    file_stream.ignore(1);
-    /*return Unix*/
-    return 1;
-    break;
-  case '\r':
-    /*maybe MS-DOS or Mac...ignore it and peek next*/
-    file_stream.ignore(1);
-    test = file_stream.peek();
-    if(test == '\n'){
+			file_stream.ignore(1);
+			/*return Unix*/
+				return 1;
+			break;
+		case '\r':
+			/*maybe MS-DOS or Mac...ignore it and peek next*/
+				file_stream.ignore(1);
+				test = file_stream.peek();
+			if(test == '\n'){
 #ifndef NDEBUG
-      cout << DEBUG_TAG << SKIP_EOL_SEQUENCE_TAG
-           << "吃掉[CR][LF]" << endl;
+				cout << DEBUG_TAG << SKIP_EOL_SEQUENCE_TAG
+						 << "吃掉[CR][LF]" << endl;
 #endif
-      file_stream.ignore(1);
-      /*return Windows*/
-      return 2;
-    }
-    /*return Mac*/
+				file_stream.ignore(1);
+				/*return Windows*/
+				return 2;
+			}
+			/*return Mac*/
 #ifndef NDEBUG
-    cout << DEBUG_TAG << SKIP_EOL_SEQUENCE_TAG
-         << "吃掉[CR]" << endl;
+				cout << DEBUG_TAG << SKIP_EOL_SEQUENCE_TAG
+						 << "吃掉[CR]" << endl;
 #endif
-    return 3;
-    break;
-  default:
-    /*shouldn't be EOL else...*/
-    return -1;
-    break;
-  }
+				return 3;
+			break;
+		default:
+			/*shouldn't be EOL else...*/
+				return -1;
+			break;
+		}
 
-}
+	}
 
-/*portable getline function*/
-std::istream& portableGetline(std::istream& is, std::string& t)
-{
-    t.clear();
+/* portable getline function */
+	std::istream& portableGetline(std::istream& is, std::string& t){
+		t.clear();
 
-    // The characters in the stream are read one-by-one using a std::streambuf.
-    // That is faster than reading them one-by-one using the std::istream.
-    // Code that uses streambuf this way must be guarded by a sentry object.
-    // The sentry object performs various tasks,
-    // such as thread synchronization and updating the stream state.
+		// The characters in the stream are read one-by-one using a std::streambuf.
+		// That is faster than reading theim one-by-one using the std::istream.
+		// Code that uses streambuf this way must be guarded by a sentry object.
+		// The sentry object performs various tasks,
+		// such as thread synchronization and updating the stream state.
 
-    std::istream::sentry se(is, true);
-    std::streambuf* sb = is.rdbuf();
+		std::istream::sentry se(is, true);
+		std::streambuf* sb = is.rdbuf();
 
-    for(;;) {
-        int c = sb->sbumpc();
-        switch (c) {
-        case '\r':
-            c = sb->sgetc();
-            if(c == '\n')
-                sb->sbumpc();
-            return is;
-        case '\n':
-        case EOF:
-            return is;
-        default:
-            t += (char)c;
-        }
-    }
-}
+		for(;;) {
+			int c = sb->sbumpc();
+			switch (c) {
+			case '\r':
+				c = sb->sgetc();
+				if(c == '\n')
+					sb->sbumpc();
+				return is;
+			case '\n':
+			case EOF:
+				return is;
+			default:
+				t += (char)c;
+				break;
+			}
+		}
+	}
 
-void dumpInvisibleContent(string& input)
-{
+void dumpInvisibleContent(string& input){
   /*counter*/
   unsigned i;
   char buffer;
