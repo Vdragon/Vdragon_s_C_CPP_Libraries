@@ -48,8 +48,12 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Source_code/pauseProgram/Pause_program.h" />
-		<Unit filename="Source_code/portableEOLalgorithm/portableEOLalgorithm.cpp" />
-		<Unit filename="Source_code/portableEOLalgorithm/portableEOLalgorithm.h" />
+		<Unit filename="Source_code/portableEOLalgorithm/C/portableEOLalgorithm.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Source_code/portableEOLalgorithm/C/portableEOLalgorithm.h" />
+		<Unit filename="Source_code/portableEOLalgorithm/CPP/portableEOLalgorithm.cpp" />
+		<Unit filename="Source_code/portableEOLalgorithm/CPP/portableEOLalgorithm.hpp" />
 		<Extensions>
 			<envvars />
 			<code_completion />

@@ -7,6 +7,5 @@
 
 #ifndef TEST_PROGRAM_H_
   #define TEST_PROGRAM_H_
-  #define MAX_FILE_NAME_SIZE 30
 
 #endif /* TEST_PROGRAM_H_ */

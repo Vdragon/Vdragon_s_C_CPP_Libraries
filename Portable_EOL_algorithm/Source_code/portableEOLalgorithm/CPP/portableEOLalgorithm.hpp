@@ -34,6 +34,5 @@
    * 引數：input - 輸入的字串*/
   void dumpInvisibleContent(string& input);
 
-  /* 換到下一列子程式 */
-  void putEOL(void);
+
 #endif /* SKIP_EOL_ALGORITHM_H_ */

@@ -43,6 +43,9 @@
 /*我們需要打開檔案的class*/
 #include <fstream>
 
+/* We need a string that don't overflow ! */
+#include <string>
+
 /*錯誤訊息header*/
 #include "Messages_templates/zh_TW.h"
 
@@ -61,10 +64,13 @@
 /*////////全域變數(Global Variables)////////*/
 
 /*--------------主要程式碼(Main Code)--------------*/
+/* 直接使用標準命名空間 */
+	using namespace std;
+
 int main()
 {
-  int buffer;
-  char filename[MAX_FILE_NAME_SIZE];
+  int buffer = 0;
+  std::string filename;
   ifstream input_file;
 
 restart_program:
@@ -84,9 +90,8 @@ restart_program:
     break;
   }
   printf("%s", "---------------------");
-  putEOL();
 
-  input_file.open(filename, ifstream::in);
+  input_file.open(filename.c_str() , input_file.in);
   if(input_file.is_open()){
     /*read file*/
     while(true){
@@ -103,13 +108,13 @@ restart_program:
       skipEOLsequence(input_file);
     }
     /*close file*/
-    input_file.close();
+    	input_file.close();
 
   }else{
-      cout << ERROR_FILE_OPEN_FAIL;
+		cout << ERROR_FILE_OPEN_FAIL;
   }
 
-  /*pause*/
+  /* pause */
   if(pauseProgram() == 1){
       goto restart_program;
   }
