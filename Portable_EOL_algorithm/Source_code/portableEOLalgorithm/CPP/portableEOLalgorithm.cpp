@@ -104,8 +104,8 @@
 	}
 
 /* portable getline function */
-	std::istream& portableGetline(std::istream& is, std::string& t){
-		t.clear();
+	std::istream& portableGetline(std::istream& is, std::string& target){
+		target.clear();
 
 		// The characters in the stream are read one-by-one using a std::streambuf.
 		// That is faster than reading theim one-by-one using the std::istream.
@@ -116,19 +116,21 @@
 		std::istream::sentry se(is, true);
 		std::streambuf* sb = is.rdbuf();
 
-		for(;;) {
+		while(true) {
 			int c = sb->sbumpc();
+
 			switch (c) {
 			case '\r':
 				c = sb->sgetc();
 				if(c == '\n')
 					sb->sbumpc();
 				return is;
-			case '\n':
-			case EOF:
+				break;
+			case '\n': case EOF:
 				return is;
+				break;
 			default:
-				t += (char)c;
+				target += (char)c;
 				break;
 			}
 		}
