@@ -90,6 +90,7 @@
 							return 2;
 					}else{
 						/* It's old Mac!  Leave the peeked non-EOL alone and return */
+							cout << endl;
 							return 3;
 					}
 			}else{
