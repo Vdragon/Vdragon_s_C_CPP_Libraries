@@ -55,54 +55,51 @@
 /*////////全域變數(Global Variables)////////*/
 
 /*--------------主要程式碼(Main Code)--------------*/
-/*我們需要std namespace*/
+/* 我們需要std namespace */
 	using namespace std;
 
-/* 跳過stream中的換行字元序列的函式*/
+/* 跳過stream中的換行字元序列的函式 */
 	short skipEOLsequence(istream& file_stream){
-		/*用來測試的字元*/
-			char test;
+		char check;
 
-		/*guess first character, may be '\r'(MS-DOS later or MAC) or '\n'(Unix)*/
-			test = file_stream.peek();
+		/* guess first character, may be '\r'(MS-DOS later or MAC) or '\n'(Unix)*/
+			check = file_stream.peek();
 
-		switch(test){
-		case '\n':
-			/*if is Unix...eat it and done*/
+		/* if is Unix...eat it and reply Unix */
+			if(check == '\n'){
+				file_stream.ignore(1);
 #ifndef NDEBUG
 				cout << DEBUG_TAG << SKIP_EOL_SEQUENCE_TAG
-						 << "吃掉[LF]" << endl;
+						 << "吃掉了[LF]" << endl;
 #endif
-			file_stream.ignore(1);
-			/*return Unix*/
 				return 1;
-			break;
-		case '\r':
-			/*maybe MS-DOS or Mac...ignore it and peek next*/
-				file_stream.ignore(1);
-				test = file_stream.peek();
-			if(test == '\n'){
+			}else if(check == '\r'){
+				/* maybe MS-DOS or old Mac...ignore it and peek next to see which is which */
+					file_stream.ignore(1);
 #ifndef NDEBUG
-				cout << DEBUG_TAG << SKIP_EOL_SEQUENCE_TAG
-						 << "吃掉[CR][LF]" << endl;
+					cout << DEBUG_TAG << SKIP_EOL_SEQUENCE_TAG
+							 << "吃掉了[CR]";
 #endif
-				file_stream.ignore(1);
-				/*return Windows*/
-				return 2;
+					check = file_stream.peek();
+					if(check == '\n'){
+						/* It's MSDOS or Windows! */
+							file_stream.ignore(1);
+#ifndef NDEBUG
+							cout << "[LF]" << endl;
+#endif
+							return 2;
+					}else{
+						/* It's old Mac!  Leave the peeked non-EOL alone and return */
+							return 3;
+					}
+			}else{
+				/* not a known EOL character sequence, good bye! */
+#ifndef NDEBUG
+					cout << DEBUG_TAG << SKIP_EOL_SEQUENCE_TAG
+							 << "吃列結尾以外的東西會拉肚子的……" << endl;
+#endif
+					return -1;
 			}
-			/*return Mac*/
-#ifndef NDEBUG
-				cout << DEBUG_TAG << SKIP_EOL_SEQUENCE_TAG
-						 << "吃掉[CR]" << endl;
-#endif
-				return 3;
-			break;
-		default:
-			/*shouldn't be EOL else...*/
-				return -1;
-			break;
-		}
-
 	}
 
 /* portable getline function */

@@ -89,7 +89,7 @@ restart_program:
     cout << "[cin]沒有偵測到換行字元序列" << endl;
     break;
   }
-  printf("%s", "---------------------");
+  cout << "-------------------" << endl;
 
   input_file.open(filename.c_str() , input_file.in);
   if(input_file.is_open()){
