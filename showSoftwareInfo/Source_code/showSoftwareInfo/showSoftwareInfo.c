@@ -33,8 +33,11 @@
 /*我們需要printf()*/
 #include <stdio.h>
 
-/*////////常數與巨集(Constants & Macros)////////*/
+/* printSomething librfary */
+#include "../printSomething/printSomething.h"
 
+/*////////常數與巨集(Constants & Macros)////////*/
+#define LINELENGTH 50
 /*////////其他前期處理器指令(Other Preprocessor Directives////////*/
 
 /*--------------全域宣告與定義(Global Declaration & Definition)--------------*/
@@ -49,6 +52,11 @@
    *  印出資訊，將控制交還給主要程式*/
 void showSoftwareInfo(const char program_name[])
 {
+
+	printLine(
+			PRINTSOMETHING_COMPONENT_HYPHEN_MINUS,
+			LINELENGTH);
+
   /*顯示程式名稱及著作權宣告*/
   printf("%s\n", program_name);
   printf("Copyright " SOFTWARE_RELEASE_YEAR " " DEVELOPER_NAME "<" DEVELOPER_EMAIL ">\n");
@@ -66,8 +74,10 @@ void showSoftwareInfo(const char program_name[])
   /*顯示附帶說明*/
   printf("You should have received a copy of the GNU Lesser General Public License along with " SOFTWARE_NAME ".  If not, see <http://www.gnu.org/licenses/>.\n");
 
-  /*顯示分隔線*/
-  printf("---------------------------------\n");
+	printLine(
+			PRINTSOMETHING_COMPONENT_HYPHEN_MINUS,
+			LINELENGTH);
+
   /* 結束*/
   return ;
 }
