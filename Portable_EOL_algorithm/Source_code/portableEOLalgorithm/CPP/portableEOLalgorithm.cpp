@@ -134,6 +134,11 @@
 				break;
 			}
 		}
+
+		// A workaround to prevent G++ from complaining
+		// Warning - No return, in function returning non-void
+		// 實際上前方的 while 迴圈最終一定會回傳，所以不需要這一行
+			return is;
 	}
 
 void dumpInvisibleContent(string& input){
