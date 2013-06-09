@@ -45,6 +45,11 @@
 
 		/* 常數與巨集
 		   Constants & Macros */
+			/* printLine 線條成份字串 */
+				#define PRINTSOMETHING_COMPONENT_HYPHEN_MINUS "-"
+			/* 線條長度 */
+				#define PRINTSOMETHING_LENGTH_TEN 10
+				#define PRINTSOMETHING_LENGTH_TWENTY 20
 
 		/* Definition of data type, enumeration, data structure and class */
 
