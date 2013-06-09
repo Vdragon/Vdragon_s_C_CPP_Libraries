@@ -37,7 +37,7 @@
 #include "../printSomething/printSomething.h"
 
 /*////////常數與巨集(Constants & Macros)////////*/
-#define LINELENGTH 50
+#define LINE_LENGTH 50
 /*////////其他前期處理器指令(Other Preprocessor Directives////////*/
 
 /*--------------全域宣告與定義(Global Declaration & Definition)--------------*/
@@ -55,7 +55,7 @@ void showSoftwareInfo(const char program_name[])
 
 	printLine(
 			PRINTSOMETHING_COMPONENT_HYPHEN_MINUS,
-			LINELENGTH);
+			LINE_LENGTH);
 
   /*顯示程式名稱及著作權宣告*/
   printf("%s\n", program_name);
@@ -76,7 +76,7 @@ void showSoftwareInfo(const char program_name[])
 
 	printLine(
 			PRINTSOMETHING_COMPONENT_HYPHEN_MINUS,
-			LINELENGTH);
+			LINE_LENGTH);
 
   /* 結束*/
   return ;
