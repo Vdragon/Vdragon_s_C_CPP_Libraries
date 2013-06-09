@@ -41,7 +41,7 @@
 		#include "../../Messages_templates/zh_TW.h"
 
 	/*我們需要標示當前模組的字串*/
-		#include "portableEOLalgorithm.hpp"
+		#include "Portable_EOL_algorithm.hpp"
 
 /*////////常數與巨集(Constants & Macros)以及其他#define指令////////*/
 
