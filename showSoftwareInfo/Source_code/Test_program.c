@@ -31,14 +31,21 @@
 #include "showSoftwareInfo/showSoftwareInfo.h"
 
 /* 我們需要暫停程式*/
-#include "pauseProgram/Pause_program.h"
+#include "pauseProgram/pauseProgram.h"
 
 /* 我們需要EXIT_SUCCESS */
 #include <stdlib.h>
 
 /*我們需要程式名稱*/
 #include "Test_program.h"
+
+/* GNU gettext library */
+#include "libintl.h"
+#include "locale.h"
+#include "Project_specific_configurations/GNU_gettext_library.h"
+
 /*////////常數與巨集(Constants & Macros)////////*/
+#define _(Untranslated_string) gettext(Untranslated_string)
 
 /*////////其他前期處理器指令(Other Preprocessor Directives////////*/
 
@@ -52,12 +59,18 @@
 /*--------------主要程式碼(Main Code)--------------*/
 int main(void)
 {
+	/* gettext library initialization */
+		/* Use system default locale instead of "C" locale */
+			setlocale(LC_MESSAGES, "");
+		bindtextdomain(MESSAGE_DOMAIN, "Translations");
+		textdomain(MESSAGE_DOMAIN);
+		bind_textdomain_codeset(MESSAGE_DOMAIN, MESSAGE_CHARSET);
 
 /*用來重新運行程式的label*/
 restart_program:
   /*呼叫Show software info*/
-  showSoftwareInfo(PROGRAM_NAME);
-  showSoftwareInfo("test_string");
+  showSoftwareInfo(_(TEST_PROGRAM_NAME));
+
   /*呼叫暫停運行函式(放在main函式中)*/
   if(pauseProgram() == 1){
     goto restart_program;
