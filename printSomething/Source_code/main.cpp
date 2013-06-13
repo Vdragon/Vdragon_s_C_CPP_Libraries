@@ -39,7 +39,9 @@
   	/* unit test functions */
   		void test_printCstring(void);
   		void test_printLine(void);
-
+#if defined(__unix) || defined(__unix__)
+			void test_printCurrentWorkingDirectory(void);
+#endif
   /*用來重新運行程式的label*/
   restart_program:
     show_software_info("printSomething 測試程式");
@@ -47,6 +49,7 @@
 		test_printCstring();
 		printLine("#", 20);
 		test_printLine();
+		test_printCurrentWorkingDirectory();
 
     /*暫停程式運行（於main函式中）*/
     if(pauseProgram() == 1){
@@ -70,3 +73,12 @@
 		printLine("喵", 10);
 		return;
 	}
+
+#if defined(__unix) || defined(__unix__)
+	void test_printCurrentWorkingDirectory(void){
+		printf("目前的工作目錄為：");
+		printCurrentWorkingDirectory();
+		printf("。\n");
+		return;
+	}
+#endif

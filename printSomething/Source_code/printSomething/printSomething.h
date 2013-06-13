@@ -66,6 +66,11 @@
 						unsigned short length
 				);
 
+#if defined(__unix) || defined(__unix__)
+			/* 印出當前的工作目錄 */
+				void printCurrentWorkingDirectory(void);
+#endif
+
 		/* 全域變數
 		   Global variables */
 
