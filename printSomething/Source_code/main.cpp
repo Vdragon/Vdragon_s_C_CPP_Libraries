@@ -29,9 +29,6 @@
 
 /* 函式雛型
  * Function Prototypes */
-	/* unit test functions */
-		void test_printCstring(void);
-		void test_printLine(void);
 
 /* 全域變數
  * Global Variables */
@@ -39,6 +36,10 @@
 /* 主要程式碼
  * Main Code */
   int main(int argc, char *argv[]){
+  	/* unit test functions */
+  		void test_printCstring(void);
+  		void test_printLine(void);
+
   /*用來重新運行程式的label*/
   restart_program:
     show_software_info("printSomething 測試程式");
