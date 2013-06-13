@@ -48,7 +48,6 @@
 			printCstring(component);
 		}
 
-		/* FIXME: 要換成跨平台的版本 */
 			putchar('\n');
 		return;
 	}
