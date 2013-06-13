@@ -287,10 +287,14 @@ modules.order
 *.uvgui.*
 *.M51
 
-# Geany 整合是開發環境排除規則
+# Geany 整合式開發環境排除規則
 *.gch
 !.geanyprj
 	#Geany alternate project plugin
+
+# GNU gettext 函式庫排除規則
+  # 二進位版本
+*.mo
 
 #我自己的喜好設定
 	#Resources目錄底下的東西為相關資源不要排除掉
