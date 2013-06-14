@@ -31,8 +31,8 @@
 		Tab character width = 2 space characters
 */
 /* include guard：避免同一個 header 檔案被 include 第二次 */
-	#ifndef ERROR_H_INCLUDED
-		#define ERROR_H_INCLUDED
+	#ifndef VCCL_ERROR
+		#define VCCL_ERROR
 		/* 如果是 C++ 編譯器則停用 C++ 特有的函式名稱 mangling*/
 		#ifdef __cplusplus
 			extern "C"{
@@ -68,4 +68,4 @@
 		#ifdef __cplusplus
 			}
 		#endif /* __cplusplus */
-	#endif/* _H_INCLUDED */
+	#endif/* VCCL_ERROR */
