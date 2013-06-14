@@ -48,7 +48,7 @@
 
 		not_exist = fopen("nonexist", "r");
 		if(not_exist == NULL){
-		  printError(errno);
+		  printError("fopen()", errno);
 		}
 
 		/* Shouldn't use this code according to the following question:

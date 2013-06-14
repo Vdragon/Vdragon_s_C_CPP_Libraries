@@ -31,9 +31,9 @@
 
 /* 函式的實作
  * Function implementations */
-	void printError(int error_id){
+	void printError(const char operation_name[], const int error_id){
 		fprintf(stderr,
-      "偵測到錯誤！\n"
-      "系統回報的錯誤原因為：%d - %s\n", error_id, strerror(error_id));
+      "%s 操作偵測到錯誤！\n"
+      "系統回報的錯誤原因為：%d - %s\n", operation_name, error_id, strerror(error_id));
 		return;
 	}

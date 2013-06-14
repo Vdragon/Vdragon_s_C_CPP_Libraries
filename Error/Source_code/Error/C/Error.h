@@ -50,7 +50,7 @@
 
 		/* 函式雛型
 		   Function prototypes */
-			void printError(int error_id);
+			void printError(const char operation_name[], const int error_id);
 
 		/* 全域變數
 		   Global variables */
