@@ -1,7 +1,7 @@
 /*
 	程式名稱
 	Program name
-		Error
+		testSomething
 	更新紀錄
 	Changelog
 		Changelog is now stored on GitHub(http://www.github.com)
@@ -31,8 +31,8 @@
 		Tab character width = 2 space characters
 */
 /* include guard：避免同一個 header 檔案被 include 第二次 */
-	#ifndef VCCL_ERROR
-		#define VCCL_ERROR
+	#ifndef testSomething_H_INCLUDED
+		#define testSomething_H_INCLUDED
 		/* 如果是 C++ 編譯器則停用 C++ 特有的函式名稱 mangling*/
 		#ifdef __cplusplus
 			extern "C"{
@@ -47,38 +47,25 @@
 		   Constants & Macros */
 
 		/* Definition of data type, enumeration, data structure and class */
-			typedef enum error_reason{
-				ERROR_UNEXPECTED_CONDITION = 0,
-				ERROR_SELF_DEFINED,
-				ERROR_UNKNOWN
-			}Error_reason;
-			const char * const error_reason_readable[] = {
-				"發生開發者未預期的狀況！請將導致此錯誤的使用程序通知開發者",
-				"發生開發者自行定義的問題"
-				"發生未知問題"
-			};
 
 		/* 函式雛型
 		   Function prototypes */
-			void printError(
-					const char operation_name[],
-					Error_reason why,
-				const char self_defined_why[]);
+			/* 測試函式的函式 */
+				void testProcedure(
+					/* 函式名稱 */
+						const char name[],
+					/* 函式指標變數 */
+						void (*proc_under_test)(void),
+					/* 用來分隔測試中函式的輸出的線的組成成份（直接傳至 printLine()） */
+						const char line_component[],
+					/* 用來分隔測試中函式的輸出的線的長度（直接傳至 printLine()） */
+						const unsigned short line_length);
 
-			void printErrorErrno(const char operation_name[], const int error_id);
-
-			void abortError(Error_reason why);
-
-#ifdef UNIMPLEMENTED
-#endif /* Unimplemented */
 		/* 全域變數
 		   Global variables */
 
 		/* Inline 子程式的實作
 		   Inline procedure implementations
-		     限制
-		     Limitations
-		       C89 規範中不可用
 		     參考資料
 		     Reference resources
 		       How do you tell the compiler to make a member function inline?, C++ FAQ
@@ -87,4 +74,4 @@
 		#ifdef __cplusplus
 			}
 		#endif /* __cplusplus */
-	#endif/* VCCL_ERROR */
+	#endif/* _H_INCLUDED */

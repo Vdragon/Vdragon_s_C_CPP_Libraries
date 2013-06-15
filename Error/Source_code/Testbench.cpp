@@ -23,6 +23,8 @@
 		  #include "Show_software_info/Show_software_info.h"
 		/* test target */
 			#include "Error/C/Error.h"
+		/* for testProcedure() */
+			#include "testSomething/C/testSomething.h"
 
 /* 常數與巨集
  * Constants & Macros */
@@ -40,15 +42,36 @@
 /* 主要程式碼
  * Main Code */
   int main(int argc, char *argv[]){
-  	FILE *not_exist = NULL;
+  	void test_printErrorErrno(void);
+  	void test_abortError(void);
 
   /*用來重新運行程式的label*/
   restart_program:
     show_software_info("Error 測試程式");
 
+#ifdef DISABLED
+    testProcedure(
+			"printErrorErrno()",
+			test_printErrorErrno,
+			"-",
+			20);
+#endif
+		testProcedure("void abortError(void)", test_abortError, "-", 20);
+
+    /*暫停程式運行（於main函式中）*/
+    if(pauseProgram() == 1){
+      goto restart_program;
+    }
+
+    return EXIT_SUCCESS;
+  }
+
+  void test_printErrorErrno(void){
+  	FILE *not_exist = NULL;
+
 		not_exist = fopen("nonexist", "r");
 		if(not_exist == NULL){
-		  printError("fopen()", errno);
+		  printErrorErrno("fopen()", errno);
 		}
 
 		/* Shouldn't use this code according to the following question:
@@ -58,11 +81,10 @@
 			printError(errno);
 		}
 		 */
+  	return;
+  }
 
-    /*暫停程式運行（於main函式中）*/
-    if(pauseProgram() == 1){
-      goto restart_program;
-    }
-
-    return EXIT_SUCCESS;
+  void test_abortError(void){
+  	abortError(ERROR_UNEXPECTED_CONDITION);
+  	return;
   }
