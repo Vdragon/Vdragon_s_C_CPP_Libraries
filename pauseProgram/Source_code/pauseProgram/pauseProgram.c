@@ -45,6 +45,7 @@
 /*////////函式雛型(Function Prototypes)////////*/
 
 /*////////全域變數(Global Variables)////////*/
+	int generic_return_value;
 
 /*--------------主要程式碼(Main Code)--------------*/
 /* 暫停運行函式 */
@@ -75,19 +76,25 @@ short int pauseProgram(void)
 
         /*清空螢幕*/
 #ifdef _WIN32
-				system("cls");
+        generic_return_value = system("cls");
 #elif defined(unix) || defined(__unix__) || defined(__unix)
-				system("clear");
+        generic_return_value = system("clear");
 	#ifndef _NDEBUG
 				printf("[DEBUG]__unix__ cleared the screen!\n");
 	#endif // _NDEBUG
 #else
-				system("clear");
+				generic_return_value = system("clear");
 	#ifndef _NDEBUG
 				printf("[DEBUG]__else__ cleared the screen!\n");
 	#endif // _NDEBUG
 #endif // _WIN32
 
+				if(generic_return_value != 0){
+					fprintf(
+						stderr,
+						"【警告】清除螢幕失敗！\n"
+						"【警告】回傳碼為 %d\n", generic_return_value);
+				}
         /*return true*/
         return 1;
       }
