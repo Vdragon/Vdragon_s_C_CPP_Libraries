@@ -45,7 +45,7 @@
 				const char line_component[],
 			/* 用來分隔測試中函式的輸出的線的長度（直接傳至 printLine()） */
 				const unsigned short line_length){
-			printf("開始測試 %s：\n", name);
+			printf("開始測試 %s 子程式\n", name);
 			printLine(line_component, line_length);
 			(*proc_under_test)();
 			printLine(line_component, line_length);
