@@ -52,11 +52,6 @@
 				ERROR_SELF_DEFINED,
 				ERROR_UNKNOWN
 			}Error_reason;
-			const char * const error_reason_readable[] = {
-				"發生開發者未預期的狀況！請將導致此錯誤的使用程序通知開發者",
-				"發生開發者自行定義的問題"
-				"發生未知問題"
-			};
 
 		/* 函式雛型
 		   Function prototypes */

@@ -33,7 +33,12 @@
 
 /* 全域變數
  * Global Variables */
-
+	const char * const error_reason_readable[] = {
+		"發生開發者未預期的狀況！請將導致此錯誤的使用程序通知開發者",
+		"發生開發者自行定義的問題"
+		"發生未知問題"
+	};
+			
 /* 函式的實作
  * Function implementations */
 	void printError(const char operation_name[], Error_reason why, const char self_defined_why[]){
