@@ -45,6 +45,7 @@
   	void test_printErrorErrno(void);
   	void test_abortError(void);
   	void test_exitError(void);
+  	void test_exitError_wrong_condition(void);
 
   /*用來重新運行程式的label*/
   restart_program:
@@ -58,8 +59,9 @@
 			20);
 
 		testProcedure("void abortError(void)", test_abortError, "-", 20);
-#endif
 		testProcedure("void test_exitError(void)", test_exitError, "-", 20);
+#endif
+		testProcedure("void test_exitError_wrong_condition(void)", test_exitError, "-", 20);
 
     /*暫停程式運行（於main函式中）*/
     if(pauseProgram() == 1){
@@ -94,6 +96,11 @@
 
   void test_exitError(void){
   	exitError(ERROR_UNEXPECTED_CONDITION, 1);
+  	return;
+  }
+
+  void test_exitError_wrong_condition(void){
+  	exitError(ERROR_UNEXPECTED_CONDITION, EXIT_SUCCESS);
   	return;
   }
 
