@@ -69,8 +69,12 @@
 				"因為「%s」程式必須異常中止。敬請見諒。\n"
 				"請連繫開發者以解決此問題。\n"
 				, error_reason_readable[why]);
-		exit(exit_status_code);
-		return;
+		if(exit_status_code != EXIT_SUCCESS){
+			exit(EXIT_FAILURE);
+		}else{
+			exit(exit_status_code);
+		}
 	}
+
 #ifdef UNIMPLEMENTED
 #endif
