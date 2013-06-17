@@ -64,11 +64,9 @@
 					const char operation_name[],
 					Error_reason why,
 				const char self_defined_why[]);
-
 			void printErrorErrno(const char operation_name[], const int error_id);
-
 			void abortError(Error_reason why);
-
+			void exitError(Error_reason why, unsigned int exit_status_code);
 #ifdef UNIMPLEMENTED
 #endif /* Unimplemented */
 		/* 全域變數
