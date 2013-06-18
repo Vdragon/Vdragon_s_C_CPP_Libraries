@@ -33,7 +33,12 @@
 
 /* 全域變數
  * Global Variables */
-
+	const char * const error_reason_readable[] = {
+		"發生開發者未預期的狀況！請將導致此錯誤的使用程序通知開發者",
+		"發生開發者自行定義的問題"
+		"發生未知問題"
+	};
+			
 /* 函式的實作
  * Function implementations */
 	void printError(const char operation_name[], Error_reason why, const char self_defined_why[]){
@@ -62,6 +67,19 @@
 				, error_reason_readable[why]);
 		abort();
 		return;
+	}
+
+	void exitError(Error_reason why, unsigned int exit_status_code){
+		fprintf(stderr,
+				"因為「%s」程式必須異常中止。敬請見諒。\n"
+				"請連繫開發者以解決此問題。\n"
+				, error_reason_readable[why]);
+		if(exit_status_code == EXIT_SUCCESS){
+			/* 如果使用者傳 EXIT_SUCCESS 他們其實是想要 EXIT_FAILURE */
+			exit(EXIT_FAILURE);
+		}else{
+			exit(exit_status_code);
+		}
 	}
 
 #ifdef UNIMPLEMENTED
