@@ -56,7 +56,7 @@
 			printCstring(component);
 		}
 
-			putchar('\n');
+		putchar('\n');
 		return;
 	}
 
