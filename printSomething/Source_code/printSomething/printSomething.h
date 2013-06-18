@@ -55,11 +55,27 @@
 
 		/* 函式雛型
 		   Function prototypes */
-			/* 印出一個 C 語言的字串 */
+			/* 印出一個 C 語言的字串
+			 * 注意：這個子程式跟 puts() 的差異是「不會多輸出列結尾字元序列」
+			 * ，跟 fputs() 的差異是「fputs() 可以指定輸出資料流」 */
 				void printCstring(const char c_string[]);
+
+			/* printCstring() 的指定 stream 版本
+			 * 注意：功能跟 fputs() 完全相同，所以最好避免使用它 */
+				void fprintCstring(FILE *output_stream, const char c_string[]);
 
 			/* 印出一條由成份字串組成的線 */
 				void printLine(
+					/* 線的組成成份 */
+						const char component[],
+					/* 線的長度 */
+						unsigned short length
+				);
+
+			/* printLine() 的指定 stream 版本 */
+				void fprintLine(
+					/* 輸出資料流 */
+						FILE *output_stream,
 					/* 線的組成成份 */
 						const char component[],
 					/* 線的長度 */

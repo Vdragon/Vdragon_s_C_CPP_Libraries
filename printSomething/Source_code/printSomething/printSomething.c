@@ -44,6 +44,12 @@
 		return;
 	}
 
+	void fprintCstring(FILE *output_stream, const char c_string[]){
+		fputs(c_string, output_stream);
+
+		return;
+	}
+
 	void printLine(
 		/* 線的組成成份 */
 			const char component[],
@@ -53,7 +59,25 @@
 		register unsigned short i;
 
 		for(i = 1; i <= length; ++i){
-			printCstring(component);
+			fputs(component, stdout);
+		}
+
+		putchar('\n');
+		return;
+	}
+
+	void fprintLine(
+		/* 輸出資料流 */
+			FILE *output_stream,
+		/* 線的組成成份 */
+			const char component[],
+		/* 線的長度 */
+			unsigned short length
+	){
+		register unsigned short i;
+
+		for(i = 1; i <= length; ++i){
+			fputs(component, output_stream);
 		}
 
 		putchar('\n');

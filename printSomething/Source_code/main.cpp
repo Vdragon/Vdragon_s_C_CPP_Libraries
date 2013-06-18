@@ -39,6 +39,7 @@
   	/* unit test functions */
   		void test_printCstring(void);
   		void test_printLine(void);
+  		void test_fprintLine(void);
 #if defined(__unix) || defined(__unix__)
 			void test_printCurrentWorkingDirectory(void);
 #endif
@@ -50,6 +51,7 @@
 		printLine("#", 20);
 		test_printLine();
 		test_printCurrentWorkingDirectory();
+		test_fprintLine();
 
     /*暫停程式運行（於main函式中）*/
     if(pauseProgram() == 1){
@@ -74,6 +76,10 @@
 		return;
 	}
 
+	void test_fprintLine(void){
+		fprintLine(stderr, "=", 20);
+		return;
+	}
 #if defined(__unix) || defined(__unix__)
 	void test_printCurrentWorkingDirectory(void){
 		printf("目前的工作目錄為：");
