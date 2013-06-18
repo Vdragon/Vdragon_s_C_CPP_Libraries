@@ -14,6 +14,8 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
+					<Add option="-D__unix__=1" />
+					<Add option="-D__unix=1" />
 				</Compiler>
 			</Target>
 			<Target title="Release_Linux_x86_32bit">
@@ -25,6 +27,8 @@
 				<Compiler>
 					<Add option="-O2" />
 					<Add option="-DNDEBUG" />
+					<Add option="-D__unix__=1" />
+					<Add option="-D__unix=1" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
