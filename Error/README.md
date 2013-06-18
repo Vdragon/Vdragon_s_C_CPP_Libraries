@@ -23,6 +23,12 @@ Some things to help deal with errors and bugs ;)
         * 本說明文件  
           This documentation
 
+## 軟體依賴資訊<br />Software dependency information
+本軟體依賴下列函式庫
+* 標準 C 函式庫
+* VCCL/printSomething 函式庫
+* 待補完
+
 ## 如何使用？<br />How to use it?
 
 ## 已知問題<br />Known issues
