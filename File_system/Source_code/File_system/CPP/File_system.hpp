@@ -40,16 +40,41 @@
 				/* 標準Ｃ＋＋函式庫 */
 					#include <string>
 
+#if defined(__unix__) || defined(__unix)
+				/* POSIX API */
+					/* for mode_t */
+						#include <sys/types.h>
+#endif //Unix system only
 			/* 常數與巨集的定義
 			 * Definition of constants & macros */
 
 			/* 資料類型、enumeration、資料結構與物件類別的定義
 			 *  Definition of data type, enumeration, data structure and class */
+				/* 輸出訊息的格式 */
+					typedef enum print_format{
+						SHORT, LONG, OCTAL
+					}Print_format;
+
+				/* 權限設定套用的對象 */
+					typedef enum permission_target{
+						OWNER, GROUP, OTHER
+					}Permission_target;
 
 			/* 函式雛型
 				 Function prototypes */
+#if defined(__unix__) || defined(__unix)
 				bool isDirectory(std::string entry_path);
+	#ifdef UNIMPLEMENTED
+				/* 印出路徑的資訊的子程式 */
+					void showPathInfo(std::string path);
+	#endif
+				/* 檔案系統項目相關子程式 */
+					void printItemType(Print_format format, mode_t mode);
 
+					void printItemPermission(Print_format format, mode_t mode);
+					void printWhoPermission(Print_format format, Permission_target who, mode_t mode);
+
+#endif
 			/* 全域變數
 				 Global variables */
 

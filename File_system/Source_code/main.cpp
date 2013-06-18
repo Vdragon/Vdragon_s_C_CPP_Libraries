@@ -19,14 +19,14 @@
 	 *   C library - C++ Reference
 	 *   http://www.cplusplus.com/reference/clibrary/ */
 		/* C library to perform Input/Output operations
-			#include <stdio.h>
-			#include <cstdio> */
+			#include <stdio.h> */
+			#include <cstdio>
 		/* C Standard General Utilities Library
 			#include <stdlib.h> */
 			#include <cstdlib>
 		/* C error number
-			#include <errno.h>
-			#include <cerrno> */
+			#include <errno.h> */
+			#include <cerrno>
 		/* C Diagnostics Library
 			#include <assert.h>
 			#include <cassert> */
@@ -116,9 +116,18 @@
 		#include "showSoftwareInfo/showSoftwareInfo.h"
 		#include "Project_specific_configurations/GNU_gettext_library.h"
 		#include "testSomething/C/testSomething.h"
+		#include "Error/C/Error.h"
 
 	/* 測試中模組 */
 		#include "File_system/CPP/File_system.hpp"
+
+#if defined(__unix__) || defined(__unix)
+	/* POSIX API */
+		/* for stat(2) */
+			#include <sys/types.h>
+			#include <sys/stat.h>
+			#include <unistd.h>
+#endif //Unix system only
 
 /* 常數與巨集的定義
  * Definition of constants & macros */
@@ -131,7 +140,7 @@
 /* 函式的宣告（函式雛型）
  * Function declarations (function prototypes)
      用途
-     Usage 
+     Usage
        預先告訴編譯器(compiler)子程式的存在 */
 
 /* 全域變數
@@ -142,11 +151,16 @@
   /* main 函式 - C/C++ 程式的進入點(entry point) */
     int main(int argc, char *argv[]){
     	/* 測試函式 */
+#if defined(__unix__) || defined(__unix)
     		void test_isDirectory(void);
+    		void test_printWhoPermission(void);
+    		void test_printItemPermission(void);
+#endif
 
     	/* 初始化 GNU gettext 函式庫 */
-				/* Use system default locale instead of "C" locale */
-					setlocale(LC_MESSAGES, "");
+				/* Use system default locale instead of "C" locale
+				 * FIXME: 中文訊息變成問號，原因不明
+					setlocale(LC_MESSAGES, ""); */
 				bindtextdomain(MESSAGE_DOMAIN, LOCALEDIR);
 				textdomain(MESSAGE_DOMAIN);
 				bind_textdomain_codeset(MESSAGE_DOMAIN, MESSAGE_CHARSET);
@@ -154,9 +168,11 @@
     /*用來重新運行程式的label*/
     restart_program:
       showSoftwareInfo(_(PROGRAM_MAIN_NAME));
-
-      testProcedure("isDirectory", test_isDirectory, "-", 20);
-
+#if defined(__unix__) || defined(__unix)
+//      testProcedure("isDirectory", test_isDirectory, "-", 20);
+      testProcedure("printWhoPermission", test_printWhoPermission, "-", 20);
+      testProcedure("printItemPermission", test_printItemPermission, "-", 20);
+#endif // Unix only
       /* 暫停程式運行（於main函式中） */
         if(pauseProgram() == 1){
           goto restart_program;
@@ -164,7 +180,7 @@
 
       return EXIT_SUCCESS;
     }
-
+#if defined(__unix__) || defined(__unix)
     void test_isDirectory(void){
 			if(isDirectory("Resources")){
 				cout << "Res is directory." << endl;
@@ -174,3 +190,80 @@
 			}
     	return;
     }
+
+    void test_printWhoPermission(void){
+    	struct stat item_status;
+    	string item_name;
+
+    	item_name = "README.md";
+    	cout << item_name << ":" << endl;
+    	if(stat(item_name.c_str(), &item_status) != 0){
+    		printErrorErrno("stat()", errno);
+    	}else{
+				printWhoPermission(SHORT, OWNER, item_status.st_mode);
+				printWhoPermission(SHORT, GROUP, item_status.st_mode);
+				printWhoPermission(SHORT, OTHER, item_status.st_mode);
+				putchar('\n');
+    	}
+    	putchar('\n');
+
+    	item_name = "/usr/bin/passwd";
+    	cout << item_name << ":" << endl;
+    	if(stat(item_name.c_str(), &item_status) != 0){
+    		printErrorErrno("stat()", errno);
+    	}else{
+				printWhoPermission(SHORT, OWNER, item_status.st_mode);
+				printWhoPermission(SHORT, GROUP, item_status.st_mode);
+				printWhoPermission(SHORT, OTHER, item_status.st_mode);
+				putchar('\n');
+    	}
+    	putchar('\n');
+
+    	item_name = "/tmp";
+    	cout << item_name << ":" << endl;
+    	if(stat(item_name.c_str(), &item_status) != 0){
+    		printErrorErrno("stat()", errno);
+    	}else{
+				printWhoPermission(SHORT, OWNER, item_status.st_mode);
+				printWhoPermission(SHORT, GROUP, item_status.st_mode);
+				printWhoPermission(SHORT, OTHER, item_status.st_mode);
+				putchar('\n');
+    	}
+    	return;
+    }
+
+    void test_printItemPermission(void){
+    	struct stat item_status;
+    	string item_name;
+
+    	item_name = "README.md";
+    	cout << item_name << ":" << endl;
+    	if(stat(item_name.c_str(), &item_status) != 0){
+    		printErrorErrno("stat()", errno);
+    	}else{
+    		printItemPermission(SHORT, item_status.st_mode); putchar('\n');
+    		printItemPermission(OCTAL, item_status.st_mode); putchar('\n');
+    	}
+    	putchar('\n');
+
+    	item_name = "/usr/bin/passwd";
+    	cout << item_name << ":" << endl;
+    	if(stat(item_name.c_str(), &item_status) != 0){
+    		printErrorErrno("stat()", errno);
+    	}else{
+    		printItemPermission(SHORT, item_status.st_mode); putchar('\n');
+    		printItemPermission(OCTAL, item_status.st_mode); putchar('\n');
+    	}
+    	putchar('\n');
+
+    	item_name = "/tmp";
+    	cout << item_name << ":" << endl;
+    	if(stat(item_name.c_str(), &item_status) != 0){
+    		printErrorErrno("stat()", errno);
+    	}else{
+    		printItemPermission(SHORT, item_status.st_mode); putchar('\n');
+    		printItemPermission(OCTAL, item_status.st_mode); putchar('\n');
+    	}
+    	return;
+    }
+#endif //Unix system only
