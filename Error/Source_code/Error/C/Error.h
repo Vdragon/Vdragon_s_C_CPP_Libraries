@@ -1,8 +1,9 @@
 /*
 	程式名稱
-	Program name
-		Error
-	更新紀錄
+	Program name */
+		#define MODULE_NAME	 "Error processing library"
+		#define MODULE_NAME_DOMAIN "org.vsdg.lib.vccl.error"
+/*更新紀錄
 	Changelog
 		Changelog is now stored on GitHub(http://www.github.com)
 	已知問題
