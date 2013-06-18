@@ -42,6 +42,7 @@
  * Function implementations */
 	void printError(const char operation_name[], Error_reason why, const char self_defined_why[]){
 		fprintf(stderr,
+			"\n"
       "%s 操作發生錯誤！\n"
       "原因為：",
       operation_name);
@@ -56,6 +57,7 @@
 
 	void printErrorErrno(const char operation_name[], const int error_id){
 		fprintf(stderr,
+			"\n"
       "%s 操作偵測到錯誤！\n"
       "系統回報的錯誤原因為：%d - %s\n",
       operation_name, error_id, strerror(error_id));
@@ -89,7 +91,7 @@
 		/* 因為我們不能確定發生錯誤當時文字游標是否在列首，我們一律先換個列先 */
 			putchar('\n');
 		/* 畫一條線分隔前面的輸出訊息 */
-			printLine("-", 20);
+			fprintLine(stderr, "-", 20);
 
 		fprintf(stderr, "因為「");
 		printErrorReason(why, stderr);
@@ -105,7 +107,7 @@
 		/* 因為我們不能確定發生錯誤當時文字游標是否在列首，我們一律先換個列先 */
 			putchar('\n');
 		/* 畫一條線分隔前面的輸出訊息 */
-			printLine("-", 20);
+			fprintLine(stderr, "-", 20);
 
 			fprintf(stderr, "因為「");
 			printErrorReason(why, stderr);
