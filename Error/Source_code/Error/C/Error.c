@@ -20,6 +20,9 @@
 		/* for abort() */
 			#include <stdlib.h>
 
+	/* VCCL */
+		#include "../../printSomething/printSomething.h"
+
 /* 常數與巨集
  * Constants & Macros */
 
@@ -61,6 +64,11 @@
 	}
 
 	void abortError(Error_reason why){
+		/* 因為我們不能確定發生錯誤當時文字游標是否在列首，我們一律先換個列先 */
+			putchar('\n');
+		/* 畫一條線分隔前面的輸出訊息 */
+			printLine("-", 20);
+
 		fprintf(stderr,
 				"因為「%s」程式必須異常中止。敬請見諒。\n"
 				"請連繫開發者以解決此問題。\n"
@@ -70,6 +78,11 @@
 	}
 
 	void exitError(Error_reason why, unsigned int exit_status_code){
+		/* 因為我們不能確定發生錯誤當時文字游標是否在列首，我們一律先換個列先 */
+			putchar('\n');
+		/* 畫一條線分隔前面的輸出訊息 */
+			printLine("-", 20);
+
 		fprintf(stderr,
 				"因為「%s」程式必須異常中止。敬請見諒。\n"
 				"請連繫開發者以解決此問題。\n"
