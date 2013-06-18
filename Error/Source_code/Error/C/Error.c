@@ -36,22 +36,21 @@
 
 /* 全域變數
  * Global Variables */
-	const char * const error_reason_readable[] = {
-		"發生開發者未預期的狀況！請將導致此錯誤的使用程序通知開發者",
-		"發生開發者自行定義的問題"
-		"發生未知問題"
-	};
+
 			
 /* 函式的實作
  * Function implementations */
 	void printError(const char operation_name[], Error_reason why, const char self_defined_why[]){
 		fprintf(stderr,
       "%s 操作發生錯誤！\n"
-      "原因為：%s\n",
-      operation_name,
-      (why == ERROR_SELF_DEFINED) ?
-      		self_defined_why :
-      		error_reason_readable[why]);
+      "原因為：",
+      operation_name);
+		if(why == ERROR_SELF_DEFINED){
+			fputs(self_defined_why, stderr);
+		}else{
+			printErrorReason(why, stderr);
+		}
+		putchar('\n');
 		return;
 	}
 
@@ -63,16 +62,41 @@
 		return;
 	}
 
+	void printErrorReason(const Error_reason reason, FILE *target){
+		switch(reason){
+		case ERROR_UNEXPECTED_CONDITION:
+			fputs("發生開發者未預期的狀況！請將導致此錯誤的使用程序通知開發者", target);
+			break;
+		case ERROR_SELF_DEFINED:
+			fputs("發生開發者自行定義的問題", target);
+			break;
+		case ERROR_UNKNOWN:
+			fputs("發生未知問題", target);
+			break;
+		default:
+			/* 避免遞迴地呼叫 printErrorReason() 造成 stack 炸掉，所以這裡不呼叫自己 */
+			fprintf(
+				stderr,
+				"\n"
+				"Undefined condition happened in printErrorReason()!");
+			exit(EXIT_FAILURE);
+			break;
+		}
+		return;
+	}
+
 	void abortError(Error_reason why){
 		/* 因為我們不能確定發生錯誤當時文字游標是否在列首，我們一律先換個列先 */
 			putchar('\n');
 		/* 畫一條線分隔前面的輸出訊息 */
 			printLine("-", 20);
 
-		fprintf(stderr,
-				"因為「%s」程式必須異常中止。敬請見諒。\n"
-				"請連繫開發者以解決此問題。\n"
-				, error_reason_readable[why]);
+		fprintf(stderr, "因為「");
+		printErrorReason(why, stderr);
+		fprintf(
+			stderr,
+			"」程式必須異常中止。敬請見諒。\n"
+			"請連繫開發者以解決此問題。\n");
 		abort();
 		return;
 	}
@@ -83,10 +107,13 @@
 		/* 畫一條線分隔前面的輸出訊息 */
 			printLine("-", 20);
 
-		fprintf(stderr,
-				"因為「%s」程式必須異常中止。敬請見諒。\n"
-				"請連繫開發者以解決此問題。\n"
-				, error_reason_readable[why]);
+			fprintf(stderr, "因為「");
+			printErrorReason(why, stderr);
+			fprintf(
+				stderr,
+				"」程式必須異常中止。敬請見諒。\n"
+				"請連繫開發者以解決此問題。\n");
+
 		if(exit_status_code == EXIT_SUCCESS){
 			/* 如果使用者傳 EXIT_SUCCESS 他們其實是想要 EXIT_FAILURE */
 			exit(EXIT_FAILURE);
