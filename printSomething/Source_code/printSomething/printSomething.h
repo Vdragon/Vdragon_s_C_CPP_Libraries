@@ -42,7 +42,9 @@
 
 		/* 程式所 include 之函式庫的標頭檔
 		   Included Library Headers */
-
+			/* for file stream pointer definition */
+				#include <stdio.h>
+				
 		/* 常數與巨集
 		   Constants & Macros */
 			/* printLine 線條成份字串 */
