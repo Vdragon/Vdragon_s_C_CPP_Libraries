@@ -179,7 +179,7 @@
 		struct stat entry_status;
 
 		checkGettextInit();
-		if(stat(entry_path.c_str(), &entry_status) != 0){
+		if(lstat(entry_path.c_str(), &entry_status) != 0){
 			printErrorErrno("stat(2)", errno);
 		}else{
 			/* access status */{
@@ -196,7 +196,7 @@
 
 		checkGettextInit();
 
-		if(stat(path.c_str(), &path_status) != 0){
+		if(lstat(path.c_str(), &path_status) != 0){
 			printErrorErrno("stat(2)", errno);
 		}else{
 			printItemType(SHORT, path_status.st_mode);
