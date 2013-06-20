@@ -179,7 +179,7 @@
 		struct stat entry_status;
 
 		checkGettextInit();
-		if(lstat(entry_path.c_str(), &entry_status) != 0){
+		if(stat(entry_path.c_str(), &entry_status) != 0){
 			printErrorErrno("stat(2)", errno);
 		}else{
 			/* access status */{
@@ -413,6 +413,7 @@
 						}while(true);
 						if(strlen(item_path) < strlen(current_working_directory)){
 							fputs("***ERROR***", stdout);
+							fputs(item_path, stdout);
 							printError("printItemPath", ERROR_SELF_DEFINED,
 									"printItemPath() 不支援顯示非當前工作目錄底下階層的項目的相對路徑！");
 						}else{
