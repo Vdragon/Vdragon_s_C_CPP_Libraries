@@ -43,7 +43,7 @@
 	void printError(const char operation_name[], Error_reason why, const char self_defined_why[]){
 		fprintf(stderr,
 			"\n"
-      "%s 操作發生錯誤！\n"
+      "%s 子程式發生錯誤！\n"
       "原因為：",
       operation_name);
 		if(why == ERROR_SELF_DEFINED){
@@ -51,14 +51,14 @@
 		}else{
 			printErrorReason(why, stderr);
 		}
-		putchar('\n');
+		fputc('\n', stderr);
 		return;
 	}
 
 	void printErrorErrno(const char operation_name[], const int error_id){
 		fprintf(stderr,
 			"\n"
-      "%s 操作偵測到錯誤！\n"
+      "%s 子程式偵測到錯誤！\n"
       "系統回報的錯誤原因為：%d - %s\n",
       operation_name, error_id, strerror(error_id));
 		return;
@@ -92,7 +92,7 @@
 
 	void abortError(Error_reason why){
 		/* 因為我們不能確定發生錯誤當時文字游標是否在列首，我們一律先換個列先 */
-			putchar('\n');
+			fputc('\n', stderr);
 		/* 畫一條線分隔前面的輸出訊息 */
 			fprintLine(stderr, "-", 20);
 
@@ -108,7 +108,7 @@
 
 	void exitError(Error_reason why, unsigned int exit_status_code){
 		/* 因為我們不能確定發生錯誤當時文字游標是否在列首，我們一律先換個列先 */
-			putchar('\n');
+			fputc('\n', stderr);
 		/* 畫一條線分隔前面的輸出訊息 */
 			fprintLine(stderr, "-", 20);
 
