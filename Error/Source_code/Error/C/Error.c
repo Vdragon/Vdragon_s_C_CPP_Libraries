@@ -75,6 +75,9 @@
 		case ERROR_UNKNOWN:
 			fputs("發生未知問題", target);
 			break;
+		case ERROR_NOT_IMPLEMENTED:
+			fputs("功能尚未實作", target);
+			break;
 		default:
 			/* 避免遞迴地呼叫 printErrorReason() 造成 stack 炸掉，所以這裡不呼叫自己 */
 			fprintf(
