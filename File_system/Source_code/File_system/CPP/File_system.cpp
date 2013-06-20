@@ -372,6 +372,9 @@
 	}
 
 	void printItemPath(Path_format format, const char *item_path){
+		char *current_working_directory = NULL, *current_working_directory_reallocated = NULL;
+		unsigned short path_size_times = 1;
+
 		checkGettextInit();
 		assert(format == RELATIVE || format == ABSOLUTE);
 
@@ -380,11 +383,9 @@
 				fputs(item_path, stdout);
 			}else{
 				/* 拿當前工作目錄做比較，只輸出多出來的部份 */{
-					char *current_working_directory = NULL;
-					unsigned short path_size_times = 1;
 
 					if((current_working_directory = (char *)malloc(sizeof(char) * PATH_ALLOCATE_SIZE)) == NULL){
-						printError("printItemPath()", ERROR_SELF_DEFINED, "向系統要求額外記憶體空間失敗");
+						printError("printItemPath()", ERROR_MEMORY_ALLOCATION_FAILED, NULL);
 					}else{
 						do{
 							if(getcwd(current_working_directory, path_size_times * PATH_ALLOCATE_SIZE) != NULL){
@@ -393,10 +394,15 @@
 								switch(errno){
 								case ERANGE:
 									++path_size_times;
-									if((realloc(current_working_directory, path_size_times * PATH_ALLOCATE_SIZE)) == NULL){
+									if((current_working_directory_reallocated = (char *)realloc(current_working_directory, path_size_times * PATH_ALLOCATE_SIZE)) == NULL){
 										fputs("***ERROR***", stdout);
-										printError("printItemPath()::realloc()", ERROR_SELF_DEFINED, "向系統要求額外記憶體空間失敗");
+										printError("printItemPath()::realloc()", ERROR_MEMORY_ALLOCATION_FAILED, NULL);
 										return;
+									}else{
+										if(current_working_directory_reallocated != current_working_directory){
+											current_working_directory = current_working_directory_reallocated;
+										}
+										current_working_directory_reallocated = NULL;
 									}
 									break;
 								default:
@@ -406,7 +412,9 @@
 							}
 						}while(true);
 						if(strlen(item_path) < strlen(current_working_directory)){
-							printError("printItemPath", ERROR_SELF_DEFINED, "printItemPath() 不支援顯示非當前工作目錄底下階層的項目的相對路徑！");
+							fputs("***ERROR***", stdout);
+							printError("printItemPath", ERROR_SELF_DEFINED,
+									"printItemPath() 不支援顯示非當前工作目錄底下階層的項目的相對路徑！");
 						}else{
 							char *item_path_real = NULL;
 
@@ -426,11 +434,10 @@
 				fputs(item_path, stdout);
 			}else{
 				string absolute_path;
-				char *current_working_directory = NULL;
-				unsigned short path_size_times = 1;
 
 				if((current_working_directory = (char *)malloc(sizeof(char) * PATH_ALLOCATE_SIZE)) == NULL){
-					printError("printItemPath()", ERROR_SELF_DEFINED, "向系統要求額外記憶體空間失敗");
+					fputs("***ERROR***", stdout);
+					printError("printItemPath()", ERROR_MEMORY_ALLOCATION_FAILED, NULL);
 					return;
 				}else{
 					do{
@@ -440,9 +447,16 @@
 							switch(errno){
 							case ERANGE:
 								path_size_times += 1;
-								if((realloc(current_working_directory, path_size_times * PATH_ALLOCATE_SIZE)) == NULL){
-									printError("printItemPath()", ERROR_SELF_DEFINED, "向系統要求額外記憶體空間失敗");
+								if((current_working_directory_reallocated =
+										(char *)realloc(current_working_directory, path_size_times * PATH_ALLOCATE_SIZE)) == NULL){
+									fputs("***ERROR***", stdout);
+									printError("printItemPath()", ERROR_MEMORY_ALLOCATION_FAILED, NULL);
 									return;
+								}else{
+									if(current_working_directory_reallocated != current_working_directory){
+										current_working_directory = current_working_directory_reallocated;
+									}
+									current_working_directory_reallocated = NULL;
 								}
 								break;
 							default:
