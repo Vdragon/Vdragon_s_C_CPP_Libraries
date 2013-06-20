@@ -43,7 +43,7 @@
 	void printError(const char operation_name[], Error_reason why, const char self_defined_why[]){
 		fprintf(stderr,
 			"\n"
-      "%s 操作發生錯誤！\n"
+      "%s 子程式發生錯誤！\n"
       "原因為：",
       operation_name);
 		if(why == ERROR_SELF_DEFINED){
@@ -58,7 +58,7 @@
 	void printErrorErrno(const char operation_name[], const int error_id){
 		fprintf(stderr,
 			"\n"
-      "%s 操作偵測到錯誤！\n"
+      "%s 子程式偵測到錯誤！\n"
       "系統回報的錯誤原因為：%d - %s\n",
       operation_name, error_id, strerror(error_id));
 		return;
