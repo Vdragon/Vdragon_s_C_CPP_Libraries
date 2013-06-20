@@ -394,7 +394,8 @@
 								case ERANGE:
 									++path_size_times;
 									if((realloc(current_working_directory, path_size_times * PATH_ALLOCATE_SIZE)) == NULL){
-										printError("printItemPath()", ERROR_SELF_DEFINED, "向系統要求額外記憶體空間失敗");
+										fputs("***ERROR***", stdout);
+										printError("printItemPath()::realloc()", ERROR_SELF_DEFINED, "向系統要求額外記憶體空間失敗");
 										return;
 									}
 									break;
