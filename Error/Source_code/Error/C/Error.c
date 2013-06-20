@@ -51,7 +51,7 @@
 		}else{
 			printErrorReason(why, stderr);
 		}
-		putchar('\n');
+		fputc('\n', stderr);
 		return;
 	}
 
@@ -92,7 +92,7 @@
 
 	void abortError(Error_reason why){
 		/* 因為我們不能確定發生錯誤當時文字游標是否在列首，我們一律先換個列先 */
-			putchar('\n');
+			fputc('\n', stderr);
 		/* 畫一條線分隔前面的輸出訊息 */
 			fprintLine(stderr, "-", 20);
 
@@ -108,7 +108,7 @@
 
 	void exitError(Error_reason why, unsigned int exit_status_code){
 		/* 因為我們不能確定發生錯誤當時文字游標是否在列首，我們一律先換個列先 */
-			putchar('\n');
+			fputc('\n', stderr);
 		/* 畫一條線分隔前面的輸出訊息 */
 			fprintLine(stderr, "-", 20);
 
