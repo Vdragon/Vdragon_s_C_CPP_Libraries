@@ -484,7 +484,7 @@
 
 		switch(format){
 		case BYTE:
-			printf("%ld", size);
+			printf("%8ld", size);
 			break;
 		case AUTO:
 		case BIT:
