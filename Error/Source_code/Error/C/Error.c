@@ -79,11 +79,8 @@
 			fputs("功能尚未實作", target);
 			break;
 		default:
-			/* 避免遞迴地呼叫 printErrorReason() 造成 stack 炸掉，所以這裡不呼叫自己 */
-			fprintf(
-				stderr,
-				"\n"
-				"Undefined condition happened in printErrorReason()!");
+			/* 不明的錯誤編碼 */
+			fputs("發生未知問題（接收到本版本函式庫未知的錯誤編碼）", target);
 			exit(EXIT_FAILURE);
 			break;
 		}
