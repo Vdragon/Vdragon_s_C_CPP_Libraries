@@ -53,7 +53,8 @@
 			typedef enum error_reason{
 				ERROR_UNEXPECTED_CONDITION = 0,
 				ERROR_SELF_DEFINED,
-				ERROR_UNKNOWN
+				ERROR_UNKNOWN,
+				ERROR_NOT_IMPLEMENTED
 			}Error_reason;
 
 		/* 函式雛型
