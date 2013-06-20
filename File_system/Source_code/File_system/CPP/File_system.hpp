@@ -81,6 +81,11 @@
 						RELATIVE, ABSOLUTE
 					}Path_format;
 
+				/* 檔案大小的格式 */
+					typedef enum size_format{
+						AUTO, BIT, BYTE, MEBI_BYTE, MEGA_BYTE, GIBI_BYTE, GIGA_BYTE, TEBIBYTE, TERABYTE
+					}Size_format;
+
 			/* 函式雛型
 				 Function prototypes */
 #if defined(__unix__) || defined(__unix)
@@ -99,9 +104,12 @@
 					void printUID(Print_format format, uid_t uid);
 					void printGID(Print_format format, gid_t gid);
 
+					void printItemSize(Size_format format, off_t size);
+
 					void printTime(Time_format format, time_t time);
 
 					void printItemPath(Path_format format, const char *item_path);
+
 #ifdef UNIMPLEMENTED
 
 #endif

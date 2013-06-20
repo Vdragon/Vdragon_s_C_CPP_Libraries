@@ -202,6 +202,7 @@
 			printItemType(SHORT, path_status.st_mode);
 			printItemPermission(SHORT, path_status.st_mode); putchar(' ');
 			printItemOwnership(LONG, path_status.st_uid, path_status.st_gid); putchar(' ');
+			printItemSize(BYTE, path_status.st_size); putchar(' ');
 			printTime(DEFAULT, path_status.st_mtime); putchar(' ');
 			printItemPath(RELATIVE, path.c_str());
 			putchar('\n');
@@ -463,6 +464,31 @@
 			exitError(ERROR_UNEXPECTED_CONDITION, EXIT_FAILURE);
 		}
 
+		return;
+	}
+
+	void printItemSize(Size_format format, off_t size){
+		checkGettextInit();
+
+		switch(format){
+		case BYTE:
+			printf("%ld", size);
+			break;
+		case AUTO:
+		case BIT:
+		case MEBI_BYTE:
+		case MEGA_BYTE:
+		case GIBI_BYTE:
+		case GIGA_BYTE:
+		case TEBIBYTE:
+		case TERABYTE:
+			printError("printItemSize", ERROR_NOT_IMPLEMENTED, NULL);
+			break;
+
+		default:
+			printError("printItemSize", ERROR_UNEXPECTED_CONDITION, NULL);
+			break;
+		}
 		return;
 	}
 #endif // if OS is unix
