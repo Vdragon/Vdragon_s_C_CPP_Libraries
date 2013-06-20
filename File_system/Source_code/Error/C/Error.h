@@ -1,8 +1,9 @@
 /*
 	程式名稱
-	Program name
-		Error
-	更新紀錄
+	Program name */
+		#define MODULE_NAME	 "Error processing library"
+		#define MODULE_NAME_DOMAIN "org.vsdg.lib.vccl.error"
+/*更新紀錄
 	Changelog
 		Changelog is now stored on GitHub(http://www.github.com)
 	已知問題
@@ -42,6 +43,8 @@
 
 		/* 程式所 include 之函式庫的標頭檔
 		   Included Library Headers */
+			/* 標準Ｃ函式庫 */
+			#include <stdio.h>
 
 		/* 常數與巨集
 		   Constants & Macros */
@@ -60,9 +63,11 @@
 					Error_reason why,
 				const char self_defined_why[]);
 			void printErrorErrno(const char operation_name[], const int error_id);
+			void printErrorReason(const Error_reason reason, FILE* target);
 			void abortError(Error_reason why);
 			void exitError(Error_reason why, unsigned int exit_status_code);
 #ifdef UNIMPLEMENTED
+
 #endif /* Unimplemented */
 		/* 全域變數
 		   Global variables */

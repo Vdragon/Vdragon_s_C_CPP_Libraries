@@ -153,8 +153,11 @@
     	/* 測試函式 */
 #if defined(__unix__) || defined(__unix)
     		void test_isDirectory(void);
+    		void test_printItemType(void);
     		void test_printWhoPermission(void);
     		void test_printItemPermission(void);
+    		void test_printItemOwnership(void);
+    		void test_showPathInfo(void);
 #endif
 
     	/* 初始化 GNU gettext 函式庫 */
@@ -169,9 +172,12 @@
     restart_program:
       showSoftwareInfo(_(PROGRAM_MAIN_NAME));
 #if defined(__unix__) || defined(__unix)
-//      testProcedure("isDirectory", test_isDirectory, "-", 20);
+      testProcedure("isDirectory", test_isDirectory, "-", 20);
       testProcedure("printWhoPermission", test_printWhoPermission, "-", 20);
       testProcedure("printItemPermission", test_printItemPermission, "-", 20);
+      testProcedure("printItemOwnership", test_printItemOwnership, "-", 20);
+      testProcedure("showPathInfo", test_showPathInfo, "-", 20);
+      testProcedure("printItemType", test_printItemType, "-",20);
 #endif // Unix only
       /* 暫停程式運行（於main函式中） */
         if(pauseProgram() == 1){
@@ -188,6 +194,31 @@
 			if(isDirectory("README.md") == false){
 				cout << "Readme is NOT directory." << endl;
 			}
+    	return;
+    }
+
+    void test_printItemType(void){
+    	struct stat item_status;
+    	string item_name;
+
+    	item_name = "README.md";
+    	cout << item_name << ":" << endl;
+    	if(stat(item_name.c_str(), &item_status) != 0){
+    		printErrorErrno("stat()", errno);
+    	}else{
+    		printItemType(SHORT, item_status.st_mode);
+				putchar('\n');
+    	}
+    	putchar('\n');
+    	item_name = "Build";
+    	cout << item_name << ":" << endl;
+    	if(stat(item_name.c_str(), &item_status) != 0){
+    		printErrorErrno("stat()", errno);
+    	}else{
+    		printItemType(SHORT, item_status.st_mode);
+				putchar('\n');
+    	}
+    	putchar('\n');
     	return;
     }
 
@@ -264,6 +295,19 @@
     		printItemPermission(SHORT, item_status.st_mode); putchar('\n');
     		printItemPermission(OCTAL, item_status.st_mode); putchar('\n');
     	}
+    	return;
+    }
+
+    void test_printItemOwnership(void){
+    	printItemOwnership(DECIMAL, 12345, 12345);putchar('\n');
+    	printItemOwnership(LONG, 12345, 12345);putchar('\n');
+    	return;
+    }
+
+    void test_showPathInfo(void){
+    	showPathInfo(string("README.md"));
+    	showPathInfo(string("/usr/bin/passwd"));
+    	showPathInfo(string("/home/Vdragon/工作空間/Programming/Libraries/Vdragons_C_CPP_Libraries_Collection/File_system/Source_code/main.cpp"));
     	return;
     }
 #endif //Unix system only

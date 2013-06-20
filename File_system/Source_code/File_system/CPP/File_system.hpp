@@ -52,7 +52,14 @@
 			 *  Definition of data type, enumeration, data structure and class */
 				/* 輸出訊息的格式 */
 					typedef enum print_format{
-						SHORT, LONG, OCTAL
+						/* 縮寫 */
+							SHORT,
+						/* 全稱（文字） */
+							LONG,
+						/* 八進位數字 */
+							OCTAL,
+						/* 十進位數字 */
+							DECIMAL
 					}Print_format;
 
 				/* 權限設定套用的對象 */
@@ -60,19 +67,44 @@
 						OWNER, GROUP, OTHER
 					}Permission_target;
 
+				/* 時間的類型 */
+					typedef enum time_type{
+						CREATE_TIME, MODIFY_TIME, ACCESS_TIME
+					}Time_type;
+				/* 時間的格式 */
+					typedef enum time_format{
+						DEFAULT
+					}Time_format;
+
+				/* 目錄的格式 */
+					typedef enum path_format{
+						RELATIVE, ABSOLUTE
+					}Path_format;
+
 			/* 函式雛型
 				 Function prototypes */
 #if defined(__unix__) || defined(__unix)
 				bool isDirectory(std::string entry_path);
-	#ifdef UNIMPLEMENTED
+
 				/* 印出路徑的資訊的子程式 */
 					void showPathInfo(std::string path);
-	#endif
+
 				/* 檔案系統項目相關子程式 */
 					void printItemType(Print_format format, mode_t mode);
 
 					void printItemPermission(Print_format format, mode_t mode);
 					void printWhoPermission(Print_format format, Permission_target who, mode_t mode);
+
+					void printItemOwnership(Print_format format, uid_t uid, gid_t gid);
+					void printUID(Print_format format, uid_t uid);
+					void printGID(Print_format format, gid_t gid);
+
+					void printTime(Time_format format, time_t time);
+
+					void printItemPath(Path_format format, const char *item_path);
+#ifdef UNIMPLEMENTED
+
+#endif
 
 #endif
 			/* 全域變數
