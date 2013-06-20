@@ -78,6 +78,9 @@
 		case ERROR_NOT_IMPLEMENTED:
 			fputs("功能尚未實作", target);
 			break;
+		case ERROR_MEMORY_ALLOCATION_FAILED:
+			fputs("向系統要求配置記憶體失敗", target);
+			break;
 		default:
 			/* 不明的錯誤編碼 */
 			fputs("發生未知問題（接收到本版本函式庫未知的錯誤編碼）", target);
