@@ -385,7 +385,6 @@
 
 					if((current_working_directory = (char *)malloc(sizeof(char) * PATH_ALLOCATE_SIZE)) == NULL){
 						printError("printItemPath()", ERROR_SELF_DEFINED, "向系統要求額外記憶體空間失敗");
-						return;
 					}else{
 						do{
 							if(getcwd(current_working_directory, path_size_times * PATH_ALLOCATE_SIZE) != NULL){
@@ -406,21 +405,18 @@
 							}
 						}while(true);
 						if(strlen(item_path) < strlen(current_working_directory)){
-							free(current_working_directory);
 							printError("printItemPath", ERROR_SELF_DEFINED, "printItemPath() 不支援顯示非當前工作目錄底下階層的項目的相對路徑！");
-							return;
 						}else{
 							char *item_path_real = NULL;
 
 							if((item_path_real = realpath(item_path, NULL)) == NULL){
-								printErrorErrno("realpath", errno);
-								free(current_working_directory);
-								return;
+								printErrorErrno("realpath", errno);;
+							}else{
+								fputs(&item_path_real[strlen(current_working_directory) + 1/* '/' */], stdout);
+								free(item_path_real);
 							}
-							fputs(&item_path_real[strlen(current_working_directory) + 1/* '/' */], stdout);
-							free(item_path_real);
-							free(current_working_directory);
 						}
+						free(current_working_directory);
 					}
 				}
 			}
