@@ -3,6 +3,7 @@
 	<name>testSomething</name>
 	<comment></comment>
 	<projects>
+		<project>printSomething</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
