@@ -110,8 +110,7 @@
 		/* 因為我們不能確定發生錯誤當時文字游標是否在列首，我們一律先換個列先 */
 			fputc('\n', stderr);
 		/* 畫一條線分隔前面的輸出訊息 */
-			fprintLine(stderr, "-", 20);
-
+			fprintLine(stderr, "-", 20); fputc('\n', stderr);
 			fprintf(stderr, "因為「");
 			printErrorReason(why, stderr);
 			fprintf(
