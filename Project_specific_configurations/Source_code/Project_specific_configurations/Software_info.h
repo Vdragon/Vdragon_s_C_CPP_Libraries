@@ -53,6 +53,10 @@
 				/* 用在軟體所使用的授權條款版本（目前尚未實作）
 				 * 有效值："「數字」（+）" "NONE"
 					#define SOFTWARE_LICENSE_VERSION "3+"*/
+				/* 軟體的官方網站 */
+					#define SOFTWARE_OFFICIAL_SITE "SOFTWARE_OFFICIAL_SITE undefined"
+				/* 軟體的問題回報地址 */
+					#define SOFTWARE_ISSUE_REPORT_ADDRESS "SOFTWARE_ISSUE_REPORT_ADDRESS undefined"
 					
 			/* 程式所 include 之函式庫的標頭檔
 			   Included Library Headers */
