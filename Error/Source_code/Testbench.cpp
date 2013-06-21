@@ -49,7 +49,7 @@
 
   /*用來重新運行程式的label*/
   restart_program:
-    show_software_info("Error 測試程式");
+    show_software_info("錯誤處理函式庫測試程式");
 
 #ifdef DISABLED
     testProcedure(
