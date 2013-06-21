@@ -80,3 +80,14 @@ void showSoftwareInfo(const char program_name[])
   /* 結束*/
   return ;
 }
+
+void showSoftwareInfoBeforeExit(void){
+	printLine("-", 20);
+	printf(_(
+		"程式運行結束。\n"
+		"本軟體的官方網站位於\n"
+		"	%s\n"
+		"如果發現任何軟體上的缺陷請至下列位址回報。\n"
+		"	%s\n"), SOFTWARE_OFFICIAL_SITE, SOFTWARE_ISSUE_REPORT_ADDRESS);
+	return;
+}

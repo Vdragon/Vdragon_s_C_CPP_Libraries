@@ -66,6 +66,7 @@ int main(void)
 		textdomain(MESSAGE_DOMAIN);
 		bind_textdomain_codeset(MESSAGE_DOMAIN, MESSAGE_CHARSET);
 
+	atexit(showSoftwareInfoBeforeExit);
 /*用來重新運行程式的label*/
 restart_program:
   /*呼叫Show software info*/

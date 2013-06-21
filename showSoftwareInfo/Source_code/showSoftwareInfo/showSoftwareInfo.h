@@ -42,7 +42,10 @@
    * 參數：
    *   program_name:程式名稱（非軟體名稱）的陣列*/
   void showSoftwareInfo(const char program_name[]);
-
+  /* 在程式結束前顯示軟體資訊（錯誤回報網址等）的子程式
+   * 　通常註冊於 atexit();
+   */
+  void showSoftwareInfoBeforeExit(void);
   #ifdef __cplusplus
     }
   #endif
