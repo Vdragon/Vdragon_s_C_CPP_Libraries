@@ -50,9 +50,6 @@
 					#define DEVELOPER_EMAIL "（尚未設定電子郵件地址）"
 				/*用在著作權宣告的軟體釋出年份*/
 					#define SOFTWARE_RELEASE_YEAR "2013"
-				/* 用在軟體所使用的授權條款（目前尚未實作）
-				 * 有效值："LGPL" "GPL" "ALL_RIGHTS_RESERVED"
-					#define SOFTWARE_LICENSE "LGPL"*/
 				/* 用在軟體所使用的授權條款版本（目前尚未實作）
 				 * 有效值："「數字」（+）" "NONE"
 					#define SOFTWARE_LICENSE_VERSION "3+"*/
@@ -62,10 +59,17 @@
 
 			/* 資料類型、enumeration、資料結構與物件類別的定義
 			 *  Definition of data type, enumeration, data structure and class */
-
+				/* 用在軟體所使用的授權條款 */
+					typedef enum software_license{
+						LICENSE_UNDEFINDED = 0, 
+						LICENSE_LGPL, 
+						LICENSE_GPL, 
+						LICENSE_MPL
+					}Software_license;
+					
 			/* 函式雛型
 				 Function prototypes */
-
+				
 			/* 全域變數
 				 Global variables */
 
