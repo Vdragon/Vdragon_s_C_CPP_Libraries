@@ -16,7 +16,11 @@
 /*--------------前期處理器指令(Preprocessor Directive)--------------*/
 
 /*////////程式所include的標頭檔(Included Headers)////////*/
+	/* Standard C library */
+		#include <stdio.h>
+
 #include "pauseProgram/pauseProgram.h"
+#include "askSomething/C/askSomething.h"
 
 /*////////常數與巨集(Constants & Macros)以及其他#define指令////////*/
 
@@ -47,7 +51,11 @@ int main(void)
   /*－－－－－－－－－－－－－－－－－－－－－*/
   /*程式從這個標籤重新啟動(program restarts from this label)*/
   restart_program:
+  /* do something to input stream 來判斷 pauseProgram 能不能正確處理標準輸入緩衝問題 */{
+  	int test;
 
+  	askSignedInteger(&test);
+  }
 
   /*呼叫暫停運行函式(放在main函式中)*/
   if(pauseProgram() == 1){

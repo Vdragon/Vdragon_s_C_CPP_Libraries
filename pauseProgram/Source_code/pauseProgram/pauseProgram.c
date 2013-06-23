@@ -31,6 +31,9 @@
 /*////////程式所include的標頭檔(Included Headers)////////*/
 /* we need printf and scanf*/
   #include <stdio.h>
+#ifdef __gnu_linux__
+	#include <stdio_ext.h>
+#endif
 
 /* we need system() */
   #include <stdlib.h>
@@ -62,12 +65,18 @@ short int pauseProgram(void){
 		"Program paused for displaying execution result...\n");
 
 	/* 迴避 input stream 殘留行結尾字元造成詢問訊息重覆印出的解決方案 */{
+#ifdef __gnu_linux__
+		/* glibc 實作了 __fpurge(3) 可以清除 input buffer */
+			__fpurge(stdin);
+
+#else
 		fputs("（如果程式卡在此句末端請按 Enter 鍵繼續）", stdout);
 		if(scanf("%*c") > 0){
-#ifndef _NDEBUG
+	#ifndef _NDEBUG
 			printf("[DEBUG]input stream successfully cleared!");
-#endif /* _NDEBUG */
+	#endif /* _NDEBUG */
 		}
+#endif
 	}
 
 	do{
