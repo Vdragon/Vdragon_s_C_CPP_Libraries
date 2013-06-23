@@ -67,7 +67,7 @@ void showSoftwareInfo(const char program_name[])
   putchar('\n');
 
   /* 顯示免責條款*/
-  printf(_("%s 以其能發揮用途的期望被散佈，但是　並　不　包　含　任　何　保　證　，甚至是商業上使用的隱含保證或特定用途的適用性保證。參閱 GNU Lesser General Public License 以了解更多細節。\n"), SOFTWARE_NAME);
+  printf(_("%s 以其能發揮用途的期望被散佈，但是　並　不　包　含　任　何　保　證　，甚至不包含商業上使用的隱含保證或特定用途的適用性保證。參閱 GNU Lesser General Public License 以了解更多細節。\n"), SOFTWARE_NAME);
   putchar('\n');
 
   /*顯示附帶說明*/
