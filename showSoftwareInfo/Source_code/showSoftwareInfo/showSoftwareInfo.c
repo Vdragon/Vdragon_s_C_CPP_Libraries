@@ -58,20 +58,20 @@ void showSoftwareInfo(const char program_name[])
 
   /*顯示程式名稱及著作權宣告*/
   printf("%s\n", program_name);
-  printf(_("Copyright %s © %s <%s>\n"), SOFTWARE_RELEASE_YEAR, DEVELOPER_NAME, DEVELOPER_EMAIL);
+  printf(_("智慧財產權生效年 %s © 擁有人：%s <%s>\n"), SOFTWARE_RELEASE_YEAR, DEVELOPER_NAME, DEVELOPER_EMAIL);
   putchar('\n');
 
   /*顯示授權條款*/
-  printf(_("%s is part of %s.\n"), program_name, SOFTWARE_NAME);
-  printf(_("%s is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License as published by the Free Software Foundation, either version 3 of the License, or(at your option) any later version.\n"), SOFTWARE_NAME);
+  printf(_("%s 是 %s 的一部份。\n"), program_name, SOFTWARE_NAME);
+  printf(_("%s 為自由軟體：您可以在 Free Software Foundation 所出版的 GNU Lesser General Public License 第 3 版或您可任意選擇之其未來版本的條款限制之下重新散佈或修改此軟體。\n"), SOFTWARE_NAME);
   putchar('\n');
 
   /* 顯示免責條款*/
-  printf(_("%s is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public License for more details.\n"), SOFTWARE_NAME);
+  printf(_("%s 以其能發揮用途的期望被散佈，但是　並　不　包　含　任　何　保　證　，甚至是商業上使用的隱含保證或特定用途的適用性保證。參閱 GNU Lesser General Public License 以了解更多細節。\n"), SOFTWARE_NAME);
   putchar('\n');
 
   /*顯示附帶說明*/
-  printf(_("You should have received a copy of the GNU Lesser General Public License along with %s.  If not, see <http://www.gnu.org/licenses/>.\n"), SOFTWARE_NAME);
+  printf(_("於 %s 中您應該有收到 GNU Lesser General Public License 的副本。如果沒有，請瀏覽 <http://www.gnu.org/licenses/>。\n"), SOFTWARE_NAME);
 
 	printLine(
 			PRINTSOMETHING_COMPONENT_HYPHEN_MINUS,
