@@ -49,57 +49,60 @@
 
 /*--------------主要程式碼(Main Code)--------------*/
 /* 暫停運行函式 */
-short int pauseProgram(void)
-  {
-    printf("\n------------------------------------------------\n");
+short int pauseProgram(void){
+	char inputChar;
 
-    printf("顯示運行結果，程式暫停運行...\nProgram paused for displaying execution result...\n");
+	printf(
+		"\n"
+		"------------------------------------------------\n"
+		"顯示運行結果，程式暫停運行...\n"
+		"Program paused for displaying execution result...\n");
 
-    {
-    /*儲存輸入的字元*/
-    char inputChar;
+	do{
+		printf(
+			"請問您要重新運行本程式嗎（Ｙ／Ｎ）？\n"
+			"Do you want to execute this program again(Y/N)?");
 
-    do{
-        printf("請問您要重新運行本程式嗎（Ｙ／Ｎ）？\nDo you want to execute this program again(Y/N)?");
+		/* 確保輸入是正確的 */
+			inputChar = getchar();
+	}while(
+		!(inputChar == 'y' || inputChar == 'Y' ||
+			inputChar == 'n' || inputChar == 'N'));
 
-    /*確保輸入是正確的*/
-    }while(!((inputChar = getchar()) == 'y' || inputChar == 'Y'
-                || inputChar == 'n' || inputChar == 'N'));
-
-      if(inputChar == 'y' || inputChar == 'Y'){
-        /*丟掉換行符號*/
-        if(scanf("%*c") > 0){
+	if(inputChar == 'y' || inputChar == 'Y'){
+		/*丟掉換行符號*/
+			if(scanf("%*c") > 0){
 #ifndef _NDEBUG
-					printf("[DEBUG]input stream cleared!");
-#endif // _NDEBUG
-        };
+				printf("[DEBUG]input stream cleared!");
+#endif /* _NDEBUG */
+			}
 
-        /*清空螢幕*/
+		/* 可行的話清空螢幕 */{
 #ifdef _WIN32
-        generic_return_value = system("cls");
+			generic_return_value = system("cls");
 #elif defined(unix) || defined(__unix__) || defined(__unix)
-        generic_return_value = system("clear");
+			generic_return_value = system("clear");
 	#ifndef _NDEBUG
-				printf("[DEBUG]__unix__ cleared the screen!\n");
-	#endif // _NDEBUG
+			printf("[DEBUG]__unix__ cleared the screen!\n");
+	#endif /* _NDEBUG */
 #else
-				generic_return_value = system("clear");
+			generic_return_value = system("clear");
 	#ifndef _NDEBUG
-				printf("[DEBUG]__else__ cleared the screen!\n");
-	#endif // _NDEBUG
-#endif // _WIN32
+			printf("[DEBUG]__else__ cleared the screen!\n");
+	#endif /* _NDEBUG */
+#endif /* _WIN32 */
 
-				if(generic_return_value != 0){
-					fprintf(
-						stderr,
-						"【警告】清除螢幕失敗！\n"
-						"【警告】回傳碼為 %d\n", generic_return_value);
-				}
-        /*return true*/
-        return 1;
-      }
-    }
+			if(generic_return_value != 0){
+				fprintf(
+					stderr,
+					"【警告】清除螢幕失敗！\n"
+					"【警告】回傳碼為 %d\n", generic_return_value);
+			}
+		}
+			/*return true*/
+			return 1;
+		}
 
-    /*return false*/
-    return 0;
-  }
+	/*return false*/
+	return 0;
+}
