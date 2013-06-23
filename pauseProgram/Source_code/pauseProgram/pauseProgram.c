@@ -35,6 +35,9 @@
 /* we need system() */
   #include <stdlib.h>
 
+/* definitions of Standard C character handling functions */
+	#include <ctype.h>
+
 /*////////常數與巨集(Constants & Macros)以及其他#define指令////////*/
 
 /*////////其他前期處理器指令(Other Preprocessor Directives////////*/
@@ -58,25 +61,28 @@ short int pauseProgram(void){
 		"顯示運行結果，程式暫停運行...\n"
 		"Program paused for displaying execution result...\n");
 
+	/* 迴避 input stream 殘留行結尾字元造成詢問訊息重覆印出的解決方案 */{
+		fputs("（如果程式卡在此句末端請按 Enter 鍵繼續）", stdout);
+		if(scanf("%*c") > 0){
+#ifndef _NDEBUG
+			printf("[DEBUG]input stream successfully cleared!");
+#endif /* _NDEBUG */
+		}
+	}
+
 	do{
 		printf(
 			"請問您要重新運行本程式嗎（Ｙ／Ｎ）？\n"
 			"Do you want to execute this program again(Y/N)?");
 
 		/* 確保輸入是正確的 */
-			inputChar = getchar();
-	}while(
-		!(inputChar == 'y' || inputChar == 'Y' ||
-			inputChar == 'n' || inputChar == 'N'));
-
-	if(inputChar == 'y' || inputChar == 'Y'){
-		/*丟掉換行符號*/
-			if(scanf("%*c") > 0){
-#ifndef _NDEBUG
-				printf("[DEBUG]input stream cleared!");
-#endif /* _NDEBUG */
+			inputChar = tolower(getchar());
+			if(inputChar == 'y' || inputChar == 'n'){
+				break;
 			}
+	}while(1);
 
+	if(inputChar == 'y'){
 		/* 可行的話清空螢幕 */{
 #ifdef _WIN32
 			generic_return_value = system("cls");
