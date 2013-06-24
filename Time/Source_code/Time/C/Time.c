@@ -67,8 +67,8 @@
 			#include <stdint.h>
 			#include <cstdint> */
 		/* C Strings
-			#include <string.h>
 			#include <cstring> */
+			#include <string.h>
 		/* C Time Library
 			#include <ctime> */
 			#include <time.h>
@@ -134,8 +134,11 @@
  * Function implementations */
 	void fprintTime(FILE *output_stream, Time_format format){
 		time_t current_time = time(NULL);
+		char time_string[25];
 
-		fputs(ctime(&current_time), output_stream);
+		strncpy(time_string, ctime(&current_time), 24);
+		time_string[24] = '\0';
+		fputs(time_string, output_stream);
 		return;
 	}
 
