@@ -99,9 +99,12 @@
 
 	void fprintMessageDebug(FILE *output_stream, const char message[]){
 		printSomething_checkGettext();
+
+#ifndef NDEBUG
 		fputs(_("除錯用訊息："), output_stream);
 		fputs(message, output_stream);
 		fputc('\n', output_stream);
+#endif
 		return;
 	}
 
