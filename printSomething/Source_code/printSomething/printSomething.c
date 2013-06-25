@@ -16,6 +16,7 @@
 
 	/* 標準 C 函式庫 */
 		#include <stdio.h>
+		#include <errno.h>
 
 #if defined(__unix) || defined(__unix__)
 	/* POSIX API(Unix only) */
@@ -27,6 +28,9 @@
 
 	/* GNU gettext library */
 		#include <libintl.h>
+
+	/* VCCL */
+		#include "../Error/C/Error.h"
 
 /* 常數與巨集
  * Constants & Macros */
@@ -116,7 +120,9 @@
 	void printCurrentWorkingDirectory(void){
 		char buffer[PATH_MAX];
 
-		getcwd(buffer, sizeof(buffer));
+		if(getcwd(buffer, sizeof(buffer)) == NULL){
+			printErrorErrno("getcwd", errno);
+		}
 		fputs(buffer, stdout);
 		return;
 	}
