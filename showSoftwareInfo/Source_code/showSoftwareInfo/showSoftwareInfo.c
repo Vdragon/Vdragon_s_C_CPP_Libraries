@@ -37,20 +37,24 @@
 /*////////Classes、資料結構(Data Structures)、type definitions跟enumerations////////*/
 
 /*////////函式雛型(Function Prototypes)////////*/
-
+	void showSoftwareInfo_checkGettext(void);
 /*////////全域變數(Global Variables)////////*/
 	/* 判斷 gettext 函式庫有無初始化 */
 		static short gettext_is_initialized = 0;
 
 /*--------------主要程式碼(Main Code)--------------*/
+	void showSoftwareInfo_checkGettext(void){
+		if(gettext_is_initialized == 0){
+			bindtextdomain(MODULE_VC_CPP_LIB_SHOWSHOFTWAREINFO, "Translations");
+			gettext_is_initialized = 1;
+		}
+		return;
+	}
 /* 顯示軟體資訊的函式
    *  印出資訊，將控制交還給主要程式*/
 void showSoftwareInfo(const char program_name[])
 {
-	if(gettext_is_initialized == 0){
-		bindtextdomain(MODULE_VC_CPP_LIB_SHOWSHOFTWAREINFO, "Translations");
-		gettext_is_initialized = 1;
-	}
+	showSoftwareInfo_checkGettext();
 
 	printLine(
 			PRINTSOMETHING_COMPONENT_HYPHEN_MINUS,
@@ -82,6 +86,8 @@ void showSoftwareInfo(const char program_name[])
 }
 
 void showSoftwareInfoBeforeExit(void){
+	showSoftwareInfo_checkGettext();
+
 	printLine("-", 20);
 	printf(_(
 		"程式運行結束。\n"
