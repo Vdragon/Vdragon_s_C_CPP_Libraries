@@ -31,8 +31,8 @@
 		Tab character width = 2 space characters
 */
 /* include guard：避免同一個 header 檔案被 include 第二次 */
-	#ifndef PRINTSOMETHING_H_INCLUDED
-		#define PRINTSOMETHING_H_INCLUDED
+	#ifndef VCCL_printSomething
+		#define VCCL_printSomething "org.vsdg.lib.vccl.printSomething"
 		/* 如果是 C++ 編譯器則停用 C++ 特有的函式名稱 mangling*/
 		#ifdef __cplusplus
 			extern "C"{
@@ -84,6 +84,9 @@
 						unsigned short length
 				);
 
+			/* 印出除錯用訊息 */
+				void fprintMessageDebug(FILE *output_stream, const char message[]);
+				void printMessageDebug(const char message[])
 #if defined(__unix) || defined(__unix__)
 			/* 印出當前的工作目錄 */
 				void printCurrentWorkingDirectory(void);
@@ -99,4 +102,4 @@
 		#ifdef __cplusplus
 			}
 		#endif /* __cplusplus */
-	#endif/* PRINTSOMETHING_H_INCLUDED */
+	#endif/* VCCL_printSomething */

@@ -11,8 +11,8 @@
 */
 /* 程式所 include 之函式庫的標頭檔
  * Included Library Headers */
-	/* 自己
-		#include "printSomething.h" */
+	/* 自己 */
+		#include "printSomething.h"
 
 	/* 標準 C 函式庫 */
 		#include <stdio.h>
@@ -25,19 +25,32 @@
 		#include <linux/limits.h>
 #endif
 
+	/* GNU gettext library */
+		#include <libintl.h>
+
 /* 常數與巨集
  * Constants & Macros */
+	/* GNU gettext library */
+		#define _(Untranslated_C_string) gettext(Untranslated_C_string)
 
 /* Definition of data type, enumeration, data structure and class */
 
 /* 函式雛型
  * Function Prototypes */
-
+	void printSomething_checkGettext(void);
 /* 全域變數
  * Global Variables */
+	short gettext_is_initialized = 0;
 
 /* 主要程式碼
  * Main Code */
+	void printSomething_checkGettext(void){
+		if(gettext_is_initialized == 0){
+			bindtextdomain(VCCL_printSomething, "Translations");
+			gettext_is_initialized = 1;
+		}
+		return;
+	}
 	void printCstring(const char c_string[]){
 		printf("%s", c_string);
 
@@ -84,6 +97,18 @@
 		return;
 	}
 
+	void fprintMessageDebug(FILE *output_stream, const char message[]){
+		printSomething_checkGettext();
+		fputs(_("除錯用訊息："), output_stream);
+		fputs(message, output_stream);
+		fputc('\n', output_stream);
+		return;
+	}
+
+	void printMessageDebug(const char message[]){
+		fprintMessageDebug(stdout, message);
+		return;
+	}
 #if defined(__unix) || defined(__unix__)
 	void printCurrentWorkingDirectory(void){
 		char buffer[PATH_MAX];
