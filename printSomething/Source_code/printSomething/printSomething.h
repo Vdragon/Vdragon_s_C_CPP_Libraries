@@ -86,7 +86,7 @@
 
 			/* 印出除錯用訊息 */
 				void fprintMessageDebug(FILE *output_stream, const char message[]);
-				void printMessageDebug(const char message[])
+				void printMessageDebug(const char message[]);
 #if defined(__unix) || defined(__unix__)
 			/* 印出當前的工作目錄 */
 				void printCurrentWorkingDirectory(void);
