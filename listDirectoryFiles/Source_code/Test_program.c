@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#include "List_directory_files/listDirectoryFiles.h"
+#include "listDirectoryFiles/listDirectoryFiles.h"
 
 int main(void)
   {
