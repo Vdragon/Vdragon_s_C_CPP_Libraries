@@ -162,7 +162,7 @@
 /* 全域變數
  * Global Variables */
 	/* 判斷 gettext 函式庫有無初始化 */
-		bool gettext_is_initialized = false;
+		static bool gettext_is_initialized = false;
 
 /* 函式的實作
  * Function implementations */
