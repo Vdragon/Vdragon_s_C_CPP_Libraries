@@ -18,11 +18,11 @@ set (CMAKE_BUILD_TYPE Release)
 
 # 設定專案路徑
 ## 設定可執行檔的輸出目錄
-set (CMAKE_RUNTIME_OUTPUT_DIRECTORY Build/${CMAKE_BUILD_TYPE})
+set (CMAKE_RUNTIME_OUTPUT_DIRECTORY Build/)
 ## 設定靜態連結函式庫的輸出目錄
-set (CMAKE_ARCHIVE_OUTPUT_DIRECTORY Build/${CMAKE_BUILD_TYPE}/Libraries/)
+set (CMAKE_ARCHIVE_OUTPUT_DIRECTORY Build/Libraries/${CMAKE_LIBRARY_ARCHITECTURE}_${CMAKE_BUILD_TYPE}/)
 ## 設定動態連結函式庫的輸出目錄
-set (CMAKE_LIBRARY_OUTPUT_DIRECTORY Build/${CMAKE_BUILD_TYPE}/Libraries/)
+set (CMAKE_LIBRARY_OUTPUT_DIRECTORY Build/Libraries/${CMAKE_LIBRARY_ARCHITECTURE}_${CMAKE_BUILD_TYPE}/)
 ## PDB?
 ### set (CMAKE_RUNTIME_OUTPUT_DIRECTORY Buildsystem_CMake/Build/PDBs)
 
@@ -32,11 +32,12 @@ set (CMAKE_LIBRARY_OUTPUT_DIRECTORY Build/${CMAKE_BUILD_TYPE}/Libraries/)
 ### set(CMAKE_INSTALL_PREFIX )
 
 # 
-# aux_source_directory(../Source_code/Swap_algorithm_C SOURCE_CODE_FILE_LIST)
-# message(STATUS "找到來源程式碼檔案：${SOURCE_CODE_FILE_LIST}")
-# add_library(${PROJECT_NAME_ABBREVIATION}_Swap_algorithm_C ${SOURCE_CODE_FILE_LIST})
+aux_source_directory(../Source_code/Swap_algorithm_C SOURCE_CODE_FILE_LIST)
+message(STATUS "找到來源程式碼檔案：${SOURCE_CODE_FILE_LIST}")
+add_library(${PROJECT_NAME_ABBREVIATION}_Swap_algorithm_C ${SOURCE_CODE_FILE_LIST})
+# file(COPY 
 
-message(STATUS "CMAKE_CURRENT_BINARY_DIR = ${CMAKE_CURRENT_BINARY_DIR}")
-message(STATUS "CMAKE_CURRENT_SOURCE_DIR = ${CMAKE_CURRENT_SOURCE_DIR}")
+# message(STATUS "CMAKE_CURRENT_BINARY_DIR = ${CMAKE_CURRENT_BINARY_DIR}")
+# message(STATUS "CMAKE_CURRENT_SOURCE_DIR = ${CMAKE_CURRENT_SOURCE_DIR}")
 
-add_subdirectory(../Source_code/Swap_algorithm_C .)
+# add_subdirectory(../Source_code/Swap_algorithm_C .)
