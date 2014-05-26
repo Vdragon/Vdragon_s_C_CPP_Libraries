@@ -12,7 +12,7 @@
 /* 程式所引入(include)之函式庫的標頭(header)檔案
  * Included library headers */
 	/* 自己的 header 檔案 */
-		#include "main.hpp"
+		#include "Unit_test.hpp"
 
 	/* 標準 C 函式庫
 	 * Standard C libraries
@@ -126,7 +126,7 @@
 /* 函式的宣告（函式雛型）
  * Function declarations (function prototypes)
      用途
-     Usage 
+     Usage
        預先告訴編譯器(compiler)子程式的存在 */
 
 /* 全域變數
