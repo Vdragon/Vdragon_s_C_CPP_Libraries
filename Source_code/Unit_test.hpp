@@ -2,8 +2,8 @@
 	#ifndef PROGRAM_MAIN
 		/*程式名稱
 			Program name */
-			#define PROGRAM_MAIN "undefined.program.domain"
-			#define PROGRAM_MAIN_NAME "Main program"
+			#define PROGRAM_MAIN "org.vsdg.lib.vccl.Unit_test"
+			#define PROGRAM_MAIN_NAME "VCCL Unit_test program"
 		/*更新紀錄
 			Changelog
 				Changelog is now stored on GitHub(http://www.github.com)
