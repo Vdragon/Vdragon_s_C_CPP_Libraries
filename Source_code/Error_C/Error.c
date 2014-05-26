@@ -21,7 +21,7 @@
 			#include <stdlib.h>
 
 	/* VCCL */
-		#include "../../printSomething/printSomething.h"
+		#include "../printSomething/printSomething.h"
 
 /* 常數與巨集
  * Constants & Macros */
