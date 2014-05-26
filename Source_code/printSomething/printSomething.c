@@ -30,7 +30,7 @@
 		#include <libintl.h>
 
 	/* VCCL */
-		#include "../Error/C/Error.h"
+		#include "../Error_C/Error.h"
 
 /* 常數與巨集
  * Constants & Macros */
