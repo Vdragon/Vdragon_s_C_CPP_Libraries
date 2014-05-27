@@ -19,5 +19,7 @@ else()
 	message(STATUS "找到 ${library_name} 函式庫的來源程式碼：${SOURCE_CODE_FILE_LIST}")
 endif()
 add_library(${project_name_abbreviation}_${library_name} ${SOURCE_CODE_FILE_LIST})
+
+# 將函式庫 header 檔案複製一份到 Build/ 中
 # file(COPY .h Build/${CMAKE_BUILD_TYPE}/Libraries)
 return()
