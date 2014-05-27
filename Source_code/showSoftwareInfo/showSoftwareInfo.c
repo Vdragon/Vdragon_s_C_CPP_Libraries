@@ -43,13 +43,13 @@
 		static short gettext_is_initialized = 0;
 
 /*--------------主要程式碼(Main Code)--------------*/
-	void showSoftwareInfo_checkGettext(void){
-		if(gettext_is_initialized == 0){
-			bindtextdomain(MODULE_VC_CPP_LIB_SHOWSHOFTWAREINFO, "Translations");
-			gettext_is_initialized = 1;
-		}
-		return;
+void showSoftwareInfo_checkGettext(void){
+	if(gettext_is_initialized == 0){
+		bindtextdomain(MODULE_VC_CPP_LIB_SHOWSHOFTWAREINFO, "Translations");
+		gettext_is_initialized = 1;
 	}
+	return;
+}
 /* 顯示軟體資訊的函式
    *  印出資訊，將控制交還給主要程式*/
 void showSoftwareInfo(const char program_name[])
