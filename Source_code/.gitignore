@@ -1,0 +1,19 @@
+# Windows 二進位可執行檔
+*.exe
+
+# Unix 作業系統可執行檔（無副檔名的檔案，GNU Make 的 Makefile 是例外）與可執行檔常見副檔名的檔案
+*
+!Makefile
+!*.*
+!*/
+a.out
+
+# Following taken from https://github.com/github/gitignore/blob/master/CMake.gitignore
+# MIT license
+CMakeCache.txt
+CMakeFiles
+Makefile
+cmake_install.cmake
+install_manifest.txt
+
+!.gitignore
