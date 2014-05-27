@@ -1,3 +1,11 @@
+# 動態連結函式庫
+*.dll
+*.so
+
+# 靜態連結函式庫
+*.lib
+*.a
+
 # Following taken from https://github.com/github/gitignore/blob/master/CMake.gitignore
 # MIT license
 CMakeCache.txt
