@@ -300,6 +300,14 @@ modules.order
 	#Resources目錄底下的東西為相關資源不要排除掉
 !Resources/
 
+# Following taken from https://github.com/github/gitignore/blob/master/CMake.gitignore
+# MIT license
+CMakeCache.txt
+CMakeFiles
+Makefile
+cmake_install.cmake
+install_manifest.txt
+
 #Git版本控制系統排除規則，放在最後面以免被後面的規則覆蓋掉
 	#排除所有目錄下的.gitignore排除規則檔案
 !*.gitignore
