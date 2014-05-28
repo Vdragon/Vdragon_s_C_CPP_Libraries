@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "../Swap_algorithm_C/VCCL_Swap_algorithm_C.h"
+#include "../Swap_algorithm_C/Swap_algorithm_C.h"
 
 /* 計算最大公因數函式 */
 unsigned int calcGcd(unsigned int number_A, unsigned int number_B){
