@@ -40,24 +40,24 @@
 		/* 保存軟體資訊用的資料結構，未初始化的字元字串請賦值 NULL */
 		
 		/* 軟體名稱 */
-		char *software_name; 
+		const char *software_name; 
 		
-		char *software_official_website; 
-		char *software_issue_tracker; 
+		const char *software_official_website; 
+		const char *software_issue_tracker; 
 		
 		/* 軟體開發者資訊 */
-		char *software_developer_name; 
-		char *software_developer_email; 
+		const char *software_developer_name; 
+		const char *software_developer_email; 
 		
 		/* 軟體智慧財產權生效年，通常是最後一次修改程式碼的年份 */
 		int software_copyright_valid_year; 
 		
 		/* 軟體所採用的授權條款 */
 		Software_license software_license; 
-		char *software_license_other_name; 
-		char *software_license_version; 
+		const char *software_license_other_name; 
+		const char *software_license_version; 
 		unsigned short software_license_version_or_later; 
-		char *software_license_other_url;
+		const char *software_license_other_url;
 	}Software_information;
 	
 	/* 一個全軟體範圍共用的軟體資料結構 */
