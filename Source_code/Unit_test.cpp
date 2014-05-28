@@ -104,22 +104,23 @@
 				#include <algorithm> */
 			/*
 				#include <> */
-
+#if 0
 	/* GNU gettext library */
 		#include <libintl.h>
-
+#endif
 	/* Ｖ字龍的 C/C++ 函式庫蒐集
 	 * Vdragons C CPP Libraries Collection
 	 *   https://github.com/Vdragon/Vdragons_C_CPP_Libraries_Collection */
 		#include "pauseProgram/pauseProgram.h"
 		#include "showSoftwareInfo/showSoftwareInfo.h"
-		#include "Project_specific_configurations/GNU_gettext_library.h"
+		/* #include "Project_specific_configurations/GNU_gettext_library.h" */
 
 /* 常數與巨集的定義
  * Definition of constants & macros */
+#if 0
 	/* GNU gettext library */
 		#define _(Untranslated_C_string) gettext(Untranslated_C_string)
-
+#endif
 /* 資料類型、enumeration、資料結構與物件類別的定義
  * Definition of data type, enumeration, data structure and class */
 
@@ -131,21 +132,35 @@
 
 /* 全域變數
  * Global Variables */
-
+	/* 定義於 showSoftwareInfo */
+		extern Software_information global_software_information;
 /* 函式的實作
  * Function implementations */
   /* main 函式 - C/C++ 程式的進入點(entry point) */
     int main(int argc, char *argv[]){
+#if 0
     	/* 初始化 GNU gettext 函式庫 */
 				/* Use system default locale instead of "C" locale */
 					setlocale(LC_MESSAGES, "");
 				bindtextdomain(MESSAGE_DOMAIN, LOCALEDIR);
 				textdomain(MESSAGE_DOMAIN);
 				bind_textdomain_codeset(MESSAGE_DOMAIN, MESSAGE_CHARSET);
-
+#endif
     /*用來重新運行程式的label*/
     restart_program:
-      showSoftwareInfo(_(PROGRAM_MAIN_NAME));
+			global_software_information.software_name = "Ｖ字龍的Ｃ、Ｃ＋＋函式庫蒐集";
+			global_software_information.software_official_website = "https://github.com/Vdragon/Vdragons_C_CPP_Libraries_Collection/";
+			global_software_information.software_issue_tracker = "https://github.com/Vdragon/Vdragons_C_CPP_Libraries_Collection/issues";
+			global_software_information.software_developer_name = "Ｖ字龍";
+			global_software_information.software_developer_email = "pika1021@gmail.com";
+			global_software_information.software_copyright_valid_year = 2014;
+			global_software_information.software_license = LGPL;
+			global_software_information.software_license_version = "v3";
+			global_software_information.software_license_version_or_later = 1;
+			global_software_information.software_license_other_url = NULL;
+			global_software_information.software_license_other_name = NULL;
+			
+      showSoftwareInfo(/* _(*/PROGRAM_MAIN_NAME/*)*/);
 
       /* 暫停程式運行（於main函式中） */
         if(pauseProgram() == 1){
