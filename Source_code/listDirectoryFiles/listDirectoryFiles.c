@@ -1,15 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "../Project_specific_configurations/System_category.h"
-
 
 void listDirectoryFiles(void)
   {
-    if(SYSTEM_CATEGORY == 1){
+#if defined(__unix) || defined(_unix__) || defined(unix)
       system("ls --almost-all");
-    }else{
+#elif defined(_WIN16) || defined(_WIN32) || defined (_WIN64)
       system("dir");
-    }
+#else
+			system("dir");
+#endif
     putchar('\n');
     return;
   }
