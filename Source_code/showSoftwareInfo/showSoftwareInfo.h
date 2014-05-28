@@ -31,16 +31,50 @@
   #ifdef __cplusplus
     extern "C"{
   #endif
+	enum software_license{
+		UNDEFINED, OTHER, GPL, LGPL, PUBLIC_DOMAIN, CC0, WTFPL, MIT, BSD_3_CLAUSE, BSD_2_CLAUSE, MPL, APACHE
+	};
+	typedef enum software_license Software_license;
+
+	typedef struct software_information{
+		/* 保存軟體資訊用的資料結構，未初始化的字元字串請賦值 NULL */
+		
+		/* 軟體名稱 */
+		char *software_name; 
+		
+		char *software_official_website; 
+		char *software_issue_tracker; 
+		
+		/* 軟體開發者資訊 */
+		char *software_developer_name; 
+		char *software_developer_email; 
+		
+		/* 軟體智慧財產權生效年，通常是最後一次修改程式碼的年份 */
+		int software_copyright_valid_year; 
+		
+		/* 軟體所採用的授權條款 */
+		Software_license software_license; 
+		char *software_license_other_name; 
+		char *software_license_version; 
+		unsigned short software_license_version_or_later; 
+		char *software_license_other_url;
+	}Software_information;
+	
+	/* 一個全軟體範圍共用的軟體資料結構 */
+	Software_information global_software_information;
 
   /* 顯示軟體資訊的函式
    *   印出資訊，將控制交還給主要程式
    * 參數：
-   *   program_name:程式名稱（非軟體名稱）的陣列*/
+   *   program_name:程式名稱（非軟體名稱）的陣列
+	 *   */
   void showSoftwareInfo(const char program_name[]);
+
   /* 在程式結束前顯示軟體資訊（錯誤回報網址等）的子程式
    * 　通常註冊於 atexit();
    */
   void showSoftwareInfoBeforeExit(void);
+ 
   #ifdef __cplusplus
     }
   #endif
