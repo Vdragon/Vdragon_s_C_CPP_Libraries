@@ -1,7 +1,5 @@
 ﻿/*偵錯訊息*/
 /* include guard：避免同一個header檔案被include第二次。*/
-#ifndef _H_INCLUDED
-  #define _H_INCLUDED
   /*使用printf()*/
   #include <stdio.h>
 
@@ -18,8 +16,6 @@
   #ifdef __cplusplus
     }
   #endif
-#endif /* _H_INCLUDED */
-
 
 
 
