@@ -1,3 +1,8 @@
+# object code
+*.o
+*.obj
+*.object_code
+
 # 動態連結函式庫
 *.dll
 *.so
