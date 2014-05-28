@@ -125,7 +125,7 @@ void showSoftwareInfo(const char program_name[]){
 						software_license_site_urls[global_software_information.software_license]);
 				}else{
 					printf(_(
-						"「%s」軟體採用「%s」授權條款 %s版本釋出，詳情請參考：\n"
+						"「%s」軟體採用「%s」授權條款 %s 版本釋出，詳情請參考：\n"
 						"%s\n"), 
 						(global_software_information.software_name != NULL) ?  global_software_information.software_name : program_name, 
 						_(software_license_names[global_software_information.software_license]),  
