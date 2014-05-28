@@ -154,8 +154,8 @@
 			global_software_information.software_developer_name = "Ｖ字龍";
 			global_software_information.software_developer_email = "pika1021@gmail.com";
 			global_software_information.software_copyright_valid_year = 2014;
-			global_software_information.software_license = LGPL;
-			global_software_information.software_license_version = "v3";
+			global_software_information.software_license = SOFTWARE_LICENSE_LGPL;
+			global_software_information.software_license_version = "3";
 			global_software_information.software_license_version_or_later = 1;
 			global_software_information.software_license_other_url = NULL;
 			global_software_information.software_license_other_name = NULL;

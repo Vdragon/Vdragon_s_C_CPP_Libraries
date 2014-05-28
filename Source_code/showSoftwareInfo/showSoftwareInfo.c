@@ -111,8 +111,8 @@ void showSoftwareInfo(const char program_name[]){
 		printf(_("「%s」是「%s」軟體的一部份。\n"),
 			program_name, global_software_information.software_name);
 	}
-	if(global_software_information.software_license != UNDEFINED){
-		if(global_software_information.software_license != OTHER){
+	if(global_software_information.software_license != SOFTWARE_LICENSE_UNDEFINED){
+		if(global_software_information.software_license != SOFTWARE_LICENSE_OTHER){
 			if(global_software_information.software_license_version != NULL){
 				if(global_software_information.software_license_version_or_later){
 					printf(_(
