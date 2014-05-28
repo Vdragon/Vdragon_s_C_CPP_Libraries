@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Vdragons_C_CPP_Libraries_Collection" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Generic_Library_Debug">
+				<Option output="Build/$(TARGET_NAME)/VCCL" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="" />
+				<Option object_output="Object_code/$(TARGET_NAME)/" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-Weffc++" />
+					<Add option="-Wmain" />
+					<Add option="-pedantic" />
+					<Add option="-Wall" />
+					<Add option="-ansi" />
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Generic_Library_Release">
+				<Option output="Build/$(TARGET_NAME)/VCCL" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="" />
+				<Option object_output="Object_code/$(TARGET_NAME)/" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+			</Target>
+			<Target title="Generic_Debug">
+				<Option output="Build/$(TARGET_NAME)/$(PROJECT_NAME)" prefix_auto="0" extension_auto="1" />
+				<Option object_output="Object_code/$(TARGET_NAME)/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Option use_console_runner="0" />
+				<Compiler>
+					<Add option="-Wall" />
+					<Add option="-ansi" />
+					<Add option="-g" />
+					<Add directory="Build/Generic_Library_Debug" />
+				</Compiler>
+				<Linker>
+					<Add library="VCCL_Swap_algorithm_C" />
+					<Add directory="Build/Generic_Library_Debug" />
+				</Linker>
+			</Target>
+			<Target title="Generic_Release">
+				<Option output="Build/$(TARGET_NAME)/$(PROJECT_NAME)" prefix_auto="0" extension_auto="1" />
+				<Option object_output="Object_code/$(TARGET_NAME)/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Option use_console_runner="0" />
+			</Target>
+			<Target title="Debug_Linux_x86_32bit">
+				<Option platforms="Unix;" />
+				<Option output="Build/$(TARGET_NAME)/$(PROJECT_NAME).exe" prefix_auto="0" extension_auto="0" />
+				<Option object_output="Object_code/$(TARGET_NAME)/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release_Linux_x86_32bit">
+				<Option platforms="Unix;" />
+				<Option output="Build/$(TARGET_NAME)/$(PROJECT_NAME).exe" prefix_auto="0" extension_auto="0" />
+				<Option object_output="Object_code/$(TARGET_NAME)/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add option="-DNDEBUG" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+			<Target title="Debug_Windows_x86_32bit">
+				<Option platforms="Windows;" />
+				<Option output="Build/$(TARGET_NAME)/$(PROJECT_NAME).exe" prefix_auto="0" extension_auto="0" />
+				<Option object_output="Object_code/$(TARGET_NAME)/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Option projectIncludeDirsRelation="2" />
+				<Option projectLibDirsRelation="2" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release_Windows_x86_32bit">
+				<Option platforms="Windows;" />
+				<Option output="Build/$(TARGET_NAME)/$(PROJECT_NAME).exe" prefix_auto="0" extension_auto="0" />
+				<Option object_output="Object_code/$(TARGET_NAME)/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Option projectIncludeDirsRelation="2" />
+				<Option projectLibDirsRelation="2" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add option="-DNDEBUG" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+			<Target title="Debug_Mac_x86_32bit">
+				<Option platforms="Mac;" />
+				<Option output="Build/$(TARGET_NAME)/$(PROJECT_NAME).exe" prefix_auto="0" extension_auto="0" />
+				<Option object_output="Object_code/$(TARGET_NAME)/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+				<Linker>
+					<Add option="-lglut" />
+				</Linker>
+			</Target>
+			<Target title="Release_Mac_x86_32bit">
+				<Option platforms="Mac;" />
+				<Option output="Build/$(TARGET_NAME)/$(PROJECT_NAME).exe" prefix_auto="0" extension_auto="0" />
+				<Option object_output="Object_code/$(TARGET_NAME)/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add option="-DNDEBUG" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add option="-lglut" />
+				</Linker>
+			</Target>
+			<Target title="VCCL_Swap_algorithm_C">
+				<Option output="Build/Generic_Library_Debug/${TARGET_NAME}" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="" />
+				<Option object_output="Object_code/$(TARGET_NAME)/" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-Weffc++" />
+					<Add option="-Wmain" />
+					<Add option="-pedantic" />
+					<Add option="-Wall" />
+					<Add option="-ansi" />
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+		</Build>
+		<VirtualTargets>
+			<Add alias="buildAllLibraryWithDebugSymbols" targets="VCCL_Swap_algorithm_C;" />
+		</VirtualTargets>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-ansi" />
+			<Add option="-fexceptions" />
+		</Compiler>
+		<Unit filename="../Source_code/Project_specific_configurations/Debug.h">
+			<Option target="Generic_Release" />
+			<Option target="Debug_Linux_x86_32bit" />
+			<Option target="Release_Linux_x86_32bit" />
+			<Option target="Debug_Windows_x86_32bit" />
+			<Option target="Release_Windows_x86_32bit" />
+			<Option target="Debug_Mac_x86_32bit" />
+			<Option target="Release_Mac_x86_32bit" />
+		</Unit>
+		<Unit filename="../Source_code/Project_specific_configurations/GNU_gettext_library.h">
+			<Option target="Generic_Release" />
+			<Option target="Debug_Linux_x86_32bit" />
+			<Option target="Release_Linux_x86_32bit" />
+			<Option target="Debug_Windows_x86_32bit" />
+			<Option target="Release_Windows_x86_32bit" />
+			<Option target="Debug_Mac_x86_32bit" />
+			<Option target="Release_Mac_x86_32bit" />
+		</Unit>
+		<Unit filename="../Source_code/Project_specific_configurations/Math.h">
+			<Option target="Generic_Release" />
+			<Option target="Debug_Linux_x86_32bit" />
+			<Option target="Release_Linux_x86_32bit" />
+			<Option target="Debug_Windows_x86_32bit" />
+			<Option target="Release_Windows_x86_32bit" />
+			<Option target="Debug_Mac_x86_32bit" />
+			<Option target="Release_Mac_x86_32bit" />
+		</Unit>
+		<Unit filename="../Source_code/Project_specific_configurations/Max_value.h">
+			<Option target="Generic_Release" />
+			<Option target="Debug_Linux_x86_32bit" />
+			<Option target="Release_Linux_x86_32bit" />
+			<Option target="Debug_Windows_x86_32bit" />
+			<Option target="Release_Windows_x86_32bit" />
+			<Option target="Debug_Mac_x86_32bit" />
+			<Option target="Release_Mac_x86_32bit" />
+		</Unit>
+		<Unit filename="../Source_code/Project_specific_configurations/Software_info.h">
+			<Option target="Generic_Release" />
+			<Option target="Debug_Linux_x86_32bit" />
+			<Option target="Release_Linux_x86_32bit" />
+			<Option target="Debug_Windows_x86_32bit" />
+			<Option target="Release_Windows_x86_32bit" />
+			<Option target="Debug_Mac_x86_32bit" />
+			<Option target="Release_Mac_x86_32bit" />
+		</Unit>
+		<Unit filename="../Source_code/README.md">
+			<Option target="Generic_Release" />
+			<Option target="Debug_Linux_x86_32bit" />
+			<Option target="Release_Linux_x86_32bit" />
+			<Option target="Debug_Windows_x86_32bit" />
+			<Option target="Release_Windows_x86_32bit" />
+			<Option target="Debug_Mac_x86_32bit" />
+			<Option target="Release_Mac_x86_32bit" />
+		</Unit>
+		<Unit filename="../Source_code/Swap_algorithm_C/Swap_algorithm_C_unit_test.c">
+			<Option compilerVar="CC" />
+			<Option target="Generic_Release" />
+			<Option target="Debug_Linux_x86_32bit" />
+			<Option target="Release_Linux_x86_32bit" />
+			<Option target="Debug_Windows_x86_32bit" />
+			<Option target="Release_Windows_x86_32bit" />
+			<Option target="Debug_Mac_x86_32bit" />
+			<Option target="Release_Mac_x86_32bit" />
+			<Option target="VCCL_Swap_algorithm_C" />
+		</Unit>
+		<Unit filename="../Source_code/Swap_algorithm_C/Swap_algorithm_C_unit_test.h">
+			<Option target="Generic_Release" />
+			<Option target="Debug_Linux_x86_32bit" />
+			<Option target="Release_Linux_x86_32bit" />
+			<Option target="Debug_Windows_x86_32bit" />
+			<Option target="Release_Windows_x86_32bit" />
+			<Option target="Debug_Mac_x86_32bit" />
+			<Option target="Release_Mac_x86_32bit" />
+			<Option target="VCCL_Swap_algorithm_C" />
+		</Unit>
+		<Unit filename="../Source_code/Swap_algorithm_C/VCCL_Swap_algorithm_C.h">
+			<Option target="Generic_Release" />
+			<Option target="Generic_Library_Debug" />
+			<Option target="Debug_Linux_x86_32bit" />
+			<Option target="Release_Linux_x86_32bit" />
+			<Option target="Debug_Windows_x86_32bit" />
+			<Option target="Release_Windows_x86_32bit" />
+			<Option target="Debug_Mac_x86_32bit" />
+			<Option target="Release_Mac_x86_32bit" />
+			<Option target="Generic_Library_Release" />
+			<Option target="VCCL_Swap_algorithm_C" />
+		</Unit>
+		<Unit filename="../Source_code/Swap_algorithm_C/swapDouble.c">
+			<Option compilerVar="CC" />
+			<Option target="Generic_Release" />
+			<Option target="Generic_Library_Debug" />
+			<Option target="Debug_Linux_x86_32bit" />
+			<Option target="Release_Linux_x86_32bit" />
+			<Option target="Debug_Windows_x86_32bit" />
+			<Option target="Release_Windows_x86_32bit" />
+			<Option target="Debug_Mac_x86_32bit" />
+			<Option target="Release_Mac_x86_32bit" />
+			<Option target="Generic_Library_Release" />
+			<Option target="VCCL_Swap_algorithm_C" />
+		</Unit>
+		<Unit filename="../Source_code/Swap_algorithm_C/swapInteger.c">
+			<Option compilerVar="CC" />
+			<Option target="Generic_Release" />
+			<Option target="Generic_Library_Debug" />
+			<Option target="Debug_Linux_x86_32bit" />
+			<Option target="Release_Linux_x86_32bit" />
+			<Option target="Debug_Windows_x86_32bit" />
+			<Option target="Release_Windows_x86_32bit" />
+			<Option target="Debug_Mac_x86_32bit" />
+			<Option target="Release_Mac_x86_32bit" />
+			<Option target="Generic_Library_Release" />
+			<Option target="VCCL_Swap_algorithm_C" />
+		</Unit>
+		<Unit filename="../Source_code/Swap_algorithm_C/swapLongInteger.c">
+			<Option compilerVar="CC" />
+			<Option target="Generic_Release" />
+			<Option target="Generic_Library_Debug" />
+			<Option target="Debug_Linux_x86_32bit" />
+			<Option target="Release_Linux_x86_32bit" />
+			<Option target="Debug_Windows_x86_32bit" />
+			<Option target="Release_Windows_x86_32bit" />
+			<Option target="Debug_Mac_x86_32bit" />
+			<Option target="Release_Mac_x86_32bit" />
+			<Option target="Generic_Library_Release" />
+			<Option target="VCCL_Swap_algorithm_C" />
+		</Unit>
+		<Unit filename="../Source_code/Swap_algorithm_C/swapUnsignedInteger.c">
+			<Option compilerVar="CC" />
+			<Option target="Generic_Release" />
+			<Option target="Generic_Library_Debug" />
+			<Option target="Debug_Linux_x86_32bit" />
+			<Option target="Release_Linux_x86_32bit" />
+			<Option target="Debug_Windows_x86_32bit" />
+			<Option target="Release_Windows_x86_32bit" />
+			<Option target="Debug_Mac_x86_32bit" />
+			<Option target="Release_Mac_x86_32bit" />
+			<Option target="Generic_Library_Release" />
+			<Option target="VCCL_Swap_algorithm_C" />
+		</Unit>
+		<Unit filename="../Source_code/Swap_algorithm_C/swapUnsignedShortInteger.c">
+			<Option compilerVar="CC" />
+			<Option target="Generic_Release" />
+			<Option target="Generic_Library_Debug" />
+			<Option target="Debug_Linux_x86_32bit" />
+			<Option target="Release_Linux_x86_32bit" />
+			<Option target="Debug_Windows_x86_32bit" />
+			<Option target="Release_Windows_x86_32bit" />
+			<Option target="Debug_Mac_x86_32bit" />
+			<Option target="Release_Mac_x86_32bit" />
+			<Option target="Generic_Library_Release" />
+			<Option target="VCCL_Swap_algorithm_C" />
+		</Unit>
+		<Unit filename="../Source_code/Unit_test.cpp" />
+		<Unit filename="../Source_code/Unit_test.hpp" />
+		<Unit filename="../Source_code/calc_GCD_LCM/calcGCD.c">
+			<Option compilerVar="CC" />
+			<Option target="Generic_Release" />
+			<Option target="Debug_Linux_x86_32bit" />
+			<Option target="Release_Linux_x86_32bit" />
+			<Option target="Debug_Windows_x86_32bit" />
+			<Option target="Release_Windows_x86_32bit" />
+			<Option target="Debug_Mac_x86_32bit" />
+			<Option target="Release_Mac_x86_32bit" />
+			<Option target="Generic_Library_Debug" />
+			<Option target="Generic_Library_Release" />
+		</Unit>
+		<Unit filename="../Source_code/calc_GCD_LCM/calcGCD.h">
+			<Option target="Generic_Release" />
+			<Option target="Debug_Linux_x86_32bit" />
+			<Option target="Release_Linux_x86_32bit" />
+			<Option target="Debug_Windows_x86_32bit" />
+			<Option target="Release_Windows_x86_32bit" />
+			<Option target="Debug_Mac_x86_32bit" />
+			<Option target="Release_Mac_x86_32bit" />
+			<Option target="Generic_Library_Debug" />
+			<Option target="Generic_Library_Release" />
+		</Unit>
+		<Extensions>
+			<code_completion />
+			<debugger />
+			<envvars set="locale_en_us" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
