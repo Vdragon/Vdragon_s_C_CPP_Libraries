@@ -21,7 +21,7 @@ set (CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Build/Libraries/${CMAKE_
 ## 設定動態連結函式庫的輸出目錄
 set (CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Build/Libraries/${CMAKE_LIBRARY_ARCHITECTURE}_${CMAKE_BUILD_TYPE}/)
 ## PDB?
-### set (CMAKE_RUNTIME_OUTPUT_DIRECTORY Buildsystem_CMake/Build/PDBs)
+### set (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Build/PDBs)
 ## Library header output path
 set (library_header_output_directory ${CMAKE_BINARY_DIR}/Build/Library_headers/${project_name_abbreviation}/)
 
