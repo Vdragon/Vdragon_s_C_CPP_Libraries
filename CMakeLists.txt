@@ -1,10 +1,6 @@
 # 設定最低可拿來解析此文件的 CMake 版本
 cmake_minimum_required(VERSION 2.8)
 
-message(STATUS "CMAKE_SOURCE_DIR = ${CMAKE_SOURCE_DIR}")
-message(STATUS "CMAKE_BINARY_DIR = ${CMAKE_BINARY_DIR}")
-# return()
-
 # 設定專案名稱
 project("Ｖ字龍的Ｃ與Ｃ＋＋函式庫蒐集")
 set(project_name_abbreviation "VCCL")
