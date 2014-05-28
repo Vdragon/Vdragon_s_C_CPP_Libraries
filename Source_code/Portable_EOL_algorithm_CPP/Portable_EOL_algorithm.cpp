@@ -34,12 +34,10 @@
 	/* we need iostream to output debug message*/
 		#include <iostream>
 
-	/*我們需要專案的設定值*/
-		#include "../../Project_specific_configurations/Debug.h"
-
 	/*我們需要一些defined訊息*/
-		#include "../../Messages_templates/zh_TW.h"
-
+		#include "../Messages/Messages_Debug.h"
+		#include "../Messages/Messages.h"
+		
 	/*我們需要標示當前模組的字串*/
 		#include "Portable_EOL_algorithm.hpp"
 
@@ -69,16 +67,14 @@
 			if(check == '\n'){
 				file_stream.ignore(1);
 #ifndef NDEBUG
-				cout << DEBUG_TAG << SKIP_EOL_SEQUENCE_TAG
-						 << "吃掉了[LF]" << endl;
+				message(DEBUG_TAG, SKIP_EOL_SEQUENCE_TAG, "吃掉了[LF]");
 #endif
 				return 1;
 			}else if(check == '\r'){
 				/* maybe MS-DOS or old Mac...ignore it and peek next to see which is which */
 					file_stream.ignore(1);
 #ifndef NDEBUG
-					cout << DEBUG_TAG << SKIP_EOL_SEQUENCE_TAG
-							 << "吃掉了[CR]";
+				message(DEBUG_TAG, SKIP_EOL_SEQUENCE_TAG, "吃掉了[CR]");
 #endif
 					check = file_stream.peek();
 					if(check == '\n'){
@@ -96,8 +92,7 @@
 			}else{
 				/* not a known EOL character sequence, good bye! */
 #ifndef NDEBUG
-					cout << DEBUG_TAG << SKIP_EOL_SEQUENCE_TAG
-							 << "吃列結尾以外的東西會拉肚子的……" << endl;
+					message(DEBUG_TAG, SKIP_EOL_SEQUENCE_TAG, "吃列結尾以外的東西會拉肚子的……");
 #endif
 					return -1;
 			}
