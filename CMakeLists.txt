@@ -1,6 +1,10 @@
 # 設定最低可拿來解析此文件的 CMake 版本
 cmake_minimum_required(VERSION 2.8)
 
+message(STATUS "CMAKE_SOURCE_DIR = ${CMAKE_SOURCE_DIR}")
+message(STATUS "CMAKE_BINARY_DIR = ${CMAKE_BINARY_DIR}")
+# return()
+
 # 設定專案名稱
 project("Ｖ字龍的Ｃ與Ｃ＋＋函式庫蒐集")
 set(project_name_abbreviation "VCCL")
@@ -15,13 +19,15 @@ set (CMAKE_BUILD_TYPE Debug)
 
 # 設定專案路徑
 ## 設定可執行檔的輸出目錄
-set (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Buildsystem_CMake/Build/)
+set (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Build/)
 ## 設定靜態連結函式庫的輸出目錄
-set (CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Buildsystem_CMake/Build/Libraries/${CMAKE_LIBRARY_ARCHITECTURE}_${CMAKE_BUILD_TYPE}/)
+set (CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Build/Libraries/${CMAKE_LIBRARY_ARCHITECTURE}_${CMAKE_BUILD_TYPE}/)
 ## 設定動態連結函式庫的輸出目錄
-set (CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Buildsystem_CMake/Build/Libraries/${CMAKE_LIBRARY_ARCHITECTURE}_${CMAKE_BUILD_TYPE}/)
+set (CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Build/Libraries/${CMAKE_LIBRARY_ARCHITECTURE}_${CMAKE_BUILD_TYPE}/)
 ## PDB?
 ### set (CMAKE_RUNTIME_OUTPUT_DIRECTORY Buildsystem_CMake/Build/PDBs)
+## Library header output path
+set (library_header_output_directory ${CMAKE_BINARY_DIR}/Build/Library_headers/${project_name_abbreviation}/)
 
 # 設定軟體安裝路徑前綴
 ## Install directory used by install.
