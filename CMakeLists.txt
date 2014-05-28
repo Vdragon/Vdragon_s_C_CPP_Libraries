@@ -30,4 +30,4 @@ set (library_header_output_directory ${CMAKE_BINARY_DIR}/Build/Library_headers/$
 ### If "make install" is invoked or INSTALL is built, this directory is prepended onto all install directories. This variable defaults to /usr/local on UNIX and c:/Program Files on Windows.
 ### set(CMAKE_INSTALL_PREFIX )
 
-add_subdirectory(Source_code)
+add_subdirectory(Source_code Built_artifacts)
