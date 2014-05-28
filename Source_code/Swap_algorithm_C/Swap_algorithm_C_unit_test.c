@@ -112,7 +112,7 @@
 	 * Vdragons C CPP Libraries Collection
 	 *   https://github.com/Vdragon/Vdragons_C_CPP_Libraries_Collection */
 		/* function under test */
-			#include "VCCL_Swap_algorithm_C.h"
+			#include "Swap_algorithm_C.h"
 
 /* 常數與巨集的定義
  * Definition of constants & macros */
