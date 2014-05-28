@@ -28,6 +28,6 @@ set (library_header_output_directory ${CMAKE_BINARY_DIR}/Build/Library_headers/$
 # 設定軟體安裝路徑前綴
 ## Install directory used by install.
 ### If "make install" is invoked or INSTALL is built, this directory is prepended onto all install directories. This variable defaults to /usr/local on UNIX and c:/Program Files on Windows.
-### set(CMAKE_INSTALL_PREFIX )
+set(CMAKE_INSTALL_PREFIX $ENV{HOME}/Software/${CMAKE_PROJECT_NAME})
 
 add_subdirectory(Source_code Built_artifacts)
