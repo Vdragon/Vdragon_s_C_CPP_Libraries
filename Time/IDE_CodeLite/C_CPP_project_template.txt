@@ -1,1 +1,0 @@
-./Object_code/Debug/Source_code_main.o ./Object_code/Debug/pauseProgram_pauseProgram.o ./Object_code/Debug/showSoftwareInfo_showSoftwareInfo.o
