@@ -25,4 +25,11 @@ foreach(subdir ${subdir_list})
 		add_subdirectory(${subdir})
 	endif()
 endforeach()
+
+# copy library headers
+if(library_header_output_directory)
+	file(GLOB_RECURSE library_headers *.h *.hpp)
+	message(STATUS "found library headers: ${library_headers}")
+	file(COPY ${library_headers} DESTINATION ${library_header_output_directory})
+endif()
 return()
