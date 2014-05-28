@@ -1,7 +1,7 @@
 # 設定最低可拿來解析此文件的 CMake 版本
 cmake_minimum_required(VERSION 2.8)
 
-set(library_name "Unnamed")
+set(library_name "testSomething_C")
 
 # 處理沒有在最上層 CMakelist.txt 下執行 CMake 的專案名稱設定
 if("${project_name_abbreviation}" STREQUAL "")
