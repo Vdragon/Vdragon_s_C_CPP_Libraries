@@ -26,8 +26,8 @@ endmacro()
 subdirlist(subdir_list ${CMAKE_CURRENT_LIST_DIR})
 message(STATUS "Found following subdirs:\n${subdir_list}")
 foreach(subdir ${subdir_list})
-	if(${subdir} STREQUAL "CMakeFiles" OR 
-		${subdir} STREQUAL "00_Library_template")
+	if(${subdir} STREQUAL "CMakeFiles"
+		OR ${subdir} STREQUAL "00_Library_template")
 		# 跳過
 	else()
 		add_subdirectory(${subdir})
