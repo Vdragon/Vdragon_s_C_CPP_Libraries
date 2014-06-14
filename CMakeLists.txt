@@ -20,6 +20,7 @@ if(CMAKE_HOST_WIN32)
 	set(path_library_gnu_intl "C:\\Program Files (x86)\\GnuWin32\\lib")
 	include_directories(${path_library_header_gnu_intl})
 	link_directories(${path_library_gnu_intl})
+	target_link_libraries(intl)
 endif()
 
 # 設定專案路徑
