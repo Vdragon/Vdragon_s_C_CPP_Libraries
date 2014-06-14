@@ -13,6 +13,15 @@ set (CMAKE_BUILD_TYPE Debug)
 ### This specifies what build types (configurations) will be available such as Debug, Release, RelWithDebInfo etc.
 ### set (CMAKE_CONFIGURATION_TYPES Debug)
 
+# 設定第三方函式庫路徑
+## Windows GNU libintl 函式庫路徑
+if(CMAKE_HOST_WIN32)
+	set(path_library_header_gnu_intl "C:\Program Files (x86)\GnuWin32\include")
+	set(path_library_gnu_intl "C:\Program Files (x86)\GnuWin32\lib")
+	include_directories(${path_library_header_gnu_intl})
+	link_directories(${path_library_gnu_intl})
+endif()
+
 # 設定專案路徑
 ## 設定可執行檔的輸出目錄
 set (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Build/)
