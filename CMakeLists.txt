@@ -16,8 +16,8 @@ set (CMAKE_BUILD_TYPE Debug)
 # 設定第三方函式庫路徑
 ## Windows GNU libintl 函式庫路徑
 if(CMAKE_HOST_WIN32)
-	set(path_library_header_gnu_intl "C:\Program Files (x86)\GnuWin32\include")
-	set(path_library_gnu_intl "C:\Program Files (x86)\GnuWin32\lib")
+	set(path_library_header_gnu_intl "C:\\Program Files (x86)\\GnuWin32\\include")
+	set(path_library_gnu_intl "C:\\Program Files (x86)\\GnuWin32\\lib")
 	include_directories(${path_library_header_gnu_intl})
 	link_directories(${path_library_gnu_intl})
 endif()
