@@ -16,6 +16,7 @@ set (CMAKE_BUILD_TYPE Debug)
 # 設定第三方函式庫路徑
 ## Windows GNU libintl 函式庫路徑
 if(CMAKE_HOST_WIN32)
+	message("### 偵測到目標系統為 Microsoft Windows，將套用其專屬設定。 ###")
 	set(path_library_header_gnu_intl "C:\\Program Files (x86)\\GnuWin32\\include")
 	set(path_library_gnu_intl "C:\\Program Files (x86)\\GnuWin32\\lib")
 	include_directories(${path_library_header_gnu_intl})
