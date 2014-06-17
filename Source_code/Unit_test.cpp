@@ -108,9 +108,8 @@
 	/* GNU gettext library */
 		#include <libintl.h>
 #endif
-	/* Ｖ字龍的 C/C++ 函式庫蒐集
-	 * Vdragons C CPP Libraries Collection
-	 *   https://github.com/Vdragon/Vdragons_C_CPP_Libraries_Collection */
+	/* Ｖ字龍的 C／C++ 程式語言函式庫
+	 * Vdragon's C/CPP Libraries */
 		#include "pauseProgram/pauseProgram.h"
 		#include "showSoftwareInfo/showSoftwareInfo.h"
 		/* #include "Project_specific_configurations/GNU_gettext_library.h" */

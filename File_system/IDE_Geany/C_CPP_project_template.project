@@ -13,7 +13,7 @@ detect_indent_width=true
 indent_mode=2
 
 [project]
-name=C_CPP_project_template
+name=Vdragon's C/CPP Libraries
 base_path=../
 description=
 file_patterns=*.c;*.h;*.cpp;

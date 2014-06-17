@@ -18,7 +18,7 @@
 		Copyright 2013 林博仁<pika1021@gmail.com>
 	智慧財產授權條款
 	Intellectual property license
-		「顯示軟體資訊函式庫」是 Vdragons_C_CPP_Libraries_Collection 的一部份，請參考 Vdragons_C_CPP_Libraries_Collection 說明文件中的授權條款章節。		
+		「顯示軟體資訊函式庫」是「Ｖ字龍的 C／C++ 程式語言函式庫」的一部份，請參考「Ｖ字龍的 C／C++ 程式語言函式庫」說明文件中的授權條款章節。
 	本程式的框架基於「C/C++ program templates」專案
 	This program's frame is based on "C/C++ program templates" project
 		https://github.com/Vdragon/C_CPP_program_templates

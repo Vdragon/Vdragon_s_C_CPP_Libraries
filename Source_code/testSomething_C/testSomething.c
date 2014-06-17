@@ -11,7 +11,8 @@
 */
 /* 程式所 include 之函式庫的標頭檔
  * Included Library Headers */
-	/* Vdragons_C_CPP_Libraries_Collection */
+	/* Ｖ字龍的 C／C++ 程式語言函式庫
+	 * Vdragon's C/CPP Libraries */
 		/* for printLine() */
 			#include "../printSomething/printSomething.h"
 

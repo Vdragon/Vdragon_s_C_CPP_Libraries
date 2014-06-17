@@ -16,12 +16,12 @@
 		Copyright 2013 林博仁<pika1021@gmail.com>
 	智慧財產授權條款
 	Intellectual property license
-		"GNU gettext library specific configurations" is part of Vdragons_C_CPP_Libraries_Collection
-		Vdragons_C_CPP_Libraries_Collection is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+		"GNU gettext library specific configurations" is part of Vdragon's C/CPP Libraries
+		Vdragon's C/CPP Libraries is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 		
-		Vdragons_C_CPP_Libraries_Collection is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public License for more details.
+		Vdragon's C/CPP Libraries is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public License for more details.
 		
-		You should have received a copy of the GNU Lesser General Public License along with Vdragons_C_CPP_Libraries_Collection.  If not, see <http://www.gnu.org/licenses/>.
+		You should have received a copy of the GNU Lesser General Public License along with Vdragon's C/CPP Libraries.  If not, see <http://www.gnu.org/licenses/>.
 	本程式的框架基於「C/C++ program templates」專案
 	This program's frame is based on "C/C++ program templates" project
 		https://github.com/Vdragon/C_CPP_program_templates

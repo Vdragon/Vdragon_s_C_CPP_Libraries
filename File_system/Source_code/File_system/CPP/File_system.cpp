@@ -113,9 +113,8 @@
 	/* GNU gettext library */
 		#include <libintl.h>
 		
-	/* Ｖ字龍的 C/C++ 函式庫蒐集
-	 * Vdragons C CPP Libraries Collection
-	 *   https://github.com/Vdragon/Vdragons_C_CPP_Libraries_Collection */
+	/* Ｖ字龍的 C／C++ 程式語言函式庫
+	 * Vdragon's C/CPP Libraries */
 		#include "../../Error/C/Error.h"
 
 #if defined(__unix__) || defined(__unix)

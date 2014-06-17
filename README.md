@@ -1,4 +1,4 @@
-# Ｖ字龍的 C、C++ 程式語言函式庫收集<br />Vdragon's C CPP Libraries Collection
+# Ｖ字龍的 C／C++ 程式語言函式庫<br />Vdragon's C/CPP Libraries
 
 ## 本專案的軟體依賴關係說明<br />Software dependencies of this project
 ### 本專案依賴的函式庫

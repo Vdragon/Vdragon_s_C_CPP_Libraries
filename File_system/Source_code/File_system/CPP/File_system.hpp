@@ -18,10 +18,10 @@
 				Copyright RELEASE_YEAR © 未定義作者<undefined@mail.address>
 			智慧財產授權條款
 			Intellectual property license
-				File system related library is part of Vdragons_C_CPP_Libraries_Collection
-				Vdragons_C_CPP_Libraries_Collection is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+				File system related library is part of Vdragon's C/CPP Libraries
+				Vdragon's C/CPP Libraries is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 				
-				Vdragons_C_CPP_Libraries_Collection is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public License for more details.
+				Vdragon's C/CPP Libraries is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public License for more details.
 				
 				You should have received a copy of the GNU Lesser General Public License along with Vdragons_C_CPP_Libraries_Collection.  If not, see <http://www.gnu.org/licenses/>.
 			本程式的框架基於「C/C++ program templates」專案

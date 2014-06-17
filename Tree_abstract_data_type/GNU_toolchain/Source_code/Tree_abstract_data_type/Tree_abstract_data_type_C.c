@@ -8,7 +8,8 @@
 /* this */
 #include "Tree_abstract_data_type_C.h"
 
-/* Vdragon's Library Collection */
+	/* Ｖ字龍的 C／C++ 程式語言函式庫
+	 * Vdragon's C/CPP Libraries */
 #include "../Messages_templates/zh_TW.h"
 #include "Swap_algorithm_heap_element/Swap_algorithm.h"
 
