@@ -1,4 +1,4 @@
-﻿#ifndef VCCL_SWAP_ALGOTITHM_INCLUDED
+#ifndef VCCL_SWAP_ALGOTITHM_INCLUDED
   #define VCCL_SWAP_ALGOTITHM_INCLUDED
   #ifdef __cplusplus
   extern "C"{

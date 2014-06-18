@@ -1,4 +1,4 @@
-﻿/*暫停程式用的函式庫
+/*暫停程式用的函式庫
  * 依賴函式庫：Project_specific_configurations
  */
 #ifndef INCLUDED_PAUSE_PROGRAM_H

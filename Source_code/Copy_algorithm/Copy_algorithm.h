@@ -1,4 +1,4 @@
-﻿#ifndef COPY_ALGORITHM_H_INCLUDED
+#ifndef COPY_ALGORITHM_H_INCLUDED
   #define COPY_ALGORITHM_H_INCLUDED
   #ifdef __cplusplus
     extern "C"{

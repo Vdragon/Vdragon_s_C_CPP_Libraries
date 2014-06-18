@@ -1,4 +1,4 @@
-﻿/*偵錯訊息*/
+/*偵錯訊息*/
 /* include guard：避免同一個header檔案被include第二次。*/
   /*使用printf()*/
   #include <stdio.h>

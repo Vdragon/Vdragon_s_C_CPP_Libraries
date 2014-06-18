@@ -1,4 +1,4 @@
-﻿/*Pause_program.c
+/*Pause_program.c
 -----------------------------------
 更新紀錄(changelog)：
   Changelog is now stored on github
